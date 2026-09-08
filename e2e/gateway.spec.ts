@@ -411,7 +411,7 @@ test("keyboard combobox and native dialog focus return; accessibility smoke", as
   await page.goto("/");
   const input = page.getByRole("combobox").first();
   await input.fill("Muster");
-  await expect(page.getByRole("option")).toHaveCount(1);
+  await expect(page.getByRole("listbox").getByRole("option")).toHaveCount(1);
   await input.press("ArrowDown");
   await input.press("Enter");
   await expect(input).toHaveValue(address);

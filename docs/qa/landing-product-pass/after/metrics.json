@@ -1,0 +1,1171 @@
+[
+  {
+    "width": 1440,
+    "overflow": false,
+    "hero": {
+      "x": 56,
+      "y": 119,
+      "width": 1328,
+      "height": 671.921875,
+      "bottom": 790.921875
+    },
+    "heading": {
+      "x": 56,
+      "y": 198.90625,
+      "width": 640,
+      "height": 296,
+      "bottom": 494.90625
+    },
+    "headingWordLines": 1,
+    "input": {
+      "x": 96,
+      "y": 592.90625,
+      "width": 401,
+      "height": 56,
+      "bottom": 648.90625
+    },
+    "cta": {
+      "x": 505,
+      "y": 592.90625,
+      "width": 191,
+      "height": 56,
+      "bottom": 648.90625
+    },
+    "process": {
+      "x": 56,
+      "y": 955.875,
+      "width": 1328,
+      "height": 109,
+      "bottom": 1064.875
+    },
+    "check": {
+      "x": 56,
+      "y": 1112.875,
+      "width": 1328,
+      "height": 635.03125,
+      "bottom": 1747.90625
+    },
+    "checkContent": {
+      "x": 56,
+      "y": 1161.875,
+      "width": 632,
+      "height": 538.03125,
+      "bottom": 1699.90625
+    },
+    "score": {
+      "x": 56,
+      "y": 1747.90625,
+      "width": 1328,
+      "height": 554.484375,
+      "bottom": 2302.390625
+    },
+    "scoreContent": {
+      "x": 56,
+      "y": 1912.859375,
+      "width": 1328,
+      "height": 341.53125,
+      "bottom": 2254.390625
+    },
+    "projectTypes": {
+      "x": 56,
+      "y": 2459.34375,
+      "width": 1328,
+      "height": 552,
+      "bottom": 3011.34375
+    },
+    "projectIntro": {
+      "x": 56,
+      "y": 2351.390625,
+      "width": 372,
+      "height": 15.953125,
+      "bottom": 2367.34375
+    },
+    "sectionInset": "48px",
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 268,
+        "max": 201,
+        "fill": 174.1875
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 268,
+        "max": 201,
+        "fill": 160.796875
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 268,
+        "max": 268,
+        "fill": 241.1875
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 268,
+        "max": 201,
+        "fill": 201
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          839,
+          592
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          169,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "overflow": false,
+    "hero": {
+      "x": 48,
+      "y": 119,
+      "width": 1184,
+      "height": 671.921875,
+      "bottom": 790.921875
+    },
+    "heading": {
+      "x": 48,
+      "y": 198.90625,
+      "width": 640,
+      "height": 296,
+      "bottom": 494.90625
+    },
+    "headingWordLines": 1,
+    "input": {
+      "x": 88,
+      "y": 592.90625,
+      "width": 401,
+      "height": 56,
+      "bottom": 648.90625
+    },
+    "cta": {
+      "x": 497,
+      "y": 592.90625,
+      "width": 191,
+      "height": 56,
+      "bottom": 648.90625
+    },
+    "process": {
+      "x": 48,
+      "y": 955.875,
+      "width": 1184,
+      "height": 109,
+      "bottom": 1064.875
+    },
+    "check": {
+      "x": 48,
+      "y": 1112.875,
+      "width": 1184,
+      "height": 654.953125,
+      "bottom": 1767.828125
+    },
+    "checkContent": {
+      "x": 48,
+      "y": 1171.828125,
+      "width": 560,
+      "height": 538.03125,
+      "bottom": 1709.859375
+    },
+    "score": {
+      "x": 48,
+      "y": 1767.828125,
+      "width": 1184,
+      "height": 554.484375,
+      "bottom": 2322.3125
+    },
+    "scoreContent": {
+      "x": 48,
+      "y": 1932.78125,
+      "width": 1184,
+      "height": 341.53125,
+      "bottom": 2274.3125
+    },
+    "projectTypes": {
+      "x": 48,
+      "y": 2479.265625,
+      "width": 1184,
+      "height": 552,
+      "bottom": 3031.265625
+    },
+    "projectIntro": {
+      "x": 48,
+      "y": 2371.3125,
+      "width": 372,
+      "height": 15.953125,
+      "bottom": 2387.265625
+    },
+    "sectionInset": "48px",
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 232,
+        "max": 174,
+        "fill": 150.796875
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 232,
+        "max": 174,
+        "fill": 139.1875
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 232,
+        "max": 232,
+        "fill": 208.796875
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 232,
+        "max": 174,
+        "fill": 174
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          755,
+          592
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          169,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "overflow": false,
+    "hero": {
+      "x": 32,
+      "y": 119,
+      "width": 960,
+      "height": 607.921875,
+      "bottom": 726.921875
+    },
+    "heading": {
+      "x": 32,
+      "y": 198.90625,
+      "width": 640,
+      "height": 240,
+      "bottom": 438.90625
+    },
+    "headingWordLines": 1,
+    "input": {
+      "x": 72,
+      "y": 536.90625,
+      "width": 401,
+      "height": 56,
+      "bottom": 592.90625
+    },
+    "cta": {
+      "x": 481,
+      "y": 536.90625,
+      "width": 191,
+      "height": 56,
+      "bottom": 592.90625
+    },
+    "process": {
+      "x": 32,
+      "y": 883.875,
+      "width": 960,
+      "height": 133,
+      "bottom": 1016.875
+    },
+    "check": {
+      "x": 32,
+      "y": 1056.875,
+      "width": 960,
+      "height": 731.03125,
+      "bottom": 1787.90625
+    },
+    "checkContent": {
+      "x": 32,
+      "y": 1097.875,
+      "width": 460,
+      "height": 650.03125,
+      "bottom": 1747.90625
+    },
+    "score": {
+      "x": 32,
+      "y": 1787.90625,
+      "width": 960,
+      "height": 691.484375,
+      "bottom": 2479.390625
+    },
+    "scoreContent": {
+      "x": 32,
+      "y": 1944.859375,
+      "width": 960,
+      "height": 494.53125,
+      "bottom": 2439.390625
+    },
+    "projectTypes": {
+      "x": 32,
+      "y": 2628.34375,
+      "width": 960,
+      "height": 550,
+      "bottom": 3178.34375
+    },
+    "projectIntro": {
+      "x": 32,
+      "y": 2520.390625,
+      "width": 372,
+      "height": 15.953125,
+      "bottom": 2536.34375
+    },
+    "sectionInset": "40px",
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 261.34375,
+        "max": 196,
+        "fill": 169.859375
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 261.34375,
+        "max": 196,
+        "fill": 156.796875
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 261.34375,
+        "max": 261.34375,
+        "fill": 235.203125
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 261.34375,
+        "max": 196,
+        "fill": 196
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          520,
+          536
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          136,
+          64
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          136,
+          64
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          136,
+          64
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          136,
+          64
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 768,
+    "overflow": false,
+    "hero": {
+      "x": 32,
+      "y": 119,
+      "width": 704,
+      "height": 991.921875,
+      "bottom": 1110.921875
+    },
+    "heading": {
+      "x": 32,
+      "y": 198.90625,
+      "width": 640,
+      "height": 240,
+      "bottom": 438.90625
+    },
+    "headingWordLines": 1,
+    "input": {
+      "x": 72,
+      "y": 536.90625,
+      "width": 401,
+      "height": 56,
+      "bottom": 592.90625
+    },
+    "cta": {
+      "x": 481,
+      "y": 536.90625,
+      "width": 191,
+      "height": 56,
+      "bottom": 592.90625
+    },
+    "process": {
+      "x": 32,
+      "y": 1267.875,
+      "width": 704,
+      "height": 271,
+      "bottom": 1538.875
+    },
+    "check": {
+      "x": 32,
+      "y": 1578.875,
+      "width": 704,
+      "height": 1273.984375,
+      "bottom": 2852.859375
+    },
+    "checkContent": {
+      "x": 32,
+      "y": 1619.875,
+      "width": 704,
+      "height": 650.03125,
+      "bottom": 2269.90625
+    },
+    "score": {
+      "x": 32,
+      "y": 2852.859375,
+      "width": 704,
+      "height": 759.484375,
+      "bottom": 3612.34375
+    },
+    "scoreContent": {
+      "x": 32,
+      "y": 3053.8125,
+      "width": 704,
+      "height": 518.53125,
+      "bottom": 3572.34375
+    },
+    "projectTypes": {
+      "x": 32,
+      "y": 3761.296875,
+      "width": 704,
+      "height": 665,
+      "bottom": 4426.296875
+    },
+    "projectIntro": {
+      "x": 32,
+      "y": 3653.34375,
+      "width": 372,
+      "height": 15.953125,
+      "bottom": 3669.296875
+    },
+    "sectionInset": "40px",
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 176,
+        "max": 132,
+        "fill": 114.390625
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 176,
+        "max": 132,
+        "fill": 105.59375
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 176,
+        "max": 176,
+        "fill": 158.390625
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 176,
+        "max": 132,
+        "fill": 132
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          704,
+          360
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          136,
+          64
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          136,
+          64
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          136,
+          64
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          136,
+          64
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 390,
+    "overflow": false,
+    "hero": {
+      "x": 20,
+      "y": 100,
+      "width": 350,
+      "height": 893.03125,
+      "bottom": 993.03125
+    },
+    "heading": {
+      "x": 20,
+      "y": 124,
+      "width": 350,
+      "height": 176,
+      "bottom": 300
+    },
+    "headingWordLines": 1,
+    "input": {
+      "x": 60,
+      "y": 422,
+      "width": 310,
+      "height": 56,
+      "bottom": 478
+    },
+    "cta": {
+      "x": 20,
+      "y": 486,
+      "width": 350,
+      "height": 56,
+      "bottom": 542
+    },
+    "process": {
+      "x": 20,
+      "y": 1153.984375,
+      "width": 350,
+      "height": 427,
+      "bottom": 1580.984375
+    },
+    "check": {
+      "x": 20,
+      "y": 1612.984375,
+      "width": 350,
+      "height": 1291,
+      "bottom": 2903.984375
+    },
+    "checkContent": {
+      "x": 20,
+      "y": 1645.984375,
+      "width": 350,
+      "height": 680.046875,
+      "bottom": 2326.03125
+    },
+    "score": {
+      "x": 20,
+      "y": 2903.984375,
+      "width": 350,
+      "height": 1207.9375,
+      "bottom": 4111.921875
+    },
+    "scoreContent": {
+      "x": 20,
+      "y": 3064.9375,
+      "width": 350,
+      "height": 1014.984375,
+      "bottom": 4079.921875
+    },
+    "projectTypes": {
+      "x": 20,
+      "y": 4264.875,
+      "width": 350,
+      "height": 1079,
+      "bottom": 5343.875
+    },
+    "projectIntro": {
+      "x": 20,
+      "y": 4144.921875,
+      "width": 350,
+      "height": 15.953125,
+      "bottom": 4160.875
+    },
+    "sectionInset": "32px",
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 350,
+        "max": 262.5,
+        "fill": 227.5
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 350,
+        "max": 262.5,
+        "fill": 210
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 350,
+        "max": 350,
+        "fill": 315
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 350,
+        "max": 262.5,
+        "fill": 262.5
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          350,
+          260
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          169,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 360,
+    "overflow": false,
+    "hero": {
+      "x": 16,
+      "y": 100,
+      "width": 328,
+      "height": 857.03125,
+      "bottom": 957.03125
+    },
+    "heading": {
+      "x": 16,
+      "y": 124,
+      "width": 328,
+      "height": 164,
+      "bottom": 288
+    },
+    "headingWordLines": 1,
+    "input": {
+      "x": 56,
+      "y": 410,
+      "width": 288,
+      "height": 56,
+      "bottom": 466
+    },
+    "cta": {
+      "x": 16,
+      "y": 474,
+      "width": 328,
+      "height": 56,
+      "bottom": 530
+    },
+    "process": {
+      "x": 16,
+      "y": 1117.984375,
+      "width": 328,
+      "height": 454,
+      "bottom": 1571.984375
+    },
+    "check": {
+      "x": 16,
+      "y": 1603.984375,
+      "width": 328,
+      "height": 1291,
+      "bottom": 2894.984375
+    },
+    "checkContent": {
+      "x": 16,
+      "y": 1636.984375,
+      "width": 328,
+      "height": 680.046875,
+      "bottom": 2317.03125
+    },
+    "score": {
+      "x": 16,
+      "y": 2894.984375,
+      "width": 328,
+      "height": 1239.9375,
+      "bottom": 4134.921875
+    },
+    "scoreContent": {
+      "x": 16,
+      "y": 3087.9375,
+      "width": 328,
+      "height": 1014.984375,
+      "bottom": 4102.921875
+    },
+    "projectTypes": {
+      "x": 16,
+      "y": 4287.875,
+      "width": 328,
+      "height": 1106,
+      "bottom": 5393.875
+    },
+    "projectIntro": {
+      "x": 16,
+      "y": 4167.921875,
+      "width": 328,
+      "height": 15.953125,
+      "bottom": 4183.875
+    },
+    "sectionInset": "32px",
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 328,
+        "max": 246,
+        "fill": 213.1875
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 328,
+        "max": 246,
+        "fill": 196.796875
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 328,
+        "max": 328,
+        "fill": 295.1875
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 328,
+        "max": 246,
+        "fill": 246
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          328,
+          260
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          169,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 320,
+    "overflow": false,
+    "hero": {
+      "x": 16,
+      "y": 118,
+      "width": 288,
+      "height": 916.03125,
+      "bottom": 1034.03125
+    },
+    "heading": {
+      "x": 16,
+      "y": 142,
+      "width": 288,
+      "height": 205,
+      "bottom": 347
+    },
+    "headingWordLines": 3,
+    "input": {
+      "x": 56,
+      "y": 469,
+      "width": 248,
+      "height": 56,
+      "bottom": 525
+    },
+    "cta": {
+      "x": 16,
+      "y": 533,
+      "width": 288,
+      "height": 56,
+      "bottom": 589
+    },
+    "process": {
+      "x": 16,
+      "y": 1194.984375,
+      "width": 288,
+      "height": 481,
+      "bottom": 1675.984375
+    },
+    "check": {
+      "x": 16,
+      "y": 1707.984375,
+      "width": 288,
+      "height": 1350,
+      "bottom": 3057.984375
+    },
+    "checkContent": {
+      "x": 16,
+      "y": 1740.984375,
+      "width": 288,
+      "height": 680.046875,
+      "bottom": 2421.03125
+    },
+    "score": {
+      "x": 16,
+      "y": 3057.984375,
+      "width": 288,
+      "height": 1239.9375,
+      "bottom": 4297.921875
+    },
+    "scoreContent": {
+      "x": 16,
+      "y": 3250.9375,
+      "width": 288,
+      "height": 1014.984375,
+      "bottom": 4265.921875
+    },
+    "projectTypes": {
+      "x": 16,
+      "y": 4450.875,
+      "width": 288,
+      "height": 1187,
+      "bottom": 5637.875
+    },
+    "projectIntro": {
+      "x": 16,
+      "y": 4330.921875,
+      "width": 288,
+      "height": 15.953125,
+      "bottom": 4346.875
+    },
+    "sectionInset": "32px",
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 288,
+        "max": 216,
+        "fill": 187.1875
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 288,
+        "max": 216,
+        "fill": 172.796875
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 288,
+        "max": 288,
+        "fill": 259.1875
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 288,
+        "max": 216,
+        "fill": 216
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          288,
+          260
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          169,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          167,
+          73
+        ]
+      }
+    ],
+    "errors": []
+  }
+]

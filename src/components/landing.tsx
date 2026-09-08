@@ -10,10 +10,17 @@ import {
   Document,
 } from "@carbon/icons-react";
 import { Header, Footer } from "./shell";
-import { Button, ErrorNotice } from "./ui";
+import { Button, ErrorNotice, Field, Options, SelectField } from "./ui";
+import examples from "@/data/analytics-examples.json";
 import "./landing.css";
 import { api } from "./client-api";
 import type { Project } from "@/domain/model";
+const previewScore = examples.scoreFull;
+const previewFactors = previewScore.factors.slice(0, 4);
+const previewAxisMax = Math.max(
+  ...previewScore.factors.map((f) => f.maxPoints),
+);
+const previewOnly = () => {};
 const faq = [
   [
     "Was benötige ich für den Standortcheck?",
@@ -52,6 +59,52 @@ function LandingAerial() {
       <figcaption>
         Atlas-Beispielansicht · kein analysierter Standort
       </figcaption>
+    </figure>
+  );
+}
+function LandingCheckPreview() {
+  return (
+    <figure className="check-preview" aria-labelledby="check-preview-caption">
+      <figcaption id="check-preview-caption">
+        <strong>Beispieldaten · Standortcheck</strong>
+        <span className="meta">Auszug aus Schritt 3 von 10 · Objekt</span>
+      </figcaption>
+      <h3>Welche Fläche steht zur Verfügung?</h3>
+      <fieldset
+        disabled
+        className="check-preview-fields"
+        aria-label="Nicht bearbeitbare Beispielansicht"
+      >
+        <Options
+          label="Art der verfügbaren Fläche"
+          name="preview-area-kind"
+          value="Dach"
+          options={["Dach", "Freifläche"]}
+          onChange={previewOnly}
+        />
+        <div className="check-preview-pair">
+          <SelectField
+            label="Genauigkeit der Fläche"
+            value="Geschätzt"
+            options={["Genau bekannt", "Geschätzt", "Noch unbekannt"]}
+            onChange={previewOnly}
+          />
+          <Field label="Verfügbare Fläche · m²" value="4.800" readOnly />
+        </div>
+        <SelectField
+          label="Dachzustand (Nutzerauskunft)"
+          value="Unbekannt"
+          options={[
+            "Keine Sanierung bekannt",
+            "Sanierung geplant",
+            "Unbekannt",
+          ]}
+          onChange={previewOnly}
+        />
+      </fieldset>
+      <p className="meta">
+        Beispielansicht · Angaben geschätzt bzw. noch unbekannt.
+      </p>
     </figure>
   );
 }
@@ -236,7 +289,7 @@ export function Landing({ mode }: { mode: string }) {
     <>
       <Header mode={mode} />
       <main id="main" className="landing-page">
-        <section className="hero wrap">
+        <section className="hero wrap" id="standort-start">
           <div className="hero-copy">
             <p className="overline hero-overline">
               GROSSE FLÄCHEN.
@@ -312,8 +365,11 @@ export function Landing({ mode }: { mode: string }) {
             ))}
           </div>
         </section>
-        <section className="section wrap editorial-split">
-          <LandingAerial />
+        <section
+          className="section wrap editorial-split landing-check"
+          id="standortcheck-vorschau"
+        >
+          <LandingCheckPreview />
           <div>
             <p className="overline">DER DIGITALE STANDORTCHECK</p>
             <h2>Ein Standortcheck, der die richtigen Fragen stellt</h2>
@@ -338,6 +394,9 @@ export function Landing({ mode }: { mode: string }) {
               Zehn Schritte. Unbekannte Werte bleiben offen. Ohne Pflichtkonto
               vor dem Ergebnis.
             </p>
+            <a className="text-link" href="#standort-start">
+              Eigenen Standort prüfen <ArrowRight size={20} aria-hidden />
+            </a>
           </div>
         </section>
         <section className="section wrap score-preview">
@@ -346,42 +405,54 @@ export function Landing({ mode }: { mode: string }) {
           <div className="preview-grid">
             <div>
               <div className="score-number">
-                82<span>/100</span>
+                {previewScore.displayScore}
+                <span>/100</span>
               </div>
               <h3 className="amber">Hohe Priorität</h3>
-              <p className="meta">
-                Synthetisches UI-Beispiel · Vorläufig
-                <br />
-                Keine technische Freigabe
-              </p>
+              <p className="meta">Synthetisches UI-Beispiel</p>
+              <p className="preview-basis">Vorläufig · enthält Schätzwerte</p>
+              <p className="meta">Keine technische Freigabe</p>
             </div>
-            <div>
-              {[
-                ["Nutzbare Fläche", 13, 15],
-                ["Solar-/Ertragspotenzial", 12, 15],
-                ["Verbrauch / Eigenverbrauch", 18, 20],
-                ["Entscheidungssituation", 15, 15],
-              ].map(([label, value, max]) => (
-                <div className="preview-factor" key={label}>
-                  <span>{label}</span>
-                  <div className="mini-axis">
-                    <div
-                      className="bar-max"
-                      style={{ width: `${Number(max) * 5}%` }}
-                    >
-                      <i
-                        style={{
-                          width: `${(Number(value) / Number(max)) * 100}%`,
-                        }}
-                      />
+            <div className="preview-factor-group">
+              <h3>4 von 9 Faktoren</h3>
+              <p className="meta">Beitrag / maximal mögliche Punkte</p>
+              {previewFactors.map(
+                ({ factorId, label, contribution: value, maxPoints: max }) => (
+                  <div
+                    className="preview-factor"
+                    key={factorId}
+                    data-preview-factor={factorId}
+                  >
+                    <span>{label}</span>
+                    <div className="mini-axis" aria-hidden="true">
+                      <div
+                        className="bar-max"
+                        style={{ width: `${(max / previewAxisMax) * 100}%` }}
+                      >
+                        <i
+                          style={{
+                            width: `${(value / max) * 100}%`,
+                          }}
+                        />
+                      </div>
                     </div>
+                    <span className="mono">
+                      {value}/{max}
+                    </span>
                   </div>
-                  <span className="mono">
-                    {value}/{max}
-                  </span>
+                ),
+              )}
+              <div className="preview-factor-scale" aria-hidden="true">
+                <div>
+                  <span>0</span>
+                  <span>{previewAxisMax / 2}</span>
+                  <span>{previewAxisMax}</span>
                 </div>
-              ))}
-              <Link className="text-link" href="/beispiel">
+              </div>
+              <p className="meta preview-scale-key">
+                Gemeinsame Punkteachse · Rahmen zeigt das Faktormaximum.
+              </p>
+              <Link className="text-link" href="/beispiel#score">
                 Bewertung erklären · alle 9 Faktoren <ArrowRight size={20} />
               </Link>
             </div>
@@ -393,7 +464,7 @@ export function Landing({ mode }: { mode: string }) {
             </div>
           </div>
         </section>
-        <section className="section wrap">
+        <section className="section wrap" id="projektarten">
           <p className="overline">PROJEKTARTEN</p>
           <h2>Welches Projekt steckt in Ihrer Fläche?</h2>
           <div className="project-types">
@@ -421,7 +492,7 @@ export function Landing({ mode }: { mode: string }) {
                   className="project-type-image"
                   src={`/atlas/atlas-reference-${["roof", "extension", "storage", "ground"][i]}.webp`}
                   alt=""
-                  width={170}
+                  width={[170, 169, 167, 167][i]}
                   height={73}
                   loading="lazy"
                 />

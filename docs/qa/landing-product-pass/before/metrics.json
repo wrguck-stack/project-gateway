@@ -1,0 +1,280 @@
+[
+  {
+    "width": 1440,
+    "hero": {
+      "x": 56,
+      "y": 119,
+      "width": 1328,
+      "height": 671.921875,
+      "bottom": 790.921875
+    },
+    "process": {
+      "x": 56,
+      "y": 1011.875,
+      "width": 1328,
+      "height": 125,
+      "bottom": 1136.875
+    },
+    "check": {
+      "x": 56,
+      "y": 1232.875,
+      "width": 1328,
+      "height": 635.953125,
+      "bottom": 1868.828125
+    },
+    "score": {
+      "x": 56,
+      "y": 1868.828125,
+      "width": 1328,
+      "height": 550.984375,
+      "bottom": 2419.8125
+    },
+    "scoreContent": {
+      "x": 56,
+      "y": 2089.78125,
+      "width": 1328,
+      "height": 234.03125,
+      "bottom": 2323.8125
+    },
+    "projectTypes": {
+      "x": 56,
+      "y": 2624.765625,
+      "width": 1328,
+      "height": 552,
+      "bottom": 3176.765625
+    },
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 239.640625,
+        "max": 179.71875,
+        "fill": 154.015625
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 239.640625,
+        "max": 179.71875,
+        "fill": 142.171875
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 239.640625,
+        "max": 239.640625,
+        "fill": 213.875
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 239.640625,
+        "max": 179.71875,
+        "fill": 177.71875
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          839,
+          592
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          632,
+          440
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "hero": {
+      "x": 20,
+      "y": 100,
+      "width": 350,
+      "height": 893.03125,
+      "bottom": 993.03125
+    },
+    "process": {
+      "x": 20,
+      "y": 1185.984375,
+      "width": 350,
+      "height": 475,
+      "bottom": 1660.984375
+    },
+    "check": {
+      "x": 20,
+      "y": 1724.984375,
+      "width": 350,
+      "height": 902.953125,
+      "bottom": 2627.9375
+    },
+    "score": {
+      "x": 20,
+      "y": 2627.9375,
+      "width": 350,
+      "height": 978.984375,
+      "bottom": 3606.921875
+    },
+    "scoreContent": {
+      "x": 20,
+      "y": 2820.890625,
+      "width": 350,
+      "height": 722.03125,
+      "bottom": 3542.921875
+    },
+    "projectTypes": {
+      "x": 20,
+      "y": 3791.875,
+      "width": 350,
+      "height": 1079,
+      "bottom": 4870.875
+    },
+    "factors": [
+      {
+        "label": "Nutzbare Fläche13/15",
+        "axis": 141,
+        "max": 105.75,
+        "fill": 89.90625
+      },
+      {
+        "label": "Solar-/Ertragspotenzial12/15",
+        "axis": 141,
+        "max": 105.75,
+        "fill": 83
+      },
+      {
+        "label": "Verbrauch / Eigenverbrauch18/20",
+        "axis": 141,
+        "max": 141,
+        "fill": 125.09375
+      },
+      {
+        "label": "Entscheidungssituation15/15",
+        "axis": 141,
+        "max": 105.75,
+        "fill": 103.75
+      }
+    ],
+    "images": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          350,
+          260
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "native": [
+          304,
+          332
+        ],
+        "display": [
+          350,
+          280
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "native": [
+          170,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "native": [
+          169,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "native": [
+          167,
+          73
+        ],
+        "display": [
+          170,
+          73
+        ]
+      }
+    ]
+  }
+]
