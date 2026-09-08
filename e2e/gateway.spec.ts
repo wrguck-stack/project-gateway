@@ -52,9 +52,10 @@ async function partnerLogin(page: Page) {
 }
 async function screenshot(page: Page, name: string, fullPage = true) {
   await page.evaluate(() => document.fonts.ready);
-  mkdirSync("docs/qa/screenshots", { recursive: true });
+  const directory = process.env.GATEWAY_QA_SCREENSHOTS ?? "docs/qa/screenshots";
+  mkdirSync(directory, { recursive: true });
   await page.screenshot({
-    path: `docs/qa/screenshots/${name}.png`,
+    path: `${directory}/${name}.png`,
     fullPage,
   });
 }

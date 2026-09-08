@@ -1,0 +1,276 @@
+/* Atlas V1 landing composition. Scope keeps check and partner surfaces intact. */
+.landing-page .hero {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: stretch;
+  min-height: 0;
+  padding-block: 32px 48px;
+  gap: 0;
+  isolation: isolate;
+}
+.landing-page .hero-copy {
+  padding: 0;
+}
+.landing-page .hero-overline {
+  margin-bottom: 16px;
+}
+.landing-page .hero h1 {
+  width: max-content;
+  max-width: calc(100vw - 112px);
+  margin-bottom: 16px;
+  font-size: 4.5rem;
+  line-height: 1.027778;
+}
+.landing-page .hero-line {
+  display: block;
+  white-space: nowrap;
+}
+.landing-page .hero-copy > .lead {
+  width: 720px;
+  max-width: calc(100vw - 112px);
+  margin-bottom: 24px;
+}
+.landing-page .hero .address-form {
+  width: 720px;
+  max-width: calc(100vw - 112px);
+}
+.landing-page .address-form label {
+  line-height: 1.375;
+}
+.landing-page .address-form .button {
+  font-size: 1rem;
+  line-height: 1.375;
+  font-weight: 500;
+}
+.landing-page .hero-stages {
+  grid-column: 1;
+  width: 640px;
+  max-width: calc(100vw - 112px);
+  margin-top: 24px;
+  z-index: 1;
+}
+.landing-page .landing-aerial {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-canvas);
+}
+.landing-page .landing-aerial img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.landing-page .landing-aerial figcaption {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  max-width: 280px;
+  padding: 8px 12px;
+  background: #151b20ed;
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  line-height: 1.4286;
+  z-index: 1;
+}
+.landing-page .hero > .landing-aerial {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  margin: 0 0 0 -64px;
+  z-index: -1;
+  min-height: 0;
+}
+.landing-page .hero > .landing-aerial::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-canvas),
+    #151b20eb 12%,
+    #151b2055 32%,
+    transparent 52%
+  );
+  pointer-events: none;
+}
+.landing-page .hero > .landing-aerial img {
+  position: absolute;
+  inset: 0;
+}
+.landing-page .editorial-split > .landing-aerial {
+  height: 440px;
+}
+.landing-page .project-types article {
+  grid-template-columns: 40px 170px 1fr 1.3fr 24px;
+}
+.landing-page .project-type-image {
+  width: 170px;
+  height: 73px;
+  object-fit: cover;
+}
+.landing-page .project-image-source {
+  margin-top: 16px;
+}
+.landing-page .faq {
+  max-width: 1328px;
+}
+.landing-page .faq details {
+  max-width: 1040px;
+}
+
+@media (min-width: 1024px) {
+  .landing-page .hero > .landing-aerial img {
+    object-fit: contain;
+    object-position: right center;
+  }
+  .landing-page .hero > .landing-aerial::after {
+    background: linear-gradient(
+      90deg,
+      var(--color-canvas) 20%,
+      #151b20ed 35%,
+      #151b2055 52%,
+      transparent 64%
+    );
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  .landing-page .hero {
+    grid-template-columns: 5fr 3fr;
+    padding-block: 32px 40px;
+  }
+  .landing-page .hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.07143;
+  }
+  .landing-page .hero-copy > .lead,
+  .landing-page .hero .address-form {
+    width: 640px;
+    max-width: calc(100vw - 64px);
+  }
+  .landing-page .hero-stages {
+    width: 600px;
+    max-width: calc(100vw - 64px);
+  }
+  .landing-page .hero > .landing-aerial {
+    margin-left: -160px;
+    height: auto;
+  }
+  .landing-page .hero > .landing-aerial figcaption {
+    max-width: 210px;
+  }
+  .landing-page .project-types article {
+    grid-template-columns: 32px 136px 1fr 1fr 24px;
+    gap: 16px;
+  }
+  .landing-page .project-type-image {
+    width: 136px;
+    height: 64px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .landing-page .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .landing-page .hero > .landing-aerial {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    height: 360px;
+  }
+  .landing-page .hero > .landing-aerial img {
+    object-position: 50% 45%;
+  }
+  .landing-page .hero > .landing-aerial::after {
+    display: none;
+  }
+  .landing-page .hero-stages {
+    grid-row: 3;
+    margin-top: 0;
+  }
+}
+@media (max-width: 767px) {
+  .landing-page .hero {
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: 24px 32px;
+    gap: 24px;
+  }
+  .landing-page .hero-overline {
+    display: none;
+  }
+  .landing-page .hero h1 {
+    width: auto;
+    max-width: 100%;
+    font-size: 2.625rem;
+    line-height: 1.04762;
+    margin-bottom: 16px;
+  }
+  .landing-page .hero-line {
+    display: inline;
+    white-space: normal;
+  }
+  .landing-page .hero-copy > .lead {
+    width: auto;
+    max-width: 100%;
+    font-size: 1.125rem;
+    line-height: 1.44445;
+    margin-bottom: 24px;
+  }
+  .landing-page .hero .address-form {
+    width: 100%;
+    max-width: 100%;
+  }
+  .landing-page .hero > .landing-aerial {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    height: 260px;
+  }
+  .landing-page .hero > .landing-aerial::after {
+    display: none;
+  }
+  .landing-page .landing-aerial figcaption {
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+  }
+  .landing-page .hero-stages {
+    grid-column: 1;
+    grid-row: 3;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  .landing-page .editorial-split > .landing-aerial {
+    height: 280px;
+  }
+  .landing-page .project-types article {
+    grid-template-columns: 32px 1fr 24px;
+    gap: 16px;
+  }
+  .landing-page .project-type-image {
+    grid-column: 2;
+    width: 170px;
+    height: 73px;
+  }
+  .landing-page .project-types h3,
+  .landing-page .project-types p {
+    grid-column: 2;
+  }
+  .landing-page .project-types h3 {
+    grid-row: 2;
+  }
+  .landing-page .project-types p {
+    grid-row: 3;
+  }
+  .landing-page .project-types article > svg {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+@media (max-width: 389px) {
+  .landing-page .hero h1 {
+    font-size: 2.375rem;
+    line-height: 1.078948;
+  }
+}

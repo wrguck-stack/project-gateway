@@ -11,7 +11,7 @@ import {
 } from "@carbon/icons-react";
 import { Header, Footer } from "./shell";
 import { Button, ErrorNotice } from "./ui";
-import { SiteContext } from "./site-context";
+import "./landing.css";
 import { api } from "./client-api";
 import type { Project } from "@/domain/model";
 const faq = [
@@ -40,6 +40,21 @@ const faq = [
     "Sie reichen eine Projektanfrage zur fachlichen Prüfung ein. Weitere Vereinbarungen werden gesondert mit dem Projektpartner getroffen.",
   ],
 ];
+function LandingAerial() {
+  return (
+    <figure className="landing-aerial hero-site">
+      <img
+        src="/atlas/atlas-reference-aerial.webp"
+        width={304}
+        height={332}
+        alt="Illustrative Luftansicht einer Logistikhalle mit Ladehof aus der freigegebenen Atlas-Referenz."
+      />
+      <figcaption>
+        Atlas-Beispielansicht · kein analysierter Standort
+      </figcaption>
+    </figure>
+  );
+}
 export function AddressEntry({
   value,
   onChange,
@@ -220,16 +235,21 @@ export function Landing({ mode }: { mode: string }) {
   return (
     <>
       <Header mode={mode} />
-      <main id="main">
+      <main id="main" className="landing-page">
         <section className="hero wrap">
           <div className="hero-copy">
-            <p className="overline">
+            <p className="overline hero-overline">
               GROSSE FLÄCHEN.
               <br />
               ECHTES POTENZIAL.
             </p>
             <h1>
-              Wie viel Energiepotenzial steckt in Ihrer Gewerbe&shy;immobilie?
+              <span className="hero-line">Wie viel</span>{" "}
+              <span className="hero-line">Energiepotenzial</span>{" "}
+              <span className="hero-line">steckt in Ihrer</span>{" "}
+              <span className="hero-line hero-property">
+                Gewerbe&shy;immobilie?
+              </span>
             </h1>
             <p className="lead">
               Standort erfassen. Projektpotenzial einordnen. Fachlich prüfen
@@ -256,13 +276,13 @@ export function Landing({ mode }: { mode: string }) {
                 </button>
               </p>
             )}
-            <div className="hero-stages">
-              <span className="active">01 Standort</span>
-              <span>02 Qualifizierung</span>
-              <span>03 Fachliche Prüfung</span>
-            </div>
           </div>
-          <SiteContext hero />
+          <LandingAerial />
+          <div className="hero-stages" aria-label="Der Weg zum Projekt">
+            <span className="active">01 Standort</span>
+            <span>02 Qualifizierung</span>
+            <span>03 Fachliche Prüfung</span>
+          </div>
         </section>
         <section id="ablauf" className="section wrap">
           <p className="overline">DER WEG ZUM PROJEKT</p>
@@ -293,7 +313,7 @@ export function Landing({ mode }: { mode: string }) {
           </div>
         </section>
         <section className="section wrap editorial-split">
-          <SiteContext hero />
+          <LandingAerial />
           <div>
             <p className="overline">DER DIGITALE STANDORTCHECK</p>
             <h2>Ein Standortcheck, der die richtigen Fragen stellt</h2>
@@ -397,12 +417,23 @@ export function Landing({ mode }: { mode: string }) {
             ].map(([title, text], i) => (
               <article key={title}>
                 <span className="mono muted">0{i + 1}</span>
+                <img
+                  className="project-type-image"
+                  src={`/atlas/atlas-reference-${["roof", "extension", "storage", "ground"][i]}.webp`}
+                  alt=""
+                  width={170}
+                  height={73}
+                  loading="lazy"
+                />
                 <h3>{title}</h3>
                 <p>{text}</p>
                 <ArrowRight size={24} aria-hidden />
               </article>
             ))}
           </div>
+          <p className="meta project-image-source">
+            Illustrative Bildausschnitte aus der Atlas-Referenz.
+          </p>
         </section>
         <section className="section wrap editorial-split text-split">
           <div>

@@ -1,0 +1,106 @@
+{
+  "sourceSHA256": "17cfbff7ed8dd1d946ebddc39067b2d180f65460fee2056743ede676625eee64",
+  "assets": [
+    {
+      "file": "/atlas/atlas-reference-aerial.webp",
+      "source": "04_PRODUCT_DESIGN_VISUALS.pdf",
+      "pdfPage": 3,
+      "embeddedImageSize": [
+        1402,
+        1122
+      ],
+      "crop": [
+        336,
+        180,
+        640,
+        512
+      ],
+      "nativeSize": [
+        304,
+        332
+      ],
+      "method": "Extract embedded raster, crop only, lossless WebP. No generated pixels, retouching, coordinates, scale or UI labels."
+    },
+    {
+      "file": "/atlas/atlas-reference-roof.webp",
+      "source": "04_PRODUCT_DESIGN_VISUALS.pdf",
+      "pdfPage": 2,
+      "embeddedImageSize": [
+        813,
+        1933
+      ],
+      "crop": [
+        31,
+        1095,
+        201,
+        1168
+      ],
+      "nativeSize": [
+        170,
+        73
+      ],
+      "method": "Extract embedded raster, crop only, lossless WebP. No generated pixels, retouching, coordinates, scale or UI labels."
+    },
+    {
+      "file": "/atlas/atlas-reference-extension.webp",
+      "source": "04_PRODUCT_DESIGN_VISUALS.pdf",
+      "pdfPage": 2,
+      "embeddedImageSize": [
+        813,
+        1933
+      ],
+      "crop": [
+        226,
+        1095,
+        395,
+        1168
+      ],
+      "nativeSize": [
+        169,
+        73
+      ],
+      "method": "Extract embedded raster, crop only, lossless WebP. No generated pixels, retouching, coordinates, scale or UI labels."
+    },
+    {
+      "file": "/atlas/atlas-reference-storage.webp",
+      "source": "04_PRODUCT_DESIGN_VISUALS.pdf",
+      "pdfPage": 2,
+      "embeddedImageSize": [
+        813,
+        1933
+      ],
+      "crop": [
+        423,
+        1095,
+        590,
+        1168
+      ],
+      "nativeSize": [
+        167,
+        73
+      ],
+      "method": "Extract embedded raster, crop only, lossless WebP. No generated pixels, retouching, coordinates, scale or UI labels."
+    },
+    {
+      "file": "/atlas/atlas-reference-ground.webp",
+      "source": "04_PRODUCT_DESIGN_VISUALS.pdf",
+      "pdfPage": 2,
+      "embeddedImageSize": [
+        813,
+        1933
+      ],
+      "crop": [
+        618,
+        1095,
+        785,
+        1168
+      ],
+      "nativeSize": [
+        167,
+        73
+      ],
+      "method": "Extract embedded raster, crop only, lossless WebP. No generated pixels, retouching, coordinates, scale or UI labels."
+    }
+  ],
+  "limitation": "Reference-board crops for the local demo. Separate high-resolution production imagery and its original license/source metadata were not supplied."
+}

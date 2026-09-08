@@ -1,0 +1,1272 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "overflow": false,
+    "heading": {
+      "x": 56,
+      "y": 198.90625,
+      "width": 586.40625,
+      "height": 296,
+      "bottom": 494.90625
+    },
+    "hero": {
+      "x": 56,
+      "y": 119,
+      "width": 1328,
+      "height": 671.921875,
+      "bottom": 790.921875
+    },
+    "subline": {
+      "x": 56,
+      "y": 510.90625,
+      "width": 720,
+      "height": 28,
+      "bottom": 538.90625
+    },
+    "input": {
+      "x": 96,
+      "y": 592.90625,
+      "width": 481,
+      "height": 56,
+      "bottom": 648.90625
+    },
+    "cta": {
+      "x": 585,
+      "y": 592.90625,
+      "width": 191,
+      "height": 56,
+      "bottom": 648.90625
+    },
+    "image": {
+      "x": 545.328125,
+      "y": 151,
+      "width": 838.65625,
+      "height": 591.921875,
+      "bottom": 742.921875
+    },
+    "headingFont": {
+      "family": "\"IBM Plex Sans Condensed\", sans-serif",
+      "size": "72px",
+      "lineHeight": "74.0002px"
+    },
+    "words": [
+      {
+        "word": "Wie",
+        "rects": [
+          {
+            "x": 56,
+            "y": 188.90625,
+            "width": 114.609375,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "viel",
+        "rects": [
+          {
+            "x": 183.796875,
+            "y": 188.90625,
+            "width": 103.8125,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "Energiepotenzial",
+        "rects": [
+          {
+            "x": 56,
+            "y": 262.90625,
+            "width": 493.203125,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "steckt",
+        "rects": [
+          {
+            "x": 56,
+            "y": 336.90625,
+            "width": 180.203125,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "in",
+        "rects": [
+          {
+            "x": 249.390625,
+            "y": 336.90625,
+            "width": 54.421875,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "Ihrer",
+        "rects": [
+          {
+            "x": 317,
+            "y": 336.90625,
+            "width": 148.015625,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "Gewerbe­immobilie?",
+        "rects": [
+          {
+            "x": 56,
+            "y": 410.90625,
+            "width": 586.40625,
+            "height": 94
+          }
+        ]
+      }
+    ],
+    "imageAssets": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "loaded": true,
+        "width": 170,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "loaded": true,
+        "width": 169,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      }
+    ],
+    "renderedFonts": {
+      ".hero h1": [
+        {
+          "familyName": "IBM Plex Sans Condensed",
+          "postScriptName": "IBMPlexSansCond-Bold",
+          "isCustomFont": true,
+          "glyphCount": 57
+        }
+      ],
+      ".hero .lead": [
+        {
+          "familyName": "IBM Plex Sans Condensed",
+          "postScriptName": "IBMPlexSansCond-Regular",
+          "isCustomFont": true,
+          "glyphCount": 70
+        }
+      ],
+      ".hero label": [
+        {
+          "familyName": "IBM Plex Sans Condensed Medium",
+          "postScriptName": "IBMPlexSansCond-Medium",
+          "isCustomFont": true,
+          "glyphCount": 35
+        }
+      ],
+      ".header .brand": [
+        {
+          "familyName": "IBM Plex Sans Condensed SemiBold",
+          "postScriptName": "IBMPlexSansCond-SemiBold",
+          "isCustomFont": true,
+          "glyphCount": 15
+        }
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "overflow": false,
+    "heading": {
+      "x": 48,
+      "y": 198.90625,
+      "width": 586.40625,
+      "height": 296,
+      "bottom": 494.90625
+    },
+    "hero": {
+      "x": 48,
+      "y": 119,
+      "width": 1184,
+      "height": 671.921875,
+      "bottom": 790.921875
+    },
+    "subline": {
+      "x": 48,
+      "y": 510.90625,
+      "width": 720,
+      "height": 28,
+      "bottom": 538.90625
+    },
+    "input": {
+      "x": 88,
+      "y": 592.90625,
+      "width": 481,
+      "height": 56,
+      "bottom": 648.90625
+    },
+    "cta": {
+      "x": 577,
+      "y": 592.90625,
+      "width": 191,
+      "height": 56,
+      "bottom": 648.90625
+    },
+    "image": {
+      "x": 477.328125,
+      "y": 151,
+      "width": 754.65625,
+      "height": 591.921875,
+      "bottom": 742.921875
+    },
+    "headingFont": {
+      "family": "\"IBM Plex Sans Condensed\", sans-serif",
+      "size": "72px",
+      "lineHeight": "74.0002px"
+    },
+    "words": [
+      {
+        "word": "Wie",
+        "rects": [
+          {
+            "x": 48,
+            "y": 188.90625,
+            "width": 114.609375,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "viel",
+        "rects": [
+          {
+            "x": 175.796875,
+            "y": 188.90625,
+            "width": 103.8125,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "Energiepotenzial",
+        "rects": [
+          {
+            "x": 48,
+            "y": 262.90625,
+            "width": 493.203125,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "steckt",
+        "rects": [
+          {
+            "x": 48,
+            "y": 336.90625,
+            "width": 180.203125,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "in",
+        "rects": [
+          {
+            "x": 241.390625,
+            "y": 336.90625,
+            "width": 54.421875,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "Ihrer",
+        "rects": [
+          {
+            "x": 309,
+            "y": 336.90625,
+            "width": 148.015625,
+            "height": 94
+          }
+        ]
+      },
+      {
+        "word": "Gewerbe­immobilie?",
+        "rects": [
+          {
+            "x": 48,
+            "y": 410.90625,
+            "width": 586.40625,
+            "height": 94
+          }
+        ]
+      }
+    ],
+    "imageAssets": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "loaded": true,
+        "width": 170,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "loaded": true,
+        "width": 169,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      }
+    ],
+    "renderedFonts": {},
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "height": 900,
+    "viewport": {
+      "width": 1024,
+      "height": 900
+    },
+    "overflow": false,
+    "heading": {
+      "x": 32,
+      "y": 198.90625,
+      "width": 452.203125,
+      "height": 240,
+      "bottom": 438.90625
+    },
+    "hero": {
+      "x": 32,
+      "y": 119,
+      "width": 960,
+      "height": 607.921875,
+      "bottom": 726.921875
+    },
+    "subline": {
+      "x": 32,
+      "y": 454.90625,
+      "width": 640,
+      "height": 28,
+      "bottom": 482.90625
+    },
+    "input": {
+      "x": 72,
+      "y": 536.90625,
+      "width": 401,
+      "height": 56,
+      "bottom": 592.90625
+    },
+    "cta": {
+      "x": 481,
+      "y": 536.90625,
+      "width": 191,
+      "height": 56,
+      "bottom": 592.90625
+    },
+    "image": {
+      "x": 472,
+      "y": 151,
+      "width": 520,
+      "height": 535.921875,
+      "bottom": 686.921875
+    },
+    "headingFont": {
+      "family": "\"IBM Plex Sans Condensed\", sans-serif",
+      "size": "56px",
+      "lineHeight": "60.0001px"
+    },
+    "words": [
+      {
+        "word": "Wie",
+        "rects": [
+          {
+            "x": 32,
+            "y": 192.90625,
+            "width": 88.8125,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "viel",
+        "rects": [
+          {
+            "x": 131.390625,
+            "y": 192.90625,
+            "width": 80.421875,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "Energiepotenzial",
+        "rects": [
+          {
+            "x": 32,
+            "y": 252.90625,
+            "width": 380.609375,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "steckt",
+        "rects": [
+          {
+            "x": 32,
+            "y": 312.90625,
+            "width": 136.609375,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "in",
+        "rects": [
+          {
+            "x": 179.1875,
+            "y": 312.90625,
+            "width": 42.21875,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "Ihrer",
+        "rects": [
+          {
+            "x": 232,
+            "y": 312.90625,
+            "width": 115.015625,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "Gewerbe­immobilie?",
+        "rects": [
+          {
+            "x": 32,
+            "y": 372.90625,
+            "width": 452.203125,
+            "height": 72
+          }
+        ]
+      }
+    ],
+    "imageAssets": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "loaded": true,
+        "width": 170,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "loaded": true,
+        "width": 169,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      }
+    ],
+    "renderedFonts": {},
+    "errors": []
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "overflow": false,
+    "heading": {
+      "x": 32,
+      "y": 198.90625,
+      "width": 452.203125,
+      "height": 240,
+      "bottom": 438.90625
+    },
+    "hero": {
+      "x": 32,
+      "y": 119,
+      "width": 704,
+      "height": 991.921875,
+      "bottom": 1110.921875
+    },
+    "subline": {
+      "x": 32,
+      "y": 454.90625,
+      "width": 640,
+      "height": 28,
+      "bottom": 482.90625
+    },
+    "input": {
+      "x": 72,
+      "y": 536.90625,
+      "width": 401,
+      "height": 56,
+      "bottom": 592.90625
+    },
+    "cta": {
+      "x": 481,
+      "y": 536.90625,
+      "width": 191,
+      "height": 56,
+      "bottom": 592.90625
+    },
+    "image": {
+      "x": 32,
+      "y": 648.921875,
+      "width": 704,
+      "height": 360,
+      "bottom": 1008.921875
+    },
+    "headingFont": {
+      "family": "\"IBM Plex Sans Condensed\", sans-serif",
+      "size": "56px",
+      "lineHeight": "60.0001px"
+    },
+    "words": [
+      {
+        "word": "Wie",
+        "rects": [
+          {
+            "x": 32,
+            "y": 192.90625,
+            "width": 88.8125,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "viel",
+        "rects": [
+          {
+            "x": 131.390625,
+            "y": 192.90625,
+            "width": 80.421875,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "Energiepotenzial",
+        "rects": [
+          {
+            "x": 32,
+            "y": 252.90625,
+            "width": 380.609375,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "steckt",
+        "rects": [
+          {
+            "x": 32,
+            "y": 312.90625,
+            "width": 136.609375,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "in",
+        "rects": [
+          {
+            "x": 179.1875,
+            "y": 312.90625,
+            "width": 42.21875,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "Ihrer",
+        "rects": [
+          {
+            "x": 232,
+            "y": 312.90625,
+            "width": 115.015625,
+            "height": 72
+          }
+        ]
+      },
+      {
+        "word": "Gewerbe­immobilie?",
+        "rects": [
+          {
+            "x": 32,
+            "y": 372.90625,
+            "width": 452.203125,
+            "height": 72
+          }
+        ]
+      }
+    ],
+    "imageAssets": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "loaded": true,
+        "width": 170,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "loaded": true,
+        "width": 169,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      }
+    ],
+    "renderedFonts": {},
+    "errors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "overflow": false,
+    "heading": {
+      "x": 20,
+      "y": 124,
+      "width": 350,
+      "height": 176,
+      "bottom": 300
+    },
+    "hero": {
+      "x": 20,
+      "y": 100,
+      "width": 350,
+      "height": 893.03125,
+      "bottom": 993.03125
+    },
+    "subline": {
+      "x": 20,
+      "y": 316,
+      "width": 350,
+      "height": 52,
+      "bottom": 368
+    },
+    "input": {
+      "x": 60,
+      "y": 422,
+      "width": 310,
+      "height": 56,
+      "bottom": 478
+    },
+    "cta": {
+      "x": 20,
+      "y": 486,
+      "width": 350,
+      "height": 56,
+      "bottom": 542
+    },
+    "image": {
+      "x": 20,
+      "y": 618.03125,
+      "width": 350,
+      "height": 260,
+      "bottom": 878.03125
+    },
+    "headingFont": {
+      "family": "\"IBM Plex Sans Condensed\", sans-serif",
+      "size": "42px",
+      "lineHeight": "44px"
+    },
+    "words": [
+      {
+        "word": "Wie",
+        "rects": [
+          {
+            "x": 20,
+            "y": 118,
+            "width": 65.859375,
+            "height": 55
+          }
+        ]
+      },
+      {
+        "word": "viel",
+        "rects": [
+          {
+            "x": 93.796875,
+            "y": 118,
+            "width": 60.8125,
+            "height": 55
+          }
+        ]
+      },
+      {
+        "word": "Energiepotenzial",
+        "rects": [
+          {
+            "x": 20,
+            "y": 162,
+            "width": 285.203125,
+            "height": 55
+          }
+        ]
+      },
+      {
+        "word": "steckt",
+        "rects": [
+          {
+            "x": 20,
+            "y": 206,
+            "width": 103.703125,
+            "height": 55
+          }
+        ]
+      },
+      {
+        "word": "in",
+        "rects": [
+          {
+            "x": 131.640625,
+            "y": 206,
+            "width": 31.921875,
+            "height": 55
+          }
+        ]
+      },
+      {
+        "word": "Ihrer",
+        "rects": [
+          {
+            "x": 171.5,
+            "y": 206,
+            "width": 85.765625,
+            "height": 55
+          }
+        ]
+      },
+      {
+        "word": "Gewerbe­immobilie?",
+        "rects": [
+          {
+            "x": 20,
+            "y": 250,
+            "width": 339.15625,
+            "height": 55
+          }
+        ]
+      }
+    ],
+    "imageAssets": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "loaded": true,
+        "width": 170,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "loaded": true,
+        "width": 169,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      }
+    ],
+    "renderedFonts": {},
+    "errors": []
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "viewport": {
+      "width": 360,
+      "height": 800
+    },
+    "overflow": false,
+    "heading": {
+      "x": 16,
+      "y": 124,
+      "width": 328,
+      "height": 164,
+      "bottom": 288
+    },
+    "hero": {
+      "x": 16,
+      "y": 100,
+      "width": 328,
+      "height": 857.03125,
+      "bottom": 957.03125
+    },
+    "subline": {
+      "x": 16,
+      "y": 304,
+      "width": 328,
+      "height": 52,
+      "bottom": 356
+    },
+    "input": {
+      "x": 56,
+      "y": 410,
+      "width": 288,
+      "height": 56,
+      "bottom": 466
+    },
+    "cta": {
+      "x": 16,
+      "y": 474,
+      "width": 328,
+      "height": 56,
+      "bottom": 530
+    },
+    "image": {
+      "x": 16,
+      "y": 606.03125,
+      "width": 328,
+      "height": 260,
+      "bottom": 866.03125
+    },
+    "headingFont": {
+      "family": "\"IBM Plex Sans Condensed\", sans-serif",
+      "size": "38px",
+      "lineHeight": "41.0001px"
+    },
+    "words": [
+      {
+        "word": "Wie",
+        "rects": [
+          {
+            "x": 16,
+            "y": 120,
+            "width": 60.15625,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "viel",
+        "rects": [
+          {
+            "x": 83.1875,
+            "y": 120,
+            "width": 55.21875,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "Energiepotenzial",
+        "rects": [
+          {
+            "x": 16,
+            "y": 161,
+            "width": 259.8125,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "steckt",
+        "rects": [
+          {
+            "x": 16,
+            "y": 202,
+            "width": 94.3125,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "in",
+        "rects": [
+          {
+            "x": 117.34375,
+            "y": 202,
+            "width": 29.109375,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "Ihrer",
+        "rects": [
+          {
+            "x": 153.5,
+            "y": 202,
+            "width": 78.265625,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "Gewerbe­immobilie?",
+        "rects": [
+          {
+            "x": 16,
+            "y": 243,
+            "width": 308.859375,
+            "height": 49
+          }
+        ]
+      }
+    ],
+    "imageAssets": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "loaded": true,
+        "width": 170,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "loaded": true,
+        "width": 169,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      }
+    ],
+    "renderedFonts": {},
+    "errors": []
+  },
+  {
+    "width": 320,
+    "height": 800,
+    "viewport": {
+      "width": 320,
+      "height": 800
+    },
+    "overflow": false,
+    "heading": {
+      "x": 16,
+      "y": 142,
+      "width": 288,
+      "height": 205,
+      "bottom": 347
+    },
+    "hero": {
+      "x": 16,
+      "y": 118,
+      "width": 288,
+      "height": 916.03125,
+      "bottom": 1034.03125
+    },
+    "subline": {
+      "x": 16,
+      "y": 363,
+      "width": 288,
+      "height": 52,
+      "bottom": 415
+    },
+    "input": {
+      "x": 56,
+      "y": 469,
+      "width": 248,
+      "height": 56,
+      "bottom": 525
+    },
+    "cta": {
+      "x": 16,
+      "y": 533,
+      "width": 288,
+      "height": 56,
+      "bottom": 589
+    },
+    "image": {
+      "x": 16,
+      "y": 665.03125,
+      "width": 288,
+      "height": 260,
+      "bottom": 925.03125
+    },
+    "headingFont": {
+      "family": "\"IBM Plex Sans Condensed\", sans-serif",
+      "size": "38px",
+      "lineHeight": "41.0001px"
+    },
+    "words": [
+      {
+        "word": "Wie",
+        "rects": [
+          {
+            "x": 16,
+            "y": 138,
+            "width": 60.15625,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "viel",
+        "rects": [
+          {
+            "x": 83.1875,
+            "y": 138,
+            "width": 55.21875,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "Energiepotenzial",
+        "rects": [
+          {
+            "x": 16,
+            "y": 179,
+            "width": 259.8125,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "steckt",
+        "rects": [
+          {
+            "x": 16,
+            "y": 220,
+            "width": 94.3125,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "in",
+        "rects": [
+          {
+            "x": 117.34375,
+            "y": 220,
+            "width": 29.109375,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "Ihrer",
+        "rects": [
+          {
+            "x": 153.5,
+            "y": 220,
+            "width": 78.265625,
+            "height": 49
+          }
+        ]
+      },
+      {
+        "word": "Gewerbe­immobilie?",
+        "rects": [
+          {
+            "x": 16,
+            "y": 261,
+            "width": 139.359375,
+            "height": 49
+          },
+          {
+            "x": 155.359375,
+            "y": 261,
+            "width": 14,
+            "height": 49
+          },
+          {
+            "x": 16,
+            "y": 302,
+            "width": 169.515625,
+            "height": 49
+          }
+        ]
+      }
+    ],
+    "imageAssets": [
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-aerial.webp",
+        "loaded": true,
+        "width": 304,
+        "height": 332
+      },
+      {
+        "src": "/atlas/atlas-reference-roof.webp",
+        "loaded": true,
+        "width": 170,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-extension.webp",
+        "loaded": true,
+        "width": 169,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-storage.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      },
+      {
+        "src": "/atlas/atlas-reference-ground.webp",
+        "loaded": true,
+        "width": 167,
+        "height": 73
+      }
+    ],
+    "renderedFonts": {},
+    "errors": []
+  }
+]
