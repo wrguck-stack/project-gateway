@@ -1,0 +1,1018 @@
+{
+  "meta": {
+    "synthetic": true,
+    "seed": 20260905,
+    "createdAt": "2026-09-05",
+    "purpose": "Deterministic visual/semantic acceptance fixture; no real projects, no validated scoring model.",
+    "separateScopes": [
+      "Score fixture PG-DEMO-SCORE",
+      "Energy fixture PG-DEMO-ENERGY with existing generation",
+      "Operational snapshot of 140 projects",
+      "Independent Jan-Feb journey cohort of 10000 measurable visits"
+    ],
+    "rawCohortFile": "fixtures/journeys.json",
+    "rawDecisionsFile": "fixtures/decisions.json",
+    "rawPipelineFile": "fixtures/pipeline-projects.json"
+  },
+  "scoreFull": {
+    "assessmentId": "ASSESS-DEMO-82",
+    "projectId": "PG-DEMO-SCORE",
+    "projectName": "Beispielobjekt · Karlsruhe",
+    "modelVersion": "DEMO-ROOF-1",
+    "inputVersion": "fixture-1",
+    "profileId": "COMMERCIAL_ROOF_PV",
+    "state": "ESTIMATED",
+    "displayScore": 82,
+    "class": "HIGH_PRIORITY",
+    "calculatedAt": "2026-09-05T08:00:00Z",
+    "factors": [
+      {
+        "factorId": "USABLE_AREA",
+        "label": "Nutzbare Fläche",
+        "applicable": true,
+        "maxPoints": 15,
+        "contribution": 13,
+        "basisState": "ESTIMATED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_USABLE_AREA",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_USABLE_AREA"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "SOLAR_YIELD",
+        "label": "Solar-/Ertragspotenzial",
+        "applicable": true,
+        "maxPoints": 15,
+        "contribution": 12,
+        "basisState": "ESTIMATED",
+        "origin": "DERIVED",
+        "ruleId": "DEMO_RULE_SOLAR_YIELD",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_SOLAR_YIELD"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "CONSUMPTION_SELF_USE",
+        "label": "Verbrauch / Eigenverbrauch",
+        "applicable": true,
+        "maxPoints": 20,
+        "contribution": 18,
+        "basisState": "ESTIMATED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_CONSUMPTION_SELF_USE",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_CONSUMPTION_SELF_USE"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "DECISION_AUTHORITY",
+        "label": "Entscheidungssituation",
+        "applicable": true,
+        "maxPoints": 15,
+        "contribution": 15,
+        "basisState": "OBSERVED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_DECISION_AUTHORITY",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_DECISION_AUTHORITY"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "ROOF_CONDITION",
+        "label": "Dachzustand",
+        "applicable": true,
+        "maxPoints": 10,
+        "contribution": 6,
+        "basisState": "ESTIMATED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_ROOF_CONDITION",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_ROOF_CONDITION"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "PROJECT_SCALE",
+        "label": "Projektgröße",
+        "applicable": true,
+        "maxPoints": 5,
+        "contribution": 4,
+        "basisState": "ESTIMATED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_PROJECT_SCALE",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_PROJECT_SCALE"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "READINESS",
+        "label": "Projektbereitschaft",
+        "applicable": true,
+        "maxPoints": 10,
+        "contribution": 7,
+        "basisState": "OBSERVED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_READINESS",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_READINESS"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "DOCUMENTATION",
+        "label": "Unterlagen",
+        "applicable": true,
+        "maxPoints": 5,
+        "contribution": 3,
+        "basisState": "OBSERVED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_DOCUMENTATION",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_DOCUMENTATION"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "ENERGY_INFRASTRUCTURE",
+        "label": "Energieinfrastruktur",
+        "applicable": true,
+        "maxPoints": 5,
+        "contribution": 4,
+        "basisState": "OBSERVED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_ENERGY_INFRASTRUCTURE",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_ENERGY_INFRASTRUCTURE"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      }
+    ],
+    "estimatedFactorCount": 5,
+    "bounds": null,
+    "blockingFindingIds": [],
+    "unresolvedFindings": [
+      "Netzanschluss nicht geprüft",
+      "Tragfähigkeit noch unbekannt"
+    ],
+    "positiveFindings": [
+      "Zusammenhängende nutzbare Fläche angegeben",
+      "Entscheidungsträger benannt"
+    ],
+    "missingInformation": ["Lastgang ergänzen"],
+    "coverage": {
+      "fieldsAvailable": 16,
+      "fieldsRequired": 20,
+      "documentsAvailable": 2,
+      "documentsRequired": 3,
+      "factorsAssessable": 9,
+      "factorsApplicable": 9,
+      "weightCovered": 100
+    }
+  },
+  "scorePartial": {
+    "assessmentId": "ASSESS-DEMO-PARTIAL",
+    "projectId": "PG-DEMO-SCORE",
+    "projectName": "Beispielobjekt · Karlsruhe",
+    "modelVersion": "DEMO-ROOF-1",
+    "inputVersion": "fixture-1",
+    "profileId": "COMMERCIAL_ROOF_PV",
+    "state": "PARTIAL",
+    "displayScore": null,
+    "class": null,
+    "calculatedAt": "2026-09-05T08:00:00Z",
+    "factors": [
+      {
+        "factorId": "USABLE_AREA",
+        "label": "Nutzbare Fläche",
+        "applicable": true,
+        "maxPoints": 15,
+        "contribution": 13,
+        "basisState": "ESTIMATED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_USABLE_AREA",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_USABLE_AREA"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "SOLAR_YIELD",
+        "label": "Solar-/Ertragspotenzial",
+        "applicable": true,
+        "maxPoints": 15,
+        "contribution": null,
+        "basisState": "UNKNOWN",
+        "origin": null,
+        "ruleId": "DEMO_RULE_SOLAR_YIELD",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": [],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "CONSUMPTION_SELF_USE",
+        "label": "Verbrauch / Eigenverbrauch",
+        "applicable": true,
+        "maxPoints": 20,
+        "contribution": 18,
+        "basisState": "ESTIMATED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_CONSUMPTION_SELF_USE",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_CONSUMPTION_SELF_USE"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "DECISION_AUTHORITY",
+        "label": "Entscheidungssituation",
+        "applicable": true,
+        "maxPoints": 15,
+        "contribution": 15,
+        "basisState": "OBSERVED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_DECISION_AUTHORITY",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_DECISION_AUTHORITY"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "ROOF_CONDITION",
+        "label": "Dachzustand",
+        "applicable": true,
+        "maxPoints": 10,
+        "contribution": 6,
+        "basisState": "ESTIMATED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_ROOF_CONDITION",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_ROOF_CONDITION"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "PROJECT_SCALE",
+        "label": "Projektgröße",
+        "applicable": true,
+        "maxPoints": 5,
+        "contribution": 4,
+        "basisState": "ESTIMATED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_PROJECT_SCALE",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_PROJECT_SCALE"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "READINESS",
+        "label": "Projektbereitschaft",
+        "applicable": true,
+        "maxPoints": 10,
+        "contribution": 7,
+        "basisState": "OBSERVED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_READINESS",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_READINESS"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "DOCUMENTATION",
+        "label": "Unterlagen",
+        "applicable": true,
+        "maxPoints": 5,
+        "contribution": 3,
+        "basisState": "OBSERVED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_DOCUMENTATION",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_DOCUMENTATION"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      },
+      {
+        "factorId": "ENERGY_INFRASTRUCTURE",
+        "label": "Energieinfrastruktur",
+        "applicable": true,
+        "maxPoints": 5,
+        "contribution": 4,
+        "basisState": "OBSERVED",
+        "origin": "USER",
+        "ruleId": "DEMO_RULE_ENERGY_INFRASTRUCTURE",
+        "ruleVersion": "fixture-1",
+        "evidenceRefs": ["DEMO_EVIDENCE_ENERGY_INFRASTRUCTURE"],
+        "explanation": "Synthetisches Regelergebnis für die UI-Abnahme; keine fachlich validierte Eignungsschwelle."
+      }
+    ],
+    "estimatedFactorCount": 4,
+    "bounds": {
+      "lower": 70,
+      "upper": 85,
+      "meaning": "POSSIBLE_POINTS"
+    },
+    "blockingFindingIds": [],
+    "unresolvedFindings": [
+      "Netzanschluss nicht geprüft",
+      "Tragfähigkeit noch unbekannt"
+    ],
+    "positiveFindings": [
+      "Zusammenhängende nutzbare Fläche angegeben",
+      "Entscheidungsträger benannt"
+    ],
+    "missingInformation": ["Lastgang ergänzen"],
+    "coverage": {
+      "fieldsAvailable": 16,
+      "fieldsRequired": 20,
+      "documentsAvailable": 2,
+      "documentsRequired": 3,
+      "factorsAssessable": 8,
+      "factorsApplicable": 9,
+      "weightCovered": 85
+    }
+  },
+  "energy": {
+    "projectId": "PG-DEMO-ENERGY",
+    "scope": "Separate synthetic example with existing generation; not the score/map demo property.",
+    "period": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "timezone": "Europe/Berlin"
+    },
+    "values": [
+      {
+        "id": "CONSUMPTION",
+        "label": "Jährlicher Stromverbrauch",
+        "value": 620,
+        "unit": "MWh/year",
+        "origin": "USER",
+        "nature": "OBSERVED",
+        "source": "Synthetische Jahresabrechnung 2025"
+      },
+      {
+        "id": "EXISTING_GENERATION",
+        "label": "Vorhandene Eigenerzeugung",
+        "value": 180,
+        "unit": "MWh/year",
+        "origin": "USER",
+        "nature": "OBSERVED",
+        "source": "Synthetischer Jahreszähler 2025"
+      },
+      {
+        "id": "ADDITIONAL_POTENTIAL",
+        "label": "Zusätzliches Erzeugungspotenzial",
+        "value": null,
+        "unit": "MWh/year",
+        "origin": "DERIVED",
+        "nature": "ESTIMATED",
+        "interval": {
+          "lower": 350,
+          "upper": 450,
+          "kind": "SCENARIO_RANGE",
+          "methodRef": "DEMO_SCENARIO_RANGE"
+        },
+        "source": "Synthetische Jahresszenario-Spanne, keine PVGIS-Abfrage"
+      }
+    ],
+    "selfUse": {
+      "value": null,
+      "state": "INSUFFICIENT_DATA",
+      "missing": ["Kompatibler Lastgang", "Zeitgleiches Erzeugungsprofil"]
+    },
+    "storage": {
+      "value": null,
+      "state": "INSUFFICIENT_DATA",
+      "label": "Daten für Speicherprüfung ergänzen"
+    }
+  },
+  "site": {
+    "projectId": "PG-DEMO-SITE",
+    "address": "Musteradresse · Demoobjekt",
+    "coordinates": null,
+    "buildingType": "Logistikhalle",
+    "illustrativeRoofAreaM2": 4800,
+    "areaNature": "ESTIMATED",
+    "roofGeometry": null,
+    "usableGeometry": null,
+    "solarPotential": null,
+    "existingPV": "UNKNOWN",
+    "extensionPotential": "UNKNOWN",
+    "storagePotential": "UNKNOWN",
+    "drawingNote": "Layer diagram is schematic and not georeferenced. No metric area or real satellite attribution may be inferred."
+  },
+  "pipeline": {
+    "scope": "Separate current operational portfolio, not the historical funnel cohort",
+    "tenantId": "DEMO-PARTNER",
+    "asOf": "2026-09-05T08:00:00Z",
+    "totalProjects": 140,
+    "rows": [
+      {
+        "status": "NEW",
+        "label": "Neu",
+        "count": 8,
+        "medianCurrentAgeDays": 1,
+        "openActions": 2,
+        "overdueActions": 0
+      },
+      {
+        "status": "INCOMPLETE",
+        "label": "Angaben fehlen",
+        "count": 24,
+        "medianCurrentAgeDays": 7,
+        "openActions": 15,
+        "overdueActions": 7
+      },
+      {
+        "status": "SCORING",
+        "label": "Bewertung läuft",
+        "count": 3,
+        "medianCurrentAgeDays": 0.007,
+        "openActions": 1,
+        "overdueActions": 1
+      },
+      {
+        "status": "QUALIFIED",
+        "label": "Vorqualifiziert",
+        "count": 15,
+        "medianCurrentAgeDays": 2,
+        "openActions": 10,
+        "overdueActions": 3
+      },
+      {
+        "status": "PARTNER_REVIEW",
+        "label": "In Prüfung",
+        "count": 20,
+        "medianCurrentAgeDays": 6,
+        "openActions": 12,
+        "overdueActions": 4
+      },
+      {
+        "status": "INFO_REQUESTED",
+        "label": "Rückfrage offen",
+        "count": 18,
+        "medianCurrentAgeDays": 12,
+        "openActions": 14,
+        "overdueActions": 8
+      },
+      {
+        "status": "ACCEPTED",
+        "label": "Übernommen",
+        "count": 12,
+        "medianCurrentAgeDays": 4,
+        "openActions": 5,
+        "overdueActions": 0
+      },
+      {
+        "status": "DEVELOPMENT",
+        "label": "In Entwicklung",
+        "count": 9,
+        "medianCurrentAgeDays": 21,
+        "openActions": 4,
+        "overdueActions": 0
+      },
+      {
+        "status": "CONTRACTED",
+        "label": "Vertrag geschlossen",
+        "count": 5,
+        "medianCurrentAgeDays": 17,
+        "openActions": 1,
+        "overdueActions": 0
+      },
+      {
+        "status": "REALIZED",
+        "label": "Realisiert",
+        "count": 4,
+        "medianCurrentAgeDays": null,
+        "openActions": 0,
+        "overdueActions": 0
+      },
+      {
+        "status": "REJECTED",
+        "label": "Abgelehnt",
+        "count": 22,
+        "medianCurrentAgeDays": null,
+        "openActions": 0,
+        "overdueActions": 0
+      }
+    ]
+  },
+  "rejection": {
+    "scope": "First rejection decisions in qualified Jan-Feb cohort within H180",
+    "denominator": 80,
+    "reasonMode": "PRIMARY_ONLY",
+    "rows": [
+      {
+        "code": "AREA_TOO_SMALL",
+        "label": "Fläche zu klein",
+        "count": 18
+      },
+      {
+        "code": "ROOF_CONDITION",
+        "label": "Dachzustand ungeeignet",
+        "count": 12
+      },
+      {
+        "code": "OWNERSHIP_AUTHORITY",
+        "label": "Eigentum / Entscheidung",
+        "count": 10
+      },
+      {
+        "code": "LOW_CONSUMPTION",
+        "label": "Verbrauch zu gering",
+        "count": 8
+      },
+      {
+        "code": "PROJECT_SCALE_MISMATCH",
+        "label": "Projektgröße unpassend",
+        "count": 7
+      },
+      {
+        "code": "GRID_CONSTRAINT",
+        "label": "Netzsituation",
+        "count": 7
+      },
+      {
+        "code": "STRUCTURAL_CONSTRAINT",
+        "label": "Statik",
+        "count": 6
+      },
+      {
+        "code": "REGION_OUT_OF_SCOPE",
+        "label": "Region außerhalb Fokus",
+        "count": 5
+      },
+      {
+        "code": "ECONOMICS",
+        "label": "Wirtschaftlichkeit",
+        "count": 4
+      },
+      {
+        "code": "MISSING_INFORMATION",
+        "label": "Informationen unvollständig",
+        "count": 2
+      },
+      {
+        "code": "OTHER",
+        "label": "Sonstiges",
+        "count": 1
+      }
+    ],
+    "missingReasonCount": 0,
+    "technicalExclusions": ["DUPLICATE", "WITHDRAWN"]
+  },
+  "funnel": {
+    "cohortStart": "2026-01-01",
+    "cohortEndInclusive": "2026-02-28",
+    "asOf": "2026-09-05",
+    "horizonDays": 180,
+    "mature": true,
+    "grain": "measurable journey / first primary project",
+    "rows": [
+      {
+        "stage": "VISIT",
+        "label": "Messbare Besuche",
+        "count": 10000,
+        "conversionFromPrevious": null,
+        "notReachedNext": 8800
+      },
+      {
+        "stage": "CHECK_STARTED",
+        "label": "Standortcheck gestartet",
+        "count": 1200,
+        "conversionFromPrevious": 0.12,
+        "notReachedNext": 480
+      },
+      {
+        "stage": "CHECK_COMPLETED",
+        "label": "Standortcheck abgeschlossen",
+        "count": 720,
+        "conversionFromPrevious": 0.6,
+        "notReachedNext": 360
+      },
+      {
+        "stage": "SUBMITTED",
+        "label": "Projekt eingereicht",
+        "count": 360,
+        "conversionFromPrevious": 0.5,
+        "notReachedNext": 108
+      },
+      {
+        "stage": "QUALIFIED",
+        "label": "Vorqualifiziert",
+        "count": 252,
+        "conversionFromPrevious": 0.7,
+        "notReachedNext": 126
+      },
+      {
+        "stage": "PARTNER_ACCEPTED",
+        "label": "Partner angenommen",
+        "count": 126,
+        "conversionFromPrevious": 0.5,
+        "notReachedNext": 36
+      },
+      {
+        "stage": "DEVELOPMENT",
+        "label": "Projektentwicklung",
+        "count": 90,
+        "conversionFromPrevious": 0.7142857142857143,
+        "notReachedNext": 45
+      },
+      {
+        "stage": "CONTRACTED",
+        "label": "Vertrag",
+        "count": 45,
+        "conversionFromPrevious": 0.5,
+        "notReachedNext": 27
+      },
+      {
+        "stage": "REALIZED",
+        "label": "Realisiert",
+        "count": 18,
+        "conversionFromPrevious": 0.4,
+        "notReachedNext": null
+      }
+    ],
+    "qualifiedToAcceptanceNotReached": {
+      "total": 126,
+      "firstRejected": 80,
+      "pending": 46
+    },
+    "rates": {
+      "qualification": {
+        "numerator": 252,
+        "denominator": 360,
+        "rate": 0.7
+      },
+      "partnerAcceptance": {
+        "numerator": 126,
+        "denominator": 206,
+        "rate": 0.6116504854368932,
+        "pending": 46,
+        "decisionCoverage": 0.8174603174603174
+      },
+      "projectWin": {
+        "numerator": 45,
+        "denominator": 125,
+        "rate": 0.36,
+        "unresolvedQualified": 127
+      },
+      "submittedToContract": {
+        "numerator": 45,
+        "denominator": 360,
+        "rate": 0.125
+      }
+    }
+  },
+  "edgeCases": [
+    {
+      "id": "KNOWN_ZERO",
+      "nature": "OBSERVED",
+      "origin": "USER",
+      "value": 0,
+      "expected": "Show valid 0, no unknown label"
+    },
+    {
+      "id": "UNKNOWN",
+      "nature": "UNKNOWN",
+      "origin": null,
+      "value": null,
+      "expected": "Noch unbekannt; no zero bar"
+    },
+    {
+      "id": "NOT_APPLICABLE",
+      "nature": "NOT_APPLICABLE",
+      "origin": null,
+      "value": null,
+      "expected": "Nicht relevant; exclude from active requirement denominator"
+    },
+    {
+      "id": "ZERO_DENOMINATOR",
+      "numerator": 0,
+      "denominator": 0,
+      "expectedRate": null
+    },
+    {
+      "id": "STALE_REVIEW",
+      "projectStatus": "PARTNER_REVIEW",
+      "scoreState": "STALE",
+      "previousScore": 82,
+      "scoreJobState": "RUNNING",
+      "expected": "Keep review status; mark old score stale"
+    },
+    {
+      "id": "INVALID_SCORE",
+      "displayScore": 103,
+      "expected": "ERROR, no clamping"
+    },
+    {
+      "id": "CONFIRMED_BLOCKER_HIGH_SCORE",
+      "score": 82,
+      "blocker": true,
+      "expected": "High score visible; gated action explained and blocked"
+    },
+    {
+      "id": "REOPENED_REJECTION",
+      "history": ["QUALIFIED", "PARTNER_REVIEW", "REJECTED", "PARTNER_REVIEW"],
+      "expected": "Retain first decision for acceptance rate; reopened outcome pending for win rate"
+    },
+    {
+      "id": "MIXED_UNITS",
+      "values": [
+        {
+          "value": 4800,
+          "unit": "m2"
+        },
+        {
+          "value": 500,
+          "unit": "kWp"
+        }
+      ],
+      "expected": "No combined numeric size sort or sum"
+    },
+    {
+      "id": "PARTIAL_RESPONSE",
+      "remainingRequired": ["LOAD_PROFILE"],
+      "expected": "Response event visible; missing requirement persists"
+    },
+    {
+      "id": "DUPLICATE_EVENT",
+      "eventIds": ["EV-1", "EV-1"],
+      "expectedDistinctEvents": 1
+    }
+  ],
+  "scoreEvidence": [
+    {
+      "id": "DEMO_EVIDENCE_USABLE_AREA",
+      "value": 4800,
+      "unit": "m2",
+      "origin": "USER",
+      "nature": "ESTIMATED",
+      "sourceRef": "DEMO_SOURCE_USABLE_AREA",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Geschätzte zusammenhängende Nutzfläche, keine geometrisch ermittelte Modulfläche."
+    },
+    {
+      "id": "DEMO_EVIDENCE_SOLAR_YIELD",
+      "value": 980,
+      "unit": "kWh/kWp/year",
+      "origin": "DERIVED",
+      "nature": "ESTIMATED",
+      "sourceRef": "DEMO_SOURCE_SOLAR_YIELD",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Synthetischer spezifischer Jahresertrag, keine externe Abfrage."
+    },
+    {
+      "id": "DEMO_EVIDENCE_CONSUMPTION_SELF_USE",
+      "value": 620,
+      "unit": "MWh/year",
+      "origin": "USER",
+      "nature": "OBSERVED",
+      "sourceRef": "DEMO_SOURCE_CONSUMPTION_SELF_USE",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Synthetische Jahresverbrauchsangabe. Zeitliche Passung noch ungeprüft."
+    },
+    {
+      "id": "DEMO_EVIDENCE_DECISION_AUTHORITY",
+      "value": "Eigentümer als Entscheidungsträger benannt",
+      "unit": null,
+      "origin": "USER",
+      "nature": "OBSERVED",
+      "sourceRef": "DEMO_SOURCE_DECISION_AUTHORITY",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Nutzerauskunft, kein Eigentumsnachweis."
+    },
+    {
+      "id": "DEMO_EVIDENCE_ROOF_CONDITION",
+      "value": "Keine Sanierung bekannt",
+      "unit": null,
+      "origin": "USER",
+      "nature": "ESTIMATED",
+      "sourceRef": "DEMO_SOURCE_ROOF_CONDITION",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Ungeprüfte Nutzervermutung zum Dachzustand."
+    },
+    {
+      "id": "DEMO_EVIDENCE_PROJECT_SCALE",
+      "value": "Gewerbedach-PV im Demo-Partnersegment",
+      "unit": null,
+      "origin": "USER",
+      "nature": "ESTIMATED",
+      "sourceRef": "DEMO_SOURCE_PROJECT_SCALE",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Fiktiver Partnerfit, keine produktive Mindestgröße."
+    },
+    {
+      "id": "DEMO_EVIDENCE_READINESS",
+      "value": "Eigenverbrauch senken; Ansprechpartner benannt",
+      "unit": null,
+      "origin": "USER",
+      "nature": "OBSERVED",
+      "sourceRef": "DEMO_SOURCE_READINESS",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Synthetische Projektziel- und Zuständigkeitsangabe."
+    },
+    {
+      "id": "DEMO_EVIDENCE_DOCUMENTATION",
+      "value": 2,
+      "unit": null,
+      "origin": "USER",
+      "nature": "OBSERVED",
+      "sourceRef": "DEMO_SOURCE_DOCUMENTATION",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Zwei von drei aktuell benötigten Unterlagen vorhanden; nicht fachlich geprüft."
+    },
+    {
+      "id": "DEMO_EVIDENCE_ENERGY_INFRASTRUCTURE",
+      "value": "Keine bestehende PV angegeben; Anschlussprüfung offen",
+      "unit": null,
+      "origin": "USER",
+      "nature": "OBSERVED",
+      "sourceRef": "DEMO_SOURCE_ENERGY_INFRASTRUCTURE",
+      "asOf": "2026-09-05T08:00:00Z",
+      "recordedAt": "2026-09-05T08:00:00Z",
+      "interval": null,
+      "inputRefs": [],
+      "loadState": "READY",
+      "note": "Fehlende PV ist kein pauschaler Nachteil."
+    }
+  ],
+  "scoreSources": [
+    {
+      "id": "DEMO_SOURCE_USABLE_AREA",
+      "origin": "USER",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Geschätzte zusammenhängende Nutzfläche, keine geometrisch ermittelte Modulfläche.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    },
+    {
+      "id": "DEMO_SOURCE_SOLAR_YIELD",
+      "origin": "DERIVED",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Synthetischer spezifischer Jahresertrag, keine externe Abfrage.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    },
+    {
+      "id": "DEMO_SOURCE_CONSUMPTION_SELF_USE",
+      "origin": "USER",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Synthetische Jahresverbrauchsangabe. Zeitliche Passung noch ungeprüft.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    },
+    {
+      "id": "DEMO_SOURCE_DECISION_AUTHORITY",
+      "origin": "USER",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Nutzerauskunft, kein Eigentumsnachweis.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    },
+    {
+      "id": "DEMO_SOURCE_ROOF_CONDITION",
+      "origin": "USER",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Ungeprüfte Nutzervermutung zum Dachzustand.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    },
+    {
+      "id": "DEMO_SOURCE_PROJECT_SCALE",
+      "origin": "USER",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Fiktiver Partnerfit, keine produktive Mindestgröße.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    },
+    {
+      "id": "DEMO_SOURCE_READINESS",
+      "origin": "USER",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Synthetische Projektziel- und Zuständigkeitsangabe.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    },
+    {
+      "id": "DEMO_SOURCE_DOCUMENTATION",
+      "origin": "USER",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Zwei von drei aktuell benötigten Unterlagen vorhanden; nicht fachlich geprüft.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    },
+    {
+      "id": "DEMO_SOURCE_ENERGY_INFRASTRUCTURE",
+      "origin": "USER",
+      "provider": "Synthetischer UI-Prüfdatensatz",
+      "dataset": "Gateway Analytics Fixture",
+      "version": "fixture-1",
+      "sourceDate": "2026-09-05T08:00:00Z",
+      "retrievedAt": null,
+      "method": "Fehlende PV ist kein pauschaler Nachteil.",
+      "license": null,
+      "attribution": "Beispieldaten, keine realen Projektinformationen",
+      "documentRef": null
+    }
+  ],
+  "scoreStateExamples": [
+    {
+      "state": "READY",
+      "displayScore": 82,
+      "description": "Vollständig bewertbar, ohne ausgewiesene Schätzungen; separate Fixture-Variante."
+    },
+    {
+      "state": "ESTIMATED",
+      "displayScore": 82,
+      "description": "Vollständig bewertbar; Schätzungen sichtbar."
+    },
+    {
+      "state": "PARTIAL",
+      "displayScore": null,
+      "description": "Unbekannter Faktor; mögliche Spanne 70-85."
+    },
+    {
+      "state": "NOT_READY",
+      "displayScore": null,
+      "description": "Standort oder Profil noch nicht festgelegt."
+    },
+    {
+      "state": "SCORING",
+      "displayScore": null,
+      "description": "Echter initialer Job in Arbeit, keine Prozentbehauptung."
+    },
+    {
+      "state": "STALE",
+      "displayScore": 82,
+      "description": "Letzte Bewertung sichtbar, geänderte Eingangsdaten."
+    },
+    {
+      "state": "ERROR",
+      "displayScore": null,
+      "description": "Dienst-/Payloadfehler, Eingaben behalten."
+    }
+  ]
+}

@@ -1,0 +1,373 @@
+{
+  "contractVersion": "1.0",
+  "kind": "normative_design_data_contract_not_application_code",
+  "locale": "de-DE",
+  "displayTimezone": "Europe/Berlin",
+  "timestampStorage": "ISO 8601 UTC",
+  "identity": {
+    "globalProjectKey": "projectId",
+    "tenantProjectKey": ["tenantId", "projectId"],
+    "assignmentKey": "partnerAssignmentId",
+    "authorization": "Server enforces all tenant, role, project and document access. Client filters are not access control."
+  },
+  "enums": {
+    "projectStatus": [
+      "NEW",
+      "INCOMPLETE",
+      "SCORING",
+      "QUALIFIED",
+      "PARTNER_REVIEW",
+      "INFO_REQUESTED",
+      "ACCEPTED",
+      "DEVELOPMENT",
+      "CONTRACTED",
+      "REALIZED",
+      "REJECTED"
+    ],
+    "scoreState": [
+      "READY",
+      "ESTIMATED",
+      "PARTIAL",
+      "NOT_READY",
+      "SCORING",
+      "STALE",
+      "ERROR"
+    ],
+    "origin": ["USER", "EXTERNAL", "PARTNER", "DERIVED"],
+    "nature": ["OBSERVED", "ESTIMATED", "UNKNOWN", "NOT_APPLICABLE"],
+    "loadState": [
+      "IDLE",
+      "INITIAL_LOADING",
+      "READY",
+      "REFRESHING",
+      "PARTIAL",
+      "ERROR",
+      "STALE",
+      "OFFLINE"
+    ],
+    "findingType": ["POSITIVE", "UNRESOLVED", "CONFIRMED_RISK", "MISSING"],
+    "factorId": [
+      "USABLE_AREA",
+      "SOLAR_YIELD",
+      "CONSUMPTION_SELF_USE",
+      "DECISION_AUTHORITY",
+      "ROOF_CONDITION",
+      "PROJECT_SCALE",
+      "READINESS",
+      "DOCUMENTATION",
+      "ENERGY_INFRASTRUCTURE"
+    ],
+    "rejectionReason": [
+      "AREA_TOO_SMALL",
+      "ROOF_CONDITION",
+      "OWNERSHIP_AUTHORITY",
+      "LOW_CONSUMPTION",
+      "PROJECT_SCALE_MISMATCH",
+      "GRID_CONSTRAINT",
+      "STRUCTURAL_CONSTRAINT",
+      "REGION_OUT_OF_SCOPE",
+      "ECONOMICS",
+      "MISSING_INFORMATION",
+      "OTHER",
+      "PARTNER_CAPACITY",
+      "DUPLICATE",
+      "WITHDRAWN"
+    ],
+    "assessmentCertainty": [
+      "CONFIRMED",
+      "INSUFFICIENT_EVIDENCE",
+      "PARTNER_SCOPE_DECISION"
+    ],
+    "projectProfile": [
+      "COMMERCIAL_ROOF_PV",
+      "GROUND_PV",
+      "PV_EXTENSION",
+      "STORAGE"
+    ],
+    "supportedUnits": [
+      "m2",
+      "kW",
+      "kWp",
+      "MWp",
+      "kWh",
+      "MWh",
+      "kWh/year",
+      "MWh/year",
+      "kWh/kWp/year",
+      "percent"
+    ]
+  },
+  "records": {
+    "EvidenceValue": {
+      "id": "string",
+      "value": "finite number|string|boolean|null; unknown and not applicable require null",
+      "unit": "supported unit or null for categorical value",
+      "origin": "origin enum or null when no source exists",
+      "nature": "nature enum",
+      "period": "{start,end,timezone,coverageRatio} or null; energy comparisons require compatible annual periods",
+      "interval": "{lower,upper,kind,methodRef} or null; kind=SCENARIO_RANGE|MODEL_RANGE|MEASUREMENT_RANGE; never invent confidence level",
+      "sourceRef": "string|null",
+      "asOf": "ISO timestamp|null",
+      "recordedAt": "ISO timestamp",
+      "methodVersion": "string|null",
+      "inputRefs": "array of EvidenceValue IDs",
+      "resolution": "source spatial/temporal resolution or null",
+      "conflict": "null|{candidateEvidenceIds,reason,resolvedBy,resolvedAt}",
+      "loadState": "separate fetch state"
+    },
+    "Source": {
+      "id": "string",
+      "origin": "origin enum",
+      "provider": "string|null",
+      "dataset": "string|null",
+      "version": "string|null",
+      "sourceDate": "ISO timestamp|null",
+      "retrievedAt": "ISO timestamp|null",
+      "method": "string|null",
+      "license": "string|null",
+      "attribution": "string|null",
+      "documentRef": "authorized reference|null"
+    },
+    "FactorAssessment": {
+      "factorId": "factor enum",
+      "applicable": "boolean",
+      "maxPoints": "nonnegative finite number",
+      "contribution": "finite number in [0,maxPoints] or null",
+      "contributionBounds": "{lower,upper} or null",
+      "basisState": "OBSERVED|ESTIMATED|UNKNOWN|NOT_APPLICABLE",
+      "evidenceRefs": "array",
+      "ruleId": "string",
+      "ruleVersion": "string",
+      "explanation": "rule-derived structured text, never post-hoc AI reasoning",
+      "improvementAction": "{actionType,targetId,label}|null"
+    },
+    "ScoreAssessment": {
+      "assessmentId": "string",
+      "projectId": "string",
+      "modelVersion": "string",
+      "profileId": "string",
+      "inputVersion": "string",
+      "calculatedAt": "ISO timestamp",
+      "state": "scoreState",
+      "displayScore": "integer [0,100]|null",
+      "class": "HIGH_PRIORITY|GOOD_POTENTIAL|MORE_INFORMATION|LOW_PRIORITY|null",
+      "bounds": "{lower,upper,meaning:POSSIBLE_POINTS}|null",
+      "factors": "FactorAssessment[]",
+      "blockingFindingIds": "array",
+      "previousAssessmentId": "string|null"
+    },
+    "RequirementCoverage": {
+      "profileVersion": "string",
+      "requiredApplicableFieldIds": "array",
+      "availableFieldIds": "subset array",
+      "answeredUnknownFieldIds": "subset array; not included in available",
+      "documents": "{requiredCategoryIds,availableCategoryIds,reviewedCategoryIds}; separate counts, no arbitrary-file bonus"
+    },
+    "SiteGeometry": {
+      "type": "GeoJSON geometry",
+      "coordinates": "WGS84 longitude then latitude",
+      "geometryRole": "BUILDING_FOOTPRINT|ROOF_SURFACE|USABLE_AREA|EXCLUDED_AREA|EXISTING_PV",
+      "sourceRef": "string",
+      "confirmed": "boolean",
+      "areaM2": "number|null",
+      "areaMethod": "geodesic or named suitable local projection; never display pixel area"
+    },
+    "ProjectSnapshot": {
+      "projectId": "string",
+      "tenantId": "string",
+      "partnerAssignmentId": "string|null",
+      "status": "projectStatus",
+      "revision": "monotonic integer",
+      "submittedAt": "ISO timestamp|null; separate from status",
+      "statusEnteredAt": "ISO timestamp",
+      "scoreAssessmentId": "string|null",
+      "scoreJobState": "IDLE|QUEUED|RUNNING|FAILED|SUCCEEDED; independent of review status during recalculation",
+      "nextAction": "{type,label,ownerId,dueAt,createdAt}|null",
+      "projectSize": "EvidenceValue; do not sort/add unlike units"
+    },
+    "DecisionEvent": {
+      "eventId": "unique string",
+      "requestId": "idempotency string",
+      "tenantId": "string",
+      "projectId": "string",
+      "partnerAssignmentId": "string",
+      "actorId": "string",
+      "occurredAt": "ISO timestamp",
+      "fromStatus": "projectStatus",
+      "toStatus": "projectStatus",
+      "primaryReasonCode": "one code for rejection, else null",
+      "secondaryReasonCodes": "unique array <=3 excluding primary",
+      "reasonCatalogVersion": "string",
+      "note": "string; required for OTHER",
+      "assessmentCertainty": "enum",
+      "evidenceRefs": "array",
+      "scoreAssessmentIdAtDecision": "string|null",
+      "inputVersionAtDecision": "string",
+      "modelVersionAtDecision": "string|null",
+      "supersedesEventId": "string|null; immutable prior snapshot"
+    },
+    "Journey": {
+      "journeyId": "unique measurable visit ID, not a person ID",
+      "startedAt": "ISO timestamp",
+      "primaryProjectId": "one attributed project|null",
+      "stageReachAt": "map of stage to timestamp|null",
+      "trackingScope": "measurable visits only",
+      "attributionStatus": "ATTRIBUTED|UNATTRIBUTED|NOT_STARTED",
+      "horizonDays": "integer",
+      "cohortAnchor": "startedAt"
+    },
+    "StatusEvent": {
+      "eventId": "unique string",
+      "projectId": "string",
+      "assignmentId": "string|null",
+      "occurredAt": "ISO timestamp",
+      "from": "enum|null",
+      "to": "enum",
+      "actorId": "string",
+      "reasonRef": "string|null",
+      "previousRevision": "integer",
+      "nextRevision": "integer"
+    }
+  },
+  "scoringRules": {
+    "productionWeightPolicy": "Provided by versioned professionally owned profile configuration; example weights must not be enabled as production defaults.",
+    "weightsInvariant": "Applicable maxPoints sum to exactly 100. N/A excluded by profile, not silently renormalized at render time.",
+    "rounding": "Service rounds total once to integer, decimal half up; class uses same display integer.",
+    "partialPolicy": "Unknown contributions remain null. Lower=sum known lower bounds; upper=sum known upper bounds+unknown maxima. No scalar score or class in PARTIAL.",
+    "blockerPolicy": "Explicit documented gates independent of numeric score; never hidden point deductions.",
+    "classes": [
+      {
+        "id": "HIGH_PRIORITY",
+        "min": 80,
+        "max": 100,
+        "label": "Hohe Priorität"
+      },
+      {
+        "id": "GOOD_POTENTIAL",
+        "min": 65,
+        "max": 79,
+        "label": "Gutes Potenzial"
+      },
+      {
+        "id": "MORE_INFORMATION",
+        "min": 50,
+        "max": 64,
+        "label": "Informationen ergänzen"
+      },
+      {
+        "id": "LOW_PRIORITY",
+        "min": 0,
+        "max": 49,
+        "label": "Aktuell geringe Priorität"
+      }
+    ],
+    "activeFactorPolicy": "Only applicable factors with maxPoints > 0 count in score coverage and PARTIAL. Applicable maxPoints=0 renders Not weighted, never 0/0; information/blocker rules remain independent."
+  },
+  "statusTransitions": {
+    "NEW": ["INCOMPLETE", "SCORING", "REJECTED"],
+    "INCOMPLETE": ["SCORING", "REJECTED"],
+    "SCORING": ["QUALIFIED", "INCOMPLETE", "NEW"],
+    "QUALIFIED": ["PARTNER_REVIEW", "INFO_REQUESTED", "ACCEPTED", "REJECTED"],
+    "PARTNER_REVIEW": ["INFO_REQUESTED", "ACCEPTED", "REJECTED"],
+    "INFO_REQUESTED": ["PARTNER_REVIEW", "REJECTED"],
+    "ACCEPTED": ["DEVELOPMENT", "REJECTED"],
+    "DEVELOPMENT": ["CONTRACTED", "REJECTED"],
+    "CONTRACTED": ["REALIZED"],
+    "REALIZED": [],
+    "REJECTED": ["PARTNER_REVIEW"]
+  },
+  "transitionGuards": {
+    "anyMutation": "Authorization + expected revision + idempotency key; server confirms result.",
+    "toREJECTED": "Explicit authorized action + primary reason + certainty + event snapshot; not timeout or automatic low-score rule.",
+    "REJECTED_to_PARTNER_REVIEW": "Explicit authorized reopen with explanation; retain rejection event.",
+    "SCORING_to_QUALIFIED": "Configured prequalification gates satisfied. Suggested starting workflow >=65, complete required basis, no active confirmed blocker; proposal, not validated scoring model.",
+    "INFO_REQUESTED_to_PARTNER_REVIEW": "Response confirmed or authorized explicit resumption. Partial answer leaves unmet requirements visible.",
+    "CONTRACTED_to_REALIZED": "Confirmed actual milestone; post-contract disturbances use separate events, not retroactive pre-contract loss."
+  },
+  "analytics": {
+    "pipeline": {
+      "grain": "unique project within selected tenant/scope",
+      "time": "current as-of snapshot",
+      "counts": "each project exactly one status",
+      "age": "median current status age of nonterminal projects, not historical throughput time",
+      "overdue": "dueAt exists and is before asOf and action open"
+    },
+    "funnel": {
+      "grain": "same measurable journey cohort, at most one primary project per journey",
+      "stageOrder": [
+        "VISIT",
+        "CHECK_STARTED",
+        "CHECK_COMPLETED",
+        "SUBMITTED",
+        "QUALIFIED",
+        "PARTNER_ACCEPTED",
+        "DEVELOPMENT",
+        "CONTRACTED",
+        "REALIZED"
+      ],
+      "qualifiedStageReach": "max(submittedAt, valid qualifiedAt); analytical derived timestamp, not fabricated workflow event",
+      "withinStageRate": "N(stage)/N(previous)",
+      "notReachedNext": "N(stage)-N(next) with still open vs closed distinction",
+      "zeroDenominator": "null",
+      "horizon": "relative to every journey start, not one arbitrary calendar snapshot",
+      "maturity": "all included journeys have elapsed horizon; otherwise visibly provisional",
+      "eventDedup": "unique eventId plus stage/project idempotency; never count retries as new reaches"
+    },
+    "qualificationRate": {
+      "numerator": "submitted projects qualified within horizon",
+      "denominator": "all submitted projects in cohort"
+    },
+    "partnerAcceptanceRate": {
+      "numerator": "first partner decisions accepted",
+      "denominator": "first partner decisions accepted + rejected",
+      "pending": "qualified assigned projects without first decision, separate"
+    },
+    "projectWinRate": {
+      "numerator": "projects contracted within horizon",
+      "denominator": "contracted + effective closed pre-contract rejections within the qualified cohort",
+      "pending": "qualified projects without effective closed outcome; reopened cases are open"
+    },
+    "reasons": {
+      "grain": "one effective rejection primary reason per case in stated rejection decision cohort",
+      "secondary": "separate many-to-many frequency; sum can exceed 100%",
+      "excludedFromTechnicalLearning": ["DUPLICATE", "WITHDRAWN"],
+      "nontechnical": ["PARTNER_CAPACITY", "DUPLICATE", "WITHDRAWN"],
+      "legacyMissing": "explicit uncoded category, never silently OTHER"
+    }
+  },
+  "uiState": {
+    "url": [
+      "projectId",
+      "tab",
+      "tenantScopeId",
+      "validated filters",
+      "sort",
+      "cohortStart",
+      "cohortEnd",
+      "horizonDays"
+    ],
+    "local": ["hover", "unsubmitted input", "map transient viewport"],
+    "server": ["project versions", "decisions", "requirements", "scores"],
+    "doNotPutInUrl": [
+      "contact free text",
+      "document access tokens",
+      "unsubmitted notes"
+    ],
+    "backgroundRefresh": "at most 60s while visible; preserve current ordering until user accepts new snapshot"
+  },
+  "validation": [
+    "reject NaN/Infinity",
+    "unknown value is null",
+    "zero is valid observed quantity",
+    "bounds lower<=upper",
+    "all points within maxima",
+    "applicable weights total 100",
+    "sum known contributions agrees with integer score after single rounding",
+    "status allowed and guarded",
+    "numerators<=denominators",
+    "funnel monotone at same grain/horizon",
+    "no mixed-unit aggregation",
+    "respect tenant scope",
+    "duplicate events not double counted"
+  ]
+}

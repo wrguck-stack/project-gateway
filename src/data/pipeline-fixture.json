@@ -1,0 +1,1038 @@
+{
+  "synthetic": true,
+  "asOf": "2026-09-05T08:00:00Z",
+  "projects": [
+    {
+      "projectId": "SNAPSHOT-NEW-001",
+      "status": "NEW",
+      "statusEnteredAt": "2026-09-04T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-NEW-002",
+      "status": "NEW",
+      "statusEnteredAt": "2026-09-04T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-NEW-003",
+      "status": "NEW",
+      "statusEnteredAt": "2026-09-04T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-NEW-004",
+      "status": "NEW",
+      "statusEnteredAt": "2026-09-04T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-NEW-005",
+      "status": "NEW",
+      "statusEnteredAt": "2026-09-04T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-NEW-006",
+      "status": "NEW",
+      "statusEnteredAt": "2026-09-04T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-NEW-007",
+      "status": "NEW",
+      "statusEnteredAt": "2026-09-04T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-NEW-008",
+      "status": "NEW",
+      "statusEnteredAt": "2026-09-04T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-001",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-002",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T05:36:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-003",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T03:12:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-004",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T00:48:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-005",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-03T22:24:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-006",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-03T20:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-007",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-03T17:36:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-008",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-009",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-010",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-011",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-012",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-013",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-014",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-015",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-016",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-017",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-018",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-019",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-020",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-021",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-022",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-023",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INCOMPLETE-024",
+      "status": "INCOMPLETE",
+      "statusEnteredAt": "2026-08-29T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-SCORING-001",
+      "status": "SCORING",
+      "statusEnteredAt": "2026-09-05T07:49:55.200000Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-SCORING-002",
+      "status": "SCORING",
+      "statusEnteredAt": "2026-09-05T07:49:55.200000Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-SCORING-003",
+      "status": "SCORING",
+      "statusEnteredAt": "2026-09-05T07:49:55.200000Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-001",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-002",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T05:36:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-003",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T03:12:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-004",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-005",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-006",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-007",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-008",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-009",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-010",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-011",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-012",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-013",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-014",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-QUALIFIED-015",
+      "status": "QUALIFIED",
+      "statusEnteredAt": "2026-09-03T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-001",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-002",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T05:36:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-003",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T03:12:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-004",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T00:48:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-005",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-006",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-007",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-008",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-009",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-010",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-011",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-012",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-013",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-014",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-015",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-016",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-017",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-018",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-019",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-PARTNER_REVIEW-020",
+      "status": "PARTNER_REVIEW",
+      "statusEnteredAt": "2026-08-30T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-001",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-002",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T05:36:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-003",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T03:12:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-004",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-04T00:48:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-005",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-03T22:24:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-006",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-03T20:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-007",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-03T17:36:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-008",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-03T15:12:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-009",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-010",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-011",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-012",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-013",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-014",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-015",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-016",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-017",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-INFO_REQUESTED-018",
+      "status": "INFO_REQUESTED",
+      "statusEnteredAt": "2026-08-24T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-001",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-002",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-003",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-004",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-005",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-006",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-007",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-008",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-009",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-010",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-011",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-ACCEPTED-012",
+      "status": "ACCEPTED",
+      "statusEnteredAt": "2026-09-01T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-001",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-002",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-003",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-004",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-005",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-006",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-007",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-008",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-DEVELOPMENT-009",
+      "status": "DEVELOPMENT",
+      "statusEnteredAt": "2026-08-15T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-CONTRACTED-001",
+      "status": "CONTRACTED",
+      "statusEnteredAt": "2026-08-19T08:00:00Z",
+      "nextAction": {
+        "dueAt": "2026-09-07T08:00:00Z",
+        "open": true
+      }
+    },
+    {
+      "projectId": "SNAPSHOT-CONTRACTED-002",
+      "status": "CONTRACTED",
+      "statusEnteredAt": "2026-08-19T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-CONTRACTED-003",
+      "status": "CONTRACTED",
+      "statusEnteredAt": "2026-08-19T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-CONTRACTED-004",
+      "status": "CONTRACTED",
+      "statusEnteredAt": "2026-08-19T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-CONTRACTED-005",
+      "status": "CONTRACTED",
+      "statusEnteredAt": "2026-08-19T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REALIZED-001",
+      "status": "REALIZED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REALIZED-002",
+      "status": "REALIZED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REALIZED-003",
+      "status": "REALIZED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REALIZED-004",
+      "status": "REALIZED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-001",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-002",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-003",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-004",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-005",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-006",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-007",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-008",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-009",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-010",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-011",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-012",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-013",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-014",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-015",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-016",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-017",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-018",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-019",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-020",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-021",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    },
+    {
+      "projectId": "SNAPSHOT-REJECTED-022",
+      "status": "REJECTED",
+      "statusEnteredAt": "2026-08-16T08:00:00Z",
+      "nextAction": null
+    }
+  ]
+}

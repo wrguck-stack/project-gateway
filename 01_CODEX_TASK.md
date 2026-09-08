@@ -6,12 +6,12 @@ Use only these root-level sources:
 - `AGENTS.md`
 - `01_CODEX_TASK.md` (this file)
 - `02_PRODUCT_DESIGN_FULL.md`
-- `03_ANALYTICS_FULL.md`
+- `03_ANALYTICS_CORE.md`
 - `04_PRODUCT_DESIGN_VISUALS.pdf`
 - `05_ANALYTICS_VISUALS.pdf`
 
 Do not look for ZIP files or `/docs/handoff/` folders.
-The full normative content from the original packages is preserved in the two FULL markdown files.
+The Product Design contract is preserved in full. `03_ANALYTICS_CORE.md` preserves the normative Analytics specification, component/data contracts, example data, key fixtures and QA material while intentionally omitting the oversized synthetic journey fixture.
 The visual boards/figures are preserved page-by-page in the two visual PDFs.
 
 ---
@@ -1205,4 +1205,15 @@ When finished, return a concise implementation report containing:
 
 Do not claim an external integration, technical PV assessment, document review, email delivery, partner transfer, authentication or production deployment worked unless you actually executed and verified it.
 
-Start now by inspecting the repository and both handoff packages. Then continue through the full implementation until the MVP foundation satisfies the Definition of Done.
+Start now by inspecting the repository and the root-level handoff files.
+
+Git workflow for this Codespaces run:
+1. ensure you are on branch `work` (create it from `main` if necessary);
+2. implement directly in this repository;
+3. install the intended dependencies when available;
+4. do not fall back to the previous dependency-free Cloud demo merely because an old Cloud task did so;
+5. complete tests, build and browser/visual QA;
+6. commit the completed implementation;
+7. push branch `work` directly to GitHub from the Codespace.
+
+Then continue through the full implementation until the MVP foundation satisfies the Definition of Done.

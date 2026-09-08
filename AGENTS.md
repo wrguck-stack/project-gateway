@@ -6,7 +6,7 @@ Before changing code, read these root files completely and in this order:
 
 1. `01_CODEX_TASK.md`
 2. `02_PRODUCT_DESIGN_FULL.md`
-3. `03_ANALYTICS_FULL.md`
+3. `03_ANALYTICS_CORE.md`
 
 Then inspect both visual reference PDFs:
 
@@ -23,3 +23,14 @@ Do not invent a new design direction.
 Do not stop after scaffolding or the landing page.
 Continue through implementation, tests, build and visual QA as required by `01_CODEX_TASK.md`.
 Use demo mode honestly when live integrations are unavailable; never present simulated external actions as live.
+
+
+## Execution environment
+
+This repository is intended to be implemented from a GitHub Codespace using Codex CLI.
+Do not depend on Codex Cloud task-diff export, Cloud PR extraction, or binary diff support.
+
+If the repository contains only the handoff files, build the application from the contracts.
+Use the intended production stack from `01_CODEX_TASK.md` when package installation is available.
+
+Work on branch `work`, commit completed implementation work, run tests/build/visual QA, and push the branch directly from the Codespace repository.
