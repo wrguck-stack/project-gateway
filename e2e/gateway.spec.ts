@@ -57,119 +57,147 @@ async function screenshot(page: Page, name: string, fullPage = true) {
   await page.screenshot({
     path: `${directory}/${name}.png`,
     fullPage,
+    // Full-page capture can otherwise include fixed UI above the real viewport.
+    style: ".skip-link:not(:focus) { visibility: hidden; }",
   });
 }
-test("complete public roof journey with actual file upload, review, result, consent and receipt", async ({
-  page,
-}) => {
-  const errors: string[] = [];
-  page.on("pageerror", (e) => errors.push(e.message));
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto("/");
-  await page.getByRole("combobox").first().fill(address);
-  await page
-    .getByRole("button", { name: "Standort prüfen", exact: true })
-    .first()
-    .click();
-  await expect(
-    page.getByRole("heading", { name: "Ist das Ihr Standort?" }),
-  ).toBeVisible();
-  await page.getByLabel("Ich bestätige die Standortangabe.").check();
-  await page
-    .getByRole("button", { name: "Standort bestätigen", exact: true })
-    .click();
-  await page.getByRole("radio", { name: "Logistikhalle", exact: true }).check();
-  await page.getByRole("button", { name: "Weiter", exact: true }).click();
-  await page.getByLabel("Genauigkeit der Fläche").selectOption("Geschätzt");
-  await page.getByLabel("Verfügbare Fläche").fill("4.800");
-  await page
-    .getByLabel("Dachzustand (Nutzerauskunft)")
-    .selectOption("Keine Sanierung bekannt");
-  await page.getByLabel("Dachform").selectOption("Flachdach");
-  await screenshot(page, "check-objekt-1440");
-  await page.getByRole("button", { name: "Weiter", exact: true }).click();
-  await page.getByRole("radio", { name: "Eigentümer", exact: true }).check();
-  await page.getByRole("radio", { name: "Liegt vor", exact: true }).check();
-  await page.getByRole("button", { name: "Weiter", exact: true }).click();
-  await page
-    .getByLabel("Herkunft des Verbrauchswerts")
-    .selectOption("Wert aus Abrechnung");
-  await page.getByLabel("Jahresverbrauch").fill("620.000");
-  await page.getByRole("radio", { name: "Tagsüber", exact: true }).check();
-  await screenshot(page, "check-energie-1440");
-  await page.getByRole("button", { name: "Weiter", exact: true }).click();
-  await expect(
-    page.getByRole("heading", { name: "Gibt es bereits eine PV-Anlage?" }),
-  ).toBeVisible();
-  await page.getByRole("radio", { name: "Nein", exact: true }).check();
-  await page.getByRole("button", { name: "Weiter", exact: true }).click();
-  await expect(
-    page.getByRole("heading", { name: "Ist ein Speicher vorhanden?" }),
-  ).toBeVisible();
-  await page.getByRole("radio", { name: "Nein", exact: true }).check();
-  await page.getByRole("button", { name: "Weiter", exact: true }).click();
-  await page
-    .getByRole("radio", { name: "Eigenverbrauch steigern", exact: true })
-    .check();
-  await page
-    .getByRole("button", { name: "Zu den Unterlagen", exact: true })
-    .click();
-  await page
-    .getByRole("checkbox", { name: "Dach-/Lageplan", exact: true })
-    .check();
-  await page
-    .getByRole("checkbox", { name: "Stromabrechnung", exact: true })
-    .check();
-  await page
-    .getByRole("button", { name: "Dateien hinzufügen", exact: true })
-    .click();
-  await page.getByLabel("Unterlagen hochladen").setInputFiles({
-    name: "lastgang.csv",
-    mimeType: "text/csv",
-    buffer: Buffer.from("timestamp;load\n2025-01-01T00:00:00;10\n"),
+for (const width of [1440, 390]) {
+  test.describe(`Public roof journey at ${width}px`, () => {
+    test.use({ hasTouch: width < 768, isMobile: width < 768 });
+    test("complete public roof journey with actual file upload, review, result, consent and receipt", async ({
+      page,
+    }) => {
+      const errors: string[] = [];
+      page.on("pageerror", (e) => errors.push(e.message));
+      await page.setViewportSize({ width, height: width < 768 ? 844 : 1000 });
+      await page.goto("/");
+      await page.getByRole("combobox").first().fill(address);
+      await page
+        .getByRole("button", { name: "Standort prüfen", exact: true })
+        .first()
+        .click();
+      await expect(
+        page.getByRole("heading", { name: "Ist das Ihr Standort?" }),
+      ).toBeVisible();
+      await page.getByLabel("Ich bestätige die Standortangabe.").check();
+      await page
+        .getByRole("button", { name: "Standort bestätigen", exact: true })
+        .click();
+      await page
+        .getByRole("radio", { name: "Logistikhalle", exact: true })
+        .check();
+      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await page.getByLabel("Genauigkeit der Fläche").selectOption("Geschätzt");
+      await page.getByLabel("Verfügbare Fläche").fill("4.800");
+      await page
+        .getByLabel("Dachzustand (Nutzerauskunft)")
+        .selectOption("Keine Sanierung bekannt");
+      await page.getByLabel("Dachform").selectOption("Flachdach");
+      await screenshot(page, `check-objekt-${width}`);
+      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await page
+        .getByRole("radio", { name: "Eigentümer", exact: true })
+        .check();
+      await page.getByRole("radio", { name: "Liegt vor", exact: true }).check();
+      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await page
+        .getByLabel("Herkunft des Verbrauchswerts")
+        .selectOption("Wert aus Abrechnung");
+      await page.getByLabel("Jahresverbrauch").fill("620.000");
+      await page.getByRole("radio", { name: "Tagsüber", exact: true }).check();
+      await screenshot(page, `check-energie-${width}`);
+      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await expect(
+        page.getByRole("heading", { name: "Gibt es bereits eine PV-Anlage?" }),
+      ).toBeVisible();
+      await page.getByRole("radio", { name: "Nein", exact: true }).check();
+      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await expect(
+        page.getByRole("heading", { name: "Ist ein Speicher vorhanden?" }),
+      ).toBeVisible();
+      await page.getByRole("radio", { name: "Nein", exact: true }).check();
+      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await page
+        .getByRole("radio", { name: "Eigenverbrauch steigern", exact: true })
+        .check();
+      await page
+        .getByRole("button", { name: "Zu den Unterlagen", exact: true })
+        .click();
+      await page
+        .getByRole("checkbox", { name: "Dach-/Lageplan", exact: true })
+        .check();
+      await page
+        .getByRole("checkbox", { name: "Stromabrechnung", exact: true })
+        .check();
+      await page
+        .getByRole("button", { name: "Dateien hinzufügen", exact: true })
+        .click();
+      await page.getByLabel("Unterlagen hochladen").setInputFiles({
+        name: "lastgang.csv",
+        mimeType: "text/csv",
+        buffer: Buffer.from("timestamp;load\n2025-01-01T00:00:00;10\n"),
+      });
+      await expect(
+        page.getByText("Technisch verfügbar · nicht fachlich geprüft", {
+          exact: true,
+        }),
+      ).toBeVisible();
+      await screenshot(page, `check-dokumente-${width}`);
+      await page
+        .getByRole("button", { name: "Angaben prüfen", exact: true })
+        .click();
+      await expect(
+        page.getByRole("heading", { name: "Ihre Angaben auf einen Blick." }),
+      ).toBeVisible();
+      await page.getByRole("link", { name: "Energie bearbeiten" }).click();
+      await expect(page.getByLabel("Jahresverbrauch")).toHaveValue("620.000");
+      await page
+        .getByRole("button", { name: "Zur Zusammenfassung", exact: true })
+        .click();
+      await page.getByRole("link", { name: /^Projekt qualifizieren/ }).click();
+      await expect(page).toHaveURL(/ergebnis$/);
+      await expect(
+        page.locator('[data-score-state="ESTIMATED"]'),
+      ).toBeVisible();
+      await expect(page.locator(".score-number").first()).toContainText("82");
+      if (width < 768) {
+        await expect(page.locator(".factors-disclosure")).not.toHaveAttribute(
+          "open",
+          "",
+        );
+        await page.locator(".factors-disclosure > summary").tap();
+      }
+      await expect(page.locator(".factors-disclosure")).toHaveAttribute(
+        "open",
+        "",
+      );
+      await expect(page.locator("[data-factor]")).toHaveCount(9);
+      await screenshot(page, `ergebnis-${width}`);
+      await page
+        .getByRole("link", { name: "Zur fachlichen Prüfung übermitteln" })
+        .click();
+      await expect(page.getByRole("checkbox").last()).not.toBeChecked();
+      await page.getByLabel("Firma / Organisation").fill("Demo Firma");
+      await page.getByLabel("Vorname", { exact: true }).fill("Alex");
+      await page.getByLabel("Nachname", { exact: true }).fill("Beispiel");
+      await page
+        .getByLabel("Geschäftliche E-Mail")
+        .fill("alex@example.invalid");
+      await page.getByRole("checkbox").last().check();
+      await page
+        .getByRole("button", { name: "Projekt einreichen", exact: true })
+        .click();
+      await expect(
+        page.getByRole("heading", {
+          name: "Übermittlung simuliert",
+          exact: true,
+        }),
+      ).toBeVisible();
+      await screenshot(page, `beleg-${width}`);
+      expect(errors).toEqual([]);
+    });
   });
-  await expect(
-    page.getByText("Technisch verfügbar · nicht fachlich geprüft", {
-      exact: true,
-    }),
-  ).toBeVisible();
-  await screenshot(page, "check-dokumente-1440");
-  await page
-    .getByRole("button", { name: "Angaben prüfen", exact: true })
-    .click();
-  await expect(
-    page.getByRole("heading", { name: "Ihre Angaben auf einen Blick." }),
-  ).toBeVisible();
-  await page.getByRole("link", { name: "Energie bearbeiten" }).click();
-  await expect(page.getByLabel("Jahresverbrauch")).toHaveValue("620.000");
-  await page
-    .getByRole("button", { name: "Zur Zusammenfassung", exact: true })
-    .click();
-  await page.getByRole("link", { name: /^Projekt qualifizieren/ }).click();
-  await expect(page).toHaveURL(/ergebnis$/);
-  await expect(page.locator('[data-score-state="ESTIMATED"]')).toBeVisible();
-  await expect(page.locator(".score-number").first()).toContainText("82");
-  await expect(page.locator(".factors-disclosure")).toHaveAttribute("open", "");
-  await expect(page.locator("[data-factor]")).toHaveCount(9);
-  await screenshot(page, "ergebnis-1440");
-  await page
-    .getByRole("link", { name: "Zur fachlichen Prüfung übermitteln" })
-    .click();
-  await expect(page.getByRole("checkbox").last()).not.toBeChecked();
-  await page.getByLabel("Firma / Organisation").fill("Demo Firma");
-  await page.getByLabel("Vorname", { exact: true }).fill("Alex");
-  await page.getByLabel("Nachname", { exact: true }).fill("Beispiel");
-  await page.getByLabel("Geschäftliche E-Mail").fill("alex@example.invalid");
-  await page.getByRole("checkbox").last().check();
-  await page
-    .getByRole("button", { name: "Projekt einreichen", exact: true })
-    .click();
-  await expect(
-    page.getByRole("heading", { name: "Übermittlung simuliert", exact: true }),
-  ).toBeVisible();
-  await screenshot(page, "beleg-1440");
-  expect(errors).toEqual([]);
-});
+}
 test("ground branch removes roof fields, unknown and zero consumption remain distinct", async ({
   page,
   request,

@@ -27,9 +27,9 @@ export function Header({
     </>
   ) : (
     <>
-      <Link href="/#ablauf">So funktioniert’s</Link>
+      <a href="/#ablauf">So funktioniert’s</a>
       <Link href="/beispiel">Beispiel ansehen</Link>
-      <Link href="/#projektpartner">Für Projektpartner</Link>
+      <a href="/#projektpartner">Für Projektpartner</a>
       <Link href="/partner/login">Partner-Login</Link>
     </>
   );

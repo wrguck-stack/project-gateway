@@ -212,7 +212,7 @@ export function Modal({
     titleRef.current?.focus();
     return () => {
       dialog?.close();
-      previous?.focus();
+      previous?.focus({ preventScroll: true });
     };
   }, []);
   return (

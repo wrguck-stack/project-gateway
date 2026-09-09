@@ -139,7 +139,8 @@
 }
 .landing-page .hero-stages .mono {
   color: var(--color-accent);
-  flex: 0;
+  flex: none;
+  white-space: nowrap;
 }
 .landing-page .dossier-section {
   display: grid;

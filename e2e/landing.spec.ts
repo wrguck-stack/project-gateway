@@ -2,10 +2,46 @@ import { test, expect } from "@playwright/test";
 
 for (const width of [1440, 390]) {
   test.describe(`Landing at ${width}px`, () => {
+    test.use({ hasTouch: width < 768, isMobile: width < 768 });
     test.beforeEach(async ({ page }) => {
       await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
       await page.goto("/");
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    });
+
+    test("section navigation scrolls to its target on the homepage and from the example", async ({
+      page,
+    }) => {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      const navigate = async (name: string, target: string) => {
+        if (width < 768) {
+          await page.getByRole("button", { name: "Menü öffnen" }).tap();
+          await page
+            .getByRole("dialog", { name: "Navigation" })
+            .getByRole("link", { name, exact: true })
+            .tap();
+          await expect(page.getByRole("dialog")).toHaveCount(0);
+        } else {
+          await page
+            .getByRole("navigation", { name: "Hauptnavigation" })
+            .getByRole("link", { name, exact: true })
+            .click();
+        }
+        await expect(page).toHaveURL(new RegExp(`#${target}$`));
+        await expect(page.locator(`#${target} h2`)).toBeInViewport();
+      };
+      await page.locator(".closing").scrollIntoViewIfNeeded();
+      await navigate("So funktioniert’s", "ablauf");
+      await navigate("Für Projektpartner", "projektpartner");
+      await page.goto("/beispiel");
+      await navigate("So funktioniert’s", "ablauf");
+      if (width < 768) {
+        const menu = page.getByRole("button", { name: "Menü öffnen" });
+        await menu.tap();
+        await page.keyboard.press("Escape");
+        await expect(page.getByRole("dialog")).toHaveCount(0);
+        await expect(menu).toBeFocused();
+      }
     });
 
     test("the interactive check changes its summary without saving or changing the score", async ({

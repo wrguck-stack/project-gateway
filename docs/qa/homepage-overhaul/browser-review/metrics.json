@@ -1,0 +1,58 @@
+[
+  {
+    "width": 1440,
+    "overflow": false,
+    "ctaBottom": 695.453125,
+    "imageTop": 159,
+    "font": "\"IBM Plex Sans Condensed\", sans-serif",
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "overflow": false,
+    "ctaBottom": 659.453125,
+    "imageTop": 159,
+    "font": "\"IBM Plex Sans Condensed\", sans-serif",
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "overflow": false,
+    "ctaBottom": 670.90625,
+    "imageTop": 159,
+    "font": "\"IBM Plex Sans Condensed\", sans-serif",
+    "errors": []
+  },
+  {
+    "width": 768,
+    "overflow": false,
+    "ctaBottom": 606.90625,
+    "imageTop": 766.9375,
+    "font": "\"IBM Plex Sans Condensed\", sans-serif",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "overflow": false,
+    "ctaBottom": 590.578125,
+    "imageTop": 762.625,
+    "font": "\"IBM Plex Sans Condensed\", sans-serif",
+    "errors": []
+  },
+  {
+    "width": 360,
+    "overflow": false,
+    "ctaBottom": 581.625,
+    "imageTop": 753.671875,
+    "font": "\"IBM Plex Sans Condensed\", sans-serif",
+    "errors": []
+  },
+  {
+    "width": 320,
+    "overflow": false,
+    "ctaBottom": 667.625,
+    "imageTop": 859.6875,
+    "font": "\"IBM Plex Sans Condensed\", sans-serif",
+    "errors": []
+  }
+]
