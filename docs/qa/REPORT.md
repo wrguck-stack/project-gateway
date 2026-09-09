@@ -1,5 +1,7 @@
 # Project Gateway — Abnahmeprotokoll
 
+> Dieses Protokoll dokumentiert den ursprünglichen Stand vom 7./8. September. Für die anschließende Homepage-Überarbeitung gilt das separate [Prüfprotokoll vom 9. September](homepage-overhaul/design-qa.md). Die früheren Browserergebnisse und Screenshots belegen nicht die neue Homepage.
+
 Ausgeführt im Codespace am 7./8. September 2026 auf Branch `work`. Grundlage: `AGENTS.md`, `01_CODEX_TASK.md`, Product Design, Analytics Core und beide vollständig gerenderten Visual-Reference-PDFs (5 Produktseiten, 11 Analytics-Seiten). Die sechs verbindlichen Handoff-Dateien wurden anhand ihrer SHA-256-Prüfsummen unverändert erhalten. Die bereits vorhandenen Änderungen an AGENTS/Task sowie Analytics Core bleiben Bestandteil der Übergabe.
 
 ## Ausgeführte Prüfungen

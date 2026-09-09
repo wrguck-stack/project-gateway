@@ -1,0 +1,28 @@
+{
+  "asset": "public/atlas/gateway-industrial-hero-v2.webp",
+  "generator": "Built-in image_gen.imagegen",
+  "generatedAt": "2026-09-09",
+  "kind": "AI-generated illustrative architectural scene; not a photograph or reference of an identified real property",
+  "dimensions": {
+    "width": 1254,
+    "height": 1254
+  },
+  "bytes": 423526,
+  "requestedDimensions": {
+    "width": 2048,
+    "height": 2048,
+    "minimum": 1536
+  },
+  "dimensionNote": "The built-in generator returned 1254 × 1254 pixels despite the larger requested dimensions; no upscaling was applied.",
+  "formatConversion": {
+    "tool": "Sharp",
+    "format": "webp",
+    "quality": 88,
+    "effort": 6
+  },
+  "reference": "Atlas / Variante 1 visual board inspected for architectural editorial art direction only; original board not used as an image-edit input.",
+  "originalGeneratedFilename": "exec-9786f913-f7be-4822-890d-9be0b310df50.png",
+  "prompt": "Use case: photorealistic-natural. Asset type: premium B2B commercial energy-project website hero, image-only architectural editorial illustration. Generate one NEW square image at 2048 x 2048 pixels or the highest available square resolution, minimum 1536 x 1536. Subject: an impressive modern central European logistics hall, a coherent single rectangular building seen from a high drone angle almost top-down, slightly oblique, diagonally composed. Show the ENTIRE main building comfortably inside the frame, surrounded on all sides by its loading yard, access roads, several neighboring industrial buildings and restrained mature trees. The main hall occupies roughly 55–60 percent of image width; leave enough surrounding context for responsive crops. Precise plausible grey metal roof construction with repeated skylights, parapet edges, simple rooftop mechanical units. Loading dock doors at ground level, a few correctly formed small-scale white articulated trucks backed onto loading bays, believable road markings, orderly paved yard. Architecture and spatial relationships physically coherent, clean geometries, exceptionally crisp natural material textures. A strong real sense of industrial scale and economic substance. Photo-real architectural editorial quality, professionally exposed, moderate contrast, subtle warm early morning sunlight grazing graphite and silver building surfaces, cool dark asphalt, muted olive vegetation, a trace of warm amber sunlight. Controlled, credible, sophisticated and quietly impressive, appropriate beside anthracite and restrained gold typography. Natural photographic depth, all parts sharply in focus including frame edges, no vignette, no tilt-shift miniature effect, no fuzzy edge treatment. No text, captions, numbers, logos, branding, watermarks, charts, outlines, property boundaries, arrows, analytical overlays or scale bars. No people. No fantasy architecture, no implausible vehicles, no generic sustainability iconography, no wind turbines. No solar panels needed; the open roof is a potential project site. This is a fictional illustrative architectural scene, not a photograph of an identified real property. Output the architectural image alone, absolutely no webpage or UI.",
+  "visualReview": "Entire central logistics hall visible, roof structure and loading yards legible, muted graphite/olive palette and restrained warm morning light. No text, logos, analytical overlays or property claims.",
+  "usage": "Illustrative homepage hero; clearly distinguish illustration from real geodata or an assessed site."
+}

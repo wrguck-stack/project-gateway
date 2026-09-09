@@ -77,9 +77,13 @@ export function Field({
       <input
         {...props}
         id={id}
-        aria-invalid={error || undefined}
+        aria-invalid={error || props["aria-invalid"] || undefined}
         aria-describedby={
-          [help ? `${id}-help` : null, error ? "form-error" : null]
+          [
+            props["aria-describedby"],
+            help ? `${id}-help` : null,
+            error ? "form-error" : null,
+          ]
             .filter(Boolean)
             .join(" ") || undefined
         }

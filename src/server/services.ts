@@ -149,10 +149,22 @@ export const siteEvidence: SiteEvidenceProvider = {
     return { available: false, source: null, coordinates: null };
   },
 };
-export function createDraft(actor: Session, address: string) {
+export const projectIntentSchema = z.enum([
+  "roof",
+  "extension",
+  "storage",
+  "ground",
+]);
+export type ProjectIntent = z.infer<typeof projectIntentSchema>;
+export function createDraft(
+  actor: Session,
+  address: string,
+  projectIntent?: ProjectIntent,
+) {
   if (actor.role !== "OWNER")
     throw new DomainError("Eigentümersitzung erforderlich.", 403);
   z.string().trim().min(3).max(240).parse(address);
+  const intent = projectIntentSchema.optional().parse(projectIntent);
   return transaction((s) => {
     const p = newProject(
       `PG-${randomUUID().slice(0, 8).toUpperCase()}`,
@@ -160,6 +172,19 @@ export function createDraft(actor: Session, address: string) {
       address.trim(),
       now(),
     );
+    // A selected project type expresses intent, not verified site evidence.
+    if (intent === "ground") {
+      p.answers.buildingType = "Freifläche";
+      p.answers.areaKind = "Freifläche";
+      p.answers.goal = "Dach oder Fläche bereitstellen";
+    } else if (intent === "extension") {
+      p.answers.goal = "Bestehende PV erweitern";
+    } else if (intent === "storage") {
+      p.answers.goal = "Speicher ergänzen";
+    } else if (intent === "roof") {
+      p.answers.areaKind = "Dach";
+      p.answers.goal = "Möglichkeiten zunächst prüfen";
+    }
     s.projects[p.id] = p;
     return p;
   });

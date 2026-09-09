@@ -1,0 +1,29 @@
+{
+  "tool": "built-in image_gen",
+  "created": "2026-09-09",
+  "provenance": "AI-generated fictional illustrative industrial scenes; not actual Project Gateway customer sites, completed projects or technical evidence.",
+  "reference": "Viewed gateway-reference/atlas-1.png for art direction only; generation did not transform or reuse its image pixels.",
+  "assets": [
+    {
+      "path": "public/atlas/gateway-extension-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 332298,
+      "prompt": "Use case: photorealistic-natural. Asset type: original illustrative project-selection photography for a premium German industrial energy website. Generate one landscape image 1536x1024. Subject: elevated close aerial view of a large modern industrial warehouse flat roof. One half has an established dark graphite photovoltaic array with disciplined physically plausible rows, access lanes and restrained natural reflections. The other half has an unoccupied grey industrial roof membrane with plausible skylights and maintenance clearances, making the possibility of an extension understandable without technical claims. Composition: crop closely enough to see roof construction and panels, industrial warehouse edges and a small amount of service road visible; clear geometry, editorial architectural photography, realistic drone lens, no distortions. Lighting: subtle warm late-afternoon daylight, crisp detail, neutral natural tones and dark graphite materials, atmospheric professional confidence. This is a fictional illustrative site, not an actual project reference. No people, no words, no logos, no watermark, no diagram annotations, no glowing outlines, no floating interface, no windmills, no exaggerated green landscape. Make a single clean photograph, not a collage."
+    },
+    {
+      "path": "public/atlas/gateway-storage-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 159132,
+      "prompt": "Use case: photorealistic-natural. Asset type: original illustrative project-selection photography for a premium German industrial energy website. Generate one landscape image 1536x1024. Primary subject: exactly two industrial battery storage enclosures beside a modern graphite-clad warehouse, photographed at a natural three-quarter ground-level architectural angle. The two substantial rectangular modular battery cabinets have believable doors, hinges, ventilation grilles, discreet secure cable conduits to the building and properly grounded concrete foundations, orderly uncluttered installation. No people or vehicles. Environment: a contemporary German industrial site, restrained grey paving with a little gravel along the building, subtle yellow safety bollards, clean but naturally used real materials. Style: high-end editorial architectural photography with physically plausible precise geometry, crisp useful detail, subtle warm afternoon sunlight, neutral natural tones, deep graphite and brushed metal. The cabinets are the clear visual focus and fill the middle of the frame; moderate depth revealing the warehouse behind them, no exaggerated wide-angle distortion. This is a fictional illustrative installation, not actual project evidence. No text, brand names, logos, watermark, diagram annotations, glowing energy lines, floating interface or solar-green advertising cliches. One single clean photograph, not a collage."
+    },
+    {
+      "path": "public/atlas/gateway-ground-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 483238,
+      "prompt": "Use case: photorealistic-natural. Asset type: original illustrative project-selection photography for a premium German industrial energy website. Generate one landscape photograph 1536x1024. Subject: a clearly legible large vacant brownfield/gravel parcel bordering a contemporary industrial park and a service road, viewed in an elevated oblique aerial perspective. The empty parcel is the main subject and occupies the foreground and middle, showing compacted pale grey-brown gravel, restrained natural tire tracks and realistic subtle uneven ground, rectangular boundaries visible from service roads and a simple fence. A few modern graphite-clad warehouse buildings in the background establish the commercial setting. No buildings within the parcel. No installed solar panels; this image illustrates an unassessed open site, not a completed solar project or evidence of suitability. Style: high-end editorial architectural drone photograph, crisp physically believable geometry, natural material detail, restrained neutral tones, subtle warm afternoon light with soft long shadows. Enough environmental context to understand the parcel, but no generic scenic green fields, no mountains, no windmills, no lush sustainability imagery. No people, text, brand marks, watermark, UI overlays, outlines or annotations. One single photograph, not a collage."
+    }
+  ]
+}

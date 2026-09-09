@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -8,156 +8,120 @@ import {
   Building,
   Flash,
   Document,
+  Checkmark,
 } from "@carbon/icons-react";
 import { Header, Footer } from "./shell";
-import { Button, ErrorNotice, Field, Options, SelectField } from "./ui";
-import examples from "@/data/analytics-examples.json";
-import "./landing.css";
+import { Button } from "./ui";
 import { api } from "./client-api";
+import {
+  DossierPreview,
+  LandingCheckPreview,
+  ProjectTypes,
+  ScorePreview,
+  projectTypes,
+  type ProjectIntent,
+} from "./landing-content";
 import type { Project } from "@/domain/model";
-const previewScore = examples.scoreFull;
-const previewFactors = previewScore.factors.slice(0, 4);
-const previewAxisMax = Math.max(
-  ...previewScore.factors.map((f) => f.maxPoints),
-);
-const previewOnly = () => {};
+import "./landing.css";
+
 const faq = [
   [
-    "Was benötige ich für den Standortcheck?",
-    "Die Adresse und erste Angaben zu Objekt, Fläche und Stromverbrauch. Unbekannte Werte und fehlende Unterlagen können Sie kenntlich machen.",
+    "Was bekomme ich nach dem Standortcheck?",
+    "Eine strukturierte Übersicht Ihrer Angaben, eine vorläufige Einordnung und sichtbar offene Punkte. Das interaktive Beispiel zeigt Ihnen das Ergebnis vorab. In dieser Demo sind Bewertung und Partnerübergabe beispielhaft; es entsteht keine technische Freigabe.",
   ],
   [
-    "Ist der Score bereits eine technische Planung?",
-    "Nein. Der Score ordnet die vorhandenen Angaben für die Projektvorqualifizierung ein. Statik, Netzanschluss, Planung und Wirtschaftlichkeit werden gegebenenfalls anschließend fachlich geprüft.",
+    "Welche Angaben brauche ich?",
+    "Die Adresse oder Beschreibung der Fläche und erste Angaben zu Objekt, Stromverbrauch und Projektziel. Unterlagen können Sie ergänzen. Was Sie noch nicht wissen, kennzeichnen Sie als unbekannt.",
   ],
   [
-    "Was passiert mit meinen Unterlagen?",
-    "Vor einer Projektübergabe sehen Sie den Empfänger und die enthaltenen Angaben und Dateien. Erst mit Ihrer ausdrücklichen Übermittlung wird die Projektakte an diesen Partner weitergegeben.",
+    "Muss ich mich vorher registrieren?",
+    "Nein. Sie können den Standortcheck ohne Pflichtkonto beginnen und das Ergebnis ansehen. Erst bei einer gewünschten Projektübergabe werden Kontaktdaten benötigt.",
   ],
   [
-    "Kann ich eine Fläche ohne Gebäude prüfen?",
-    "Ja. Wählen Sie Freifläche. Die folgenden Fragen beziehen sich dann auf Fläche, Nutzung und Verfügungsrechte.",
+    "Wird meine Immobilie automatisch analysiert?",
+    "In dieser Demo wird Ihre Adresse manuell erfasst. Es gibt keine automatische Gebäudeerkennung und keine tatsächliche Ertrags- oder Wirtschaftlichkeitsberechnung. Bilder und Beispielwerte sind als solche gekennzeichnet.",
   ],
   [
-    "Kann ich ohne vollständige Unterlagen fortfahren?",
-    "Ja. Der Check zeigt, was noch fehlt. Je nach Datenlage ist bereits eine vorläufige Einordnung möglich oder zunächst eine Ergänzung erforderlich.",
+    "Wer bekommt meine Unterlagen?",
+    "Vor jeder Freigabe sehen Sie den Empfänger und die ausgewählten Angaben und Dateien. Sie entscheiden ausdrücklich über die Übergabe. In der Demo wird diese nur simuliert; es erfolgt kein externer Versand.",
   ],
   [
-    "Ist die Übermittlung bereits ein Projektauftrag?",
-    "Sie reichen eine Projektanfrage zur fachlichen Prüfung ein. Weitere Vereinbarungen werden gesondert mit dem Projektpartner getroffen.",
+    "Ist die Einreichung bereits ein Auftrag?",
+    "Nein. Eine Projektanfrage dient der Vorbereitung einer fachlichen Prüfung. Planung, Wirtschaftlichkeit und weitere Vereinbarungen werden gesondert mit einem tatsächlich benannten Projektpartner geklärt.",
   ],
 ];
-function LandingAerial() {
-  return (
-    <figure className="landing-aerial hero-site">
-      <img
-        src="/atlas/atlas-reference-aerial.webp"
-        width={304}
-        height={332}
-        alt="Illustrative Luftansicht einer Logistikhalle mit Ladehof aus der freigegebenen Atlas-Referenz."
-      />
-      <figcaption>
-        Atlas-Beispielansicht · kein analysierter Standort
-      </figcaption>
-    </figure>
-  );
-}
-function LandingCheckPreview() {
-  return (
-    <figure className="check-preview" aria-labelledby="check-preview-caption">
-      <figcaption id="check-preview-caption">
-        <strong>Beispieldaten · Standortcheck</strong>
-        <span className="meta">Auszug aus Schritt 3 von 10 · Objekt</span>
-      </figcaption>
-      <h3>Welche Fläche steht zur Verfügung?</h3>
-      <fieldset
-        disabled
-        className="check-preview-fields"
-        aria-label="Nicht bearbeitbare Beispielansicht"
-      >
-        <Options
-          label="Art der verfügbaren Fläche"
-          name="preview-area-kind"
-          value="Dach"
-          options={["Dach", "Freifläche"]}
-          onChange={previewOnly}
-        />
-        <div className="check-preview-pair">
-          <SelectField
-            label="Genauigkeit der Fläche"
-            value="Geschätzt"
-            options={["Genau bekannt", "Geschätzt", "Noch unbekannt"]}
-            onChange={previewOnly}
-          />
-          <Field label="Verfügbare Fläche · m²" value="4.800" readOnly />
-        </div>
-        <SelectField
-          label="Dachzustand (Nutzerauskunft)"
-          value="Unbekannt"
-          options={[
-            "Keine Sanierung bekannt",
-            "Sanierung geplant",
-            "Unbekannt",
-          ]}
-          onChange={previewOnly}
-        />
-      </fieldset>
-      <p className="meta">
-        Beispielansicht · Angaben geschätzt bzw. noch unbekannt.
-      </p>
-    </figure>
-  );
-}
+
+type AddressProps = {
+  value: string;
+  onChange: (value: string) => void;
+  onSubmit: () => void;
+  pending: boolean;
+  error?: string;
+  inputId?: string;
+};
 export function AddressEntry({
   value,
   onChange,
   onSubmit,
   pending,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  onSubmit: () => void;
-  pending: boolean;
-}) {
-  const id = useId();
+  error = "",
+  inputId,
+}: AddressProps) {
+  const fallbackId = useId();
+  const id = inputId ?? fallbackId;
   const [suggestions, setSuggestions] = useState<
     { address: string; source: string }[]
   >([]);
   const [index, setIndex] = useState(-1);
   const [open, setOpen] = useState(false);
   const [searching, setSearching] = useState(false);
+  const [searchFailed, setSearchFailed] = useState(false);
+  const errorRef = useRef<HTMLParagraphElement>(null);
+  useEffect(() => {
+    if (error) errorRef.current?.focus();
+  }, [error]);
   useEffect(() => {
     let active = true;
-    if (value.length < 2) {
+    setSuggestions([]);
+    setIndex(-1);
+    setSearchFailed(false);
+    if (value.trim().length < 2 || !open) {
+      setSearching(false);
       return;
     }
     setSearching(true);
-    api<{ address: string; source: string }[]>(
-      `/api/locations?q=${encodeURIComponent(value)}`,
-    )
-      .then((v) => {
-        if (active) {
-          setSuggestions(v);
-          setIndex(-1);
-        }
-      })
-      .catch(() => {
-        if (active) setSuggestions([]);
-      })
-      .finally(() => {
-        if (active) setSearching(false);
-      });
+    const timer = setTimeout(() => {
+      api<{ address: string; source: string }[]>(
+        `/api/locations?q=${encodeURIComponent(value)}`,
+      )
+        .then((rows) => {
+          if (active) setSuggestions(rows.slice(0, 5));
+        })
+        .catch(() => {
+          if (active) setSearchFailed(true);
+        })
+        .finally(() => {
+          if (active) setSearching(false);
+        });
+    }, 200);
     return () => {
       active = false;
+      clearTimeout(timer);
     };
-  }, [value]);
+  }, [value, open]);
+  const choose = (address: string) => {
+    onChange(address);
+    setOpen(false);
+    setIndex(-1);
+  };
   return (
     <form
       className="address-form"
+      aria-busy={pending}
       onSubmit={(e) => {
         e.preventDefault();
         setOpen(false);
-        onSubmit();
+        if (!pending) onSubmit();
       }}
     >
       <label htmlFor={id}>Adresse Ihrer Immobilie oder Fläche</label>
@@ -169,11 +133,17 @@ export function AddressEntry({
             role="combobox"
             aria-autocomplete="list"
             aria-expanded={open && suggestions.length > 0}
-            aria-controls={`${id}-list`}
-            aria-activedescendant={
-              open && index >= 0 ? `${id}-${index}` : undefined
+            aria-controls={
+              open && suggestions.length > 0 ? `${id}-list` : undefined
             }
+            aria-activedescendant={
+              open && index >= 0 && suggestions[index]
+                ? `${id}-option-${index}`
+                : undefined
+            }
+            aria-describedby={`${id}-help${error ? ` ${id}-error` : ""}`}
             value={value}
+            disabled={pending}
             onChange={(e) => {
               onChange(e.target.value);
               setOpen(true);
@@ -193,9 +163,12 @@ export function AddressEntry({
               }
               if (e.key === "ArrowUp") {
                 e.preventDefault();
-                setIndex((i) => Math.max(i - 1, 0));
+                setIndex((i) => (suggestions.length ? Math.max(i - 1, 0) : -1));
               }
-              if (e.key === "Escape") setOpen(false);
+              if (e.key === "Escape") {
+                setOpen(false);
+                setIndex(-1);
+              }
               if (
                 e.key === "Enter" &&
                 open &&
@@ -203,24 +176,25 @@ export function AddressEntry({
                 suggestions[index]
               ) {
                 e.preventDefault();
-                onChange(suggestions[index].address);
-                setOpen(false);
+                choose(suggestions[index].address);
               }
             }}
           />
           {open && suggestions.length > 0 && (
-            <ul role="listbox" id={`${id}-list`} className="suggestions">
-              {suggestions.slice(0, 5).map((s, i) => (
+            <ul
+              role="listbox"
+              id={`${id}-list`}
+              aria-label="Adressvorschläge"
+              className="suggestions"
+            >
+              {suggestions.map((s, i) => (
                 <li
                   key={s.address}
-                  id={`${id}-${i}`}
+                  id={`${id}-option-${i}`}
                   role="option"
-                  aria-selected={i === index}
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    onChange(s.address);
-                    setOpen(false);
-                  }}
+                  aria-selected={index === i}
+                  onPointerDown={(e) => e.preventDefault()}
+                  onClick={() => choose(s.address)}
                 >
                   <strong>{s.address}</strong>
                   <small>{s.source}</small>
@@ -233,58 +207,133 @@ export function AddressEntry({
           {pending ? "Entwurf wird angelegt …" : "Standort prüfen"}
         </Button>
       </div>
-      <small aria-live="polite">
+      <small id={`${id}-help`} aria-live="polite">
         {searching
-          ? "Demo-Adressen werden gesucht."
-          : "Adresse manuell erfassen oder einen gekennzeichneten Demo-Standort wählen."}
+          ? "Demo-Adressen werden gesucht …"
+          : searchFailed
+            ? "Adresssuche nicht erreichbar. Sie können den Standort manuell eingeben."
+            : "Adresse manuell eingeben oder einen gekennzeichneten Demo-Standort wählen."}
       </small>
+      {error && (
+        <p
+          ref={errorRef}
+          id={`${id}-error`}
+          tabIndex={-1}
+          className="notice critical-notice"
+          role="alert"
+        >
+          {error}
+        </p>
+      )}
     </form>
   );
 }
+
+type SavedDraft = {
+  id: string;
+  address: string;
+  projectIntent?: ProjectIntent;
+};
 export function Landing({ mode }: { mode: string }) {
   const [address, setAddress] = useState("");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
-  const [draft, setDraft] = useState<{ id: string; address: string } | null>(
-    null,
-  );
+  const [activeForm, setActiveForm] = useState("hero");
+  const [intent, setIntent] = useState<ProjectIntent>();
+  const [draft, setDraft] = useState<SavedDraft | null>(null);
+  const starting = useRef(false);
   const router = useRouter();
   useEffect(() => {
     try {
-      const saved = sessionStorage.getItem("gateway-draft");
-      if (saved) {
-        const d = JSON.parse(saved);
-        setDraft(d);
-        setAddress(d.address);
+      const raw = sessionStorage.getItem("gateway-draft");
+      if (raw) {
+        const d = JSON.parse(raw);
+        if (typeof d.id === "string" && typeof d.address === "string") {
+          setDraft(d);
+          setAddress(d.address);
+          if (projectTypes.some((p) => p.id === d.projectIntent))
+            setIntent(d.projectIntent);
+        }
       }
-    } catch {}
+    } catch {
+      /* The check remains usable without browser storage. */
+    }
   }, []);
-  async function start() {
-    setPending(true);
+  async function start(source: string) {
+    if (starting.current) return;
+    setActiveForm(source);
     setError("");
+    if (address.trim().length < 3) {
+      setError("Bitte geben Sie eine Adresse oder Standortbeschreibung ein.");
+      return;
+    }
+    starting.current = true;
+    setPending(true);
     try {
-      if (draft && draft.address === address) {
+      if (
+        draft &&
+        draft.address === address.trim() &&
+        draft.projectIntent === intent
+      ) {
         router.push(`/standortcheck/${draft.id}/1`);
         return;
       }
       await api("/api/session", "POST", { role: "OWNER" });
-      const p = await api<Project>("/api/drafts", "POST", { address });
-      sessionStorage.setItem(
-        "gateway-draft",
-        JSON.stringify({ id: p.id, address: p.answers.address }),
-      );
+      const p = await api<Project>("/api/drafts", "POST", {
+        address: address.trim(),
+        projectIntent: intent,
+      });
+      const saved = {
+        id: p.id,
+        address: p.answers.address,
+        projectIntent: intent,
+      };
+      setDraft(saved);
+      try {
+        sessionStorage.setItem("gateway-draft", JSON.stringify(saved));
+      } catch {
+        /* Server-created draft can still be opened. */
+      }
       router.push(`/standortcheck/${p.id}/1`);
     } catch (e) {
-      setError((e as Error).message);
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Der Standortcheck konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",
+      );
+      starting.current = false;
       setPending(false);
     }
   }
-  const addressProps = {
-    value: address,
-    onChange: setAddress,
-    onSubmit: start,
-    pending,
-  };
+  function focusEntry() {
+    document.getElementById("standort-start")?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
+    document
+      .getElementById("gateway-address-hero")
+      ?.focus({ preventScroll: true });
+  }
+  function selectIntent(value: ProjectIntent) {
+    setIntent(value);
+    setError("");
+    focusEntry();
+  }
+  const selectedTitle = projectTypes.find((p) => p.id === intent)?.title;
+  const entry = (source: string) => (
+    <AddressEntry
+      value={address}
+      onChange={(value) => {
+        setAddress(value);
+        setError("");
+      }}
+      pending={pending}
+      onSubmit={() => start(source)}
+      error={activeForm === source ? error : ""}
+      inputId={`gateway-address-${source}`}
+    />
+  );
   return (
     <>
       <Header mode={mode} />
@@ -292,37 +341,57 @@ export function Landing({ mode }: { mode: string }) {
         <section className="hero wrap" id="standort-start">
           <div className="hero-copy">
             <p className="overline hero-overline">
-              GROSSE FLÄCHEN.
-              <br />
-              ECHTES POTENZIAL.
+              GEWERBEIMMOBILIEN / ENERGIEPROJEKTE
             </p>
             <h1>
-              <span className="hero-line">Wie viel</span>{" "}
-              <span className="hero-line">Energiepotenzial</span>{" "}
-              <span className="hero-line">steckt in Ihrer</span>{" "}
-              <span className="hero-line hero-property">
-                Gewerbe&shy;immobilie?
-              </span>
+              Ihre Fläche.
+              <br />
+              Ein klarer Weg zum Energieprojekt.
             </h1>
             <p className="lead">
-              Standort erfassen. Projektpotenzial einordnen. Fachlich prüfen
-              lassen.
+              Bringen Sie Dach, Verbrauch und Unterlagen in eine strukturierte
+              Projektakte. Erkennen Sie offene Fragen und bereiten Sie die
+              fachliche Prüfung vor.
             </p>
-            <AddressEntry {...addressProps} />
-            <ErrorNotice message={error} />
-            {draft && (
+            {selectedTitle && (
+              <div className="selected-intent" role="status">
+                <span>
+                  <Checkmark size={20} aria-hidden />
+                  {selectedTitle} ausgewählt
+                </span>
+                <button
+                  type="button"
+                  className="text-button"
+                  onClick={() => setIntent(undefined)}
+                >
+                  Auswahl aufheben
+                </button>
+              </div>
+            )}
+            {entry("hero")}
+            <div className="hero-secondary">
+              <Link href="/beispiel" className="text-link">
+                Beispiel-Projektakte ansehen{" "}
+                <ArrowRight size={20} aria-hidden />
+              </Link>
               <p className="meta">
-                Ein Entwurf ist vorhanden.{" "}
+                Ohne Pflichtkonto · Unbekannte Angaben sind möglich
+              </p>
+            </div>
+            {draft && (
+              <p className="draft-return">
                 <Link href={`/standortcheck/${draft.id}/1`}>
                   Entwurf fortsetzen
-                </Link>{" "}
-                ·{" "}
+                </Link>
                 <button
                   className="text-button"
                   onClick={() => {
                     setDraft(null);
                     setAddress("");
-                    sessionStorage.removeItem("gateway-draft");
+                    setIntent(undefined);
+                    try {
+                      sessionStorage.removeItem("gateway-draft");
+                    } catch {}
                   }}
                 >
                   Neuen Standort beginnen
@@ -330,29 +399,79 @@ export function Landing({ mode }: { mode: string }) {
               </p>
             )}
           </div>
-          <LandingAerial />
-          <div className="hero-stages" aria-label="Der Weg zum Projekt">
-            <span className="active">01 Standort</span>
-            <span>02 Qualifizierung</span>
-            <span>03 Fachliche Prüfung</span>
-          </div>
+          <figure className="landing-aerial hero-site">
+            <img
+              src="/atlas/gateway-industrial-hero-v2.webp"
+              width={1254}
+              height={1254}
+              alt="Illustrative Luftansicht einer Gewerbehalle mit großzügigen Dachflächen und Ladehof."
+              fetchPriority="high"
+            />
+            <figcaption>
+              <span className="mono">FLÄCHE. SUBSTANZ. PERSPEKTIVE.</span>
+              <span>
+                KI-generierte Illustration · kein analysierter Standort
+              </span>
+            </figcaption>
+          </figure>
+          <nav className="hero-stages" aria-label="Der Weg zum Projekt">
+            <a href="#standort-start">
+              <span className="mono">01</span> Standort erfassen
+            </a>
+            <a href="#projektakte">
+              <span className="mono">02</span> Projektakte ansehen
+            </a>
+            <a href="#projektpartner">
+              <span className="mono">03</span> Fachliche Prüfung
+            </a>
+          </nav>
         </section>
+
+        <section className="section wrap dossier-section" id="projektakte">
+          <div className="dossier-intro">
+            <p className="overline">IHR ERGEBNIS / VORAB ANSEHEN</p>
+            <h2>Aus einzelnen Angaben wird eine klare Projektgrundlage.</h2>
+            <p className="lead">
+              Was ist bekannt? Was fehlt noch? Und was ist als Nächstes zu
+              klären? Ihre Projektakte hält die Antworten an einem Ort fest.
+            </p>
+            <ul className="value-list">
+              <li>
+                <Checkmark size={20} aria-hidden />
+                <span>Objekt, Energie und Unterlagen zusammengeführt</span>
+              </li>
+              <li>
+                <Checkmark size={20} aria-hidden />
+                <span>Schätzwerte und offene Prüfungen klar benannt</span>
+              </li>
+              <li>
+                <Checkmark size={20} aria-hidden />
+                <span>Nachvollziehbare Grundlage für das Fachgespräch</span>
+              </li>
+            </ul>
+            <Link href="/beispiel" className="button secondary">
+              Ergebnis am Beispiel ansehen <ArrowRight size={20} aria-hidden />
+            </Link>
+          </div>
+          <DossierPreview />
+        </section>
+
         <section id="ablauf" className="section wrap">
           <p className="overline">DER WEG ZUM PROJEKT</p>
-          <h2>Von der Fläche zum Energieprojekt</h2>
+          <h2>Ihr Standort. Drei klare Schritte.</h2>
           <div className="process-grid">
             {[
               [
                 "Standort erfassen",
-                "Geben Sie die Adresse Ihrer Immobilie oder Fläche an und ordnen Sie den Standort zu.",
+                "Beginnen Sie mit der Adresse oder einer Beschreibung Ihrer Fläche. Ein Pflichtkonto ist dafür nicht nötig.",
               ],
               [
-                "Projekt qualifizieren",
-                "Ergänzen Sie Objekt, Energieprofil und vorhandene Unterlagen. Gateway strukturiert Ihre Angaben und macht offene Punkte sichtbar.",
+                "Angaben zusammenführen",
+                "Ergänzen Sie Objekt, Energieprofil und Unterlagen. Unbekannte Werte bleiben als offene Punkte erhalten.",
               ],
               [
-                "Fachlich prüfen lassen",
-                "Übermitteln Sie Ihre Projektakte gezielt an den angezeigten Fachpartner.",
+                "Prüfung vorbereiten",
+                "Sehen Sie Ihre Projektakte durch und entscheiden Sie bewusst über die Übergabe. In dieser Demo wird sie simuliert.",
               ],
             ].map(([title, text], i) => (
               <article key={title}>
@@ -365,212 +484,193 @@ export function Landing({ mode }: { mode: string }) {
             ))}
           </div>
         </section>
+
         <section
           className="section wrap editorial-split landing-check"
           id="standortcheck-vorschau"
         >
           <LandingCheckPreview />
           <div>
-            <p className="overline">DER DIGITALE STANDORTCHECK</p>
-            <h2>Ein Standortcheck, der die richtigen Fragen stellt</h2>
+            <p className="overline">DER STANDORTCHECK / DIREKT AUSPROBIEREN</p>
+            <h2>Sie kennen Ihre Immobilie. Wir bringen Struktur hinein.</h2>
             <p className="lead">
-              Sie ergänzen die Angaben. Gateway macht die offenen Punkte
-              sichtbar.
+              Zehn verständliche Schritte führen durch die Angaben. Sie müssen
+              dafür weder eine fertige Planung noch jede technische Antwort
+              mitbringen.
             </p>
             {[
-              [Building, "Objekt und Fläche"],
-              [Flash, "Energieprofil"],
-              [Document, "Vorhandene Unterlagen"],
-            ].map(([Icon, title]) => {
+              [
+                Building,
+                "Objekt und Fläche",
+                "Gebäude, verfügbare Fläche und Ihre Rolle.",
+              ],
+              [
+                Flash,
+                "Energieprofil",
+                "Verbrauch, bestehende PV und Speicher.",
+              ],
+              [
+                Document,
+                "Vorhandene Unterlagen",
+                "Pläne, Abrechnungen und offene Nachweise.",
+              ],
+            ].map(([Icon, title, text]) => {
               const Component = Icon as typeof Building;
               return (
                 <div key={String(title)} className="editorial-line">
-                  <Component size={24} />
-                  <span>{String(title)}</span>
+                  <Component size={24} aria-hidden />
+                  <div>
+                    <strong>{String(title)}</strong>
+                    <small>{String(text)}</small>
+                  </div>
                 </div>
               );
             })}
-            <p className="muted">
-              Zehn Schritte. Unbekannte Werte bleiben offen. Ohne Pflichtkonto
-              vor dem Ergebnis.
-            </p>
-            <a className="text-link" href="#standort-start">
+            <button className="text-link text-button" onClick={focusEntry}>
               Eigenen Standort prüfen <ArrowRight size={20} aria-hidden />
-            </a>
+            </button>
           </div>
         </section>
-        <section className="section wrap score-preview">
-          <p className="overline">NACHVOLLZIEHBARE EINORDNUNG</p>
-          <h2>Ein Score. Eine nachvollziehbare Grundlage.</h2>
-          <div className="preview-grid">
+
+        <section className="section wrap" id="projektarten">
+          <div className="section-intro">
             <div>
-              <div className="score-number">
-                {previewScore.displayScore}
-                <span>/100</span>
-              </div>
-              <h3 className="amber">Hohe Priorität</h3>
-              <p className="meta">Synthetisches UI-Beispiel</p>
-              <p className="preview-basis">Vorläufig · enthält Schätzwerte</p>
-              <p className="meta">Keine technische Freigabe</p>
+              <p className="overline">VIER AUSGANGSPUNKTE</p>
+              <h2>Was möchten Sie mit Ihrer Fläche bewegen?</h2>
             </div>
-            <div className="preview-factor-group">
-              <h3>4 von 9 Faktoren</h3>
-              <p className="meta">Beitrag / maximal mögliche Punkte</p>
-              {previewFactors.map(
-                ({ factorId, label, contribution: value, maxPoints: max }) => (
-                  <div
-                    className="preview-factor"
-                    key={factorId}
-                    data-preview-factor={factorId}
-                  >
-                    <span>{label}</span>
-                    <div className="mini-axis" aria-hidden="true">
-                      <div
-                        className="bar-max"
-                        style={{ width: `${(max / previewAxisMax) * 100}%` }}
-                      >
-                        <i
-                          style={{
-                            width: `${(value / max) * 100}%`,
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <span className="mono">
-                      {value}/{max}
-                    </span>
-                  </div>
-                ),
-              )}
-              <div className="preview-factor-scale" aria-hidden="true">
-                <div>
-                  <span>0</span>
-                  <span>{previewAxisMax / 2}</span>
-                  <span>{previewAxisMax}</span>
-                </div>
-              </div>
-              <p className="meta preview-scale-key">
-                Gemeinsame Punkteachse · Rahmen zeigt das Faktormaximum.
+            <p>
+              Öffnen Sie die passende Projektart und starten Sie mit einer
+              Auswahl, die zu Ihrem Vorhaben passt.
+            </p>
+          </div>
+          <ProjectTypes selected={intent} onSelect={selectIntent} />
+        </section>
+        <ScorePreview />
+
+        <section className="section wrap audience-section" id="eigentuemer">
+          <p className="overline">
+            FÜR EIGENTÜMER, UNTERNEHMEN UND BESTANDSHALTER
+          </p>
+          <h2>Eine Immobilie verdient einen klaren nächsten Schritt.</h2>
+          <div className="audience-columns">
+            <article>
+              <span className="mono muted">01 / EIGENTÜMER & UNTERNEHMEN</span>
+              <h3>Ihre Fläche ins Gespräch bringen.</h3>
+              <p>
+                Halten Sie Potenzialfragen und Voraussetzungen fest. So können
+                Sie ein Dach-, Speicher- oder Flächenprojekt mit einer
+                geordneten Grundlage besprechen.
               </p>
-              <Link className="text-link" href="/beispiel#score">
-                Bewertung erklären · alle 9 Faktoren <ArrowRight size={20} />
+              <button className="text-button text-link" onClick={focusEntry}>
+                Meinen Standort erfassen <ArrowRight size={20} aria-hidden />
+              </button>
+            </article>
+            <article>
+              <span className="mono muted">
+                02 / PORTFOLIOS & ASSET MANAGEMENT
+              </span>
+              <h3>Einheitliche Angaben. Klarere Entscheidungen.</h3>
+              <p>
+                Ein gemeinsamer Aufbau macht Informationen leichter prüfbar.
+                Quellen, fehlende Nachweise und offene Entscheidungen bleiben je
+                Standort nachvollziehbar.
+              </p>
+              <a className="text-link" href="#projektpartner">
+                Zusammenarbeit kennenlernen <ArrowRight size={20} aria-hidden />
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <section className="section wrap partner-section" id="projektpartner">
+          <div>
+            <p className="overline">FÜR PROJEKTENTWICKLER UND PARTNER</p>
+            <h2>Gut vorbereitet in die fachliche Prüfung.</h2>
+            <p className="lead">
+              Project Gateway bündelt die Angaben. Der tatsächlich benannte
+              Projektpartner bewertet die fachlichen Voraussetzungen und
+              entscheidet über die nächsten Schritte.
+            </p>
+            <div className="actions">
+              <Link
+                href="/kontakt?anliegen=partnerschaft"
+                className="button secondary"
+              >
+                Zusammenarbeit besprechen <ArrowRight size={20} aria-hidden />
+              </Link>
+              <Link className="text-link" href="/partner/login">
+                Partner-Demo öffnen <ArrowRight size={20} aria-hidden />
               </Link>
             </div>
-            <div className="preview-findings">
-              <h3>Dafür spricht</h3>
-              <p>Fläche angegeben, Entscheidungsträger benannt.</p>
-              <h3>Zu klären</h3>
-              <p>Netzanschluss und Tragfähigkeit noch nicht geprüft.</p>
-            </div>
           </div>
-        </section>
-        <section className="section wrap" id="projektarten">
-          <p className="overline">PROJEKTARTEN</p>
-          <h2>Welches Projekt steckt in Ihrer Fläche?</h2>
-          <div className="project-types">
+          <div className="responsibility-list">
             {[
               [
-                "Gewerbedach-PV",
-                "Untersuchen Sie, ob eine gewerbliche Dachfläche für ein PV-Projekt weiter geprüft werden sollte.",
+                "Geordnete Projektanfragen",
+                "Standort, Objekt, Energieprofil und Unterlagen in einer gemeinsamen Akte.",
               ],
               [
-                "PV-Erweiterung",
-                "Ordnen Sie zusätzliche Flächen und eine vorhandene Anlage in eine strukturierte Projektanfrage ein.",
+                "Nachvollziehbare Einordnung",
+                "Datenherkunft, Schätzwerte und offene Punkte stehen neben der Bewertung.",
               ],
               [
-                "Speicherprojekt",
-                "Stellen Sie Verbrauch, vorhandene Anlagen und Ihr Speicherziel zusammen.",
-              ],
-              [
-                "Freiflächenprojekt",
-                "Erfassen Sie unbebaute Flächen, Nutzung und Verfügungsrechte für eine erste Einordnung.",
+                "Bewusste Entscheidungen",
+                "Prüfen, Angaben anfordern und Entscheidungen mit Begründung dokumentieren.",
               ],
             ].map(([title, text], i) => (
               <article key={title}>
-                <span className="mono muted">0{i + 1}</span>
-                <img
-                  className="project-type-image"
-                  src={`/atlas/atlas-reference-${["roof", "extension", "storage", "ground"][i]}.webp`}
-                  alt=""
-                  width={[170, 169, 167, 167][i]}
-                  height={73}
-                  loading="lazy"
-                />
-                <h3>{title}</h3>
-                <p>{text}</p>
-                <ArrowRight size={24} aria-hidden />
+                <span className="mono amber">0{i + 1}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
               </article>
             ))}
           </div>
-          <p className="meta project-image-source">
-            Illustrative Bildausschnitte aus der Atlas-Referenz.
-          </p>
         </section>
-        <section className="section wrap editorial-split text-split">
-          <div>
-            <p className="overline">FÜR EIGENTÜMER UND UNTERNEHMEN</p>
-            <h2>Für Flächen mit Verantwortung</h2>
-          </div>
-          <ul className="audience-list">
-            {[
-              "Eigentümer von Gewerbeimmobilien",
-              "Industrieunternehmen",
-              "Logistikunternehmen",
-              "Landwirtschaft",
-              "Gewerbeparks",
-              "Größere Bestandshalter",
-              "Asset Manager",
-            ].map((s) => (
-              <li key={s}>{s}</li>
-            ))}
-          </ul>
-        </section>
-        <section className="section wrap" id="projektpartner">
-          <p className="overline">KLARE VERANTWORTUNG</p>
-          <h2>
-            Digital vorbereitet.
-            <br />
-            Fachlich geprüft.
-          </h2>
-          <div className="editorial-split text-split">
-            <p className="lead">
-              Project Gateway bereitet Ihre Projektangaben digital auf. Die
-              fachliche Bewertung und Entscheidung übernimmt der benannte
-              Projektpartner.
-            </p>
-            <div>
-              {[
-                "Nachvollziehbare Kriterien",
-                "Klare Datenherkunft",
-                "Benannter Empfänger",
-              ].map((s) => (
-                <div className="editorial-line" key={s}>
-                  <span className="amber">↗</span>
-                  {s}
-                </div>
-              ))}
-              <Link className="text-link" href="/partner/login">
-                Zum Partnerbereich <ArrowRight size={20} />
-              </Link>
-            </div>
-          </div>
-        </section>
+
         <section className="section wrap faq">
-          <p className="overline">GUT ZU WISSEN</p>
-          <h2>Häufige Fragen</h2>
-          {faq.map(([q, a]) => (
-            <details key={q}>
-              <summary>
-                {q}
-                <span aria-hidden>+</span>
-              </summary>
-              <p>{a}</p>
-            </details>
-          ))}
+          <div>
+            <p className="overline">VOR DEM ERSTEN SCHRITT</p>
+            <h2>
+              Ihre Fragen.
+              <br />
+              Klare Antworten.
+            </h2>
+            <Link href="/kontakt" className="text-link">
+              Kontakt und Ansprechpartner <ArrowRight size={20} aria-hidden />
+            </Link>
+          </div>
+          <div>
+            {faq.map(([q, a]) => (
+              <details key={q}>
+                <summary>
+                  {q}
+                  <span aria-hidden>+</span>
+                </summary>
+                <p>{a}</p>
+              </details>
+            ))}
+          </div>
         </section>
         <section className="section wrap closing">
-          <h2>Beginnen wir mit Ihrem Standort.</h2>
-          <AddressEntry {...addressProps} />
+          <div>
+            <p className="overline">BEGINNEN WIR MIT IHRER FLÄCHE</p>
+            <h2>Der nächste Schritt beginnt mit einem Standort.</h2>
+            <p>
+              Erfassen Sie Ihre Immobilie und sehen Sie, welche Angaben Ihre
+              Projektanfrage voranbringen.
+            </p>
+          </div>
+          <div>
+            {selectedTitle && (
+              <p className="meta">Ausgewählte Projektart: {selectedTitle}</p>
+            )}
+            {entry("closing")}
+            <Link href="/beispiel" className="text-link">
+              Zuerst das Beispiel ansehen <ArrowRight size={20} aria-hidden />
+            </Link>
+          </div>
         </section>
       </main>
       <Footer />

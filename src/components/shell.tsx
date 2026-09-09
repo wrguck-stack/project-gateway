@@ -28,6 +28,7 @@ export function Header({
   ) : (
     <>
       <Link href="/#ablauf">So funktioniert’s</Link>
+      <Link href="/beispiel">Beispiel ansehen</Link>
       <Link href="/#projektpartner">Für Projektpartner</Link>
       <Link href="/partner/login">Partner-Login</Link>
     </>
@@ -50,7 +51,7 @@ export function Header({
       <section className="mode-strip" aria-label="Betriebsmodus">
         <div className="wrap">
           {mode === "demo"
-            ? "DEMO · Synthetische Beispiele und simulierte Partneraktionen"
+            ? "Interaktive Demo · Beispieldaten und simulierte Projektübergabe"
             : "LIVE · Integrationen noch nicht konfiguriert"}
         </div>
       </section>

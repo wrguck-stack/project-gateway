@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   auth,
   createDraft,
+  projectIntentSchema,
   drafts,
   qualification,
   submissions,
@@ -77,10 +78,13 @@ async function handle(
       throw new DomainError("Sitzung abgelaufen. Bitte erneut öffnen.", 401);
     if (path[0] === "drafts" && path.length === 1 && method === "POST") {
       const v = z
-        .object({ address: z.string().trim().min(3).max(240) })
+        .object({
+          address: z.string().trim().min(3).max(240),
+          projectIntent: projectIntentSchema.optional(),
+        })
         .strict()
         .parse(await req.json());
-      return NextResponse.json(createDraft(actor, v.address));
+      return NextResponse.json(createDraft(actor, v.address, v.projectIntent));
     }
     if (
       partner &&

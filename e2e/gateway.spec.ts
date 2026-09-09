@@ -399,10 +399,12 @@ test("authorization, missing routes and legal pages", async ({
     await page.goto(url);
     await expect(page.locator("main h1")).toBeVisible();
   }
-  await page.goto("/unbekannte-seite");
-  await expect(
-    page.getByRole("heading", { name: "Seite nicht gefunden." }),
-  ).toBeVisible();
+  for (const url of ["/unbekannte-seite", "/constructor"]) {
+    await page.goto(url);
+    await expect(
+      page.getByRole("heading", { name: "Seite nicht gefunden." }),
+    ).toBeVisible();
+  }
 });
 test("keyboard combobox and native dialog focus return; accessibility smoke", async ({
   page,
@@ -506,11 +508,11 @@ test("200% text, touch without hover, reduced motion and map landscape", async (
   await page.goto("/");
   await page
     .locator("summary")
-    .filter({ hasText: "Was benötige ich für den Standortcheck?" })
+    .filter({ hasText: "Welche Angaben brauche ich?" })
     .tap();
   await expect(
     page.getByText(
-      "Die Adresse und erste Angaben zu Objekt, Fläche und Stromverbrauch.",
+      "Die Adresse oder Beschreibung der Fläche und erste Angaben zu Objekt, Stromverbrauch und Projektziel.",
       { exact: false },
     ),
   ).toBeVisible();

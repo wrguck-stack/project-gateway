@@ -15,6 +15,18 @@ The checked-in `gateway.config.json` explicitly selects `demo`. `APP_MODE=demo` 
 
 Open `http://localhost:3000`. The public path needs no account. Start with a manually entered location, or select one of the clearly synthetic demo addresses. `/beispiel` explains the nine-factor 82-point example. `/partner/login` opens an explicitly simulated partner session.
 
+## Homepage revision
+
+The homepage now introduces the concrete output before the longer process explanation: a project dossier with known facts, sources and missing evidence. Its object, energy and next-step tabs work with the keyboard. The embedded check is editable and updates an explicitly unsaved example summary. It does not create a project or change the illustrative score.
+
+All four project types open their details and can be selected for the actual location check. Selection carries narrow, editable defaults into the draft; choosing a PV extension does not assert that an existing PV system has been verified. Both address forms share the address while showing request errors next to the form used. HTML gateway failures, timeouts and invalid server responses now produce readable errors and allow retry.
+
+Industrial illustrations are individual locally served WebP assets with provenance under `docs/qa/homepage-overhaul/`. They are labelled as AI-generated illustrations, not surveyed sites or completed client projects. No GVS affiliation, assets under management, customer logos or endorsements are claimed.
+
+The contact page supports verified operator details from the optional `GATEWAY_CONTACT_*` and `GATEWAY_OPERATOR_*` variables in `.env.example`. Set them in the deployment environment or an untracked `.env.local` and restart the server. The partnership link opens a distinct contact topic; email and phone links appear only when valid details are configured. Without those details, the page explains the missing contact and links to the example. No contact form or outbound mail service is implied.
+
+`npm run dev` binds the Next.js development server to `0.0.0.0`, accepts `--port`, and maps preview-runner `--host` arguments to Next.js `--hostname`. Keep the Codespaces port private. The new implementation and its validation limits are documented in `docs/qa/homepage-overhaul/design-qa.md`.
+
 ## Implemented routes
 
 `/`, `/standortcheck/[draftId]/1` through `/10`, `/standortcheck/[draftId]/zusammenfassung`, `/standortcheck/[draftId]/analyse`, `/projekte/[id]/ergebnis`, `/projekte/[id]/einreichen`, `/projekte/[id]/eingereicht`, `/partner/login`, `/partner/projekte`, `/partner/pipeline`, `/partner/projekte/[id]`, `/kontakt`, `/datenschutz`, `/impressum`, plus the public synthetic `/beispiel` reference.

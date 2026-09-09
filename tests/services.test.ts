@@ -49,6 +49,45 @@ function submit(p: Project, key = randomUUID()) {
   return { input, receipt: submissions.submit(p.id, owner, input) };
 }
 describe("Persistent service boundaries", () => {
+  it("carries selected project intent into a new draft without inventing site facts", () => {
+    const ground = createDraft(owner, "Freifläche am Gewerbepark", "ground");
+    const extension = createDraft(
+      owner,
+      "Halle mit Erweiterungswunsch",
+      "extension",
+    );
+    const storage = createDraft(
+      owner,
+      "Standort für Speicherprüfung",
+      "storage",
+    );
+    const roof = createDraft(owner, "Gewerbedach im Gewerbepark", "roof");
+    expect(drafts.get(ground.id, owner).answers).toMatchObject({
+      buildingType: "Freifläche",
+      areaKind: "Freifläche",
+      goal: "Dach oder Fläche bereitstellen",
+      locationConfirmed: false,
+      area: null,
+    });
+    expect(extension.answers.goal).toBe("Bestehende PV erweitern");
+    expect(storage.answers.goal).toBe("Speicher ergänzen");
+    expect(roof.answers.goal).toBe("Möglichkeiten zunächst prüfen");
+    for (const p of [ground, extension, storage, roof]) {
+      expect(p.answers.pv).toBe("Unbekannt");
+      expect(p.answers.battery).toBe("Unbekannt");
+      expect(p.answers.area).toBeNull();
+      expect(p.score).toBeNull();
+      expect(p.maxVisited).toBe(1);
+    }
+    const ordinary = createDraft(owner, "Standort ohne Vorauswahl");
+    expect(ordinary.answers.goal).toBeNull();
+    expect(() =>
+      createDraft(partner, "Unzulässiger Entwurf", "roof"),
+    ).toThrow();
+    expect(() =>
+      createDraft(owner, "Ungültige Vorauswahl", "unsupported" as never),
+    ).toThrow();
+  });
   it("persists drafts and sessions while keeping owners isolated", () => {
     const { token, session } = auth.create("OWNER");
     expect(auth.resolve(token)).toEqual(session);
