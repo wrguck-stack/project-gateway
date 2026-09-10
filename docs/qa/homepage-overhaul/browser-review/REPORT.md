@@ -1,8 +1,18 @@
 # Browserprüfung der überarbeiteten Homepage
 
-Stand: 9. September 2026 (UTC). Branch: `feat/homepage-professional-pass`.
+Stand: 10. September 2026 (UTC). Branch: `feat/homepage-professional-pass`.
 
 Die Überarbeitung wurde aus `origin/feat/homepage-professional-pass` übernommen und in Codespaces mit installiertem Chromium geprüft. Die zuvor lokale Änderung an `next-env.d.ts` liegt weiterhin in `stash@{0}` mit dem Namen `Backup before homepage-professional-pass checkout 2026-09-09`.
+
+## Wiederaufnahme nach Sitzungsunterbrechung
+
+Der tatsächliche Stand wurde am 10. September vor weiteren Arbeiten abgeglichen: sauberer Zielbranch, lokaler Commit `fe3eafc`, Remote nach `git fetch` weiterhin auf `d6272bd`. Es gab keine ungesicherten Arbeitsbaumänderungen. Der ursprüngliche Stash blieb erhalten.
+
+Der vorhandene Playwright-HTML-Bericht wurde ausgelesen: 32 erwartungsgemäß bestandene Tests, keine fehlgeschlagenen, übersprungenen oder instabilen Tests; Laufzeit 156,9 Sekunden. Zusammen mit dem vorhandenen Produktionsbuild und den versionierten Screenshots bestätigt dies den bereits abgeschlossenen Desktop- und Mobil-Standortcheck einschließlich Datei-Upload und Demo-Beleg. Die vor der Unterbrechung erfolgreichen Unit-, TypeScript- und Build-Prüfungen wurden beibehalten.
+
+Port 3000 hatte nach der Unterbrechung keinen laufenden Server. Der geprüfte Build wurde erneut in einem weiterlaufenden Terminal mit `npm run start -- --port 3000` gestartet. HTTP 200 und die private Portfreigabe wurden erneut bestätigt.
+
+`node scripts/capture-homepage-review.mjs` wurde danach direkt an dieser Vorschau erneut erfolgreich ausgeführt: sieben Bildschirmbreiten, Desktop- und mobile Touch-Navigation, Standort-Buttons, vier Projektarten, Beispielakte, Check-Vorschau, FAQ, Kontakt und Partner-Login. Keine Browserfehler, kein horizontaler Überlauf, axe-Prüfungen erfolgreich. Die Aufnahmen wurden aktualisiert und visuell kontrolliert. Es waren keine weiteren Änderungen am Anwendungscode erforderlich. Offen war damit nur noch die Sicherung des Wiederaufnahmeprotokolls und der lokalen Commits auf dem Zielbranch.
 
 ## Vorschau
 
