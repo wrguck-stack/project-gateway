@@ -4,7 +4,10 @@ Next.js 16 / React 19 / TypeScript strict / Tailwind CSS 4. IBM Plex Sans Conden
 
 ## Local setup
 
-Use Node.js 24 LTS and npm. From branch `work`:
+Use Node.js 24 LTS and npm. The current homepage implementation is on branch
+`feat/homepage-professional-pass`; `work` and `main` contain older revisions.
+See the [current project status](docs/qa/STATUS-2026-09-28.md) for the verified baseline,
+checks and next steps. From the current implementation branch:
 
 ```sh
 npm ci
