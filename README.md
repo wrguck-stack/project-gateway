@@ -38,6 +38,21 @@ The ten check steps retain four chapters and preserve data on back/edit navigati
 
 ## Demo persistence and integration boundaries
 
+### Preview outside Codespaces
+
+`render.yaml` prepares a single Node service in Frankfurt with a private persistent
+data disk. Deployment settings, remaining provider checks and the local restart
+verification are documented in [Render preview setup](docs/deployment/render-preview.md).
+The configuration alone does not create a service or publish the application.
+Automatic deployments are disabled; a provider connection and an agreed paid plan
+are still required. This remains a demo installation with synthetic data.
+
+After building, `npm run verify:preview` checks a newly created test project,
+session and uploaded file across a full application restart. It uses its own
+temporary data directory and never targets an existing Codespace or hosted service.
+
+### Storage and services
+
 `src/server/ports.ts` defines location search, evidence, draft, upload, qualification, submission, partner repository/actions, auth and notification ports. `src/server/services.ts` connects their demo adapters. `APP_MODE=live` fails closed with a clear integration-unavailable error; it never silently uses demo providers.
 
 The local `.gateway/demo-store.json` persists projects, opaque-cookie sessions, receipts, events and idempotency records. `GATEWAY_DATA_DIR` can select another private directory. File writes and state transactions are synchronous and atomically renamed **within one Node process**. This is a development/demo adapter, not a multi-process production database. Run one app process against each directory. Do not publish `.gateway` or expose it through a static server. Test runs get isolated stores.
