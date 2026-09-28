@@ -18,7 +18,7 @@ export interface SiteEvidenceProvider {
   ): Promise<{ available: boolean; source: string | null; coordinates: null }>;
 }
 export interface DraftRepository {
-  get(id: string, session: Session): Project;
+  get(id: string, session: Session): Promise<Project>;
   save(
     id: string,
     session: Session,
@@ -26,7 +26,7 @@ export interface DraftRepository {
     answers: Answers,
     step: number,
     completeStep?: boolean,
-  ): Project;
+  ): Promise<Project>;
 }
 export interface UploadProvider {
   upload(
@@ -35,6 +35,7 @@ export interface UploadProvider {
     file: File,
     category: Document["category"],
     revision: number,
+    requestId?: string,
   ): Promise<Project>;
 }
 export interface QualificationProvider {
@@ -52,18 +53,18 @@ export interface SubmissionProvider {
       comment: string;
       documentIds: string[];
     },
-  ): Receipt;
+  ): Promise<Receipt>;
 }
 export interface PartnerProjectRepository {
-  list(session: Session): Project[];
-  get(id: string, session: Session): Project;
+  list(session: Session): Promise<Project[]>;
+  get(id: string, session: Session): Promise<Project>;
 }
 export interface PartnerActionProvider {
-  execute(id: string, session: Session, input: unknown): Project;
+  execute(id: string, session: Session, input: unknown): Promise<Project>;
 }
 export interface AuthProvider {
-  create(role: Session["role"]): { token: string; session: Session };
-  resolve(token: string | undefined): Session | null;
+  create(role: Session["role"]): Promise<{ token: string; session: Session }>;
+  resolve(token: string | undefined): Promise<Session | null>;
 }
 export interface NotificationProvider {
   send(

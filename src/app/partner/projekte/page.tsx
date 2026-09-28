@@ -6,7 +6,9 @@ export default async function Page() {
   const actor = await requireSession("PARTNER");
   return (
     <Workspace
-      initial={partnerProjects.list(actor).map((p) => safeProject(p, actor))}
+      initial={(await partnerProjects.list(actor)).map((p) =>
+        safeProject(p, actor),
+      )}
     />
   );
 }

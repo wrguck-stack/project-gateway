@@ -40,24 +40,34 @@ The ten check steps retain four chapters and preserve data on back/edit navigati
 
 ### Preview outside Codespaces
 
-`render.yaml` prepares a single Node service in Frankfurt with a private persistent
-data disk. Deployment settings, remaining provider checks and the local restart
-verification are documented in [Render preview setup](docs/deployment/render-preview.md).
-The configuration alone does not create a service or publish the application.
-Automatic deployments are disabled; a provider connection and an agreed paid plan
-are still required. This remains a demo installation with synthetic data.
+The selected target is **Netlify Free**. `netlify.toml` configures the Next.js
+build, and the Netlify build selects private, durable Netlify Blobs for projects,
+sessions and uploads. See [Netlify setup](docs/deployment/netlify-free.md) for
+account setup, Free-plan limits, verification and the deployment boundary.
+The configuration alone does not publish a site. The older paid `render.yaml`
+proposal was not selected and must not be applied as part of this setup.
 
 After building, `npm run verify:preview` checks a newly created test project,
 session and uploaded file across a full application restart. It uses its own
 temporary data directory and never targets an existing Codespace or hosted service.
 
+`npm run verify:netlify` instead uses the official local Netlify Blobs emulator
+with synthetic credentials and a fresh temporary store. It checks large chunked
+uploads, streamed downloads, sessions across app restarts and preview isolation.
+The emulator needs a test-only local ETag forwarding workaround and does not
+provide atomic concurrent writes; see the [verification limitations](docs/deployment/netlify-free.md#prüfung).
+Run a regular `npm run build` before these local checks (not a `NETLIFY=true`
+platform build, whose storage context is deliberately fixed at build time).
+
 ### Storage and services
 
 `src/server/ports.ts` defines location search, evidence, draft, upload, qualification, submission, partner repository/actions, auth and notification ports. `src/server/services.ts` connects their demo adapters. `APP_MODE=live` fails closed with a clear integration-unavailable error; it never silently uses demo providers.
 
-The local `.gateway/demo-store.json` persists projects, opaque-cookie sessions, receipts, events and idempotency records. `GATEWAY_DATA_DIR` can select another private directory. File writes and state transactions are synchronous and atomically renamed **within one Node process**. This is a development/demo adapter, not a multi-process production database. Run one app process against each directory. Do not publish `.gateway` or expose it through a static server. Test runs get isolated stores.
+With `GATEWAY_STORAGE=local`, `.gateway/demo-store.json` persists projects, opaque-cookie sessions, receipts, events and idempotency records. `GATEWAY_DATA_DIR` can select another private directory. State transactions run synchronously and publish by atomic rename **within one Node process**. Run one app process against each directory. This local development/demo adapter requires a persistent filesystem; it is not the Netlify storage backend. Do not publish `.gateway` or expose it through a static server. Test runs get isolated stores.
 
-File bytes are written into `.gateway/documents/`, never LocalStorage. Uploads enforce 15 files, 20 MB per file and 100 MB total, content-signature checks for binary formats, UTF-8 CSV checks, deduplication by SHA-256, and authenticated access through download endpoints. A ready document is technically available and explicitly not professionally reviewed. Files selected for submission are recorded in its immutable scope. Demo uploads do not provide malware scanning or a production object-storage service.
+With `GATEWAY_STORAGE=netlify-blobs`, the application reads the demo state with strong consistency and writes conditionally against its ETag. Production uses a stable private store across deployments; preview contexts use separate stores. Sessions, project metadata and uploaded bytes reside in Blobs rather than the serverless filesystem. Storage errors fail closed without switching to local files. This shared demo-state model is bounded and is not a scalable production database; retention, backups and real authentication still require a separate production design.
+
+File bytes never enter LocalStorage. The local backend publishes complete bytes under `.gateway/documents/`; the Netlify backend stores them under private Blobs keys. Uploads use authenticated chunks of at most 2,000,000 bytes and enforce 15 files, 20,000,000 bytes per file and 100,000,000 bytes per project, content-signature checks for binary formats, UTF-8 CSV checks, SHA-256 deduplication, and authenticated streaming download endpoints. A document becomes ready only after validated bytes and metadata are durably stored; ready means technically available, not professionally reviewed. Files selected for submission are recorded in its immutable scope. Demo uploads do not provide malware scanning.
 
 Owner access requires the original opaque HttpOnly cookie; knowing a project ID grants no access. Partner repository access checks tenant and release. The openly accessible demo login deliberately simulates the partner role: **do not enter confidential or real personal data**. There is no production identity verification, real outbound notification, partner transfer or deployment.
 

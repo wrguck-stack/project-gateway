@@ -11,13 +11,31 @@ import {
   partnerActions,
   uploads,
   updateDocument,
-  downloadDocument,
+  downloadDocumentStream,
   safeProject,
   locations,
 } from "@/server/services";
 import { appMode } from "@/server/config";
 import { DomainError, readableError } from "@/domain/rules";
 import { categories } from "@/domain/model";
+import {
+  boundedRequestBytes,
+  cancelUploadTransfer,
+  finishUploadTransfer,
+  putUploadChunk,
+  startUploadTransfer,
+  UPLOAD_CHUNK_BYTES,
+} from "@/server/upload-transfer";
+
+async function jsonBody(req: NextRequest) {
+  const bytes = await boundedRequestBytes(req, 100_000);
+  try {
+    return JSON.parse(new TextDecoder().decode(bytes));
+  } catch {
+    throw new DomainError("Ungültige Anfrage.", 422);
+  }
+}
+
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 async function handle(
@@ -42,14 +60,14 @@ async function handle(
       const { role } = z
         .object({ role: z.enum(["OWNER", "PARTNER"]) })
         .strict()
-        .parse(await req.json());
-      const current = auth.resolve(
+        .parse(await jsonBody(req));
+      const current = await auth.resolve(
         req.cookies.get(
           role === "PARTNER" ? "gateway_partner" : "gateway_owner",
         )?.value,
       );
       if (current?.role === role) return NextResponse.json({ role });
-      const { token } = auth.create(role);
+      const { token } = await auth.create(role);
       const res = NextResponse.json({ role, mode: appMode() });
       res.cookies.set(
         role === "PARTNER" ? "gateway_partner" : "gateway_owner",
@@ -71,7 +89,7 @@ async function handle(
         ),
       );
     const partner = path[0] === "partner";
-    const actor = auth.resolve(
+    const actor = await auth.resolve(
       req.cookies.get(partner ? "gateway_partner" : "gateway_owner")?.value,
     );
     if (!actor)
@@ -83,8 +101,10 @@ async function handle(
           projectIntent: projectIntentSchema.optional(),
         })
         .strict()
-        .parse(await req.json());
-      return NextResponse.json(createDraft(actor, v.address, v.projectIntent));
+        .parse(await jsonBody(req));
+      return NextResponse.json(
+        await createDraft(actor, v.address, v.projectIntent),
+      );
     }
     if (
       partner &&
@@ -93,17 +113,17 @@ async function handle(
       method === "GET"
     )
       return NextResponse.json(
-        partnerProjects.list(actor).map((p) => safeProject(p, actor)),
+        (await partnerProjects.list(actor)).map((p) => safeProject(p, actor)),
       );
     const id = partner ? path[2] : path[1];
     if (!id) throw new DomainError("Route nicht gefunden.", 404);
     const operation = partner ? path[3] : path[2];
     if (method === "GET" && !operation)
-      return NextResponse.json(safeProject(drafts.get(id, actor), actor));
+      return NextResponse.json(safeProject(await drafts.get(id, actor), actor));
     if (operation === "documents" && method === "GET") {
       const docId = partner ? path[4] : path[3];
-      const result = downloadDocument(id, docId, actor);
-      return new NextResponse(new Uint8Array(result.bytes), {
+      const result = await downloadDocumentStream(id, docId, actor);
+      return new NextResponse(result.stream, {
         headers: {
           "Content-Type": result.document.mime,
           "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(result.document.name)}`,
@@ -112,9 +132,15 @@ async function handle(
       });
     }
     if (operation === "documents" && method === "POST") {
-      if (Number(req.headers.get("content-length") ?? 0) > 20_100_000)
-        throw new DomainError("Maximal 20 MB pro Datei.", 413);
-      const form = await req.formData();
+      // Small multipart requests remain supported for existing integrations.
+      // Larger files use the authenticated transfer protocol below.
+      const bytes = await boundedRequestBytes(
+        req,
+        UPLOAD_CHUNK_BYTES + 100_000,
+      );
+      const form = await new Response(bytes, {
+        headers: { "Content-Type": req.headers.get("content-type") ?? "" },
+      }).formData();
       const file = form.get("file");
       if (!(file instanceof File)) throw new DomainError("Datei fehlt.");
       const category = z.enum(categories).parse(form.get("category"));
@@ -131,9 +157,29 @@ async function handle(
         ),
       );
     }
-    if (Number(req.headers.get("content-length") ?? 0) > 100_000)
-      throw new DomainError("Anfrage zu groß.", 413);
-    const body = await req.json();
+    if (operation === "transfers" && !partner && path[0] === "projects") {
+      if (method === "POST" && path.length === 3)
+        return NextResponse.json(
+          await startUploadTransfer(id, actor, await jsonBody(req)),
+        );
+      const transferId = path[3];
+      if (method === "PUT" && path.length === 5 && /^\d+$/.test(path[4])) {
+        const bytes = await boundedRequestBytes(req, UPLOAD_CHUNK_BYTES);
+        return NextResponse.json(
+          await putUploadChunk(id, transferId, actor, Number(path[4]), bytes),
+        );
+      }
+      if (method === "POST" && path.length === 5 && path[4] === "complete")
+        return NextResponse.json(
+          safeProject(await finishUploadTransfer(id, transferId, actor), actor),
+        );
+      if (method === "DELETE" && path.length === 4)
+        return NextResponse.json(
+          await cancelUploadTransfer(id, transferId, actor),
+        );
+      throw new DomainError("Route nicht gefunden.", 404);
+    }
+    const body = await jsonBody(req);
     if (operation === "documents" && method === "PATCH") {
       const v = z
         .object({
@@ -144,7 +190,10 @@ async function handle(
         .strict()
         .parse(body);
       return NextResponse.json(
-        updateDocument(id, v.documentId, actor, v.revision, v.category),
+        safeProject(
+          await updateDocument(id, v.documentId, actor, v.revision, v.category),
+          actor,
+        ),
       );
     }
     if (path[0] === "drafts" && method === "PATCH") {
@@ -158,7 +207,7 @@ async function handle(
         .strict()
         .parse(body);
       return NextResponse.json(
-        drafts.save(
+        await drafts.save(
           id,
           actor,
           v.revision,
@@ -178,10 +227,10 @@ async function handle(
       );
     }
     if (operation === "submit" && method === "POST")
-      return NextResponse.json(submissions.submit(id, actor, body));
+      return NextResponse.json(await submissions.submit(id, actor, body));
     if (operation === "actions" && method === "POST")
       return NextResponse.json(
-        safeProject(partnerActions.execute(id, actor, body), actor),
+        safeProject(await partnerActions.execute(id, actor, body), actor),
       );
     throw new DomainError("Route nicht gefunden.", 404);
   } catch (e) {
@@ -205,3 +254,5 @@ async function handle(
 export const GET = handle;
 export const POST = handle;
 export const PATCH = handle;
+export const PUT = handle;
+export const DELETE = handle;

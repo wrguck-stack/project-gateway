@@ -1,6 +1,4 @@
 import { randomUUID, randomBytes, createHash } from "node:crypto";
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
 import { z } from "zod";
 import {
   answersSchema,
@@ -25,7 +23,13 @@ import {
   uploadLimits,
   validateStep,
 } from "@/domain/rules";
-import { transaction, dataDir, type Store } from "./store";
+import { transaction, StorageCommitUncertainError, type Store } from "./store";
+import {
+  putPrivateBytes,
+  readPrivateBytes,
+  streamPrivateBytes,
+  deletePrivateBytes,
+} from "./storage";
 import { newProject, demoAddresses } from "./seed";
 import { qualifyDemo } from "./qualification";
 import { partnerConfig, requireDemo } from "./config";
@@ -105,7 +109,7 @@ function idempotent<T>(
   return result;
 }
 export const auth: AuthProvider = {
-  create(role) {
+  async create(role) {
     requireDemo();
     const token = randomBytes(32).toString("hex");
     const session: Session = {
@@ -115,13 +119,13 @@ export const auth: AuthProvider = {
       partnerId: role === "PARTNER" ? partnerConfig.id : null,
       expiresAt: Date.now() + 86400000 * 7,
     };
-    transaction((s) => {
+    await transaction((s) => {
       s.sessions[hash(token)] = session;
       return true;
     });
     return { token, session };
   },
-  resolve(token) {
+  async resolve(token) {
     if (!token) return null;
     return transaction((s) => {
       const session = s.sessions[hash(token)];
@@ -156,7 +160,7 @@ export const projectIntentSchema = z.enum([
   "ground",
 ]);
 export type ProjectIntent = z.infer<typeof projectIntentSchema>;
-export function createDraft(
+export async function createDraft(
   actor: Session,
   address: string,
   projectIntent?: ProjectIntent,
@@ -190,10 +194,10 @@ export function createDraft(
   });
 }
 export const drafts: DraftRepository = {
-  get(id, actor) {
+  async get(id, actor) {
     return transaction((s) => find(s, id, actor));
   },
-  save(id, actor, revision, answers, step, completeStep = true) {
+  async save(id, actor, revision, answers, step, completeStep = true) {
     return transaction((s) => {
       const p = find(s, id, actor);
       if (actor.role !== "OWNER")
@@ -225,7 +229,7 @@ export const drafts: DraftRepository = {
 };
 export const qualification: QualificationProvider = {
   async qualify(id, actor, revision) {
-    const started = transaction((s) => {
+    const started = await transaction((s) => {
       const p = find(s, id, actor);
       checkRevision(p, revision);
       for (let step = 1; step <= 10; step++) validateStep(p.answers, step);
@@ -312,7 +316,7 @@ const submitSchema = z
   })
   .strict();
 export const submissions: SubmissionProvider = {
-  submit(id, actor, input) {
+  async submit(id, actor, input) {
     const v = submitSchema.parse(input);
     return transaction((s) => {
       const p = find(s, id, actor);
@@ -385,7 +389,7 @@ export const submissions: SubmissionProvider = {
 };
 export const partnerProjects: PartnerProjectRepository = {
   get: drafts.get,
-  list(actor) {
+  async list(actor) {
     if (actor.role !== "PARTNER")
       throw new DomainError("Partnerzugriff erforderlich.", 403);
     return transaction((s) =>
@@ -424,7 +428,7 @@ export const actionSchema = z
   })
   .strict();
 export const partnerActions: PartnerActionProvider = {
-  execute(id, actor, input) {
+  async execute(id, actor, input) {
     const v = actionSchema.parse(input);
     return transaction((s) => {
       const p = find(s, id, actor, v.action !== "respond");
@@ -558,27 +562,70 @@ export const partnerActions: PartnerActionProvider = {
     });
   },
 };
+function matchingUpload(
+  project: Project,
+  documentId: string,
+  file: { name: string; size: number },
+  category: Document["category"],
+  digest: string,
+) {
+  const document = project.documents.find((d) => d.id === documentId);
+  if (!document) return false;
+  if (
+    document.hash !== digest ||
+    document.size !== file.size ||
+    document.name !== file.name.slice(0, 240) ||
+    document.category !== category ||
+    document.state !== "ready"
+  )
+    throw new DomainError(
+      "Diese Upload-ID gehört zu einer anderen oder entfernten Datei.",
+      409,
+    );
+  return true;
+}
+
 export const uploads: UploadProvider = {
-  async upload(id, actor, file, category, revision) {
-    const initial = drafts.get(id, actor);
-    if (actor.role !== "OWNER" || initial.receipt)
+  async upload(id, actor, file, category, revision, requestId) {
+    if (actor.role !== "OWNER")
+      throw new DomainError("Upload nur im eigenen Entwurf.", 403);
+    const initial = await drafts.get(id, actor);
+    z.enum(categories).parse(category);
+    uploadLimits([file]);
+    const bytes = Buffer.from(await file.arrayBuffer());
+    if (bytes.length !== file.size)
+      throw new DomainError("Ungültige Dateigröße.");
+    const digest = hash(bytes);
+    const documentId = requestId ? z.uuid().parse(requestId) : randomUUID();
+    // Finalization can be retried after a lost response with the same upload ID.
+    if (
+      requestId &&
+      matchingUpload(initial, documentId, file, category, digest)
+    )
+      return initial;
+    if (initial.receipt)
       throw new DomainError(
         "Upload nur im eigenen, noch nicht eingereichten Entwurf.",
         403,
       );
     checkRevision(initial, revision);
-    z.enum(categories).parse(category);
+    if (
+      initial.documents.some((d) => d.hash === digest && d.state !== "removed")
+    )
+      throw new DomainError("Diese Datei wurde bereits hinzugefügt.", 409);
     uploadLimits([
       ...initial.documents.filter((d) => d.state !== "removed"),
       file,
     ]);
-    const bytes = Buffer.from(await file.arrayBuffer());
-    if (bytes.length !== file.size)
-      throw new DomainError("Ungültige Dateigröße.");
     const ext = file.name.split(".").pop()?.toLowerCase();
     let mime = "";
     if (ext === "csv") {
-      const text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+      let text: string;
+      try {
+        text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+      } catch {
+        throw new DomainError("Die Datei ist keine lesbare UTF-8-CSV-Datei.");
+      }
       if (/[\u0000-\u0008\u000E-\u001F]/.test(text) || !/[;,\t]/.test(text))
         throw new DomainError("Die Datei ist keine lesbare CSV-Datei.");
       mime = "text/csv";
@@ -598,37 +645,90 @@ export const uploads: UploadProvider = {
         );
       mime = type.mime;
     }
-    return transaction((s) => {
-      const p = find(s, id, actor);
-      checkRevision(p, revision);
-      const digest = hash(bytes);
-      if (p.documents.some((d) => d.hash === digest && d.state !== "removed"))
-        throw new DomainError("Diese Datei wurde bereits hinzugefügt.", 409);
-      uploadLimits([...p.documents.filter((d) => d.state !== "removed"), file]);
-      const document: Document = {
-        id: randomUUID(),
-        name: file.name.slice(0, 240),
-        size: bytes.length,
-        mime,
-        hash: digest,
-        category,
-        version: 1,
-        state: "ready",
-        reviewState: "NOT_REVIEWED",
-        createdAt: now(),
-      };
-      const dir = join(dataDir(), "documents");
-      mkdirSync(dir, { recursive: true, mode: 0o700 });
-      writeFileSync(join(dir, document.id), bytes, { mode: 0o600 });
-      p.documents.push(document);
-      p.inputVersion++;
-      if (p.score) p.score.state = "STALE";
-      bump(p);
-      return p;
-    });
+    const document: Document = {
+      id: documentId,
+      name: file.name.slice(0, 240),
+      size: bytes.length,
+      mime,
+      hash: digest,
+      category,
+      version: 1,
+      state: "ready",
+      reviewState: "NOT_REVIEWED",
+      createdAt: now(),
+    };
+    const key = `documents/${document.id}`;
+    // Bytes must be durably available before metadata can say "ready". This
+    // immutable write is deliberately outside the retried CAS callback.
+    const created = await putPrivateBytes(key, bytes);
+    if (!created) {
+      const existing = await readPrivateBytes(key);
+      if (
+        !existing ||
+        existing.length !== bytes.length ||
+        hash(existing) !== digest
+      )
+        throw new DomainError("Die Upload-ID ist bereits anders belegt.", 409);
+    }
+    try {
+      return await transaction((s) => {
+        const p = find(s, id, actor);
+        if (requestId && matchingUpload(p, documentId, file, category, digest))
+          return p;
+        if (requestId) {
+          const transfer = s.uploadTransfers?.[requestId];
+          if (
+            !transfer ||
+            transfer.state !== "finalizing" ||
+            transfer.expiresAt <= Date.now() ||
+            transfer.projectId !== id ||
+            transfer.actorId !== actor.actorId ||
+            transfer.tenantId !== actor.tenantId
+          )
+            throw new DomainError(
+              "Der Upload ist abgelaufen oder nicht zur Fertigstellung freigegeben.",
+              409,
+            );
+        }
+        if (p.receipt)
+          throw new DomainError(
+            "Die eingereichte Dokumentfassung ist unveränderlich.",
+            403,
+          );
+        checkRevision(p, revision);
+        if (p.documents.some((d) => d.hash === digest && d.state !== "removed"))
+          throw new DomainError("Diese Datei wurde bereits hinzugefügt.", 409);
+        uploadLimits([
+          ...p.documents.filter((d) => d.state !== "removed"),
+          file,
+        ]);
+        p.documents.push(structuredClone(document));
+        p.inputVersion++;
+        if (p.score) p.score.state = "STALE";
+        bump(p);
+        return p;
+      });
+    } catch (error) {
+      if (error instanceof StorageCommitUncertainError) {
+        // Reconcile a response lost after the metadata commit. If the read also
+        // fails, retain the private bytes; deleting could break a committed file.
+        try {
+          const current = await drafts.get(id, actor);
+          if (matchingUpload(current, documentId, file, category, digest))
+            return current;
+        } catch {
+          /* Preserve the original indeterminate-commit error. */
+        }
+      } else if (created && !requestId) {
+        // A random document ID is exclusive to this invocation. Stable transfer
+        // IDs may be finalized concurrently and are cleaned by the transfer owner.
+        await deletePrivateBytes(key).catch(() => undefined);
+      }
+      throw error;
+    }
   },
 };
-export function updateDocument(
+export async function updateDocument(
   id: string,
   documentId: string,
   actor: Session,
@@ -656,18 +756,39 @@ export function updateDocument(
     return p;
   });
 }
-export function downloadDocument(id: string, docId: string, actor: Session) {
-  const p = drafts.get(id, actor);
-  const d = p.documents.find((d) => d.id === docId && d.state === "ready");
+async function authorizedDocument(id: string, docId: string, actor: Session) {
+  const p = await drafts.get(id, actor);
+  const document = p.documents.find(
+    (d) => d.id === docId && d.state === "ready",
+  );
   if (
-    !d ||
+    !document ||
     (actor.role === "PARTNER" && !p.receipt?.documentIds.includes(docId))
   )
     throw new DomainError("Kein Zugriff auf dieses Dokument.", 403);
-  return {
-    document: d,
-    bytes: readFileSync(join(dataDir(), "documents", d.id)),
-  };
+  return document;
+}
+
+export async function downloadDocument(
+  id: string,
+  docId: string,
+  actor: Session,
+) {
+  const document = await authorizedDocument(id, docId, actor);
+  const bytes = await readPrivateBytes(`documents/${document.id}`);
+  if (!bytes) throw new DomainError("Dokument nicht verfügbar.", 404);
+  return { document, bytes };
+}
+
+export async function downloadDocumentStream(
+  id: string,
+  docId: string,
+  actor: Session,
+) {
+  const document = await authorizedDocument(id, docId, actor);
+  const stream = await streamPrivateBytes(`documents/${document.id}`);
+  if (!stream) throw new DomainError("Dokument nicht verfügbar.", 404);
+  return { document, stream };
 }
 export function safeProject(p: Project, actor: Session) {
   const safe = structuredClone(p);

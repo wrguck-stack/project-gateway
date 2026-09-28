@@ -14,7 +14,7 @@ export default async function Page({
   const { draftId, step } = await params;
   try {
     const actor = await requireSession("OWNER");
-    const p = safeProject(drafts.get(draftId, actor), actor);
+    const p = safeProject(await drafts.get(draftId, actor), actor);
     const n = Number(step);
     if (
       !["analyse", "zusammenfassung"].includes(step) &&

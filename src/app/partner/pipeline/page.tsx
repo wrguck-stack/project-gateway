@@ -4,5 +4,5 @@ import { partnerProjects } from "@/server/services";
 export const dynamic = "force-dynamic";
 export default async function Page() {
   const actor = await requireSession("PARTNER");
-  return <PipelineView projects={partnerProjects.list(actor)} />;
+  return <PipelineView projects={await partnerProjects.list(actor)} />;
 }

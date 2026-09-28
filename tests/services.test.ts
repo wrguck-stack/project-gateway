@@ -19,12 +19,12 @@ import { demoAddresses, demoContact, seedProjects } from "@/server/seed";
 import { transaction } from "@/server/store";
 import type { Session, Project } from "@/domain/model";
 let dir: string, owner: Session, partner: Session;
-beforeAll(() => {
+beforeAll(async () => {
   dir = mkdtempSync(join(tmpdir(), "gateway-unit-"));
   process.env.GATEWAY_DATA_DIR = dir;
   process.env.APP_MODE = "demo";
-  owner = auth.create("OWNER").session;
-  partner = auth.create("PARTNER").session;
+  owner = (await auth.create("OWNER")).session;
+  partner = (await auth.create("PARTNER")).session;
 });
 afterAll(() => {
   delete process.env.GATEWAY_DATA_DIR;
@@ -32,12 +32,12 @@ afterAll(() => {
   rmSync(dir, { recursive: true, force: true });
 });
 async function ready() {
-  let p = createDraft(owner, demoAddresses[0]);
+  let p = await createDraft(owner, demoAddresses[0]);
   const answers = seedProjects()[0].answers;
-  p = drafts.save(p.id, owner, p.revision, answers, 10);
+  p = await drafts.save(p.id, owner, p.revision, answers, 10);
   return qualification.qualify(p.id, owner, p.revision);
 }
-function submit(p: Project, key = randomUUID()) {
+async function submit(p: Project, key = randomUUID()) {
   const input = {
     requestId: key,
     revision: p.revision,
@@ -46,23 +46,27 @@ function submit(p: Project, key = randomUUID()) {
     comment: "Test",
     documentIds: [],
   };
-  return { input, receipt: submissions.submit(p.id, owner, input) };
+  return { input, receipt: await submissions.submit(p.id, owner, input) };
 }
 describe("Persistent service boundaries", () => {
-  it("carries selected project intent into a new draft without inventing site facts", () => {
-    const ground = createDraft(owner, "Freifläche am Gewerbepark", "ground");
-    const extension = createDraft(
+  it("carries selected project intent into a new draft without inventing site facts", async () => {
+    const ground = await createDraft(
+      owner,
+      "Freifläche am Gewerbepark",
+      "ground",
+    );
+    const extension = await createDraft(
       owner,
       "Halle mit Erweiterungswunsch",
       "extension",
     );
-    const storage = createDraft(
+    const storage = await createDraft(
       owner,
       "Standort für Speicherprüfung",
       "storage",
     );
-    const roof = createDraft(owner, "Gewerbedach im Gewerbepark", "roof");
-    expect(drafts.get(ground.id, owner).answers).toMatchObject({
+    const roof = await createDraft(owner, "Gewerbedach im Gewerbepark", "roof");
+    expect((await drafts.get(ground.id, owner)).answers).toMatchObject({
       buildingType: "Freifläche",
       areaKind: "Freifläche",
       goal: "Dach oder Fläche bereitstellen",
@@ -79,43 +83,43 @@ describe("Persistent service boundaries", () => {
       expect(p.score).toBeNull();
       expect(p.maxVisited).toBe(1);
     }
-    const ordinary = createDraft(owner, "Standort ohne Vorauswahl");
+    const ordinary = await createDraft(owner, "Standort ohne Vorauswahl");
     expect(ordinary.answers.goal).toBeNull();
-    expect(() =>
+    await expect(
       createDraft(partner, "Unzulässiger Entwurf", "roof"),
-    ).toThrow();
-    expect(() =>
+    ).rejects.toThrow();
+    await expect(
       createDraft(owner, "Ungültige Vorauswahl", "unsupported" as never),
-    ).toThrow();
+    ).rejects.toThrow();
   });
-  it("persists drafts and sessions while keeping owners isolated", () => {
-    const { token, session } = auth.create("OWNER");
-    expect(auth.resolve(token)).toEqual(session);
-    const p = createDraft(session, "Manuell erfasste Gewerbefläche");
-    expect(drafts.get(p.id, session).answers.address).toBe(
+  it("persists drafts and sessions while keeping owners isolated", async () => {
+    const { token, session } = await auth.create("OWNER");
+    expect(await auth.resolve(token)).toEqual(session);
+    const p = await createDraft(session, "Manuell erfasste Gewerbefläche");
+    expect((await drafts.get(p.id, session)).answers.address).toBe(
       "Manuell erfasste Gewerbefläche",
     );
-    expect(() => drafts.get(p.id, owner)).toThrow();
-    expect(() => drafts.get(p.id, partner)).toThrow();
+    await expect(drafts.get(p.id, owner)).rejects.toThrow();
+    await expect(drafts.get(p.id, partner)).rejects.toThrow();
   });
   it("submits idempotently, creates one receipt/event and detects key payload mismatch", async () => {
     const p = await ready();
     expect(canSubmit(p)).toBe(true);
-    const { input, receipt } = submit(p);
-    expect(submissions.submit(p.id, owner, input)).toEqual(receipt);
+    const { input, receipt } = await submit(p);
+    expect(await submissions.submit(p.id, owner, input)).toEqual(receipt);
     expect(
-      drafts
-        .get(p.id, owner)
-        .events.filter((e) => e.action === "Übermittlung simuliert"),
+      (await drafts.get(p.id, owner)).events.filter(
+        (e) => e.action === "Übermittlung simuliert",
+      ),
     ).toHaveLength(1);
-    expect(() =>
+    await expect(
       submissions.submit(p.id, owner, { ...input, comment: "changed" }),
-    ).toThrow();
-    expect(drafts.get(p.id, partner).receipt?.simulated).toBe(true);
+    ).rejects.toThrow();
+    expect((await drafts.get(p.id, partner)).receipt?.simulated).toBe(true);
   });
   it("rejects stale revisions and unconsented submissions", async () => {
     const p = await ready();
-    expect(() =>
+    await expect(
       submissions.submit(p.id, owner, {
         requestId: randomUUID(),
         revision: p.revision - 1,
@@ -124,8 +128,8 @@ describe("Persistent service boundaries", () => {
         comment: "",
         documentIds: [],
       }),
-    ).toThrow();
-    expect(() =>
+    ).rejects.toThrow();
+    await expect(
       submissions.submit(p.id, owner, {
         requestId: randomUUID(),
         revision: p.revision,
@@ -134,38 +138,40 @@ describe("Persistent service boundaries", () => {
         comment: "",
         documentIds: [],
       }),
-    ).toThrow();
+    ).rejects.toThrow();
   });
   it("keeps partner reading side-effect free, decisions idempotent and immutable", async () => {
     let p = await ready();
-    submit(p);
-    p = drafts.get(p.id, partner);
+    await submit(p);
+    p = await drafts.get(p.id, partner);
     const revision = p.revision;
-    partnerProjects.list(partner);
-    expect(drafts.get(p.id, partner).revision).toBe(revision);
+    await partnerProjects.list(partner);
+    expect((await drafts.get(p.id, partner)).revision).toBe(revision);
     const input = {
       requestId: randomUUID(),
       revision,
       action: "accept",
       note: "",
     };
-    const accepted = partnerActions.execute(p.id, partner, input);
+    const accepted = await partnerActions.execute(p.id, partner, input);
     expect(accepted.status).toBe("ACCEPTED");
-    expect(partnerActions.execute(p.id, partner, input)).toEqual(accepted);
+    expect(await partnerActions.execute(p.id, partner, input)).toEqual(
+      accepted,
+    );
     expect(accepted.score).toEqual(p.score);
     expect(accepted.events[0].scoreSnapshot).toEqual(p.score);
-    expect(() =>
+    await expect(
       partnerActions.execute(p.id, partner, {
         ...input,
         requestId: randomUUID(),
       }),
-    ).toThrow();
+    ).rejects.toThrow();
   });
   it("requests information, records a partial reply and keeps unanswered requirements", async () => {
     let p = await ready();
-    submit(p);
-    p = drafts.get(p.id, partner);
-    p = partnerActions.execute(p.id, partner, {
+    await submit(p);
+    p = await drafts.get(p.id, partner);
+    p = await partnerActions.execute(p.id, partner, {
       requestId: randomUUID(),
       revision: p.revision,
       action: "request-info",
@@ -174,7 +180,7 @@ describe("Persistent service boundaries", () => {
       recipient: demoContact.email,
     });
     expect(p.status).toBe("INFO_REQUESTED");
-    p = partnerActions.execute(p.id, owner, {
+    p = await partnerActions.execute(p.id, owner, {
       requestId: randomUUID(),
       revision: p.revision,
       action: "respond",
@@ -188,8 +194,8 @@ describe("Persistent service boundaries", () => {
   });
   it("rejects OTHER without text and keeps the original decision on reopening", async () => {
     let p = await ready();
-    submit(p);
-    p = drafts.get(p.id, partner);
+    await submit(p);
+    p = await drafts.get(p.id, partner);
     const input = {
       requestId: randomUUID(),
       revision: p.revision,
@@ -202,8 +208,10 @@ describe("Persistent service boundaries", () => {
         evidenceRefs: [],
       },
     };
-    expect(() => partnerActions.execute(p.id, partner, input)).toThrow();
-    p = partnerActions.execute(p.id, partner, {
+    await expect(
+      partnerActions.execute(p.id, partner, input),
+    ).rejects.toThrow();
+    p = await partnerActions.execute(p.id, partner, {
       ...input,
       rejection: {
         ...input.rejection,
@@ -211,7 +219,7 @@ describe("Persistent service boundaries", () => {
       },
     });
     const rejectEvent = p.events[0];
-    p = partnerActions.execute(p.id, partner, {
+    p = await partnerActions.execute(p.id, partner, {
       requestId: randomUUID(),
       revision: p.revision,
       action: "reopen",
@@ -224,14 +232,14 @@ describe("Persistent service boundaries", () => {
   });
   it("retains active business status while re-scoring and guards the input version", async () => {
     let p = await ready();
-    submit(p);
-    p = drafts.get(p.id, partner);
-    p = partnerActions.execute(p.id, partner, {
+    await submit(p);
+    p = await drafts.get(p.id, partner);
+    p = await partnerActions.execute(p.id, partner, {
       requestId: randomUUID(),
       revision: p.revision,
       action: "begin-review",
     });
-    transaction((s) => {
+    await transaction((s) => {
       s.projects[p.id].score!.state = "STALE";
       return true;
     });
@@ -240,7 +248,7 @@ describe("Persistent service boundaries", () => {
     expect(p.scoreJobState).toBe("SUCCEEDED");
   });
   it("stores actual private bytes, rejects duplicate content and spoofed extensions", async () => {
-    let p = createDraft(owner, demoAddresses[0]);
+    let p = await createDraft(owner, demoAddresses[0]);
     const file = new File(["time;load\n00:00;4\n"], "lastgang.csv", {
       type: "text/csv",
     });
@@ -248,7 +256,7 @@ describe("Persistent service boundaries", () => {
     expect(p.documents[0].state).toBe("ready");
     expect(p.documents[0].reviewState).toBe("NOT_REVIEWED");
     expect(
-      downloadDocument(p.id, p.documents[0].id, owner).bytes.toString(),
+      (await downloadDocument(p.id, p.documents[0].id, owner)).bytes.toString(),
     ).toContain("00:00;4");
     await expect(
       uploads.upload(
@@ -268,11 +276,18 @@ describe("Persistent service boundaries", () => {
         p.revision,
       ),
     ).rejects.toThrow("Dateiinhalt");
-    expect(() => downloadDocument(p.id, p.documents[0].id, partner)).toThrow();
+    await expect(
+      downloadDocument(p.id, p.documents[0].id, partner),
+    ).rejects.toThrow();
   });
-  it("fails closed in live mode", () => {
+  it("fails closed in live mode", async () => {
     process.env.APP_MODE = "live";
-    expect(() => auth.create("PARTNER")).toThrow("Live-Integrationen");
-    process.env.APP_MODE = "demo";
+    try {
+      await expect(auth.create("PARTNER")).rejects.toThrow(
+        "Live-Integrationen",
+      );
+    } finally {
+      process.env.APP_MODE = "demo";
+    }
   });
 });

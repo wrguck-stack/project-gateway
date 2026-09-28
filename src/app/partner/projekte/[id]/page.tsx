@@ -15,7 +15,7 @@ export default async function Page({
   const { id } = await params;
   const { back } = await searchParams;
   try {
-    const p = safeProject(partnerProjects.get(id, actor), actor);
+    const p = safeProject(await partnerProjects.get(id, actor), actor);
     return (
       <main id="main" className="wrap page">
         <Link

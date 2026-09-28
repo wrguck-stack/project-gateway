@@ -7,7 +7,7 @@ export async function getSession(
   role: "OWNER" | "PARTNER",
 ): Promise<Session | null> {
   const jar = await cookies();
-  return auth.resolve(
+  return await auth.resolve(
     jar.get(role === "PARTNER" ? "gateway_partner" : "gateway_owner")?.value,
   );
 }

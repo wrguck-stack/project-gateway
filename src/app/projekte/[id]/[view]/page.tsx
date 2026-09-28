@@ -15,7 +15,7 @@ export default async function Page({
   if (!["ergebnis", "einreichen", "eingereicht"].includes(view)) notFound();
   try {
     const actor = await requireSession("OWNER");
-    const p = safeProject(drafts.get(id, actor), actor);
+    const p = safeProject(await drafts.get(id, actor), actor);
     return (
       <>
         <Header />

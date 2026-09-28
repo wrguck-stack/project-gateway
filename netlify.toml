@@ -1,0 +1,16 @@
+# Use the Netlify Free workspace plan. This file does not select or upgrade a plan.
+# Import feat/homepage-professional-pass as the production branch in Netlify.
+[build]
+  command = "NETLIFY=false GATEWAY_STORAGE=local npm test && npm run build && npm run typecheck"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24.19.0"
+  NPM_FLAGS = "--include=dev"
+  APP_MODE = "demo"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Netlify automatically installs its maintained Next.js adapter. Do not add a
+# paid database, custom Functions region, larger compute tier, or paid add-on.
+# The Next build records the non-secret CONTEXT/BRANCH values for isolated Blobs
+# namespaces. Runtime credentials are injected by Netlify, never by this file.

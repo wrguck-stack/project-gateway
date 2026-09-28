@@ -7,8 +7,47 @@ import {
 } from "@carbon/icons-react";
 import { categories, type Project, type Document } from "@/domain/model";
 import { uploadLimits, numberDE, readableError } from "@/domain/rules";
-import { api } from "./client-api";
+import { api, ApiError } from "./client-api";
 import { Button, ErrorNotice } from "./ui";
+type Transfer = {
+  id: string;
+  chunkSize: number;
+  chunkCount: number;
+  expiresAt: number;
+  nextIndex: number;
+  finalizing: boolean;
+};
+
+async function sendChunk(url: string, bytes: Blob) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 120_000);
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/octet-stream" },
+      body: bytes,
+      cache: "no-store",
+      signal: controller.signal,
+    });
+    if (!response.ok) {
+      const body = await response.json().catch(() => null);
+      throw new ApiError(
+        body?.error ??
+          `Dateiabschnitt konnte nicht übertragen werden (HTTP ${response.status}). Bitte erneut versuchen.`,
+        response.status,
+      );
+    }
+  } catch (error) {
+    if (error instanceof ApiError) throw error;
+    throw new ApiError(
+      "Dateiübertragung unterbrochen. Bitte erneut versuchen; bestätigte Abschnitte bleiben erhalten.",
+      0,
+    );
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 type LocalFile = {
   file: File;
   state:
@@ -19,6 +58,7 @@ type LocalFile = {
     | "unsupported"
     | "too large";
   error?: string;
+  transfer?: Transfer;
 };
 export function UploadList({
   project,
@@ -32,52 +72,121 @@ export function UploadList({
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [omitted, setOmitted] = useState(false);
-  async function upload(files: File[]) {
+  async function upload(files: File[], retry?: LocalFile) {
     setError("");
     setOmitted(false);
-    try {
-      uploadLimits([
-        ...project.documents.filter((d) => d.state !== "removed"),
-        ...files,
+    if (!retry) {
+      try {
+        uploadLimits([
+          ...project.documents.filter((d) => d.state !== "removed"),
+          ...local.map((item) => item.file),
+          ...files,
+        ]);
+      } catch (error) {
+        setError(readableError(error));
+        setLocal((list) => [
+          ...list,
+          ...files.map((file): LocalFile => ({
+            file,
+            state: file.size > 20_000_000 ? "too large" : "unsupported",
+            error: readableError(error),
+          })),
+        ]);
+        return;
+      }
+      setLocal((list) => [
+        ...list,
+        ...files.map((file): LocalFile => ({ file, state: "selected" })),
       ]);
-    } catch (e) {
-      setError(readableError(e));
-      setLocal(
-        files.map((file) => ({
-          file,
-          state: file.size > 20_000_000 ? "too large" : "unsupported",
-          error: readableError(e),
-        })),
-      );
-      return;
     }
     setBusy(true);
-    setLocal(files.map((file) => ({ file, state: "selected" })));
-    let p = project;
+    let current = project;
     for (const file of files) {
-      setLocal((list) =>
-        list.map((l) => (l.file === file ? { ...l, state: "uploading" } : l)),
-      );
-      try {
-        const data = new FormData();
-        data.set("file", file);
-        data.set("category", "Sonstiges");
-        data.set("revision", String(p.revision));
-        p = await api<Project>(`/api/projects/${p.id}/documents`, "POST", data);
-        onChange(p);
-        setLocal((list) => list.filter((l) => l.file !== file));
-      } catch (e) {
+      let transfer = retry?.transfer;
+      const updateLocal = (changes: Partial<LocalFile>) =>
         setLocal((list) =>
-          list.map((l) =>
-            l.file === file
-              ? { ...l, state: "failed", error: readableError(e) }
-              : l,
+          list.map((item) =>
+            item.file === file ? { ...item, ...changes } : item,
           ),
         );
+      updateLocal({
+        state: transfer?.finalizing ? "processing" : "uploading",
+        error: undefined,
+      });
+      try {
+        const base = `/api/projects/${current.id}/transfers`;
+        if (!transfer) {
+          const created = await api<Omit<Transfer, "nextIndex" | "finalizing">>(
+            base,
+            "POST",
+            {
+              name: file.name,
+              size: file.size,
+              category: "Sonstiges",
+              revision: current.revision,
+            },
+          );
+          transfer = { ...created, nextIndex: 0, finalizing: false };
+          updateLocal({ transfer });
+        }
+        if (!transfer.finalizing) {
+          for (
+            let index = transfer.nextIndex;
+            index < transfer.chunkCount;
+            index++
+          ) {
+            await sendChunk(
+              `${base}/${transfer.id}/${index}`,
+              file.slice(
+                index * transfer.chunkSize,
+                Math.min((index + 1) * transfer.chunkSize, file.size),
+              ),
+            );
+            transfer = { ...transfer, nextIndex: index + 1 };
+            updateLocal({ transfer });
+          }
+          transfer = { ...transfer, finalizing: true };
+          updateLocal({ transfer, state: "processing" });
+        }
+        current = await api<Project>(
+          `${base}/${transfer.id}/complete`,
+          "POST",
+          {},
+        );
+        onChange(current);
+        setLocal((list) => list.filter((item) => item.file !== file));
+      } catch (error) {
+        // Retain the stable transfer ID after an uncertain response so retrying
+        // reconciles the original finalization without creating a second file.
+        updateLocal({
+          state: "failed",
+          error: readableError(error),
+          transfer:
+            error instanceof ApiError && error.status === 410
+              ? undefined
+              : transfer,
+        });
       }
     }
     setBusy(false);
     if (input.current) input.current.value = "";
+  }
+  async function removeLocal(item: LocalFile) {
+    setBusy(true);
+    try {
+      if (item.transfer)
+        await api(
+          `/api/projects/${project.id}/transfers/${item.transfer.id}`,
+          "DELETE",
+        );
+      setLocal((list) => list.filter((entry) => entry !== item));
+    } catch (error) {
+      if (error instanceof ApiError && [404, 410].includes(error.status))
+        setLocal((list) => list.filter((entry) => entry !== item));
+      else setError(readableError(error));
+    } finally {
+      setBusy(false);
+    }
   }
   async function update(
     documentId: string,
@@ -200,16 +309,14 @@ export function UploadList({
                 <Button
                   type="button"
                   variant="secondary"
-                  onClick={() => upload([l.file])}
+                  onClick={() => upload([l.file], l)}
                 >
                   Erneut hochladen
                 </Button>
                 <Button
                   type="button"
                   variant="text"
-                  onClick={() =>
-                    setLocal((old) => old.filter((item) => item !== l))
-                  }
+                  onClick={() => removeLocal(l)}
                 >
                   Entfernen
                 </Button>
@@ -237,7 +344,7 @@ export function UploadList({
       )}
       <p className="meta">
         {project.documents.filter((d) => d.state !== "removed").length} von 15
-        Dateien · Originaldateien liegen im privaten lokalen Demo-Speicher.
+        Dateien · Originaldateien werden privat gespeichert.
       </p>
     </div>
   );
