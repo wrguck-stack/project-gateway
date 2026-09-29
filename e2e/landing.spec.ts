@@ -344,7 +344,7 @@ for (const width of [1440, 390]) {
         score.getByRole("heading", { name: "4 von 9 Faktoren" }),
       ).toBeVisible();
       await expect(score.locator(".score-number")).toHaveText("82/100");
-      await expect(score).toContainText("Synthetisches UI-Beispiel");
+      await expect(score).toContainText("Beispielbewertung");
       await expect(score).toContainText("Vorläufig · enthält Schätzwerte");
       await expect(score).toContainText(
         "Netzanschluss und Tragfähigkeit noch nicht geprüft.",

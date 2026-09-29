@@ -58,7 +58,7 @@ export function DossierPreview() {
       ["Entscheidungssituation", "Eigentümer", "Berechtigung angegeben"],
     ],
     [
-      ["Jahresverbrauch", "620.000 kWh", "Synthetischer Beispielwert"],
+      ["Jahresverbrauch", "620.000 kWh", "Beispielwert"],
       ["Projektziel", "Eigenverbrauch steigern", "Auswahl im Standortcheck"],
       [
         "Ertrag und Wirtschaftlichkeit",
@@ -340,7 +340,7 @@ export function ScorePreview() {
             <span>/100</span>
           </div>
           <h3 className="amber">Hohe Priorität</h3>
-          <p className="meta">Synthetisches UI-Beispiel</p>
+          <p className="meta">Beispielbewertung</p>
           <p className="preview-basis">Vorläufig · enthält Schätzwerte</p>
           <p className="meta">Keine technische Freigabe</p>
         </div>

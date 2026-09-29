@@ -7,15 +7,27 @@ const labels: Record<string, string> = {
   ADDITIONAL_POTENTIAL: "Zusätzliches Erzeugungspotenzial",
   LAST_KNOWN_YIELD: "Letzter spezifischer Jahresertrag",
 };
+const exampleLabels: Record<string, string> = {
+  "Synthetische Jahresabrechnung 2025": "Beispielabrechnung 2025",
+  "Synthetischer Jahreszähler 2025": "Beispielzähler 2025",
+  "Synthetische Jahresszenario-Spanne, keine PVGIS-Abfrage":
+    "Jahresszenario · keine externe Ertragsabfrage",
+  "Synthetischer UI-Prüfdatensatz · DEMO_SOURCE_SOLAR_YIELD": "Ertragsbeispiel",
+  "Eigenständiger synthetischer Jahresenergie-Datensatz. Keine reale Standortbewertung.":
+    "Eigenständiges Jahresenergieprofil zur Veranschaulichung.",
+  "Simulierter Aktualisierungszustand. Keine externe Abfrage; letzter Beispielwert bleibt sichtbar.":
+    "Letzter Beispielwert · Aktualisierung ausstehend.",
+};
+function evidenceLabel(value: string | null) {
+  if (value === null) return null;
+  return Object.hasOwn(exampleLabels, value) ? exampleLabels[value] : value;
+}
 export function EnergyEvidence({ values }: { values: Evidence[] }) {
   if (!values.length) return null;
   const comparison = annualEnergyComparison(values);
   return (
     <div className="energy-evidence">
-      <p>
-        Separates synthetisches Datenbeispiel · kein externer Dienst
-        angeschlossen.
-      </p>
+      <p>Beispiel eines Jahresenergieprofils</p>
       {comparison && (
         <p className="meta">
           Vergleichszeitraum {comparison.period.start} bis{" "}
@@ -69,7 +81,7 @@ export function EnergyEvidence({ values }: { values: Evidence[] }) {
                   {v.interval
                     ? " · Szenariospanne, kein Konfidenzintervall"
                     : ""}{" "}
-                  · {v.sourceRef}
+                  · {evidenceLabel(v.sourceRef)}
                 </small>
                 <small>
                   Stand {v.asOf ? dateDE(v.asOf) : "unbekannt"}
@@ -79,7 +91,7 @@ export function EnergyEvidence({ values }: { values: Evidence[] }) {
                       ? " · Aktualisierung fehlgeschlagen – letzter gültiger Beispielwert"
                       : ""}
                 </small>
-                {v.note && <small>{v.note}</small>}
+                {v.note && <small>{evidenceLabel(v.note)}</small>}
               </dd>
             </div>
           );
