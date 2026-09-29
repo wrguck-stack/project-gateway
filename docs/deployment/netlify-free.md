@@ -10,13 +10,17 @@ eingerichtet werden. Die vorherige Render-Vorlage ist nicht das gewählte Ziel.
 - Dashboard: https://app.netlify.com/projects/project-gateway-wrguck
 - Site-ID: `28b65faa-2f4c-4d99-ae3c-405f4a756885`, Team `wrguck-stack`.
 - Veröffentlicht aus `wrguck-stack/project-gateway`, Branch
-  `feat/homepage-professional-pass`, Anwendungsstand `4060882`.
+  `feat/homepage-professional-pass`, aktueller Anwendungsstand `6ec397b`.
 - Offizielle Kontoanmeldung vom Nutzer freigegeben; manueller Build und Deploy
   mit Netlify CLI 27.10.2. **Keine GitHub-CD-Verknüpfung eingerichtet.**
 - Produktion öffentlich, Vorschauen mit Netlify-Anmeldung geschützt
   (`sso_login=true`, `sso_login_context=non_production`).
 - Free-Tarif mit 300 Credits und deaktivierter automatischer Aufladung im Konto
   bestätigt; kein kostenpflichtiger Testtarif und keine zusätzliche Datenbank.
+- Schwebendes Netlify-Badge über `built_with_badge_enabled=false` deaktiviert;
+  stattdessen normaler „Powered by Netlify“-Link im vorhandenen Seitenfooter.
+  Die Änderung ist auf Free ohne Upgrade möglich. Aktueller Deploy:
+  `6abc187d69359544437e624c`; [Prüfung der Produktansicht](../qa/PRESENTATION-2026-09-29.md).
 
 Die eingecheckte `netlify.toml` legt Node 24.19.0, Tests, Build, Typecheck und
 das Publish-Verzeichnis `.next` fest. Der automatisch installierte Next.js-Adapter
