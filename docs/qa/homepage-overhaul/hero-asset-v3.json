@@ -1,0 +1,46 @@
+{
+  "generationDate": "2026-09-29",
+  "generationTool": "Built-in ImageGen",
+  "prompt": "Use case: photorealistic-natural. Asset type: a separate, clean website hero photograph, no interface. Input image is only a composition and lighting reference: reproduce the warehouse aerial scene in the right side of the supplied website mockup as a standalone photograph. Create ONE wide landscape image, approximately 1920x1200 pixels. Oblique drone view of a credible European industrial logistics park in warm late-afternoon sunlight. The main large light-grey-roofed warehouse fills the right two thirds with long realistic loading-dock facade, roof skylights, vents, a few trucks and surrounding trees. Roof plane and facade geometry must be physically coherent. Keep the main roof and front corner fully readable. Trace a very thin restrained amber line exactly along the main warehouse's roof perimeter, like the reference, not luminous, no glow. The left third to half has quieter, less busy contextual trees and distant warehouse surroundings so website developers can overlay a dark gradient and text later. Use natural photographic surface texture and believable shadows. This is the original photographic asset, NOT a screenshot: completely remove all UI, all headings, letters, numbers, logo, caption, text, inputs, buttons, nav bars, yellow horizontal lines, section dividers, dark website panels and masks. No hard stepped mask, no vignette, no artificial blackout; continuous photograph edge to edge. No graph, labels, metrics or invented analytical overlays beyond the single subtle roof perimeter line. Preserve the selected mockup's cinematic but believable warm sunlight and precise architectural industrial character.",
+  "transparentBackground": false,
+  "disclaimer": "KI-generierte Illustration eines fiktiven Standorts; kein Foto eines identifizierten oder analysierten Standorts. Die Kontur ist illustrative Gestaltung und kein Messergebnis.",
+  "generatedOriginal": "/workspace/scratch/573202a10952/generated_images/exec-84a667f8-f3bb-40ab-9a4b-7a5abf21d658.png",
+  "output": {
+    "path": "public/atlas/gateway-industrial-hero-v3.webp",
+    "width": 1586,
+    "height": 992,
+    "sizeBytes": 415232,
+    "format": "WebP"
+  },
+  "conversion": {
+    "tool": "Pillow",
+    "format": "WebP",
+    "quality": 86,
+    "method": 6,
+    "resized": false,
+    "pixelEditing": false,
+    "originalPreserved": true
+  },
+  "reference": {
+    "path": "docs/qa/homepage-overhaul/hero-editorial-reference.webp",
+    "originalPath": "/workspace/scratch/573202a10952/generated_images/exec-f1efa110-5e49-4aeb-88a2-a3701abc2412.png",
+    "role": "User-selected refined visual mockup; composition and lighting reference",
+    "width": 1486,
+    "height": 1059,
+    "sizeBytes": 245640,
+    "conversion": {
+      "tool": "Pillow",
+      "format": "WebP",
+      "quality": 90,
+      "method": 6,
+      "resized": false,
+      "pixelEditing": false,
+      "originalPreserved": true
+    }
+  },
+  "inspection": {
+    "assetVisuallyInspected": true,
+    "implementedPageVisuallyCompared": false,
+    "note": "Standalone asset checked for composition, UI/text absence and continuous image surface. This provenance does not claim browser validation or visual comparison of the implemented page."
+  }
+}

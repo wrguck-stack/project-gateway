@@ -6,7 +6,7 @@ Next.js 16 / React 19 / TypeScript strict / Tailwind CSS 4. IBM Plex Sans Conden
 
 Use Node.js 24 LTS and npm. The current homepage implementation is on branch
 `feat/homepage-professional-pass`; `work` and `main` contain older revisions.
-See the [current project status](docs/qa/STATUS-2026-09-28.md) for the verified baseline,
+See the [current project status](docs/qa/STATUS-2026-09-29.md) for the verified baseline,
 checks and next steps. From the current implementation branch:
 
 ```sh
@@ -19,6 +19,12 @@ The checked-in `gateway.config.json` explicitly selects `demo`. `APP_MODE=demo` 
 Open `http://localhost:3000`. The public path needs no account. Start with a manually entered location, or select one of the clearly synthetic demo addresses. `/beispiel` explains the nine-factor 82-point example. `/partner/login` opens an explicitly simulated partner session.
 
 ## Homepage revision
+
+The approved editorial hero now uses the three-line “Ihre Fläche. Mehr
+Perspektive.” headline and a separate warehouse image with a soft photo-to-canvas
+transition. Inputs, labels, navigation and copy remain real HTML. Mobile places
+the entry form before the imagery. The new layout is implemented and builds,
+but its current browser/design verification is blocked; see [design QA](design-qa.md).
 
 The homepage now introduces the concrete output before the longer process explanation: a project dossier with known facts, sources and missing evidence. Its object, energy and next-step tabs work with the keyboard. The embedded check is editable and updates an explicitly unsaved example summary. It does not create a project or change the illustrative score.
 

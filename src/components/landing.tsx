@@ -23,6 +23,7 @@ import {
 } from "./landing-content";
 import type { Project } from "@/domain/model";
 import "./landing.css";
+import "./landing-hero.css";
 
 const faq = [
   [
@@ -338,83 +339,83 @@ export function Landing({ mode }: { mode: string }) {
     <>
       <Header mode={mode} />
       <main id="main" className="landing-page">
-        <section className="hero wrap" id="standort-start">
-          <div className="hero-copy">
-            <p className="overline hero-overline">
-              GEWERBEIMMOBILIEN / ENERGIEPROJEKTE
-            </p>
-            <h1>
-              Ihre Fläche.
-              <br />
-              Ein klarer Weg zum Energieprojekt.
-            </h1>
-            <p className="lead">
-              Bringen Sie Dach, Verbrauch und Unterlagen in eine strukturierte
-              Projektakte. Erkennen Sie offene Fragen und bereiten Sie die
-              fachliche Prüfung vor.
-            </p>
-            {selectedTitle && (
-              <div className="selected-intent" role="status">
-                <span>
-                  <Checkmark size={20} aria-hidden />
-                  {selectedTitle} ausgewählt
-                </span>
-                <button
-                  type="button"
-                  className="text-button"
-                  onClick={() => setIntent(undefined)}
-                >
-                  Auswahl aufheben
-                </button>
-              </div>
-            )}
-            {entry("hero")}
-            <div className="hero-secondary">
-              <Link href="/beispiel" className="text-link">
-                Beispiel-Projektakte ansehen{" "}
-                <ArrowRight size={20} aria-hidden />
-              </Link>
-              <p className="meta">
-                Ohne Pflichtkonto · Unbekannte Angaben sind möglich
+        <section className="hero editorial-hero" id="standort-start">
+          <div className="wrap editorial-hero-content">
+            <div className="hero-copy">
+              <p className="overline hero-overline">
+                GEWERBEIMMOBILIEN / ENERGIEPROJEKTE
               </p>
-            </div>
-            {draft && (
-              <p className="draft-return">
-                <Link href={`/standortcheck/${draft.id}/1`}>
-                  Entwurf fortsetzen
+              <h1>
+                <span>Ihre Fläche.</span> <span>Mehr</span>{" "}
+                <span className="hero-accent">Perspektive.</span>
+              </h1>
+              <p className="lead">
+                Von der ersten Idee zur strukturierten Projektakte.
+                <br /> Standort erfassen. Offene Fragen erkennen. Nächste
+                Schritte vorbereiten.
+              </p>
+              {selectedTitle && (
+                <div className="selected-intent" role="status">
+                  <span>
+                    <Checkmark size={20} aria-hidden />
+                    {selectedTitle} ausgewählt
+                  </span>
+                  <button
+                    type="button"
+                    className="text-button"
+                    onClick={() => setIntent(undefined)}
+                  >
+                    Auswahl aufheben
+                  </button>
+                </div>
+              )}
+              {entry("hero")}
+              <div className="hero-secondary">
+                <Link href="/beispiel" className="text-link">
+                  Beispiel-Projektakte ansehen{" "}
+                  <ArrowRight size={20} aria-hidden />
                 </Link>
-                <button
-                  className="text-button"
-                  onClick={() => {
-                    setDraft(null);
-                    setAddress("");
-                    setIntent(undefined);
-                    try {
-                      sessionStorage.removeItem("gateway-draft");
-                    } catch {}
-                  }}
-                >
-                  Neuen Standort beginnen
-                </button>
-              </p>
-            )}
+                <p className="meta">
+                  Ohne Pflichtkonto · Unbekannte Angaben sind möglich
+                </p>
+              </div>
+              {draft && (
+                <p className="draft-return">
+                  <Link href={`/standortcheck/${draft.id}/1`}>
+                    Entwurf fortsetzen
+                  </Link>
+                  <button
+                    className="text-button"
+                    onClick={() => {
+                      setDraft(null);
+                      setAddress("");
+                      setIntent(undefined);
+                      try {
+                        sessionStorage.removeItem("gateway-draft");
+                      } catch {}
+                    }}
+                  >
+                    Neuen Standort beginnen
+                  </button>
+                </p>
+              )}
+            </div>
           </div>
           <figure className="landing-aerial hero-site">
             <img
-              src="/atlas/gateway-industrial-hero-v2.webp"
-              width={1254}
-              height={1254}
-              alt="Illustrative Luftansicht einer Gewerbehalle mit großzügigen Dachflächen und Ladehof."
+              src="/atlas/gateway-industrial-hero-v3.webp"
+              width={1586}
+              height={992}
+              alt="Illustrative Luftansicht einer Gewerbehalle im Abendlicht; eine Amberlinie hebt das Beispieldach hervor."
               fetchPriority="high"
             />
             <figcaption>
-              <span className="mono">FLÄCHE. SUBSTANZ. PERSPEKTIVE.</span>
               <span>
                 KI-generierte Illustration · kein analysierter Standort
               </span>
             </figcaption>
           </figure>
-          <nav className="hero-stages" aria-label="Der Weg zum Projekt">
+          <nav className="hero-stages wrap" aria-label="Der Weg zum Projekt">
             <a href="#standort-start">
               <span className="mono">01</span> Standort erfassen
             </a>
