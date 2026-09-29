@@ -13,7 +13,6 @@ export function Brand() {
 }
 export function Header({
   partner = false,
-  mode = "demo",
 }: {
   partner?: boolean;
   mode?: string;
@@ -23,7 +22,7 @@ export function Header({
     <>
       <Link href="/partner/projekte">Projekte</Link>
       <Link href="/partner/pipeline">Pipeline</Link>
-      <span className="muted">Gateway Demopartner</span>
+      <span className="muted">Gateway Projektpartner</span>
     </>
   ) : (
     <>
@@ -48,13 +47,6 @@ export function Header({
           <Menu size={24} />
         </button>
       </header>
-      <section className="mode-strip" aria-label="Betriebsmodus">
-        <div className="wrap">
-          {mode === "demo"
-            ? "Interaktive Demo · Beispieldaten und simulierte Projektübergabe"
-            : "LIVE · Integrationen noch nicht konfiguriert"}
-        </div>
-      </section>
       {open && (
         <Modal title="Navigation" onClose={() => setOpen(false)}>
           <nav className="mobile-nav" onClick={() => setOpen(false)}>
@@ -75,9 +67,14 @@ export function Footer() {
         <Link href="/impressum">Impressum</Link>
         <Link href="/partner/login">Partner-Login</Link>
       </nav>
-      <p>
-        Digitale Projektvorqualifizierung. Fachliche Entscheidungen bleiben beim
-        Projektpartner.
+      <p className="footer-note">
+        <span>
+          Digitale Projektvorqualifizierung. Fachliche Entscheidungen bleiben
+          beim Projektpartner.
+        </span>
+        <a className="hosting-credit" href="https://www.netlify.com/">
+          Powered by Netlify
+        </a>
       </p>
     </footer>
   );

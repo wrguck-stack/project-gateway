@@ -144,7 +144,7 @@ export function SiteContext({
         <>
           <SiteSchematic />
           <div className="site-caption">
-            <span className="overline">DEMO / OBJEKTKONTEXT</span>
+            <span className="overline">OBJEKTKONTEXT</span>
             <strong>Eine Fläche. Viele Möglichkeiten.</strong>
             <small>Schematischer Gewerbestandort · keine Standortanalyse</small>
           </div>
@@ -167,7 +167,7 @@ export function SiteContext({
             {address}
             <small>
               {synthetic
-                ? "Synthetischer Demo-Standort"
+                ? "Beispielstandort"
                 : "Vom Nutzer angegeben · geografisch ungeprüft"}
             </small>
           </span>

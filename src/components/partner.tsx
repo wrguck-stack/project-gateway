@@ -23,6 +23,7 @@ import {
   transitionAllowed,
 } from "@/domain/rules";
 import { api, ApiError } from "./client-api";
+import { activityLabel } from "./presentation";
 import {
   Button,
   Checks,
@@ -40,6 +41,7 @@ import {
   History,
   ScoreSummary,
   SiteDetails,
+  findingLabel,
 } from "./project-details";
 export function PartnerLogin() {
   const [busy, setBusy] = useState(false);
@@ -54,10 +56,10 @@ export function PartnerLogin() {
         Entscheidung dokumentieren.
       </p>
       <div className="login-panel">
-        <h2>Gateway Demopartner</h2>
+        <h2>Gateway Projektpartner</h2>
         <p>
-          Offen zugänglicher Demo-Arbeitsplatz mit synthetischen Projekten. Die
-          Sitzung simuliert die Partnerrolle; es ist keine produktive Anmeldung.
+          Öffnen Sie den Arbeitsbereich mit Beispielprojekten. Hier können Sie
+          Projektakten sichten und Bearbeitungsschritte dokumentieren.
         </p>
         <ErrorNotice message={error} />
         <Button
@@ -73,7 +75,7 @@ export function PartnerLogin() {
             }
           }}
         >
-          Demo-Arbeitsplatz öffnen
+          Arbeitsbereich öffnen
         </Button>
       </div>
     </main>
@@ -266,7 +268,7 @@ export function Workspace({ initial }: { initial: Project[] }) {
       <div className="work-meta">
         <span>Nächste Aktion bestimmt die Reihenfolge.</span>
         <span>
-          {projects.length} freigegebene Demo-Projekte · Stand {dateDE(asOf)}
+          {projects.length} freigegebene Projekte · Stand {dateDE(asOf)}
         </span>
       </div>
       <ErrorNotice message={error} />
@@ -399,7 +401,7 @@ export function Workspace({ initial }: { initial: Project[] }) {
                             ? "Dienstfehler"
                             : p.score?.state === "NOT_READY"
                               ? "Nicht bewertbar"
-                              : "Demo-Score"}
+                              : "Vorläufige Bewertung"}
                     </small>
                   </div>
                 </article>
@@ -561,7 +563,7 @@ export function Workspace({ initial }: { initial: Project[] }) {
             </div>
             <p className="meta">
               Fläche, PV-Leistung und Speicherkapazität werden getrennt
-              gefiltert. Im Demo-Bestand ist nur Fläche belegt.
+              gefiltert. Im vorhandenen Bestand ist nur Fläche belegt.
             </p>
             <div className="actions">
               <Button type="submit">Filter anwenden</Button>
@@ -649,7 +651,9 @@ export function Dossier({
             <p>{p.answers.description || "Keine ergänzende Beschreibung."}</p>
             <p>
               Kontakt: {p.contact?.firstName} {p.contact?.lastName} ·{" "}
-              {p.contact?.organization}
+              {p.contact?.organization === "Demo Immobilien GmbH · synthetisch"
+                ? "Beispiel Immobilien GmbH"
+                : p.contact?.organization}
             </p>
             <p>{p.contact?.email}</p>
           </section>
@@ -661,7 +665,10 @@ export function Dossier({
               {p.infoRequests.map((r) => (
                 <div key={r.id}>
                   <h3>{r.message}</h3>
-                  <p>An {r.recipient} · Übermittlung simuliert</p>
+                  <p>
+                    Kontakt: {r.recipient} · Rückfrage gespeichert, nicht per
+                    E-Mail versandt
+                  </p>
                   <ul>
                     {r.items.map((i) => (
                       <li key={i}>
@@ -688,7 +695,7 @@ export function Dossier({
             </p>
             <Button onClick={() => setDecision(true)}>Entscheidung</Button>
             <p className="meta">
-              Demo-Partnerkontext · keine echten Übermittlungen
+              Entscheidungen werden in der Projektakte dokumentiert.
             </p>
           </aside>
         )}
@@ -791,7 +798,7 @@ export function DecisionDialog({
       );
       onUpdate(result);
       setP(result);
-      setSuccess(result.events[0].action);
+      setSuccess(activityLabel(result.events[0].action));
       setAction(null);
     } catch (e) {
       setError(readableError(e));
@@ -831,7 +838,7 @@ export function DecisionDialog({
       <ErrorNotice message={error} />
       {success && (
         <p role="status" className="notice">
-          {success}. Im Demo-Speicher bestätigt.
+          {success}. In der Projektakte gespeichert.
         </p>
       )}
       {!action ? (
@@ -874,11 +881,10 @@ export function DecisionDialog({
               </p>
               <Notice>
                 Die Übernahme ist kein Vertrag und keine garantierte Umsetzung.
-                Diese Aktion wird lokal simuliert.
               </Notice>
               {p.blockers.map((b) => (
                 <Notice critical key={b}>
-                  {b}
+                  {findingLabel(b)}
                 </Notice>
               ))}
             </>
@@ -892,7 +898,7 @@ export function DecisionDialog({
                 options={["Jahresverbrauch", "Berechtigung", ...categories]}
               />
               <Field
-                label="Tatsächlicher Empfänger im Demo-Projekt"
+                label="Projektkontakt"
                 value={p.contact?.email ?? ""}
                 readOnly
               />
@@ -903,8 +909,8 @@ export function DecisionDialog({
                 onChange={(e) => setDue(e.target.value)}
               />
               <p>
-                Der Versand wird simuliert und im Verlauf ausdrücklich so
-                gekennzeichnet.
+                Die Rückfrage wird in der Projektakte gespeichert. Eine E-Mail
+                wird nicht versandt.
               </p>
             </>
           )}
@@ -976,7 +982,7 @@ export function DecisionDialog({
                   checked={confirmed}
                   onChange={(e) => setConfirmed(e.target.checked)}
                 />
-                Ich bestätige den synthetischen Demo-Meilenstein ausdrücklich.
+                Ich bestätige die Dokumentation dieses Meilensteins.
               </label>
             </>
           )}
@@ -1013,7 +1019,7 @@ export function DecisionDialog({
                 : action === "reject"
                   ? "Projekt ablehnen"
                   : action === "request-info"
-                    ? "Anfrage senden"
+                    ? "Rückfrage speichern"
                     : "Aktion bestätigen"}
             </Button>
             <Button
@@ -1069,7 +1075,7 @@ export function PipelineView({ projects }: { projects: Project[] }) {
       <h1>Projekte im Prozess.</h1>
       <p className="lead">Bestand und offene Arbeit auf einen Blick.</p>
       <p className="meta">
-        {projects.length} freigegebene Demo-Projekte · Stand {dateDE(asOf)} ·
+        {projects.length} freigegebene Projekte · Stand {dateDE(asOf)} ·
         aktueller Bestand, keine Durchsatzmessung
       </p>
       <table className="pipeline-table">
@@ -1130,8 +1136,8 @@ export function PipelineView({ projects }: { projects: Project[] }) {
       </table>
       <p className="meta">
         Median der bisherigen Aufenthaltsdauer aktueller Fälle. Terminale Stufen
-        akkumulieren keine weitere Liegezeit. Überfälligkeit setzt eine echte
-        Fälligkeit in den Demo-Daten voraus.
+        akkumulieren keine weitere Liegezeit. Überfälligkeit setzt eine
+        hinterlegte Fälligkeit voraus.
       </p>
     </main>
   );

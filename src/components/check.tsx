@@ -649,7 +649,7 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
                 : uploadsBlockNavigation
                   ? "Bitte Dateien abschließen, entfernen oder ausdrücklich auslassen."
                   : JSON.stringify(a) === JSON.stringify(project.answers)
-                    ? "Im Demo-Speicher gespeichert"
+                    ? "Gespeichert"
                     : "Änderungen vorhanden · beim Weitergehen speichern"}
             </p>
             {error && (

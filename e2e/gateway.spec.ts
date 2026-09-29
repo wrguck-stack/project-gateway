@@ -47,7 +47,7 @@ async function fixture(request: APIRequestContext, overrides = {}) {
 }
 async function partnerLogin(page: Page) {
   await page.goto("/partner/login");
-  await page.getByRole("button", { name: "Demo-Arbeitsplatz öffnen" }).click();
+  await page.getByRole("button", { name: "Arbeitsbereich öffnen" }).click();
   await expect(page).toHaveURL(/partner\/projekte/);
 }
 async function screenshot(page: Page, name: string, fullPage = true) {
@@ -189,7 +189,7 @@ for (const width of [1440, 390]) {
         .click();
       await expect(
         page.getByRole("heading", {
-          name: "Übermittlung simuliert",
+          name: "Ihre Projektanfrage ist gespeichert.",
           exact: true,
         }),
       ).toBeVisible();
@@ -311,9 +311,9 @@ test("partner request info, acceptance, OTHER rejection, conflict and reopening"
     .getByLabel("Nachricht an Projektkontakt")
     .fill("Bitte den zeitlich zugeordneten Lastgang ergänzen.");
   await page
-    .getByRole("button", { name: "Anfrage senden", exact: true })
+    .getByRole("button", { name: "Rückfrage speichern", exact: true })
     .click();
-  await expect(page.getByRole("status")).toContainText("Rückfrage simuliert");
+  await expect(page.getByRole("status")).toContainText("Rückfrage gespeichert");
   await page.getByRole("button", { name: "Schließen", exact: true }).click();
   await expect(
     page.getByText("Lastgang · Antwort offen", { exact: true }),
@@ -329,7 +329,9 @@ test("partner request info, acceptance, OTHER rejection, conflict and reopening"
   await page
     .getByRole("button", { name: "Übernahme bestätigen", exact: true })
     .click();
-  await expect(page.getByRole("status")).toContainText("Übernahme simuliert");
+  await expect(page.getByRole("status")).toContainText(
+    "Übernahme dokumentiert",
+  );
   await page.getByRole("button", { name: "Schließen", exact: true }).click();
   await page.goto("/partner/projekte/SNAPSHOT-QUALIFIED-006");
   await page
@@ -346,7 +348,9 @@ test("partner request info, acceptance, OTHER rejection, conflict and reopening"
   await page
     .getByRole("button", { name: "Projekt ablehnen", exact: true })
     .click();
-  await expect(page.getByRole("status")).toContainText("Ablehnung simuliert");
+  await expect(page.getByRole("status")).toContainText(
+    "Ablehnung dokumentiert",
+  );
   await page
     .getByRole("button", { name: "Projekt wiederaufnehmen", exact: true })
     .click();
@@ -391,7 +395,9 @@ test("partner request info, acceptance, OTHER rejection, conflict and reopening"
   await page
     .getByRole("button", { name: "Übernahme bestätigen", exact: true })
     .click();
-  await expect(page.getByRole("status")).toContainText("Übernahme simuliert");
+  await expect(page.getByRole("status")).toContainText(
+    "Übernahme dokumentiert",
+  );
 });
 test("six result score states and blocked high score render as distinct states", async ({
   page,

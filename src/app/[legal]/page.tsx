@@ -1,30 +1,30 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header, Footer } from "@/components/shell";
-import { appMode, operatorContact } from "@/server/config";
+import { operatorContact } from "@/server/config";
 
 export const dynamic = "force-dynamic";
 const copy: Record<string, { title: string; body: string[] }> = {
   kontakt: {
     title: "Kontakt",
     body: [
-      "Project Gateway befindet sich in einer ausdrücklich gekennzeichneten Demo. Es ist noch keine reale Kontaktadresse eines Betreibers oder Projektpartners konfiguriert.",
-      "Die Demo führt keine externen Kontaktanfragen aus. Projektinformationen können innerhalb der Demo-Strecke erfasst und simuliert eingereicht werden.",
+      "Der persönliche Kontakt zu Project Gateway wird hier ergänzt.",
+      "Sie können bereits Ihren Standort erfassen und eine strukturierte Projektakte zusammenstellen.",
     ],
   },
   datenschutz: {
-    title: "Datenschutzhinweise zur Demo",
+    title: "Datenschutzhinweise",
     body: [
-      "Ihre Eingaben und ausgewählten Dateien werden im lokalen Demo-Speicher dieser Installation abgelegt. Technisch notwendige Sitzungscookies verbinden den Browser mit den zugehörigen Projektentwürfen.",
-      "Der Partnerbereich verwendet einen offen zugänglichen Demo-Kontext. Verwenden Sie hier ausschließlich Testdaten und keine vertraulichen Unterlagen. Es gibt keine Live-Authentifizierung, keine Marketinganalyse und keinen externen E-Mail-Versand.",
-      "Vor einem produktiven Einsatz müssen der verantwortliche Betreiber, Zwecke, Rechtsgrundlagen, Aufbewahrungsfristen, Betroffenenrechte und reale Dienstleister konkret ergänzt und geprüft werden. Diese Seite ist keine freigegebene produktive Datenschutzerklärung.",
+      "Ihre Eingaben und ausgewählten Dateien werden im Speicher dieser Anwendung abgelegt. Technisch notwendige Sitzungscookies verbinden Ihren Browser mit den zugehörigen Projektentwürfen.",
+      "Der Partnerbereich ist derzeit frei zugänglich. Verwenden Sie ausschließlich Beispieldaten und keine vertraulichen Unterlagen. Es findet kein externer E-Mail-Versand statt.",
+      "Angaben zum verantwortlichen Betreiber, zu Verarbeitungszwecken, Rechtsgrundlagen, Aufbewahrungsfristen, Datenschutzrechten und Dienstleistern werden hier ergänzt.",
     ],
   },
   impressum: {
-    title: "Impressum · Demo",
+    title: "Impressum",
     body: [
-      "Project Gateway ist eine Entwicklungs- und Demonstrationsumgebung. Reale Betreiberinformationen sind noch nicht hinterlegt.",
-      "Verantwortlicher Betreiber, ladungsfähige Anschrift, Vertretung und weitere anwendbare Pflichtangaben müssen vor einem öffentlichen Produktivbetrieb ergänzt werden. Es werden keine Unternehmensdaten erfunden.",
+      "Die Betreiberangaben zu Project Gateway werden hier ergänzt.",
+      "Dazu gehören die verantwortliche Gesellschaft, Anschrift, Vertretung und die zugehörigen Register- und Kontaktdaten.",
     ],
   },
 };
@@ -40,7 +40,6 @@ export default async function Page({
   const c = copy[legal];
   if (!c) notFound();
   const operator = operatorContact();
-  const mode = appMode();
   const partnership = (await searchParams).anliegen === "partnerschaft";
   const hasContact = Boolean(operator.email || operator.phone);
   const showOperator = legal === "impressum" && operator.name;
@@ -49,9 +48,9 @@ export default async function Page({
     : "Anfrage zu Project Gateway";
   return (
     <>
-      <Header mode={mode} />
+      <Header />
       <main id="main" className="wrap page legal">
-        <p className="overline">PROJECT GATEWAY / {mode.toUpperCase()}</p>
+        <p className="overline">PROJECT GATEWAY</p>
         <h1>
           {legal === "kontakt" && partnership
             ? "Zusammenarbeit besprechen"
@@ -97,8 +96,9 @@ export default async function Page({
               <section aria-label="Kontaktstatus">
                 <h2>Persönlicher Kontakt folgt</h2>
                 <p>
-                  Für diese Vorschau ist noch kein Ansprechpartner hinterlegt.
-                  Über die Demo werden keine Anfragen an Unternehmen verschickt.
+                  Ein persönlicher Ansprechpartner wird hier ergänzt. Bis dahin
+                  können Sie Ihren Standort und die relevanten Unterlagen
+                  zusammenstellen.
                 </p>
                 <p>
                   Sie können bereits ansehen, wie eine Projektakte aufgebaut ist
@@ -114,7 +114,7 @@ export default async function Page({
             {partnership && (
               <p>
                 <Link className="text-link" href="/partner/login">
-                  Partnerbereich als Demo ansehen →
+                  Partnerbereich ansehen →
                 </Link>
               </p>
             )}
@@ -146,12 +146,6 @@ export default async function Page({
                 <a href={`tel:${operator.phone.replace(/[^\d+]/g, "")}`}>
                   {operator.phone}
                 </a>
-              </p>
-            )}
-            {mode === "demo" && (
-              <p>
-                Diese Installation dient der Demonstration. Projektbewertungen
-                und Partneraktionen sind simuliert.
               </p>
             )}
           </>

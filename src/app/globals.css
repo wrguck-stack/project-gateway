@@ -260,13 +260,6 @@ input:focus-visible {
 .desktop-nav a:hover {
   color: var(--color-accent);
 }
-.mode-strip {
-  border-block: 1px solid var(--color-line);
-  background: var(--color-inset);
-  font-size: 0.875rem;
-  color: var(--color-muted);
-  padding-block: 8px;
-}
 .mobile-menu {
   display: none !important;
 }
@@ -293,6 +286,19 @@ input:focus-visible {
   flex-basis: 100%;
   font-size: 0.875rem;
   color: var(--color-muted);
+}
+.footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.hosting-credit {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-underline-offset: 4px;
 }
 .button {
   min-height: 56px;
@@ -1984,11 +1990,6 @@ dialog p {
   }
   .mobile-menu {
     display: inline-flex !important;
-  }
-  .mode-strip {
-    font-size: 0.75rem;
-    line-height: 1.5;
-    padding-block: 8px;
   }
   .page {
     padding-block: 40px 64px;

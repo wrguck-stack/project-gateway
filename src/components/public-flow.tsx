@@ -17,13 +17,16 @@ import {
   History,
 } from "./project-details";
 import { SiteContext } from "./site-context";
+import { partnerLabel } from "./presentation";
 export function Review({ project }: { project: Project }) {
   const a = project.answers;
   return (
     <main id="main" className="wrap page">
       <p className="overline">STANDORTCHECK / ZUSAMMENFASSUNG</p>
       <h1>Ihre Angaben auf einen Blick.</h1>
-      <p>Prüfen Sie Ihre Angaben, bevor Sie das Demo-Regelmodell starten.</p>
+      <p>
+        Prüfen Sie Ihre Angaben, bevor Sie die Projektqualifizierung starten.
+      </p>
       <div className="review-grid">
         <div>
           {[
@@ -85,8 +88,8 @@ export function Review({ project }: { project: Project }) {
             </section>
           ))}
           <Notice>
-            Die Qualifizierung ordnet Ihre Angaben nach dem synthetischen Modell
-            demo-v1 ein. Sie ersetzt keine technische Planung.
+            Die Qualifizierung ordnet Ihre Angaben vorläufig ein. Die Bewertung
+            ersetzt keine fachliche Prüfung oder technische Planung.
           </Notice>
           <Link
             href={`/standortcheck/${project.id}/analyse`}
@@ -140,7 +143,7 @@ export function Analysis({ initial }: { initial: Project }) {
     <main id="main" className="wrap page">
       <div className="review-grid">
         <section>
-          <p className="overline">PROJEKTQUALIFIZIERUNG / DEMO</p>
+          <p className="overline">PROJEKTQUALIFIZIERUNG</p>
           <h1>Ihre Projektqualifizierung wird erstellt.</h1>
           <p className="lead">
             Wir ordnen die vorhandenen Angaben ein und kennzeichnen offene
@@ -216,7 +219,7 @@ export function Result({
   return (
     <main id="main" className="wrap page result-page">
       <p className="overline">
-        PROJECT GATEWAY / {example ? "SYNTHETISCHES UI-BEISPIEL" : project.id}
+        PROJECT GATEWAY / {example ? "BEISPIELPROJEKT" : project.id}
       </p>
       <h1>Ihre Projektvor&shy;qualifizierung</h1>
       <p className="lead">{project.answers.address}</p>
@@ -234,7 +237,7 @@ export function Result({
                 className="button primary"
                 href={`/projekte/${project.id}/eingereicht`}
               >
-                Übermittlungsbeleg ansehen →
+                Projektbeleg ansehen →
               </Link>
             ) : s?.state === "STALE" || s?.state === "ERROR" ? (
               <Link
@@ -360,12 +363,12 @@ export function Submission({
             <h2>Projekt und Empfänger</h2>
             <p>{project.answers.address}</p>
             <strong>
-              {recipient ||
+              {partnerLabel(recipient) ||
                 "Für dieses Projekt ist noch kein Empfänger hinterlegt."}
             </strong>
             <p>
-              Expliziter Demo-Partnerkontext. Es erfolgt keine echte Übertragung
-              an ein Unternehmen und kein E-Mail-Versand.
+              Die Freigabe wird in Ihrer Projektakte gespeichert. Ein externer
+              Versand an Unternehmen ist derzeit nicht aktiviert.
             </p>
           </div>
           <details className="review-section">
@@ -466,10 +469,10 @@ export function Submission({
                 required
               />
               Ich möchte die angezeigten Projektangaben und ausgewählten
-              Unterlagen an {recipient} zur fachlichen Prüfung übermitteln.
+              Unterlagen für {partnerLabel(recipient)} zur fachlichen Prüfung
+              freigeben.
             </label>
             <p className="meta">
-              In dieser Demo wird die Freigabe lokal simuliert.{" "}
               <Link href="/datenschutz">Datenschutzhinweise</Link>
             </p>
             {!allowed && (
@@ -513,10 +516,11 @@ export function ReceiptView({ project }: { project: Project }) {
     );
   return (
     <main id="main" className="wrap page receipt">
-      <p className="overline">BESTÄTIGTER DEMO-BELEG</p>
-      <h1>Übermittlung simuliert</h1>
+      <p className="overline">PROJEKTBELEG</p>
+      <h1>Ihre Projektanfrage ist gespeichert.</h1>
       <p className="lead">
-        Ihre Projektanfrage wurde im lokalen Demo-Partnerkontext freigegeben.
+        Ihre Angaben und ausgewählten Unterlagen sind im Partnerbereich zur
+        Prüfung hinterlegt.
       </p>
       <dl className="facts">
         <div>
@@ -525,7 +529,7 @@ export function ReceiptView({ project }: { project: Project }) {
         </div>
         <div>
           <dt>Empfänger</dt>
-          <dd>{receipt.recipient}</dd>
+          <dd>{partnerLabel(receipt.recipient)}</dd>
         </div>
         <div>
           <dt>Zeitpunkt</dt>
@@ -547,8 +551,8 @@ export function ReceiptView({ project }: { project: Project }) {
         </div>
       </dl>
       <Notice>
-        Die Demo löst keine echte E-Mail, Partnerübertragung oder Beauftragung
-        aus. Es gibt keine zugesagte Annahme oder Bearbeitungsfrist.
+        Es wurde keine E-Mail oder externe Übertragung ausgelöst. Mit der
+        gespeicherten Anfrage ist noch keine Beauftragung verbunden.
       </Notice>
       <div className="actions">
         <Link
@@ -609,7 +613,9 @@ export function ContactResponses({ project }: { project: Project }) {
             }}
           >
             <h3>{r.message}</h3>
-            <p>An {r.recipient} · Übermittlung simuliert</p>
+            <p>
+              An {partnerLabel(r.recipient)} · In der Projektakte gespeichert
+            </p>
             {r.items.map((item) => (
               <label className="option" key={item}>
                 <input

@@ -7,6 +7,10 @@ Published on Netlify Free on 29 September 2026; use synthetic data only.
 The hosted HTTP acceptance passed, including the exact 20 MB upload/download.
 Current browser and visual acceptance remains blocked; see [design QA](design-qa.md).
 
+The visible interface now uses normal product wording without a global demo
+banner. Integration mode remains explicitly `demo`; saved requests do not send
+external email. See the [presentation update](docs/qa/PRESENTATION-2026-09-29.md).
+
 ## Local setup
 
 Use Node.js 24 LTS and npm. The current homepage implementation is on branch

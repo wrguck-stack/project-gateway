@@ -28,7 +28,7 @@ import "./landing-hero.css";
 const faq = [
   [
     "Was bekomme ich nach dem Standortcheck?",
-    "Eine strukturierte Übersicht Ihrer Angaben, eine vorläufige Einordnung und sichtbar offene Punkte. Das interaktive Beispiel zeigt Ihnen das Ergebnis vorab. In dieser Demo sind Bewertung und Partnerübergabe beispielhaft; es entsteht keine technische Freigabe.",
+    "Eine strukturierte Übersicht Ihrer Angaben, eine vorläufige Einordnung und sichtbar offene Punkte. Das interaktive Beispiel zeigt Ihnen das Ergebnis vorab. Die fachliche Prüfung ist der nächste Schritt.",
   ],
   [
     "Welche Angaben brauche ich?",
@@ -40,11 +40,11 @@ const faq = [
   ],
   [
     "Wird meine Immobilie automatisch analysiert?",
-    "In dieser Demo wird Ihre Adresse manuell erfasst. Es gibt keine automatische Gebäudeerkennung und keine tatsächliche Ertrags- oder Wirtschaftlichkeitsberechnung. Bilder und Beispielwerte sind als solche gekennzeichnet.",
+    "Sie erfassen Ihre Adresse und die Angaben zum Objekt. Gateway strukturiert diese Informationen und zeigt offene Fragen. Die Prüfung von Gebäude, Ertrag und Wirtschaftlichkeit gehört in die anschließende fachliche Planung.",
   ],
   [
     "Wer bekommt meine Unterlagen?",
-    "Vor jeder Freigabe sehen Sie den Empfänger und die ausgewählten Angaben und Dateien. Sie entscheiden ausdrücklich über die Übergabe. In der Demo wird diese nur simuliert; es erfolgt kein externer Versand.",
+    "Sie bestimmen, welche Angaben und Dateien Sie für Ihre Projektanfrage freigeben. Den zugeordneten Partner und den vollständigen Umfang sehen Sie vor dem Abschluss.",
   ],
   [
     "Ist die Einreichung bereits ein Auftrag?",
@@ -198,7 +198,11 @@ export function AddressEntry({
                   onClick={() => choose(s.address)}
                 >
                   <strong>{s.address}</strong>
-                  <small>{s.source}</small>
+                  <small>
+                    {s.source === "Synthetischer Demo-Standort"
+                      ? "Beispielstandort"
+                      : s.source}
+                  </small>
                 </li>
               ))}
             </ul>
@@ -210,10 +214,10 @@ export function AddressEntry({
       </div>
       <small id={`${id}-help`} aria-live="polite">
         {searching
-          ? "Demo-Adressen werden gesucht …"
+          ? "Adressvorschläge werden gesucht …"
           : searchFailed
             ? "Adresssuche nicht erreichbar. Sie können den Standort manuell eingeben."
-            : "Adresse manuell eingeben oder einen gekennzeichneten Demo-Standort wählen."}
+            : "Geben Sie die Adresse oder eine Beschreibung Ihrer Fläche ein."}
       </small>
       {error && (
         <p
@@ -472,7 +476,7 @@ export function Landing({ mode }: { mode: string }) {
               ],
               [
                 "Prüfung vorbereiten",
-                "Sehen Sie Ihre Projektakte durch und entscheiden Sie bewusst über die Übergabe. In dieser Demo wird sie simuliert.",
+                "Sehen Sie Ihre Projektakte durch, wählen Sie die relevanten Unterlagen aus und bereiten Sie die fachliche Prüfung vor.",
               ],
             ].map(([title, text], i) => (
               <article key={title}>
@@ -600,7 +604,7 @@ export function Landing({ mode }: { mode: string }) {
                 Zusammenarbeit besprechen <ArrowRight size={20} aria-hidden />
               </Link>
               <Link className="text-link" href="/partner/login">
-                Partner-Demo öffnen <ArrowRight size={20} aria-hidden />
+                Partnerbereich öffnen <ArrowRight size={20} aria-hidden />
               </Link>
             </div>
           </div>

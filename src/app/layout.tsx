@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s · Project Gateway",
   },
   description:
-    "Gewerbliche Energieprojekte strukturiert erfassen und zur fachlichen Prüfung vorbereiten. Atlas Demo.",
+    "Gewerbliche Energieprojekte strukturiert erfassen und zur fachlichen Prüfung vorbereiten.",
   robots: { index: false, follow: false },
 };
 export default function RootLayout({

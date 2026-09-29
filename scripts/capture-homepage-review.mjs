@@ -170,7 +170,7 @@ try {
       await mainNav("Partner-Login");
       await expect(page).toHaveURL(/\/partner\/login$/);
       await expect(
-        page.getByRole("button", { name: "Demo-Arbeitsplatz öffnen" }),
+        page.getByRole("button", { name: "Arbeitsbereich öffnen" }),
       ).toBeVisible();
       await capture("12-partner-login", page.locator("main"));
     }

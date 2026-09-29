@@ -4,6 +4,25 @@ import { assessFactors, coverage, dateDE, numberDE } from "@/domain/rules";
 import { Notice, ResponsiveDisclosure } from "./ui";
 import { SiteContext } from "./site-context";
 import { EnergyEvidence } from "./energy-evidence";
+import { activityLabel, actorLabel } from "./presentation";
+
+function modelLabel(version: string) {
+  return version === "demo-v1" ? "Beispielmodell v1" : version;
+}
+
+function factorExplanation(explanation: string) {
+  return explanation.replace(
+    /^Synthetische Demo-Regel demo-v1:/,
+    "Beispielbewertung:",
+  );
+}
+
+export function findingLabel(finding: string) {
+  return finding ===
+    "Synthetischer bestätigter Befund: Sanierung vor Installation erforderlich. Quelle: Demo-Fachvermerk 05.09.2026."
+    ? "Beispielbefund: Sanierung vor Installation erforderlich. Quelle: Fachvermerk vom 05.09.2026."
+    : finding;
+}
 export function ScoreSummary({
   project,
   compact = false,
@@ -26,8 +45,7 @@ export function ScoreSummary({
         <>
           <h2>Bewertung derzeit nicht verfügbar.</h2>
           <Notice>
-            Fehler im Demo-Bewertungsdienst. Vorhandene Angaben bleiben
-            erhalten.
+            Fehler im Bewertungsdienst. Vorhandene Angaben bleiben erhalten.
           </Notice>
         </>
       ) : s.state === "SCORING" ? (
@@ -66,9 +84,9 @@ export function ScoreSummary({
       )}
       {s && (
         <p className="meta">
-          Modell {s.modelVersion} · Eingabeversion {s.inputVersion}
+          {modelLabel(s.modelVersion)} · Eingabeversion {s.inputVersion}
           <br />
-          Stand {dateDE(s.calculatedAt)} · Demo-Bewertung
+          Stand {dateDE(s.calculatedAt)} · Vorläufige Bewertung
         </p>
       )}
       <p className="meta">
@@ -77,7 +95,7 @@ export function ScoreSummary({
       {project.blockers.map((b) => (
         <Notice critical key={b}>
           <strong>Bestätigter Blocker</strong>
-          <p>{b}</p>
+          <p>{findingLabel(b)}</p>
         </Notice>
       ))}
       <Notice>
@@ -134,11 +152,14 @@ export function Factors({
                   </strong>
                 </summary>
                 <div className="factor-rule">
-                  <p>{f.explanation}</p>
+                  <p>{factorExplanation(f.explanation)}</p>
                   <p>
                     Regel:{" "}
                     <span className="mono">
-                      {f.ruleId} / {f.ruleVersion}
+                      {f.ruleId === `DEMO_${f.factorId}`
+                        ? f.factorId
+                        : f.ruleId}{" "}
+                      / {modelLabel(f.ruleVersion)}
                     </span>
                   </p>
                   <p>
@@ -177,7 +198,7 @@ export function Factors({
                 {!f.applicable
                   ? "Nicht anwendbar im aktiven Profil"
                   : f.origin === "DERIVED"
-                    ? "Berechnet · synthetisches Demo-Szenario"
+                    ? "Berechnet · Beispielszenario"
                     : f.origin === "USER"
                       ? "Vom Nutzer angegeben"
                       : "Quelle offen"}{" "}
@@ -257,7 +278,7 @@ export function Completeness({ project }: { project: Project }) {
         {c.available.length} von {c.required.length} benötigten Angaben
         vorhanden
       </strong>
-      <small>Anforderungsprofil demo-v1 · {project.answers.areaKind}</small>
+      <small>Anforderungsprofil v1 · {project.answers.areaKind}</small>
       <p>
         {count} von {c.requiredDocuments.length} derzeit benötigten Unterlagen
         technisch verfügbar
@@ -447,9 +468,9 @@ export function History({ project }: { project: Project }) {
       <ol className="history">
         {project.events.map((e) => (
           <li key={e.eventId}>
-            <strong>{e.action}</strong>
+            <strong>{activityLabel(e.action)}</strong>
             <small>
-              {e.actorId} · {dateDE(e.occurredAt)} · Europe/Berlin
+              {actorLabel(e.actorId)} · {dateDE(e.occurredAt)} · Europe/Berlin
             </small>
             <p>
               {e.from} → {e.to} · Eingabeversion {e.inputVersion}
@@ -459,7 +480,12 @@ export function History({ project }: { project: Project }) {
                 {e.visibility === "INTERNAL"
                   ? "Interne Notiz"
                   : "Nachricht an Projektkontakt"}
-                : {e.note}
+                :{" "}
+                {e.actorId === "Demo-Datenimport" &&
+                e.note ===
+                  "Demo-Bestand; keine rekonstruierte echte Projekthistorie."
+                  ? "Beispielbestand ohne vorherige Projekthistorie."
+                  : e.note}
               </p>
             )}
             <details>
@@ -467,14 +493,19 @@ export function History({ project }: { project: Project }) {
               <p>Auftrag {e.requestId}</p>
               <p>
                 Score: {e.scoreSnapshot?.displayScore ?? "Kein Gesamtscore"} ·{" "}
-                {e.scoreSnapshot?.modelVersion ?? "Kein Modell"} ·{" "}
-                {e.scoreSnapshot?.assessmentId}
+                {e.scoreSnapshot
+                  ? modelLabel(e.scoreSnapshot.modelVersion)
+                  : "Kein Modell"}{" "}
+                · {e.scoreSnapshot?.assessmentId}
               </p>
               {e.rejection && (
                 <p>
                   Primärgrund: {e.rejection.primary} · {e.rejection.certainty}
                   <br />
-                  {e.rejection.note}
+                  {e.actorId === "Demo-Datenimport" &&
+                  e.rejection.note === "Synthetisches Ablehnungsbeispiel."
+                    ? "Beispiel einer dokumentierten Ablehnung."
+                    : e.rejection.note}
                 </p>
               )}
               <ul>

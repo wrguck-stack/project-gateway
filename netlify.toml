@@ -1,5 +1,5 @@
 # Use the Netlify Free workspace plan. This file does not select or upgrade a plan.
-# Import feat/homepage-professional-pass as the production branch in Netlify.
+# Deploy feat/homepage-professional-pass with the CLI; GitHub CD is not connected.
 [build]
   command = "NETLIFY=false GATEWAY_STORAGE=local npm test && npm run build && npm run typecheck"
   publish = ".next"

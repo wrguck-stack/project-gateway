@@ -228,13 +228,17 @@ try {
   console.log(
     "Synthetic demo verification: creates a private draft and a 20,000,000-byte file; records remain stored.",
   );
-  stage = "confirm the public demo before creating synthetic data";
+  stage = "confirm the Gateway homepage before creating synthetic data";
   const homepage = await (await request(origin, "/")).text();
   ensure(
-    homepage.includes("Interaktive Demo") &&
-      homepage.includes("simulierte Projektübergabe"),
-    "The homepage does not identify the expected Gateway demo.",
+    homepage.includes("PROJECT GATEWAY") &&
+      homepage.includes("Standort prüfen"),
+    "The homepage does not identify the expected Gateway application.",
   );
+
+  // Presentation copy is independent of the storage/integration mode. Each
+  // newly created session below must still report mode=demo before any draft
+  // or upload can be created by this verifier.
 
   stage = "create synthetic owner sessions and inspect HTTPS cookies";
   const owner = await ownerSession(origin);

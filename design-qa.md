@@ -2,6 +2,12 @@
 
 final result: blocked
 
+Nachträglicher Nutzerauftrag vom 29.09.2026: allgemeine Demo-Auszeichnung aus der
+Oberfläche entfernt und Netlify-Verweis als Footer-Link eingebaut. Der Hero selbst
+bleibt unverändert; der entfernte Banner verändert den vertikalen Einstieg.
+Diese neue Fassung ist ebenfalls noch nicht im Browser visuell abgenommen.
+Details: [Produktansicht](docs/qa/PRESENTATION-2026-09-29.md).
+
 ## Vergleichsgrundlage und Status
 
 - Freigegebene visuelle Vorlage: `docs/qa/homepage-overhaul/hero-editorial-reference.webp`.
