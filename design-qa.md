@@ -25,6 +25,11 @@ nach Aufnahme von `terminal.local` in die dokumentierte Next-Dev-Origin-Liste.
 Es wurde kein anderer Browserweg als vermeintlich gleichwertige Sichtprüfung
 ausgegeben. Weitere unveränderte Startversuche wurden nicht wiederholt.
 
+Ein separater HTTP-Diagnoselauf bestätigte anschließend den Start des
+unveränderten Next-Dev-Kommandos und HTTP 200 mit der neuen Headline. Der
+Testprozess wurde danach beendet. Dieser Nachweis grenzt den Fehler auf die
+verwaltete Vorschau ein; es ist keine Browser- oder Layoutprüfung.
+
 Damit sind Interaktionen und Browser-Konsole in dieser neuen Fassung **nicht
 geprüft**. Unit-Tests und Build ersetzen diese Prüfungen nicht. Die ältere
 Browserabnahme vom 10. September gilt nicht als Freigabe des neuen Layouts.
@@ -42,7 +47,11 @@ Browserabnahme vom 10. September gilt nicht als Freigabe des neuen Layouts.
 ## Code-Review und ausgeführte Prüfungen
 
 - 192 Unit-Tests bestanden; regulärer Produktionsbuild und Typecheck erfolgreich.
-- Keine Änderung an Session-, Draft-, Upload- oder Speicherdiensten.
+- Der Hero verändert keine Session-, Draft- oder Speicherdienste.
+- Im anschließenden Funktionsreview wurde die Check-Navigation während
+  Dateioperationen gesperrt, die Wiederholung unvollständiger Uploads korrigiert
+  und blockierter Browser-Sitzungsspeicher abgefangen. Drei neue Browserfälle
+  sind vorbereitet, aber noch nicht ausgeführt.
 - Formularzustand, Vorschläge, Tastaturbehandlung, Entwurfsfortsetzung,
   Projektartauswahl, Links und Navigation bleiben in den bestehenden Komponenten.
 - Nach Review: explizites Leerzeichen beim mobil ausgeblendeten Zeilenumbruch

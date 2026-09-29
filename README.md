@@ -65,6 +65,12 @@ provide atomic concurrent writes; see the [verification limitations](docs/deploy
 Run a regular `npm run build` before these local checks (not a `NETLIFY=true`
 platform build, whose storage context is deliberately fixed at build time).
 
+Once the owned site is published, `npm run verify:hosted -- https://YOUR-SITE.netlify.app`
+checks HTTPS cookies, owner isolation, a synthetic exact 20 MB upload/download
+and revision conflicts. It leaves private synthetic test data on that explicit
+target and uses its hosting allowance. This prepared check has not yet been run
+against hosting; browser and redeployment acceptance remain separate.
+
 ### Storage and services
 
 `src/server/ports.ts` defines location search, evidence, draft, upload, qualification, submission, partner repository/actions, auth and notification ports. `src/server/services.ts` connects their demo adapters. `APP_MODE=live` fails closed with a clear integration-unavailable error; it never silently uses demo providers.

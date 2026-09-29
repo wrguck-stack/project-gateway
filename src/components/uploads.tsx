@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Upload,
   Document as DocumentIcon,
@@ -63,16 +63,44 @@ type LocalFile = {
 export function UploadList({
   project,
   onChange,
+  disabled = false,
+  onNavigationBlockedChange,
 }: {
   project: Project;
   onChange: (p: Project) => void;
+  disabled?: boolean;
+  onNavigationBlockedChange: (blocked: boolean) => void;
 }) {
   const input = useRef<HTMLInputElement>(null);
+  const busyRef = useRef(false);
   const [local, setLocal] = useState<LocalFile[]>([]);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [omitted, setOmitted] = useState(false);
+  useEffect(() => {
+    onNavigationBlockedChange(busy || (local.length > 0 && !omitted));
+  }, [busy, local.length, omitted, onNavigationBlockedChange]);
+  useEffect(
+    () => () => onNavigationBlockedChange(false),
+    [onNavigationBlockedChange],
+  );
+  function beginOperation() {
+    if (disabled || busyRef.current) return false;
+    busyRef.current = true;
+    setBusy(true);
+    // Lock the parent synchronously before the first network request. Native
+    // form validation alone cannot protect Back or the visited-step buttons.
+    onNavigationBlockedChange(true);
+    return true;
+  }
+  function endOperation() {
+    busyRef.current = false;
+    setBusy(false);
+    // The effect releases navigation only once remaining files were removed,
+    // completed or explicitly omitted, using the latest React state.
+  }
   async function upload(files: File[], retry?: LocalFile) {
+    if (disabled || busyRef.current || files.length === 0) return;
     setError("");
     setOmitted(false);
     if (!retry) {
@@ -99,80 +127,89 @@ export function UploadList({
         ...files.map((file): LocalFile => ({ file, state: "selected" })),
       ]);
     }
-    setBusy(true);
+    if (!beginOperation()) return;
     let current = project;
-    for (const file of files) {
-      let transfer = retry?.transfer;
-      const updateLocal = (changes: Partial<LocalFile>) =>
-        setLocal((list) =>
-          list.map((item) =>
-            item.file === file ? { ...item, ...changes } : item,
-          ),
-        );
-      updateLocal({
-        state: transfer?.finalizing ? "processing" : "uploading",
-        error: undefined,
-      });
-      try {
-        const base = `/api/projects/${current.id}/transfers`;
-        if (!transfer) {
-          const created = await api<Omit<Transfer, "nextIndex" | "finalizing">>(
-            base,
-            "POST",
-            {
+    try {
+      for (const file of files) {
+        let transfer = retry?.transfer;
+        let completing = false;
+        const updateLocal = (changes: Partial<LocalFile>) =>
+          setLocal((list) =>
+            list.map((item) =>
+              item.file === file ? { ...item, ...changes } : item,
+            ),
+          );
+        updateLocal({
+          state: transfer?.finalizing ? "processing" : "uploading",
+          error: undefined,
+        });
+        try {
+          const base = `/api/projects/${current.id}/transfers`;
+          if (!transfer) {
+            const created = await api<
+              Omit<Transfer, "nextIndex" | "finalizing">
+            >(base, "POST", {
               name: file.name,
               size: file.size,
               category: "Sonstiges",
               revision: current.revision,
-            },
-          );
-          transfer = { ...created, nextIndex: 0, finalizing: false };
-          updateLocal({ transfer });
-        }
-        if (!transfer.finalizing) {
-          for (
-            let index = transfer.nextIndex;
-            index < transfer.chunkCount;
-            index++
-          ) {
-            await sendChunk(
-              `${base}/${transfer.id}/${index}`,
-              file.slice(
-                index * transfer.chunkSize,
-                Math.min((index + 1) * transfer.chunkSize, file.size),
-              ),
-            );
-            transfer = { ...transfer, nextIndex: index + 1 };
+            });
+            transfer = { ...created, nextIndex: 0, finalizing: false };
             updateLocal({ transfer });
           }
-          transfer = { ...transfer, finalizing: true };
-          updateLocal({ transfer, state: "processing" });
+          if (!transfer.finalizing) {
+            for (
+              let index = transfer.nextIndex;
+              index < transfer.chunkCount;
+              index++
+            ) {
+              await sendChunk(
+                `${base}/${transfer.id}/${index}`,
+                file.slice(
+                  index * transfer.chunkSize,
+                  Math.min((index + 1) * transfer.chunkSize, file.size),
+                ),
+              );
+              transfer = { ...transfer, nextIndex: index + 1 };
+              updateLocal({ transfer });
+            }
+            transfer = { ...transfer, finalizing: true };
+            updateLocal({ transfer, state: "processing" });
+          }
+          completing = true;
+          current = await api<Project>(
+            `${base}/${transfer.id}/complete`,
+            "POST",
+            {},
+          );
+          onChange(current);
+          setLocal((list) => list.filter((item) => item.file !== file));
+        } catch (error) {
+          // Retain the stable transfer ID after an uncertain response so retrying
+          // reconciles the original finalization without creating a second file.
+          updateLocal({
+            state: "failed",
+            error: readableError(error),
+            transfer:
+              error instanceof ApiError && error.status === 410
+                ? undefined
+                : completing &&
+                    transfer &&
+                    error instanceof ApiError &&
+                    error.status >= 400 &&
+                    error.status < 500
+                  ? { ...transfer, nextIndex: 0, finalizing: false }
+                  : transfer,
+          });
         }
-        current = await api<Project>(
-          `${base}/${transfer.id}/complete`,
-          "POST",
-          {},
-        );
-        onChange(current);
-        setLocal((list) => list.filter((item) => item.file !== file));
-      } catch (error) {
-        // Retain the stable transfer ID after an uncertain response so retrying
-        // reconciles the original finalization without creating a second file.
-        updateLocal({
-          state: "failed",
-          error: readableError(error),
-          transfer:
-            error instanceof ApiError && error.status === 410
-              ? undefined
-              : transfer,
-        });
       }
+    } finally {
+      endOperation();
+      if (input.current) input.current.value = "";
     }
-    setBusy(false);
-    if (input.current) input.current.value = "";
   }
   async function removeLocal(item: LocalFile) {
-    setBusy(true);
+    if (!beginOperation()) return;
     try {
       if (item.transfer)
         await api(
@@ -185,14 +222,14 @@ export function UploadList({
         setLocal((list) => list.filter((entry) => entry !== item));
       else setError(readableError(error));
     } finally {
-      setBusy(false);
+      endOperation();
     }
   }
   async function update(
     documentId: string,
     category: Document["category"] | null,
   ) {
-    setBusy(true);
+    if (!beginOperation()) return;
     setError("");
     try {
       onChange(
@@ -205,7 +242,7 @@ export function UploadList({
     } catch (e) {
       setError(readableError(e));
     } finally {
-      setBusy(false);
+      endOperation();
     }
   }
   return (
@@ -215,7 +252,7 @@ export function UploadList({
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
-          if (!busy) upload(Array.from(e.dataTransfer.files));
+          if (!disabled && !busy) upload(Array.from(e.dataTransfer.files));
         }}
       >
         <Upload size={32} />
@@ -224,7 +261,7 @@ export function UploadList({
           type="button"
           variant="secondary"
           onClick={() => input.current?.click()}
-          disabled={busy}
+          disabled={disabled || busy}
         >
           Datei auswählen
         </Button>
@@ -232,6 +269,7 @@ export function UploadList({
           ref={input}
           type="file"
           multiple
+          disabled={disabled || busy}
           accept=".pdf,.jpg,.jpeg,.png,.csv,.xlsx"
           className="sr-only"
           tabIndex={-1}
@@ -267,7 +305,7 @@ export function UploadList({
                     onChange={(e) =>
                       update(d.id, e.target.value as Document["category"])
                     }
-                    disabled={busy}
+                    disabled={disabled || busy}
                   >
                     {categories.map((c) => (
                       <option key={c}>{c}</option>
@@ -278,7 +316,7 @@ export function UploadList({
               <button
                 type="button"
                 className="icon-button"
-                disabled={busy}
+                disabled={disabled || busy}
                 aria-label={`${d.name} entfernen`}
                 onClick={() => update(d.id, null)}
               >
@@ -309,6 +347,7 @@ export function UploadList({
                 <Button
                   type="button"
                   variant="secondary"
+                  disabled={disabled}
                   onClick={() => upload([l.file], l)}
                 >
                   Erneut hochladen
@@ -316,6 +355,7 @@ export function UploadList({
                 <Button
                   type="button"
                   variant="text"
+                  disabled={disabled}
                   onClick={() => removeLocal(l)}
                 >
                   Entfernen
@@ -331,7 +371,7 @@ export function UploadList({
             type="checkbox"
             required
             checked={omitted && !busy}
-            disabled={busy}
+            disabled={disabled || busy}
             onChange={(e) => setOmitted(e.target.checked)}
           />
           Ohne die nicht verfügbaren Dateien fortfahren.

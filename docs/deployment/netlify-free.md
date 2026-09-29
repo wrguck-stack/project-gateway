@@ -27,6 +27,12 @@ Diese Einstellungen müssen im Konto geprüft werden. Ein GitHub-Zugriff für
 Netlify kann eine separate Benutzerfreigabe erfordern. Die Demo-Partneranmeldung
 ist weiterhin simuliert; ausschließlich Testdaten verwenden.
 
+Die am 29.09.2026 geprüfte Option `netlify deploy --allow-anonymous` ist für
+dieses Projekt ungeeignet: Die CLI erlaubt dabei keine Serverless- oder
+Edge-Funktionen. Ohne bestätigte Kontoanmeldung kann diese Next.js-Anwendung
+deshalb nicht mit ihrem privaten Speicher veröffentlicht werden. Ein statischer
+Export wäre keine funktional gleichwertige Bereitstellung.
+
 ## Kosten und Grenzen
 
 Laut den am 28.09.2026 geprüften offiziellen Netlify-Angaben kostet Free 0 USD
@@ -136,6 +142,25 @@ Nach der Bereitstellung: tatsächlichen Commit, Free-Tarif, HTTPS-Cookies,
 Upload/Download bis zur 20-MB-Grenze, Daten über erneutes Deployment hinweg,
 parallele Änderungen und die Browseroberfläche prüfen. Erst dann gilt die
 gehostete Demo als abgenommen.
+
+Für die HTTP-Prüfung ist ein gezielter Befehl vorbereitet:
+
+```sh
+npm run verify:hosted -- https://DIE-EIGENE-SITE.netlify.app
+```
+
+Er akzeptiert nur eine ausdrücklich angegebene Netlify-HTTPS-Adresse ohne
+Zugangsdaten, Pfad oder Weiterleitungen. Nach der Demo-Prüfung legt er zwei
+synthetische Eigentümersitzungen, einen Entwurf und eine exakt 20.000.000 Byte
+große CSV-Datei an. Er prüft Cookieattribute, Zugriffstrennung, Speichern,
+Abschnittsübertragung, wiederholbaren Abschluss, bytegleichen Streaming-Download
+und Ablehnung einer veralteten Revision. Die Testdaten bleiben privat auf der
+Site gespeichert; der Lauf verbraucht deren normales Hostingkontingent. Cookies
+und Zugangsdaten werden nicht ausgegeben. Es gibt keine automatische Zielsuche.
+
+Der Befehl ist am 29.09.2026 syntaktisch geprüft, aber noch nicht gegen eine
+veröffentlichte Site ausgeführt. Browserprüfung, konkurrierende Schreibzugriffe
+und Persistenz über ein erneutes Deployment sind separate offene Prüfschritte.
 
 ## Offizielle Referenzen
 

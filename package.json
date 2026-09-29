@@ -17,6 +17,7 @@
     "test:e2e": "playwright test",
     "verify:preview": "node scripts/verify-preview.mjs",
     "verify:netlify": "node scripts/verify-netlify.mjs",
+    "verify:hosted": "node scripts/verify-hosted.mjs",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
   },

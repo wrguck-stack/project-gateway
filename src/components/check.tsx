@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -101,6 +101,13 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
   const [project, setProject] = useState(initial);
   const [a, setA] = useState(initial.answers);
   const [pending, setPending] = useState(false);
+  const pendingRef = useRef(false);
+  const [uploadsBlockNavigation, setUploadsBlockNavigation] = useState(false);
+  const uploadsBlockNavigationRef = useRef(false);
+  const onUploadNavigationChange = useCallback((blocked: boolean) => {
+    uploadsBlockNavigationRef.current = blocked;
+    setUploadsBlockNavigation(blocked);
+  }, []);
   const [error, setError] = useState("");
   const router = useRouter();
   const params = useSearchParams();
@@ -110,7 +117,9 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
     setA(initial.answers);
     setError("");
     setPending(false);
-  }, [initial, step]);
+    pendingRef.current = false;
+    onUploadNavigationChange(false);
+  }, [initial, step, onUploadNavigationChange]);
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
     setA((old) => ({ ...old, [key]: value }));
   const opts = (
@@ -146,6 +155,8 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
     />
   );
   async function save(target?: string) {
+    if (pendingRef.current || uploadsBlockNavigationRef.current) return;
+    pendingRef.current = true;
     setPending(true);
     setError("");
     try {
@@ -156,10 +167,15 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
         completeStep: !target,
       });
       setProject(updated);
-      sessionStorage.setItem(
-        "gateway-draft",
-        JSON.stringify({ id: updated.id, address: updated.answers.address }),
-      );
+      try {
+        sessionStorage.setItem(
+          "gateway-draft",
+          JSON.stringify({ id: updated.id, address: updated.answers.address }),
+        );
+      } catch {
+        // The server has saved the draft; unavailable browser storage must
+        // not prevent continuing through its authenticated URL.
+      }
       router.push(
         target ??
           `/standortcheck/${project.id}/${review || step === 10 ? "zusammenfassung" : step + 1}`,
@@ -167,6 +183,7 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
     } catch (e) {
       setError(readableError(e));
       setPending(false);
+      pendingRef.current = false;
     }
   }
   const chapter = step === 1 ? 0 : step <= 4 ? 1 : step <= 8 ? 2 : 3;
@@ -190,7 +207,11 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
           <nav aria-label="Besuchte Schritte">
             {questions.map((q, i) => (
               <button
-                disabled={i + 1 > project.maxVisited || pending}
+                disabled={
+                  i + 1 > project.maxVisited ||
+                  pending ||
+                  uploadsBlockNavigation
+                }
                 key={q}
                 onClick={() => save(`/standortcheck/${project.id}/${i + 1}`)}
                 aria-current={i + 1 === step ? "step" : undefined}
@@ -578,6 +599,8 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
             {step === 10 && (
               <UploadList
                 project={project}
+                disabled={pending}
+                onNavigationBlockedChange={onUploadNavigationChange}
                 onChange={(p) => {
                   setProject(p);
                   setA(p.answers);
@@ -590,6 +613,7 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
                   type="button"
                   variant="secondary"
                   pending={pending}
+                  disabled={uploadsBlockNavigation}
                   onClick={() =>
                     save(`/standortcheck/${project.id}/${step - 1}`)
                   }
@@ -601,7 +625,11 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
                   Zur Startseite
                 </Link>
               )}
-              <Button type="submit" pending={pending}>
+              <Button
+                type="submit"
+                pending={pending}
+                disabled={uploadsBlockNavigation}
+              >
                 {review
                   ? "Zur Zusammenfassung"
                   : step === 1
@@ -618,9 +646,11 @@ export function Check({ initial, step }: { initial: Project; step: number }) {
             <p className="save-state">
               {pending
                 ? "Wird gespeichert …"
-                : JSON.stringify(a) === JSON.stringify(project.answers)
-                  ? "Im lokalen Demo-Speicher gespeichert"
-                  : "Änderungen vorhanden · beim Weitergehen speichern"}
+                : uploadsBlockNavigation
+                  ? "Bitte Dateien abschließen, entfernen oder ausdrücklich auslassen."
+                  : JSON.stringify(a) === JSON.stringify(project.answers)
+                    ? "Im Demo-Speicher gespeichert"
+                    : "Änderungen vorhanden · beim Weitergehen speichern"}
             </p>
             {error && (
               <Button
