@@ -10,6 +10,13 @@
   APP_MODE = "demo"
   NEXT_TELEMETRY_DISABLED = "1"
 
+[context.production.environment]
+  # Netlify CLI 27.10.2 builds its default prime URL from the raw Git branch.
+  # A slash in feat/homepage-professional-pass becomes a URL path and points
+  # the Next adapter's onSuccess warm-up at the wrong host. Production has
+  # this verified, owned canonical URL; do not use a branch-derived URL here.
+  DEPLOY_PRIME_URL = "https://project-gateway-wrguck.netlify.app"
+
 # Netlify automatically installs its maintained Next.js adapter. Do not add a
 # paid database, custom Functions region, larger compute tier, or paid add-on.
 # The Next build records the non-secret CONTEXT/BRANCH values for isolated Blobs
