@@ -9,6 +9,7 @@ import {
   Flash,
   Document,
   Checkmark,
+  ChevronDown,
 } from "@carbon/icons-react";
 import { Header, Footer } from "./shell";
 import { Button } from "./ui";
@@ -651,7 +652,7 @@ export function Landing({ mode }: { mode: string }) {
               <details key={q}>
                 <summary>
                   {q}
-                  <span aria-hidden>+</span>
+                  <ChevronDown className="faq-chevron" size={24} aria-hidden />
                 </summary>
                 <p>{a}</p>
               </details>

@@ -8,6 +8,12 @@ bleibt unverändert; der entfernte Banner verändert den vertikalen Einstieg.
 Diese neue Fassung ist ebenfalls noch nicht im Browser visuell abgenommen.
 Details: [Produktansicht](docs/qa/PRESENTATION-2026-09-29.md).
 
+Weiterer Nutzerauftrag: Eingaben und klickbare Elemente professionell erkennbar
+machen. Kontrastreichere Feld- und Buttonkonturen, dauerhafte Linkunterstreichung,
+deutliche Tabs und beschriftete aufklappbare Projektarten sind umgesetzt.
+Details: [Bedienelemente](docs/qa/CONTROLS-2026-09-29.md). Auch diese Fassung ist
+noch nicht visuell abgenommen; `final result: blocked` bleibt bestehen.
+
 ## Vergleichsgrundlage und Status
 
 - Freigegebene visuelle Vorlage: `docs/qa/homepage-overhaul/hero-editorial-reference.webp`.
@@ -54,6 +60,13 @@ beim Abruf der Browser-Fehlerbehandlung hängen und wurde nach 181,7 Sekunden
 abgebrochen; eine erneute Navigation wurde nicht ausgeführt. Es liegt weiterhin
 kein gerendertes Bild der aktuellen Fassung vor. Für einen direkten Wechsel zur
 Playwright CLI verlangt die Product-Design-Anleitung eine gesonderte Zustimmung.
+
+Beim Auftrag zu den Bedienelementen gelangen erneut Dokumentationsabruf,
+Browserinventar und Auswahl des leeren Tabs 4. Die anschließende einzelne
+Navigation zur öffentlichen Netlify-URL lieferte nach 68,6 Sekunden weiterhin
+keinen Seitenzustand und wurde abgebrochen. Es entstanden weder DOM-Ansicht noch
+Screenshot. Es folgte kein weiterer unveränderter Versuch und kein Wechsel zu
+einem nicht freigegebenen Browserweg.
 
 ## Fünf verpflichtende Prüfflächen
 

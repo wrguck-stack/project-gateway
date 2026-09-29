@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   Checkmark,
+  ChevronDown,
   Document,
   WarningAlt,
 } from "@carbon/icons-react";
@@ -274,7 +275,10 @@ export function ProjectTypes({
             >
               <span className="mono muted">0{i + 1}</span>
               <span>{p.title}</span>
-              <ArrowRight size={24} aria-hidden />
+              <span className="project-type-action">
+                {expanded === p.id ? "Details schließen" : "Details ansehen"}
+                <ChevronDown size={20} aria-hidden />
+              </span>
             </button>
           </h3>
           <div

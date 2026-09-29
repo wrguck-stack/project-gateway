@@ -10,6 +10,7 @@
   --color-muted: #97a4ad;
   --color-line: #39454d;
   --color-control: #697b87;
+  --color-control-strong: #97a4ad;
   --color-accent: #e9b64c;
   --color-critical: #f09b93;
   --color-success: #a9c5b5;
@@ -57,6 +58,7 @@ summary {
 }
 a {
   color: inherit;
+  text-decoration-line: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1px;
 }
@@ -123,7 +125,8 @@ textarea,
 summary {
   transition:
     background-color 120ms var(--ease),
-    border-color 120ms var(--ease);
+    border-color 120ms var(--ease),
+    color 120ms var(--ease);
 }
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -255,10 +258,14 @@ input:focus-visible {
 }
 .desktop-nav a {
   padding-block: 12px;
-  text-decoration: none;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--color-control);
+  text-underline-offset: 6px;
 }
 .desktop-nav a:hover {
   color: var(--color-accent);
+  text-decoration-color: currentColor;
 }
 .mobile-menu {
   display: none !important;
@@ -323,21 +330,35 @@ input:focus-visible {
 .button.primary:hover:not(:disabled) {
   background: #f2c66b;
 }
-.button.primary:active {
+.button.primary:active:not(:disabled) {
   background: #d9a43a;
 }
 .button.secondary {
-  background: transparent;
-  border-color: var(--color-control);
+  background: var(--color-raised);
+  border-color: var(--color-control-strong);
   color: var(--color-primary);
 }
 .button.secondary:hover:not(:disabled) {
-  background: var(--color-raised);
+  background: var(--color-line);
+  border-color: var(--color-primary);
+}
+.button.secondary:active:not(:disabled) {
+  background: var(--color-inset);
+  border-color: var(--color-accent);
 }
 .button.text {
   padding-inline: 8px;
   text-decoration: underline;
-  color: var(--color-secondary);
+  color: var(--color-primary);
+}
+.button.text:hover:not(:disabled),
+.text-button:hover:not(:disabled) {
+  color: var(--color-accent);
+  text-decoration-thickness: 2px;
+}
+.button:focus-visible,
+.icon-button:focus-visible {
+  outline-width: 3px;
 }
 .button.critical {
   color: var(--color-critical);
@@ -350,6 +371,7 @@ input:focus-visible {
   align-items: center;
   min-height: 44px;
   font-size: 1rem;
+  font-weight: 600;
   text-decoration: underline;
   margin-block: 8px;
 }
@@ -361,8 +383,8 @@ input:focus-visible {
   min-height: 44px;
 }
 .icon-button {
-  background: transparent;
-  border: 1px solid var(--color-control);
+  background: var(--color-raised);
+  border: 1px solid var(--color-control-strong);
   border-radius: 4px;
   width: 44px;
   min-width: 44px;
@@ -370,6 +392,17 @@ input:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+.icon-button:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  background: var(--color-line);
+}
+@media (hover: hover) {
+  a:not(.button):not(.brand):hover {
+    color: var(--color-accent);
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 2px;
+  }
 }
 .actions {
   display: flex;
@@ -418,7 +451,7 @@ input:focus-visible {
 label.field,
 legend {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 .field small {
   font-weight: 400;
@@ -428,26 +461,60 @@ legend {
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
-input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+input:where(:not([type="checkbox"]):not([type="radio"]):not([type="file"])),
 select,
 textarea {
   width: 100%;
   min-height: 56px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-control);
+  background: var(--color-raised);
+  border: 1px solid var(--color-control-strong);
+  border-bottom-width: 2px;
   border-radius: 4px;
   padding: 12px 16px;
   color: var(--color-primary);
   font-size: 1rem;
+  font-weight: 400;
   min-width: 0;
+}
+input:where(:not([type="checkbox"]):not([type="radio"]):not([type="file"])):not(
+    :disabled
+  ):not([readonly]):not([aria-invalid="true"]):hover:not(:focus),
+select:not(:disabled):not([aria-invalid="true"]):hover:not(:focus),
+textarea:not(:disabled):not([readonly]):not([aria-invalid="true"]):hover:not(
+    :focus
+  ) {
+  border-color: var(--color-primary);
+}
+input:where(:not([type="checkbox"]):not([type="radio"]):not([type="file"])):not(
+    [readonly]
+  ):not([aria-invalid="true"]):focus,
+select:not([aria-invalid="true"]):focus,
+textarea:not([readonly]):not([aria-invalid="true"]):focus {
+  border-color: var(--color-accent);
+}
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-critical);
 }
 input::placeholder,
 textarea::placeholder {
   color: var(--color-muted);
   opacity: 1;
 }
-input:read-only {
+input[readonly],
+textarea[readonly] {
+  background: var(--color-inset);
+  border-color: var(--color-line);
+  border-bottom-width: 1px;
   color: var(--color-secondary);
+  cursor: default;
+}
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 input[type="checkbox"],
 input[type="radio"] {
@@ -479,7 +546,8 @@ legend {
   gap: 16px;
   align-items: center;
   padding: 16px;
-  border: 1px solid var(--color-control);
+  border: 1px solid var(--color-control-strong);
+  background: var(--color-surface);
   border-radius: 4px;
   min-height: 56px;
   font-size: 1rem;
@@ -489,9 +557,25 @@ legend {
 .option.selected {
   border-color: var(--color-accent);
   background: var(--color-raised);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+  font-weight: 600;
 }
-.option:hover {
-  background: var(--color-surface);
+.option:hover:not(:has(input:disabled)) {
+  border-color: var(--color-primary);
+  background: var(--color-raised);
+}
+.option.selected:hover:not(:has(input:disabled)) {
+  border-color: var(--color-accent);
+}
+.option:has(input:focus-visible),
+.check-label:has(input:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.option:has(input:disabled),
+.check-label:has(input:disabled) {
+  cursor: not-allowed;
+  color: var(--color-muted);
 }
 .option input[type="radio"] {
   margin-left: auto;
@@ -508,6 +592,14 @@ legend {
   line-height: 1.5;
   margin-block: 16px 24px;
   cursor: pointer;
+  padding: 16px;
+  border: 1px solid var(--color-control);
+  border-radius: 4px;
+  background: var(--color-surface);
+}
+.check-label:has(input:checked) {
+  border-color: var(--color-accent);
+  background: var(--color-raised);
 }
 .inline-details {
   margin-block: 24px;
@@ -519,6 +611,8 @@ legend {
   min-height: 44px;
   padding-block: 12px;
   font-size: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .inline-details[open] summary {
   margin-bottom: 16px;
@@ -890,28 +984,39 @@ dialog p {
   max-width: 1040px;
 }
 .faq details {
-  border-bottom: 1px solid var(--color-line);
+  border: 1px solid var(--color-control);
+  border-radius: 4px;
+  background: var(--color-surface);
+  margin-bottom: 12px;
 }
 .faq summary {
-  padding-block: 24px;
+  padding: 20px 24px;
   display: flex;
   gap: 16px;
   justify-content: space-between;
   font-size: 1.25rem;
   font-weight: 500;
   list-style: none;
+  align-items: center;
 }
 .faq summary::-webkit-details-marker {
   display: none;
 }
-.faq summary > span {
+.faq-chevron {
   color: var(--color-accent);
+  flex-shrink: 0;
+  transition: transform 160ms var(--ease);
 }
-.faq details[open] summary > span {
-  transform: rotate(45deg);
+.faq details[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq summary:hover,
+.faq details[open] summary {
+  background: var(--color-raised);
 }
 .faq details p {
-  padding-bottom: 16px;
+  padding: 0 24px 20px;
+  margin-top: 16px;
 }
 .closing {
   display: grid;
@@ -985,7 +1090,10 @@ dialog p {
 }
 .step-index summary {
   min-height: 44px;
-  padding-block: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-control);
+  border-radius: 4px;
+  background: var(--color-raised);
 }
 .step-index[open] {
   width: 100%;
@@ -994,6 +1102,7 @@ dialog p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+  margin-top: 12px;
 }
 .step-index button {
   text-align: left;
@@ -1050,10 +1159,10 @@ dialog p {
   margin-top: 16px;
 }
 .dropzone {
-  border: 1px dashed var(--color-control);
+  border: 1px dashed var(--color-control-strong);
   padding: 32px 16px;
   text-align: center;
-  background: var(--color-surface);
+  background: var(--color-raised);
   margin-bottom: 24px;
 }
 .dropzone > svg {
@@ -1139,6 +1248,8 @@ dialog p {
   font-size: 1.25rem;
   font-weight: 500;
   min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .analysis-list {
   list-style: none;
@@ -1360,6 +1471,8 @@ dialog p {
 .history summary {
   min-height: 44px;
   padding-block: 8px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .history details ul {
   list-style: none;
@@ -1408,15 +1521,16 @@ dialog p {
 }
 .view-tabs {
   display: flex;
-  gap: 24px;
+  gap: 8px;
   flex-wrap: wrap;
   border-bottom: 1px solid var(--color-line);
   padding-block: 8px;
 }
 .view-tabs button {
-  background: none;
-  border: 0;
-  padding: 16px 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-control);
+  border-radius: 4px;
+  padding: 12px 16px;
   font-size: 1rem;
   min-height: 44px;
   position: relative;
@@ -1424,11 +1538,14 @@ dialog p {
 }
 .view-tabs .active {
   color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-raised);
+  font-weight: 600;
 }
 .view-tabs .active:after {
   content: "";
   position: absolute;
-  bottom: -9px;
+  bottom: 0;
   left: 0;
   right: 0;
   height: 2px;
@@ -1442,10 +1559,23 @@ dialog p {
 .search-form {
   display: flex;
   align-items: center;
-  border: 1px solid var(--color-control);
+  border: 1px solid var(--color-control-strong);
+  background: var(--color-raised);
   border-radius: 4px;
   padding-left: 16px;
   flex: 1;
+}
+.search-form:focus-within {
+  border-color: var(--color-accent);
+}
+.view-tabs button:hover:not(:disabled),
+.step-index button:hover:not(:disabled),
+.active-filters > button:hover:not(:disabled) {
+  background: var(--color-raised);
+  border-color: var(--color-primary);
+}
+.view-tabs button.active:hover {
+  border-color: var(--color-accent);
 }
 .search-form
   input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
@@ -2382,7 +2512,7 @@ dialog p {
     min-height: 44px;
   }
   .view-tabs {
-    gap: 8px 20px;
+    gap: 8px;
     padding-block: 16px;
   }
   .view-tabs button {
@@ -2526,9 +2656,6 @@ dialog p {
   }
   .dialog-head h2 {
     font-size: 1.75rem;
-  }
-  .dialog-head .icon-button {
-    border: 0;
   }
   .dialog-head {
     margin-bottom: 24px;
