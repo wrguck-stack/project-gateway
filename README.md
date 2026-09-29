@@ -2,6 +2,11 @@
 
 Next.js 16 / React 19 / TypeScript strict / Tailwind CSS 4. IBM Plex Sans Condensed and IBM Plex Mono are installed packages and are served locally. The provided Atlas design direction and Analytics contracts control the implementation.
 
+**Public demo:** [Project Gateway](https://project-gateway-wrguck.netlify.app).
+Published on Netlify Free on 29 September 2026; use synthetic data only.
+The hosted HTTP acceptance passed, including the exact 20 MB upload/download.
+Current browser and visual acceptance remains blocked; see [design QA](design-qa.md).
+
 ## Local setup
 
 Use Node.js 24 LTS and npm. The current homepage implementation is on branch
@@ -46,12 +51,14 @@ The ten check steps retain four chapters and preserve data on back/edit navigati
 
 ### Preview outside Codespaces
 
-The selected target is **Netlify Free**. `netlify.toml` configures the Next.js
-build, and the Netlify build selects private, durable Netlify Blobs for projects,
-sessions and uploads. See [Netlify setup](docs/deployment/netlify-free.md) for
-account setup, Free-plan limits, verification and the deployment boundary.
-The configuration alone does not publish a site. The older paid `render.yaml`
-proposal was not selected and must not be applied as part of this setup.
+The demo is deployed on **Netlify Free**, independently of Codespaces, with
+private, durable Netlify Blobs for projects, sessions and uploads. Deployment
+uses the official CLI from `feat/homepage-professional-pass`; GitHub continuous
+deployment is not connected. Production is public and deploy previews remain
+protected. The account was verified as Free with 300 credits and automatic
+top-up disabled. See [Netlify setup](docs/deployment/netlify-free.md) for release
+evidence, manual updates and limits. The older paid `render.yaml` proposal was
+not selected and must not be applied as part of this setup.
 
 After building, `npm run verify:preview` checks a newly created test project,
 session and uploaded file across a full application restart. It uses its own
@@ -65,11 +72,12 @@ provide atomic concurrent writes; see the [verification limitations](docs/deploy
 Run a regular `npm run build` before these local checks (not a `NETLIFY=true`
 platform build, whose storage context is deliberately fixed at build time).
 
-Once the owned site is published, `npm run verify:hosted -- https://YOUR-SITE.netlify.app`
+`npm run verify:hosted -- https://project-gateway-wrguck.netlify.app`
 checks HTTPS cookies, owner isolation, a synthetic exact 20 MB upload/download
 and revision conflicts. It leaves private synthetic test data on that explicit
-target and uses its hosting allowance. This prepared check has not yet been run
-against hosting; browser and redeployment acceptance remain separate.
+target and uses its hosting allowance. This check passed against the public
+deployment on 29 September 2026. Separate concurrency, redeployment and browser
+results are recorded in the [hosted acceptance report](docs/qa/HOSTED-2026-09-29.md).
 
 ### Storage and services
 
@@ -81,7 +89,7 @@ With `GATEWAY_STORAGE=netlify-blobs`, the application reads the demo state with 
 
 File bytes never enter LocalStorage. The local backend publishes complete bytes under `.gateway/documents/`; the Netlify backend stores them under private Blobs keys. Uploads use authenticated chunks of at most 2,000,000 bytes and enforce 15 files, 20,000,000 bytes per file and 100,000,000 bytes per project, content-signature checks for binary formats, UTF-8 CSV checks, SHA-256 deduplication, and authenticated streaming download endpoints. A document becomes ready only after validated bytes and metadata are durably stored; ready means technically available, not professionally reviewed. Files selected for submission are recorded in its immutable scope. Demo uploads do not provide malware scanning.
 
-Owner access requires the original opaque HttpOnly cookie; knowing a project ID grants no access. Partner repository access checks tenant and release. The openly accessible demo login deliberately simulates the partner role: **do not enter confidential or real personal data**. There is no production identity verification, real outbound notification, partner transfer or deployment.
+Owner access requires the original opaque HttpOnly cookie; knowing a project ID grants no access. Partner repository access checks tenant and release. The openly accessible demo login deliberately simulates the partner role: **do not enter confidential or real personal data**. There is no production identity verification, real outbound notification or partner transfer. Public hosting does not enable live customer operation.
 
 Demo scoring uses the explicit `demo-v1` ruleset. Its illustrative contributions are not technical suitability rules. Unknown is null; zero is a confirmed zero. Ground profiles remove roof weight before scoring. Partial bounds include known contributions and remaining weights without renormalization. The demo submission gate accepts a complete score or a partial lower bound of at least 65 with a confirmed location, stated area, stated authority and no confirmed blocker. This gate is a declared demo workflow choice, not a validated production qualification rule. Other projects remain editable and are never automatically rejected.
 
@@ -120,4 +128,5 @@ In a restricted Codespace sandbox, registry downloads, Turbopack's build process
 - `src/app/globals.css`: Atlas tokens and responsive composition.
 - `docs/qa/REPORT.md`: actual browser results and remaining integration boundaries.
 
-No force-push, main merge, external communication or production deployment is part of this implementation.
+The public demo was deployed from the implementation branch. No force-push,
+main merge, external communication or activation of live integrations was performed.

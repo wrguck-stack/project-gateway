@@ -34,6 +34,21 @@ Damit sind Interaktionen und Browser-Konsole in dieser neuen Fassung **nicht
 geprüft**. Unit-Tests und Build ersetzen diese Prüfungen nicht. Die ältere
 Browserabnahme vom 10. September gilt nicht als Freigabe des neuen Layouts.
 
+Die Anwendung wurde inzwischen auf Netlify veröffentlicht und per HTTPS geprüft.
+Der erste Cloud-Browser-Aufruf zur öffentlichen URL blieb ohne Seitenzustand
+hängen und wurde nach 1210,2 Sekunden abgebrochen. Es wurde dabei weder eine
+DOM-Ansicht noch ein Screenshot oder eine Interaktionsprüfung gewonnen. Die
+verfügbare Browser-API bietet außerdem keine Änderung der Viewportgröße für die
+geforderte mobile Abnahme. Die erfolgreiche HTTP-Prüfung ersetzt diese fehlende
+visuelle Evidenz nicht.
+
+Nach erfolgreicher Veröffentlichung funktionierten Inventarabfrage und Auswahl
+des leeren Tabs 4. Ein einzelner Wiederaufnahmeversuch blieb anschließend schon
+beim Abruf der Browser-Fehlerbehandlung hängen und wurde nach 181,7 Sekunden
+abgebrochen; eine erneute Navigation wurde nicht ausgeführt. Es liegt weiterhin
+kein gerendertes Bild der aktuellen Fassung vor. Für einen direkten Wechsel zur
+Playwright CLI verlangt die Product-Design-Anleitung eine gesonderte Zustimmung.
+
 ## Fünf verpflichtende Prüfflächen
 
 | Fläche | Im Code umgesetzt | Noch visuell zu prüfen |
@@ -73,6 +88,8 @@ keine zulässige visuelle Vergleichshistorie.
    auswählen, Beispielseite und Navigation prüfen; Konsole kontrollieren.
 5. Abweichungen beheben, erneut aufnehmen und erst danach `final result: passed` setzen.
 
-Die Codefassung ist auf dem Arbeitsbranch vorbereitet, noch nicht visuell
-abgenommen oder auf Netlify veröffentlicht. Es wurden keine kostenpflichtigen
-Dienste eingerichtet.
+Die Codefassung ist auf dem Arbeitsbranch gesichert und unter
+https://project-gateway-wrguck.netlify.app auf Netlify Free veröffentlicht,
+aber noch nicht visuell abgenommen. Es wurden keine kostenpflichtigen Dienste
+eingerichtet. Die gehosteten Funktionsprüfungen stehen separat im
+[Abnahmebericht](docs/qa/HOSTED-2026-09-29.md).

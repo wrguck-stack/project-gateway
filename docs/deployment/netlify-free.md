@@ -1,31 +1,57 @@
 # Project Gateway auf Netlify Free
 
-Stand: 28.09.2026. Der Nutzer hat die Umstellung auf Netlify Free freigegeben.
+Stand: 29.09.2026. Der Nutzer hat die Umstellung auf Netlify Free freigegeben.
 Es dürfen keine kostenpflichtigen Tarife, Datenbanken, Add-ons oder Upgrades
 eingerichtet werden. Die vorherige Render-Vorlage ist nicht das gewählte Ziel.
 
-## Einrichtung
+## Eingerichtetes Hosting
 
-1. Bei Netlify anmelden bzw. ein kostenloses Konto selbst registrieren.
-2. **Free** als Team-Tarif wählen, keinen Test eines kostenpflichtigen Tarifs.
-3. Das bestehende Repository `wrguck-stack/project-gateway` importieren und
-   **`feat/homepage-professional-pass` als Produktionsbranch** einstellen.
-   `main` enthält einen älteren Anwendungsstand.
-4. Die eingecheckte `netlify.toml` verwenden: Node 24.19.0, Build inklusive Tests,
-   Publish-Verzeichnis `.next`. Der Next.js-Adapter wird von Netlify automatisch
-   bereitgestellt. Keine statische Exportkonfiguration wählen.
-5. Keine separate Datenbank provisionieren. Der Code nutzt den integrierten,
-   privaten Netlify-Blobs-Speicher mit automatisch bereitgestellten Zugangsdaten.
-   Keine Zugangsschlüssel in Git, Client-Code oder Chat eintragen.
-6. Nach einem erfolgreichen ersten Build mit synthetischen Daten prüfen und erst
-   dann die Demo über die bereitgestellte Netlify-Adresse veröffentlichen.
-   Automatische weitere Builds anschließend stoppen; gezielte Updates manuell
-   freigeben, um das kostenlose Kontingent zu schonen.
+- Öffentliche Demo: https://project-gateway-wrguck.netlify.app
+- Dashboard: https://app.netlify.com/projects/project-gateway-wrguck
+- Site-ID: `28b65faa-2f4c-4d99-ae3c-405f4a756885`, Team `wrguck-stack`.
+- Veröffentlicht aus `wrguck-stack/project-gateway`, Branch
+  `feat/homepage-professional-pass`, Anwendungsstand `4060882`.
+- Offizielle Kontoanmeldung vom Nutzer freigegeben; manueller Build und Deploy
+  mit Netlify CLI 27.10.2. **Keine GitHub-CD-Verknüpfung eingerichtet.**
+- Produktion öffentlich, Vorschauen mit Netlify-Anmeldung geschützt
+  (`sso_login=true`, `sso_login_context=non_production`).
+- Free-Tarif mit 300 Credits und deaktivierter automatischer Aufladung im Konto
+  bestätigt; kein kostenpflichtiger Testtarif und keine zusätzliche Datenbank.
 
-`netlify.toml` kann den Kontotarif und die Veröffentlichung nicht festlegen.
-Diese Einstellungen müssen im Konto geprüft werden. Ein GitHub-Zugriff für
-Netlify kann eine separate Benutzerfreigabe erfordern. Die Demo-Partneranmeldung
-ist weiterhin simuliert; ausschließlich Testdaten verwenden.
+Die eingecheckte `netlify.toml` legt Node 24.19.0, Tests, Build, Typecheck und
+das Publish-Verzeichnis `.next` fest. Der automatisch installierte Next.js-Adapter
+stellt Serverfunktionen und statische Dateien bereit. Der private Blobs-Speicher
+erhält seine Zugangsdaten aus der Netlify-Laufzeit. Die Demo-Partneranmeldung
+bleibt simuliert; ausschließlich Testdaten verwenden.
+
+## Manuelle Aktualisierung
+
+Nach Prüfung des gewünschten Branchstands mit der bereits autorisierten CLI
+gezielt auf die bestehende Site veröffentlichen:
+
+```sh
+NETLIFY=true CONTEXT=production BRANCH=feat/homepage-professional-pass \
+  netlify deploy --prod --context production \
+  --site 28b65faa-2f4c-4d99-ae3c-405f4a756885 \
+  --message 'Project Gateway: geprüfter Commit'
+```
+
+Der normale vollständige CLI-Build ist erforderlich. Nicht durch `--no-build`
+ersetzen: Der Next.js-Adapter bereitet das statische Publish-Verzeichnis während
+des Build-/Deploy-Lebenszyklus vor. Die Produktionskonfiguration setzt
+`DEPLOY_PRIME_URL` explizit auf die eigene öffentliche Adresse, damit der Slash
+im Branchnamen keine ungültige Warm-up-Adresse des Adapters erzeugt.
+
+In der verwalteten Ausführungsumgebung benötigte die Node-HTTP-Verbindung zum
+Netlify-API-Proxy einen längeren Timeout. Der erfolgreiche Aufruf verwendete
+`NODE_USE_ENV_PROXY=1` und ein lokales Node-Importmodul, das ausschließlich
+`http.globalAgent.options.timeout` und `https.globalAgent.options.timeout` auf
+60.000 ms erhöhte. Proxy-Routen, Anmeldedaten und Zugriffsregeln blieben erhalten.
+Diese umgebungsspezifische Einstellung ist keine Anwendungskonfiguration.
+
+Ein späterer Repository-Import mit automatischen Builds ist eine separate,
+bisher nicht ausgeführte Einrichtung. Dabei müsste dieser Arbeitsbranch als
+Produktionsbranch gewählt werden; `main` enthält einen älteren Stand.
 
 Die am 29.09.2026 geprüfte Option `netlify deploy --allow-anonymous` ist für
 dieses Projekt ungeeignet: Die CLI erlaubt dabei keine Serverless- oder
@@ -135,18 +161,17 @@ Separat erfolgreich geprüft wurde am 28.09.2026 der Offline-Adapterbuild mit
 `NETLIFY=true CONTEXT=production BRANCH=feat/homepage-professional-pass npx netlify-cli build --offline`.
 Netlify Build 37.3.2 und Next Runtime 5.16.0 paketierten die Serverfunktion;
 der erzeugte Build enthält das Blobs-Backend und den Produktionskontext.
-Dieser Prüfschritt legt keine Site an. Die tatsächliche Bereitstellung ist noch
-offen, weil die Kontoanmeldung nicht bestätigt werden konnte.
+Dieser historische Prüfschritt legte keine Site an. Am 29.09.2026 folgte die
+tatsächliche Veröffentlichung mit Netlify Build 37.3.3 und Next Runtime 5.16.0;
+die Serverfunktion verwendet Node 24 und Streaming-Antworten.
 
-Nach der Bereitstellung: tatsächlichen Commit, Free-Tarif, HTTPS-Cookies,
-Upload/Download bis zur 20-MB-Grenze, Daten über erneutes Deployment hinweg,
-parallele Änderungen und die Browseroberfläche prüfen. Erst dann gilt die
-gehostete Demo als abgenommen.
+Die tatsächlichen Deploy-IDs, Live-Prüfergebnisse und verbleibende Browserabnahme
+stehen im [gehosteten Abnahmebericht](../qa/HOSTED-2026-09-29.md).
 
-Für die HTTP-Prüfung ist ein gezielter Befehl vorbereitet:
+Für die HTTP-Prüfung:
 
 ```sh
-npm run verify:hosted -- https://DIE-EIGENE-SITE.netlify.app
+npm run verify:hosted -- https://project-gateway-wrguck.netlify.app
 ```
 
 Er akzeptiert nur eine ausdrücklich angegebene Netlify-HTTPS-Adresse ohne
@@ -158,9 +183,14 @@ und Ablehnung einer veralteten Revision. Die Testdaten bleiben privat auf der
 Site gespeichert; der Lauf verbraucht deren normales Hostingkontingent. Cookies
 und Zugangsdaten werden nicht ausgegeben. Es gibt keine automatische Zielsuche.
 
-Der Befehl ist am 29.09.2026 syntaktisch geprüft, aber noch nicht gegen eine
-veröffentlichte Site ausgeführt. Browserprüfung, konkurrierende Schreibzugriffe
-und Persistenz über ein erneutes Deployment sind separate offene Prüfschritte.
+Der Befehl wurde am 29.09.2026 erfolgreich gegen diese öffentliche Site ausgeführt.
+Ein separater Test mit zwei gleichzeitig gestarteten Client-Änderungen lieferte
+genau einen Erfolg und einen Konflikt; ein anschließender Lesezugriff bestätigte
+die gewinnende Fassung. Nach einem zweiten erfolgreichen Produktionsdeploy wurden
+ursprüngliche Sitzungen, unveränderte Projektfassung, Verlauf und bytegleiche
+Datei samt Zugriffstrennung bestätigt. Der Abnahmebericht dokumentiert auch einen
+nicht reproduzierten 502-Fehler beim ersten Kontrolllauf. Die Browserprüfung bleibt
+offen.
 
 ## Offizielle Referenzen
 
