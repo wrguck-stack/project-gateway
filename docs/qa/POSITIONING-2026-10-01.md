@@ -42,16 +42,27 @@ Bewertung oder Renditegarantie wurde ergänzt.
 
 ## Veröffentlichungsstand
 
-Die Implementierung wird auf `feat/homepage-professional-pass` gesichert.
-Eine neue Produktionsveröffentlichung ist noch nicht erfolgt.
+Die Implementierung ist mit Commit `4c936c3fd40b99e5d63e17502516fccdf9a4b506`
+auf `feat/homepage-professional-pass` gesichert und veröffentlicht.
 
-Die Netlify-CLI wurde nach dem Wechsel der Arbeitsumgebung außerhalb des Repos
-mit Version 27.10.2 wiederhergestellt. `status --json` bestätigt
-`loggedIn: false` und `NOT_LOGGED_IN`. Die vorhandene Projektzuordnung stimmt mit
-Site `28b65faa-2f4c-4d99-ae3c-405f4a756885` überein; die frühere globale
-Anmeldung ist nicht mehr vorhanden. Zur Fortsetzung ist die erneute offizielle
-Netlify-Autorisierung nötig. Keine Zugangsdaten wurden im Repository gespeichert.
+Nach dem Wechsel der Arbeitsumgebung fehlte zunächst die Netlify-Anmeldung.
+Die CLI 27.10.2 wurde außerhalb des Repos wiederhergestellt. Der Nutzer hat die
+erneute offizielle Anmeldung bestätigt; `login --check` meldete `authorized`.
+Keine Zugangsdaten wurden im Repository gespeichert.
 
-https://project-gateway-wrguck.netlify.app zeigt bis dahin den bisherigen
-Anwendungsstand `320d290`, Deploy `6abc239b2558e2f1c5b52c8c`.
+- Bestehende Site: `28b65faa-2f4c-4d99-ae3c-405f4a756885`.
+- Produktionsdeploy: `6abe89017fcc5f1a4ac2c417`, Exit 0, vollständiger CLI-Build
+  und Veröffentlichung in 2 Minuten 38 Sekunden, Next.js Runtime 5.16.1.
+- Im Veröffentlichungsbuild erneut 192 Tests, Produktionsbuild und Typecheck
+  bestanden.
+- Live-HTTP: `/`, `/beispiel`, `/partner/login` und `/kontakt` liefern HTTP 200.
+  Die Homepage enthält die neue H1 und den neuen Seitentitel, beide
+  Einstiegsbuttons, die drei Antwortabschnitte vor der Projektakte, alle vier
+  zugehörigen Sprungziele samt Links und die neue Netzanschluss-FAQ.
+- Beide Stylesheets liefern HTTP 200; die neue mobile Hero-Skalierung ist
+  enthalten. Bestehendes Hero-Bild und Netlify-Footer-Verweis sind vorhanden.
+- Diese Nachweise betreffen HTTPS und ausgeliefertes HTML/CSS. Die visuelle
+  Browserabnahme bleibt aus dem oben dokumentierten Grund offen.
+
+Öffentliche Adresse: https://project-gateway-wrguck.netlify.app.
 Keine kostenpflichtigen Dienste oder Tarifänderungen wurden eingerichtet.

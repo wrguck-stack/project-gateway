@@ -17,9 +17,11 @@ Bindung funktionierten, die einmalige Navigation hing trotz 45-Sekunden-Timeout
 bis zum Abbruch nach 232,3 Sekunden. Keine aktuelle visuelle Abnahme, kein
 Screenshot und kein nicht freigegebener Browserwechsel.
 
-Veröffentlichung noch ausstehend: Die Netlify-CLI meldet nach dem Wechsel der
-Arbeitsumgebung `NOT_LOGGED_IN`. Die bestehende Site bleibt unverändert auf dem
-zuvor veröffentlichten Stand. Details: [Positionierung](docs/qa/POSITIONING-2026-10-01.md).
+Nach erneuter, vom Nutzer bestätigter Netlify-Anmeldung wurde Commit `4c936c3`
+auf der bestehenden Site veröffentlicht. Deploy `6abe89017fcc5f1a4ac2c417`
+ist live; vier öffentliche Seiten und die neuen HTML-/CSS-Inhalte wurden per
+HTTPS erfolgreich geprüft. Das ersetzt keine visuelle Browserabnahme.
+Details: [Positionierung](docs/qa/POSITIONING-2026-10-01.md).
 
 ## Frühere Aufträge · 29. September 2026
 
