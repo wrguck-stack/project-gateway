@@ -73,7 +73,10 @@ for (const width of [1440, 390]) {
       await page.goto("/");
       await page.getByRole("combobox").first().fill(address);
       await page
-        .getByRole("button", { name: "Standort prüfen", exact: true })
+        .getByRole("button", {
+          name: "Meine Möglichkeiten prüfen",
+          exact: true,
+        })
         .first()
         .click();
       await expect(

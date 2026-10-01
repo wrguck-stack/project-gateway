@@ -28,6 +28,14 @@ import "./landing-hero.css";
 
 const faq = [
   [
+    "Lohnt sich Photovoltaik trotz der Unsicherheiten noch?",
+    "Ob sich ein Projekt lohnt, hängt von Ihrem Standort, der Nutzung, den Investitions- und Betriebskosten sowie den geltenden Rahmenbedingungen ab. Der Standortcheck sammelt die Ausgangsdaten. Ertrag, Risiken und Wirtschaftlichkeit werden anschließend fachlich geprüft – auch mit dem möglichen Ergebnis, ein Vorhaben vorerst nicht weiterzuverfolgen.",
+  ],
+  [
+    "Welche Rolle spielt mein bestehender Netzanschluss?",
+    "Die vorhandene Anschlussleistung und die Möglichkeiten für Bezug und Einspeisung gehören zur Prüfung von Photovoltaik und Speichern. Anschlussunterlagen helfen dabei, die Ausgangslage zu klären. Welche Nutzung technisch möglich, zulässig und wirtschaftlich sinnvoll ist, muss für Ihren Standort geprüft werden.",
+  ],
+  [
     "Was bekomme ich nach dem Standortcheck?",
     "Eine strukturierte Übersicht Ihrer Angaben, eine vorläufige Einordnung und sichtbar offene Punkte. Das interaktive Beispiel zeigt Ihnen das Ergebnis vorab. Die fachliche Prüfung ist der nächste Schritt.",
   ],
@@ -210,7 +218,7 @@ export function AddressEntry({
           )}
         </div>
         <Button type="submit" pending={pending}>
-          {pending ? "Entwurf wird angelegt …" : "Standort prüfen"}
+          {pending ? "Entwurf wird angelegt …" : "Meine Möglichkeiten prüfen"}
         </Button>
       </div>
       <small id={`${id}-help`} aria-live="polite">
@@ -348,16 +356,17 @@ export function Landing({ mode }: { mode: string }) {
           <div className="wrap editorial-hero-content">
             <div className="hero-copy">
               <p className="overline hero-overline">
-                GEWERBEIMMOBILIEN / ENERGIEPROJEKTE
+                PHOTOVOLTAIK · SPEICHER · NETZANSCHLUSS
               </p>
               <h1>
-                <span>Ihre Fläche.</span> <span>Mehr</span>{" "}
-                <span className="hero-accent">Perspektive.</span>
+                <span>Erst Klarheit.</span>{" "}
+                <span className="hero-accent">Dann investieren.</span>
               </h1>
               <p className="lead">
-                Von der ersten Idee zur strukturierten Projektakte.
-                <br /> Standort erfassen. Offene Fragen erkennen. Nächste
-                Schritte vorbereiten.
+                Gesetzliche Vorgaben und unsichere Erträge werfen Fragen auf.
+                Wir prüfen, welche Möglichkeiten Ihre Fläche und Ihr bestehender
+                Netzanschluss bieten – und unter welchen Voraussetzungen sich
+                Photovoltaik oder Speicher für Sie lohnen können.
               </p>
               {selectedTitle && (
                 <div className="selected-intent" role="status">
@@ -376,12 +385,13 @@ export function Landing({ mode }: { mode: string }) {
               )}
               {entry("hero")}
               <div className="hero-secondary">
-                <Link href="/beispiel" className="text-link">
-                  Beispiel-Projektakte ansehen{" "}
+                <a href="#ablauf" className="text-link">
+                  So prüfen wir Ihren Standort{" "}
                   <ArrowRight size={20} aria-hidden />
-                </Link>
+                </a>
                 <p className="meta">
-                  Ohne Pflichtkonto · Unbekannte Angaben sind möglich
+                  Ohne Pflichtkonto · Der Standortcheck bereitet die fachliche
+                  Prüfung vor.
                 </p>
               </div>
               {draft && (
@@ -420,26 +430,62 @@ export function Landing({ mode }: { mode: string }) {
               </span>
             </figcaption>
           </figure>
-          <nav className="hero-stages wrap" aria-label="Der Weg zum Projekt">
-            <a href="#standort-start">
-              <span className="mono">01</span> Standort erfassen
+          <nav
+            className="hero-stages wrap"
+            aria-label="Klarheit vor der Investition"
+          >
+            <a href="#moeglichkeiten">
+              <span className="mono">01</span> Möglichkeiten erkennen
             </a>
-            <a href="#projektakte">
-              <span className="mono">02</span> Projektakte ansehen
+            <a href="#wirtschaftlichkeit">
+              <span className="mono">02</span> Wirtschaftlichkeit einordnen
             </a>
-            <a href="#projektpartner">
-              <span className="mono">03</span> Fachliche Prüfung
+            <a href="#naechste-schritte">
+              <span className="mono">03</span> Nächste Schritte klären
             </a>
           </nav>
+        </section>
+
+        <section id="ablauf" className="section wrap">
+          <p className="overline">DIE GRUNDLAGE FÜR IHRE ENTSCHEIDUNG</p>
+          <h2>Chancen erkennen. Voraussetzungen klären.</h2>
+          <div className="process-grid">
+            {[
+              [
+                "moeglichkeiten",
+                "Was ist möglich?",
+                "Ihre Fläche, Ihr Strombedarf und Ihr bestehender Netzanschluss bilden die Ausgangslage. Wir erfassen Ihre Angaben und machen sichtbar, welche technischen und rechtlichen Voraussetzungen fachlich zu klären sind.",
+              ],
+              [
+                "wirtschaftlichkeit",
+                "Was kann sich rechnen?",
+                "Eigenverbrauch, Erweiterung oder Speicher: Entscheidend ist das passende Nutzungskonzept. Kosten, mögliche Erträge und Risiken gehören in die anschließende fachliche Bewertung. Annahmen und offene Fragen bleiben nachvollziehbar.",
+              ],
+              [
+                "naechste-schritte",
+                "Was passiert als Nächstes?",
+                "Sie erfassen Ihren Standort und ergänzen vorhandene Angaben und Unterlagen. Daraus entsteht Ihre Projektakte mit offenen Prüfpunkten – die Grundlage für ein Fachgespräch, bevor Sie über eine Investition entscheiden.",
+              ],
+            ].map(([id, title, text], i) => (
+              <article key={id} id={id}>
+                <span className="process-number">0{i + 1}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="section wrap dossier-section" id="projektakte">
           <div className="dossier-intro">
             <p className="overline">IHR ERGEBNIS / VORAB ANSEHEN</p>
-            <h2>Aus einzelnen Angaben wird eine klare Projektgrundlage.</h2>
+            <h2>Eine klare Grundlage, bevor Sie entscheiden.</h2>
             <p className="lead">
-              Was ist bekannt? Was fehlt noch? Und was ist als Nächstes zu
-              klären? Ihre Projektakte hält die Antworten an einem Ort fest.
+              Ihre Projektakte führt die Ausgangslage, vorhandene Nachweise und
+              offene Prüfungen zusammen. So wird sichtbar, was bereits bekannt
+              ist und was vor einer Investition noch geklärt werden muss.
             </p>
             <ul className="value-list">
               <li>
@@ -462,35 +508,6 @@ export function Landing({ mode }: { mode: string }) {
           <DossierPreview />
         </section>
 
-        <section id="ablauf" className="section wrap">
-          <p className="overline">DER WEG ZUM PROJEKT</p>
-          <h2>Ihr Standort. Drei klare Schritte.</h2>
-          <div className="process-grid">
-            {[
-              [
-                "Standort erfassen",
-                "Beginnen Sie mit der Adresse oder einer Beschreibung Ihrer Fläche. Ein Pflichtkonto ist dafür nicht nötig.",
-              ],
-              [
-                "Angaben zusammenführen",
-                "Ergänzen Sie Objekt, Energieprofil und Unterlagen. Unbekannte Werte bleiben als offene Punkte erhalten.",
-              ],
-              [
-                "Prüfung vorbereiten",
-                "Sehen Sie Ihre Projektakte durch, wählen Sie die relevanten Unterlagen aus und bereiten Sie die fachliche Prüfung vor.",
-              ],
-            ].map(([title, text], i) => (
-              <article key={title}>
-                <span className="process-number">0{i + 1}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
         <section
           className="section wrap editorial-split landing-check"
           id="standortcheck-vorschau"
@@ -498,7 +515,7 @@ export function Landing({ mode }: { mode: string }) {
           <LandingCheckPreview />
           <div>
             <p className="overline">DER STANDORTCHECK / DIREKT AUSPROBIEREN</p>
-            <h2>Sie kennen Ihre Immobilie. Wir bringen Struktur hinein.</h2>
+            <h2>Sie müssen noch nicht alle Antworten kennen.</h2>
             <p className="lead">
               Zehn verständliche Schritte führen durch die Angaben. Sie müssen
               dafür weder eine fertige Planung noch jede technische Antwort
@@ -542,7 +559,7 @@ export function Landing({ mode }: { mode: string }) {
           <div className="section-intro">
             <div>
               <p className="overline">VIER AUSGANGSPUNKTE</p>
-              <h2>Was möchten Sie mit Ihrer Fläche bewegen?</h2>
+              <h2>Welche Möglichkeiten bietet Ihr Standort?</h2>
             </div>
             <p>
               Öffnen Sie die passende Projektart und starten Sie mit einer
@@ -557,15 +574,16 @@ export function Landing({ mode }: { mode: string }) {
           <p className="overline">
             FÜR EIGENTÜMER, UNTERNEHMEN UND BESTANDSHALTER
           </p>
-          <h2>Eine Immobilie verdient einen klaren nächsten Schritt.</h2>
+          <h2>Ihr Standort verdient eine fundierte Entscheidung.</h2>
           <div className="audience-columns">
             <article>
               <span className="mono muted">01 / EIGENTÜMER & UNTERNEHMEN</span>
-              <h3>Ihre Fläche ins Gespräch bringen.</h3>
+              <h3>Fläche und Netzanschluss gemeinsam betrachten.</h3>
               <p>
-                Halten Sie Potenzialfragen und Voraussetzungen fest. So können
-                Sie ein Dach-, Speicher- oder Flächenprojekt mit einer
-                geordneten Grundlage besprechen.
+                Ihr vorhandener Netzanschluss gehört zur Betrachtung Ihres
+                Standorts. Halten Sie Strombedarf, Anlagen und
+                Anschlussunterlagen fest, um das wirtschaftliche Potenzial von
+                Photovoltaik und Speichern fachlich prüfen zu lassen.
               </p>
               <button className="text-button text-link" onClick={focusEntry}>
                 Meinen Standort erfassen <ArrowRight size={20} aria-hidden />
@@ -661,11 +679,12 @@ export function Landing({ mode }: { mode: string }) {
         </section>
         <section className="section wrap closing">
           <div>
-            <p className="overline">BEGINNEN WIR MIT IHRER FLÄCHE</p>
-            <h2>Der nächste Schritt beginnt mit einem Standort.</h2>
+            <p className="overline">DER ERSTE SCHRITT ZU MEHR KLARHEIT</p>
+            <h2>Beginnen Sie mit Ihren Möglichkeiten.</h2>
             <p>
-              Erfassen Sie Ihre Immobilie und sehen Sie, welche Angaben Ihre
-              Projektanfrage voranbringen.
+              Erfassen Sie Ihren Standort. Ordnen Sie Ihre Ausgangslage und
+              bereiten Sie die Fragen vor, die vor einer Investition geklärt
+              werden müssen.
             </p>
           </div>
           <div>

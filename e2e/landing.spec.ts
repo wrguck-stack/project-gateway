@@ -302,7 +302,7 @@ for (const width of [1440, 390]) {
       const closing = page.locator(".closing .address-form");
       const input = closing.getByRole("combobox");
       const button = closing.getByRole("button", {
-        name: "Standort prüfen",
+        name: "Meine Möglichkeiten prüfen",
         exact: true,
       });
       const address = "QA Rückkehr · Gewerbepark 5";

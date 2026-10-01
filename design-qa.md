@@ -2,6 +2,27 @@
 
 final result: blocked
 
+## Aktueller Auftrag · 1. Oktober 2026
+
+Der freigegebene Einstieg lautet jetzt „Erst Klarheit. Dann investieren.“.
+Die Homepage stellt Möglichkeiten, Wirtschaftlichkeit und nächste Schritte in
+den Vordergrund. Neue Überschrift, CTA, Folgetexte, FAQs und Metadaten sind
+implementiert; das vorhandene Hallenmotiv und sein weicher Übergang bleiben
+erhalten. Die Schriftgrößen sind für den längeren Text angepasst. Die frühere
+Bildvorlage dokumentiert die Gestaltung, nicht den jetzt freigegebenen Wortlaut.
+
+Tests, Build, Typecheck und statisch erzeugtes HTML sind geprüft. Ein neuer
+Cloud-Browser-Versuch am 01.10. lieferte erneut keinen Seitenzustand: Inventar und
+Bindung funktionierten, die einmalige Navigation hing trotz 45-Sekunden-Timeout
+bis zum Abbruch nach 232,3 Sekunden. Keine aktuelle visuelle Abnahme, kein
+Screenshot und kein nicht freigegebener Browserwechsel.
+
+Veröffentlichung noch ausstehend: Die Netlify-CLI meldet nach dem Wechsel der
+Arbeitsumgebung `NOT_LOGGED_IN`. Die bestehende Site bleibt unverändert auf dem
+zuvor veröffentlichten Stand. Details: [Positionierung](docs/qa/POSITIONING-2026-10-01.md).
+
+## Frühere Aufträge · 29. September 2026
+
 Nachträglicher Nutzerauftrag vom 29.09.2026: allgemeine Demo-Auszeichnung aus der
 Oberfläche entfernt und Netlify-Verweis als Footer-Link eingebaut. Der Hero selbst
 bleibt unverändert; der entfernte Banner verändert den vertikalen Einstieg.

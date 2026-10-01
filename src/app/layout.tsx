@@ -9,11 +9,11 @@ import "./globals.css";
 import { RouteFocus } from "@/components/route-focus";
 export const metadata: Metadata = {
   title: {
-    default: "Project Gateway · Von der Fläche zum Energieprojekt",
+    default: "Project Gateway · Erst Klarheit. Dann investieren.",
     template: "%s · Project Gateway",
   },
   description:
-    "Gewerbliche Energieprojekte strukturiert erfassen und zur fachlichen Prüfung vorbereiten.",
+    "Photovoltaik, Speicher und Netzanschluss gemeinsam betrachten: Ausgangslage erfassen, offene Fragen erkennen und die fachliche Prüfung vorbereiten.",
   robots: { index: false, follow: false },
 };
 export default function RootLayout({
