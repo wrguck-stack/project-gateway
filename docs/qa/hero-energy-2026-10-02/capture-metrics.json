@@ -1,0 +1,398 @@
+[
+  {
+    "width": 1487,
+    "height": 1058,
+    "metrics": {
+      "viewport": 1487,
+      "document": 1487,
+      "hero": {
+        "x": 0,
+        "y": 80,
+        "width": 1487,
+        "height": 980.859375
+      },
+      "heading": {
+        "x": 56,
+        "y": 141.625,
+        "width": 918.6875,
+        "height": 278.25
+      },
+      "intro": {
+        "x": 1022.6875,
+        "y": 109,
+        "width": 408.296875,
+        "height": 320.4375
+      },
+      "photo": {
+        "x": 0,
+        "y": 409.4375,
+        "width": 1487,
+        "height": 585.421875
+      },
+      "font": "700 93.681px / 92.7442px \"IBM Plex Sans Condensed\", sans-serif",
+      "spans": [
+        {
+          "text": "Können PV und Speicher",
+          "width": 918.6875,
+          "height": 92.75
+        },
+        {
+          "text": "Ihre Stromkosten",
+          "width": 918.6875,
+          "height": 92.75
+        },
+        {
+          "text": "senken?",
+          "width": 918.6875,
+          "height": 92.75
+        }
+      ],
+      "dialog": {
+        "width": 638,
+        "scrollWidth": 638,
+        "top": 300.984375,
+        "bottom": 757.015625
+      },
+      "focusReturned": true
+    },
+    "errors": [
+      {
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:4173/favicon.ico",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "metrics": {
+      "viewport": 1440,
+      "document": 1440,
+      "hero": {
+        "x": 0,
+        "y": 80,
+        "width": 1440,
+        "height": 962.359375
+      },
+      "heading": {
+        "x": 56,
+        "y": 141.625,
+        "width": 886.140625,
+        "height": 269.390625
+      },
+      "intro": {
+        "x": 990.140625,
+        "y": 109,
+        "width": 393.859375,
+        "height": 320.4375
+      },
+      "photo": {
+        "x": 0,
+        "y": 409.4375,
+        "width": 1440,
+        "height": 566.921875
+      },
+      "font": "700 90.72px / 89.8128px \"IBM Plex Sans Condensed\", sans-serif",
+      "spans": [
+        {
+          "text": "Können PV und Speicher",
+          "width": 886.140625,
+          "height": 89.796875
+        },
+        {
+          "text": "Ihre Stromkosten",
+          "width": 886.140625,
+          "height": 89.796875
+        },
+        {
+          "text": "senken?",
+          "width": 886.140625,
+          "height": 89.796875
+        }
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "height": 900,
+    "metrics": {
+      "viewport": 1280,
+      "document": 1280,
+      "hero": {
+        "x": 0,
+        "y": 80,
+        "width": 1280,
+        "height": 899.359375
+      },
+      "heading": {
+        "x": 56,
+        "y": 141.625,
+        "width": 775.375,
+        "height": 239.484375
+      },
+      "intro": {
+        "x": 879.375,
+        "y": 109,
+        "width": 344.625,
+        "height": 320.4375
+      },
+      "photo": {
+        "x": 0,
+        "y": 409.4375,
+        "width": 1280,
+        "height": 503.921875
+      },
+      "font": "700 80.64px / 79.8336px \"IBM Plex Sans Condensed\", sans-serif",
+      "spans": [
+        {
+          "text": "Können PV und Speicher",
+          "width": 775.375,
+          "height": 79.828125
+        },
+        {
+          "text": "Ihre Stromkosten",
+          "width": 775.375,
+          "height": 79.828125
+        },
+        {
+          "text": "senken?",
+          "width": 775.375,
+          "height": 79.828125
+        }
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "height": 900,
+    "metrics": {
+      "viewport": 1024,
+      "document": 1024,
+      "hero": {
+        "x": 0,
+        "y": 80,
+        "width": 1024,
+        "height": 785.0625
+      },
+      "heading": {
+        "x": 32,
+        "y": 141.625,
+        "width": 618.65625,
+        "height": 191.578125
+      },
+      "intro": {
+        "x": 682.65625,
+        "y": 109,
+        "width": 309.34375,
+        "height": 306.921875
+      },
+      "photo": {
+        "x": 0,
+        "y": 395.921875,
+        "width": 1024,
+        "height": 403.140625
+      },
+      "font": "700 64.512px / 63.8669px \"IBM Plex Sans Condensed\", sans-serif",
+      "spans": [
+        {
+          "text": "Können PV und Speicher",
+          "width": 618.65625,
+          "height": 63.859375
+        },
+        {
+          "text": "Ihre Stromkosten",
+          "width": 618.65625,
+          "height": 63.859375
+        },
+        {
+          "text": "senken?",
+          "width": 618.65625,
+          "height": 63.859375
+        }
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "metrics": {
+      "viewport": 768,
+      "document": 768,
+      "hero": {
+        "x": 0,
+        "y": 80,
+        "width": 768,
+        "height": 923.375
+      },
+      "heading": {
+        "x": 32,
+        "y": 145.625,
+        "width": 704,
+        "height": 191.578125
+      },
+      "intro": {
+        "x": 32,
+        "y": 361.203125,
+        "width": 640,
+        "height": 230.328125
+      },
+      "photo": {
+        "x": 0,
+        "y": 607.53125,
+        "width": 768,
+        "height": 302.34375
+      },
+      "font": "700 64.512px / 63.8669px \"IBM Plex Sans Condensed\", sans-serif",
+      "spans": [
+        {
+          "text": "Können PV und Speicher",
+          "width": 704,
+          "height": 63.859375
+        },
+        {
+          "text": "Ihre Stromkosten",
+          "width": 704,
+          "height": 63.859375
+        },
+        {
+          "text": "senken?",
+          "width": 704,
+          "height": 63.859375
+        }
+      ],
+      "dialog": {
+        "width": 638,
+        "scrollWidth": 638,
+        "top": 283.984375,
+        "bottom": 740.015625
+      },
+      "focusReturned": true
+    },
+    "errors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "metrics": {
+      "viewport": 390,
+      "document": 390,
+      "hero": {
+        "x": 0,
+        "y": 64,
+        "width": 390,
+        "height": 1014.21875
+      },
+      "heading": {
+        "x": 20,
+        "y": 124.96875,
+        "width": 350,
+        "height": 173.4375
+      },
+      "intro": {
+        "x": 20,
+        "y": 322.40625,
+        "width": 350,
+        "height": 283.375
+      },
+      "photo": {
+        "x": 0,
+        "y": 613.78125,
+        "width": 390,
+        "height": 357.5625
+      },
+      "font": "700 42.51px / 43.3602px \"IBM Plex Sans Condensed\", sans-serif",
+      "spans": [
+        {
+          "text": "Können PV und Speicher",
+          "width": 344.25,
+          "height": 86.71875
+        },
+        {
+          "text": "Ihre Stromkosten",
+          "width": 350,
+          "height": 43.359375
+        },
+        {
+          "text": "senken?",
+          "width": 350,
+          "height": 43.359375
+        }
+      ],
+      "dialog": {
+        "width": 346,
+        "scrollWidth": 346,
+        "top": 168.46875,
+        "bottom": 675.53125
+      },
+      "focusReturned": true
+    },
+    "errors": []
+  },
+  {
+    "width": 320,
+    "height": 780,
+    "metrics": {
+      "viewport": 320,
+      "document": 320,
+      "hero": {
+        "x": 0,
+        "y": 64,
+        "width": 320,
+        "height": 979.15625
+      },
+      "heading": {
+        "x": 20,
+        "y": 124.96875,
+        "width": 280,
+        "height": 163.1875
+      },
+      "intro": {
+        "x": 20,
+        "y": 312.15625,
+        "width": 280,
+        "height": 308.5625
+      },
+      "photo": {
+        "x": 0,
+        "y": 628.71875,
+        "width": 320,
+        "height": 307.5625
+      },
+      "font": "700 40px / 40.8px \"IBM Plex Sans Condensed\", sans-serif",
+      "spans": [
+        {
+          "text": "Können PV und Speicher",
+          "width": 280,
+          "height": 81.59375
+        },
+        {
+          "text": "Ihre Stromkosten",
+          "width": 280,
+          "height": 40.796875
+        },
+        {
+          "text": "senken?",
+          "width": 280,
+          "height": 40.796875
+        }
+      ],
+      "dialog": {
+        "width": 276,
+        "scrollWidth": 276,
+        "top": 126.96875,
+        "bottom": 653.03125
+      },
+      "focusReturned": true
+    },
+    "errors": []
+  }
+]

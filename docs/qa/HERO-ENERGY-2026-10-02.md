@@ -28,7 +28,7 @@ Der Partner-Login ist weiterhin im Footer und im Partnerabschnitt erreichbar.
 Metadaten verwenden die konkrete neue Kostenfrage; noindex bleibt erhalten.
 Die Texte versprechen weder errechnete Einsparungen noch garantierte Erträge.
 
-## Prüfung und verbleibende Freigaben
+## Erster Prüflauf vor Browserfreigabe
 
 - 192 vorhandene Unit-Tests in sieben Dateien bestanden.
 - Produktionsbuild und Typecheck bestanden. Build-HTML: exakte Headline,
@@ -50,3 +50,23 @@ Die Texte versprechen weder errechnete Einsparungen noch garantierte Erträge.
 
 Der zuletzt veröffentlichte Anwendungsstand bleibt `4c936c3` mit Deploy
 `6abe89017fcc5f1a4ac2c417` („Erst Klarheit. Dann investieren.“).
+
+## Abschlussprüfung nach Nutzerfreigabe
+
+Der Nutzer hat Netlify erneut autorisiert und am 02.10.2026 ausdrücklich dem
+Wechsel zu Playwright zugestimmt. Der offizielle Netlify-Ticketcheck bestätigt
+`authorized`.
+
+23/23 ausgewählte Playwright-Tests bestanden: komplette Desktop-/Mobile-
+Nutzerabläufe, alle Landing-Interaktionen, Tastatur/Dialog/axe, sieben
+Bildschirmbreiten, 200 % Text, Touch und reduzierte Bewegung. Die Sichtprüfung
+fand einen unerwünschten Overline-Umbruch; die scoped CSS-Korrektur wurde nach
+neuem Build erneut aufgenommen und mit der Quelle verglichen.
+
+Visuelle Abnahme: bestanden. Belege und vollständiger Prüfumfang stehen in
+`design-qa.md` sowie `docs/qa/hero-energy-2026-10-02/`. Die IBM-Plex-Markenschrift
+bleibt trotz kräftigerer Schriftanmutung im generierten Mockup erhalten.
+Keine JavaScript-Laufzeitfehler; fehlendes Favicon als P3 dokumentiert.
+
+Veröffentlichung auf der bestehenden Netlify-Site folgt nach Sicherung dieses
+Abnahmestands. Keine Tarifänderung und keine kostenpflichtige Einrichtung.

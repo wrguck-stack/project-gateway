@@ -1,163 +1,75 @@
-# Atlas-Hero · Umsetzungsstand 2. Oktober 2026
+# Project Gateway · Energie-Hero · Visuelle Abnahme 2. Oktober 2026
 
-final result: blocked
+final result: passed
 
-## Aktueller Auftrag · 2. Oktober 2026
+## Vergleichsgrundlage
 
-Gewählter visueller Zielstand ist Variante 3 der zuletzt gezeigten Entwürfe:
-„Können PV und Speicher Ihre Stromkosten senken?“.
-
+- Gewählt: Variante 3 der letzten Entwurfsrunde, „Können PV und Speicher Ihre
+  Stromkosten senken?“.
 - Source: `docs/qa/homepage-overhaul/hero-energy-reference.webp`, 1487 × 1058 px.
-- Zustand: Homepage ohne gespeicherten Entwurf, geschlossener Standortdialog.
-- Implementierung: `src/components/landing.tsx`, `landing-hero.css`,
-  `public/atlas/gateway-energy-panorama-v1.webp`.
-- Geplante Vergleichsansichten: 1487 × 1058 und 390 × 844 CSS-Pixel, DPR 1;
-  zusätzlich 320 px sowie geöffneter Adresseingabedialog und Tastaturbedienung.
-- Aktueller Browser-Screenshot: nicht verfügbar. Keine Dichtenormalisierung,
-  kein Vollbild- oder Detailvergleich, keine Prüfung der Browserkonsole möglich.
-- Fonts, Layoutabstände, Farben, Bildausschnitt und Inhalte sind im Code an der
-  geöffneten Referenz ausgerichtet, aber noch nicht visuell abgenommen.
-- Ein neuer Cloud-Browser-Navigationsversuch hing trotz 20-Sekunden-Timeout
-  602,9 Sekunden bis zum Abbruch. Keine weiteren unveränderten Versuche.
-- Lokale Vorschau liefert HTTP 200; das ersetzt keine Browserprüfung.
+- Implementierung: `docs/qa/hero-energy-2026-10-02/hero-1487.webp`, gleicher
+  Viewport 1487 × 1058 CSS-Pixel, deviceScaleFactor 1. Keine Skalierung oder
+  Dichtenormalisierung nötig. Zustand: Homepage, kein gespeicherter Entwurf,
+  geschlossener Standortdialog.
+- Direkte Playwright-Prüfung vom Nutzer am 02.10.2026 ausdrücklich freigegeben,
+  nachdem der Cloud-Browser wiederholt ohne DOM oder Screenshot hängen blieb.
+- Chromium 153.0.8010.12 gegen den lokalen Next-Produktionsbuild.
 
-final result: blocked
+## Vergleich und Korrekturschleife
 
-Details: [Umsetzung und Prüfumfang](docs/qa/HERO-ENERGY-2026-10-02.md).
-Für die Abnahme wird ein funktionierender Cloud-Browser oder die ausdrückliche
-Zustimmung zu Playwright CLI/MCP benötigt. Für die Veröffentlichung ist außerdem
-eine erneute Netlify-Anmeldung erforderlich.
+1. Referenz und erste Implementierungsaufnahme gemeinsam geöffnet. P2:
+   Die technische Overline brach auf Desktop unerwünscht in zwei Zeilen um.
+   Ursache: geerbtes `p { max-width: 62ch }` zusammen mit der Zierlinie.
+   Vorher-Beleg: `docs/qa/hero-energy-2026-10-02/hero-1487-before.webp`.
+2. Scoped `max-width: none` und `flex-shrink: 0` für die Linie ergänzt.
+   Produktionsbuild und Typecheck erneut bestanden.
+3. Neu aufgenommen und mit der Referenz verglichen, einschließlich Detailcrop
+   (x40/y90, 1400 × 350 px) der Überschrift, Overline, Einleitung und CTA.
+   Overline nun einzeilig. Desktop-Headline bleibt dreizeilig, rechte
+   CTA-Spalte und Panorama entsprechen der ausgewählten Komposition.
+   Keine offenen P0/P1/P2-Befunde.
 
-## Vorheriger Auftrag · 1. Oktober 2026
+## Geprüfte Gestaltungsflächen
 
-Der freigegebene Einstieg lautet jetzt „Erst Klarheit. Dann investieren.“.
-Die Homepage stellt Möglichkeiten, Wirtschaftlichkeit und nächste Schritte in
-den Vordergrund. Neue Überschrift, CTA, Folgetexte, FAQs und Metadaten sind
-implementiert; das vorhandene Hallenmotiv und sein weicher Übergang bleiben
-erhalten. Die Schriftgrößen sind für den längeren Text angepasst. Die frühere
-Bildvorlage dokumentiert die Gestaltung, nicht den jetzt freigegebenen Wortlaut.
+- **Schrift:** tatsächliche IBM Plex Sans Condensed 700 und IBM Plex Mono aus
+  der bestehenden Marke. Headline, Akzentzeilen und Hierarchie stimmen; die
+  Bildgenerierung stellt den Schriftzug kräftiger dar als die reale
+  Markenschrift. Diese Abweichung ist bewusst akzeptiert, keine dritte
+  Schrift eingeführt. Text bleibt echtes, skalierbares HTML.
+- **Abstände/Layout:** Textspalten, CTA, breites Motiv und Caption geprüft.
+  Korrigierter Overline-Umbruch; keine abgeschnittenen Controls oder
+  horizontalen Überläufe in den gemessenen Viewports.
+- **Farben:** vorhandene Atlas-Tokens, Amber-Akzent, dunkle Oberfläche und
+  sichtbare Interaktionskonturen. Unterstrichene Links bleiben erkennbar.
+- **Bild:** eigenständiges WebP 1999 × 787 px, PV-Dach, Werkhalle, Speicher und
+  Ladefahrzeug wie in der Vorlage. Sanfter Übergang am oberen Bildrand.
+  Kleine dunkle Hintergründe der Beschriftungen dienen der Lesbarkeit.
+- **Inhalt:** gewählte Überschrift, Einleitung und CTA; keine zugesagten
+  Einsparbeträge oder garantierten Erträge. Der Standortcheck bereitet die
+  fachliche Prüfung vor.
 
-Tests, Build, Typecheck und statisch erzeugtes HTML sind geprüft. Ein neuer
-Cloud-Browser-Versuch am 01.10. lieferte erneut keinen Seitenzustand: Inventar und
-Bindung funktionierten, die einmalige Navigation hing trotz 45-Sekunden-Timeout
-bis zum Abbruch nach 232,3 Sekunden. Keine aktuelle visuelle Abnahme, kein
-Screenshot und kein nicht freigegebener Browserwechsel.
+## Responsive- und Funktionsprüfung
 
-Nach erneuter, vom Nutzer bestätigter Netlify-Anmeldung wurde Commit `4c936c3`
-auf der bestehenden Site veröffentlicht. Deploy `6abe89017fcc5f1a4ac2c417`
-ist live; vier öffentliche Seiten und die neuen HTML-/CSS-Inhalte wurden per
-HTTPS erfolgreich geprüft. Das ersetzt keine visuelle Browserabnahme.
-Details: [Positionierung](docs/qa/POSITIONING-2026-10-01.md).
+- Neue Aufnahmen und DOM-Messungen bei 1487/1440/1280/1024/768/390/320 px.
+  In allen Fällen entspricht Dokumentbreite der Viewportbreite.
+- Standortdialog bei 1487/768/390/320 px ohne horizontalen Überlauf;
+  Escape schließt und der Fokus kehrt zum öffnenden Button zurück.
+- Mobile Belege: `hero-390-complete.webp`, `hero-320.webp`, `dialog-390.webp`
+  im oben genannten QA-Verzeichnis. Auf Mobile stehen Bildbeschriftungen
+  unter dem Motiv; Text und Einstieg stehen vor dem Bild.
+- `capture-metrics.json` enthält Größen, Fokusnachweise und Konsolenergebnisse.
+- 23/23 bestehende ausgewählte Playwright-Tests bestanden (1,4 Minuten):
+  alle 18 Landing-Tests bei 1440/390 px; zwei vollständige Nutzerabläufe mit
+  Upload, Ergebnis, Review und Einreichung; Tastatur/Dialog/axe-Smoke;
+  42 Seitenansichten und sieben Dialog-Reflows; 200 % Text, Touch,
+  reduzierte Bewegung und Querformat.
+- 192/192 Unit-Tests, Produktionsbuild und Typecheck bestanden.
+- Keine JavaScript-Laufzeitfehler. Ein erster automatischer Aufruf von
+  `/favicon.ico` liefert 404; die Anwendung und ihre Bild-/Schriftdateien
+  laden. Dies ist ein P3-Nachtrag, keine Funktions- oder Abnahmeblockade.
 
-## Frühere Aufträge · 29. September 2026
+## Ergebnis
 
-Nachträglicher Nutzerauftrag vom 29.09.2026: allgemeine Demo-Auszeichnung aus der
-Oberfläche entfernt und Netlify-Verweis als Footer-Link eingebaut. Der Hero selbst
-bleibt unverändert; der entfernte Banner verändert den vertikalen Einstieg.
-Diese neue Fassung ist ebenfalls noch nicht im Browser visuell abgenommen.
-Details: [Produktansicht](docs/qa/PRESENTATION-2026-09-29.md).
-
-Weiterer Nutzerauftrag: Eingaben und klickbare Elemente professionell erkennbar
-machen. Kontrastreichere Feld- und Buttonkonturen, dauerhafte Linkunterstreichung,
-deutliche Tabs und beschriftete aufklappbare Projektarten sind umgesetzt.
-Details: [Bedienelemente](docs/qa/CONTROLS-2026-09-29.md). Auch diese Fassung ist
-noch nicht visuell abgenommen; `final result: blocked` bleibt bestehen.
-
-## Vergleichsgrundlage und Status
-
-- Freigegebene visuelle Vorlage: `docs/qa/homepage-overhaul/hero-editorial-reference.webp`.
-- Quelle: erster Entwurf, danach vom Nutzer ausdrücklich gewünschter weicher
-  Fotoübergang; Zustimmung zur überarbeiteten Fassung am 29.09.2026.
-- Quellbild: 1486 × 1059 Pixel, Desktop-Hero; keine Browser-Chrome.
-- Implementierung: Homepage `/`, normaler Demo-Einstieg ohne gespeicherten
-  Entwurf. `src/components/landing.tsx` und `landing-hero.css`.
-- Vorgesehene Vergleichsgröße: 1486 × 1059 CSS-Pixel, DPR 1. Weitere Prüfpunkte:
-  320, 360, 390, 768, 1024, 1280 und 1440 Pixel sowie 200 % Textgröße.
-- Browseraufnahme der Implementierung: **nicht verfügbar**.
-- Dichtenormalisierung, Vollbildvergleich und fokussierter Vergleich:
-  **nicht durchgeführt**. Keine visuelle Übereinstimmung bestätigt.
-
-## Blocker
-
-Der vorhandene Vorschaudienst meldete bei zwei Startversuchen zunächst einen
-erfolgreichen Start, war bei anschließender Statusprüfung aber wieder gestoppt.
-Der Cloud-Browser erhielt `ERR_CONNECTION_REFUSED`. Der zweite Versuch folgte
-nach Aufnahme von `terminal.local` in die dokumentierte Next-Dev-Origin-Liste.
-Es wurde kein anderer Browserweg als vermeintlich gleichwertige Sichtprüfung
-ausgegeben. Weitere unveränderte Startversuche wurden nicht wiederholt.
-
-Ein separater HTTP-Diagnoselauf bestätigte anschließend den Start des
-unveränderten Next-Dev-Kommandos und HTTP 200 mit der neuen Headline. Der
-Testprozess wurde danach beendet. Dieser Nachweis grenzt den Fehler auf die
-verwaltete Vorschau ein; es ist keine Browser- oder Layoutprüfung.
-
-Damit sind Interaktionen und Browser-Konsole in dieser neuen Fassung **nicht
-geprüft**. Unit-Tests und Build ersetzen diese Prüfungen nicht. Die ältere
-Browserabnahme vom 10. September gilt nicht als Freigabe des neuen Layouts.
-
-Die Anwendung wurde inzwischen auf Netlify veröffentlicht und per HTTPS geprüft.
-Der erste Cloud-Browser-Aufruf zur öffentlichen URL blieb ohne Seitenzustand
-hängen und wurde nach 1210,2 Sekunden abgebrochen. Es wurde dabei weder eine
-DOM-Ansicht noch ein Screenshot oder eine Interaktionsprüfung gewonnen. Die
-verfügbare Browser-API bietet außerdem keine Änderung der Viewportgröße für die
-geforderte mobile Abnahme. Die erfolgreiche HTTP-Prüfung ersetzt diese fehlende
-visuelle Evidenz nicht.
-
-Nach erfolgreicher Veröffentlichung funktionierten Inventarabfrage und Auswahl
-des leeren Tabs 4. Ein einzelner Wiederaufnahmeversuch blieb anschließend schon
-beim Abruf der Browser-Fehlerbehandlung hängen und wurde nach 181,7 Sekunden
-abgebrochen; eine erneute Navigation wurde nicht ausgeführt. Es liegt weiterhin
-kein gerendertes Bild der aktuellen Fassung vor. Für einen direkten Wechsel zur
-Playwright CLI verlangt die Product-Design-Anleitung eine gesonderte Zustimmung.
-
-Beim Auftrag zu den Bedienelementen gelangen erneut Dokumentationsabruf,
-Browserinventar und Auswahl des leeren Tabs 4. Die anschließende einzelne
-Navigation zur öffentlichen Netlify-URL lieferte nach 68,6 Sekunden weiterhin
-keinen Seitenzustand und wurde abgebrochen. Es entstanden weder DOM-Ansicht noch
-Screenshot. Es folgte kein weiterer unveränderter Versuch und kein Wechsel zu
-einem nicht freigegebenen Browserweg.
-
-## Fünf verpflichtende Prüfflächen
-
-| Fläche | Im Code umgesetzt | Noch visuell zu prüfen |
-| --- | --- | --- |
-| Typografie | Vorhandene lokal geladene IBM Plex Sans Condensed/Mono; dreizeilige Headline, Amber auf „Perspektive.“ | Reale Umbrüche, Gewicht, Zeilenabstand und Reflow bei 200 % |
-| Abstände und Layout | Asymmetrischer Desktop-Hero, breite Eingabe, eigene mobile Reihenfolge | Zielproportionen, CTA im sichtbaren Bereich, Fokusrahmen und Vorschläge |
-| Farben | Bestehende Atlas-Tokens; nur Bild-Deckkraft weich ausgeblendet | Kontrast insbesondere an der Fotogrenze und unter der Bildunterschrift |
-| Bild | Separates KI-Motiv, 1586 × 992, als WebP eingebunden; keine gerasterten UI-Texte | Crop/Schärfe bei allen Breiten und nahtloser Übergang |
-| Inhalte | Freigegebene Headline/Subline; bestehende Labels, Hilfetexte und Demo-Kennzeichnung erhalten | Lesbarkeit und keine Überlagerung dynamischer Fehlermeldungen |
-
-## Code-Review und ausgeführte Prüfungen
-
-- 192 Unit-Tests bestanden; regulärer Produktionsbuild und Typecheck erfolgreich.
-- Der Hero verändert keine Session-, Draft- oder Speicherdienste.
-- Im anschließenden Funktionsreview wurde die Check-Navigation während
-  Dateioperationen gesperrt, die Wiederholung unvollständiger Uploads korrigiert
-  und blockierter Browser-Sitzungsspeicher abgefangen. Drei neue Browserfälle
-  sind vorbereitet, aber noch nicht ausgeführt.
-- Formularzustand, Vorschläge, Tastaturbehandlung, Entwurfsfortsetzung,
-  Projektartauswahl, Links und Navigation bleiben in den bestehenden Komponenten.
-- Nach Review: explizites Leerzeichen beim mobil ausgeblendeten Zeilenumbruch
-  ergänzt; Tablet-Textbreite für vergrößerte Schrift auf `min(100%, 36rem)` begrenzt.
-- Die Bildmaske betrifft ausschließlich die Fotodatei. Formulare, Vorschläge
-  und Fokusrahmen liegen außerhalb des beschnittenen Bildcontainers.
-
-Diese Punkte sind Code-Prüfungen, keine visuellen QA-Iterationen. Es gibt noch
-keine zulässige visuelle Vergleichshistorie.
-
-## Vor Freigabe
-
-1. Funktionsfähige Browservorschau öffnen und den Desktop-Hero in der Zielgröße aufnehmen.
-2. Vorlage und gerenderte Seite gemeinsam vergleichen; zusätzlich Headline,
-   Bildübergang, Formulare und mobile Ansicht im Detail prüfen.
-3. Alle genannten Breiten und 200 % Textgröße prüfen; keinen horizontalen
-   Überlauf, abgeschnittene Vorschläge oder verdeckte Aktionen akzeptieren.
-4. Standortcheck per Tastatur/Button starten, Demo-Entwurf öffnen, Projektart
-   auswählen, Beispielseite und Navigation prüfen; Konsole kontrollieren.
-5. Abweichungen beheben, erneut aufnehmen und erst danach `final result: passed` setzen.
-
-Die Codefassung ist auf dem Arbeitsbranch gesichert und unter
-https://project-gateway-wrguck.netlify.app auf Netlify Free veröffentlicht,
-aber noch nicht visuell abgenommen. Es wurden keine kostenpflichtigen Dienste
-eingerichtet. Die gehosteten Funktionsprüfungen stehen separat im
-[Abnahmebericht](docs/qa/HOSTED-2026-09-29.md).
+Die frühere Blockade der visuellen Abnahme ist durch den freigegebenen
+Playwright-Weg behoben. Umsetzung für die bestehende Netlify-Site freigegeben.
+Hosting-Tarif und Ressourcen bleiben unverändert.
