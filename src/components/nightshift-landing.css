@@ -98,7 +98,7 @@
   position: absolute;
   inset: 0 0 auto;
   z-index: 5;
-  height: 104px;
+  height: clamp(72px, 9.5svh, 104px);
   border-bottom: 1px solid #9cafc555;
   gap: 24px;
 }
@@ -643,7 +643,7 @@
     width: calc(100% - 48px);
   }
   .gateway-editorial .header.nightshift-header {
-    height: 82px;
+    height: max(64px, 3.25rem);
     gap: 12px;
   }
   .gateway-editorial .editorial-brand {

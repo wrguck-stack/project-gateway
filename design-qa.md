@@ -2,6 +2,39 @@
 
 final result: passed
 
+## Korrektur nach Nutzerfeedback: Hero in einer Bildschirmhöhe
+
+Die frühere Abnahme hat die Gesamthöhe auf üblichen Laptopbildschirmen nicht
+korrekt gewichtet. Der Nutzer verlangt jetzt ausdrücklich einen vollständig
+sichtbaren Hero. Diese Vorgabe ersetzt die ursprüngliche hohe Proportion des
+Rasterentwurfs. Die folgenden älteren Vergleichsangaben sind historisch.
+
+P1 behoben: feste Mindesthöhe von 900–1256 px durch `min-height: 100svh`
+ersetzt; Typografie und Abstände berücksichtigen nun auch die Viewporthöhe.
+Header, Text, CTA und Zeitleiste passen gemeinsam in die erste Ansicht.
+Mobil liegt das vorhandene Foto ebenfalls hinter dem Inhalt. Keine Texte oder
+Bedienelemente werden zum Erreichen der Höhe ausgeblendet.
+
+Aktueller Browserbeleg: `docs/qa/nightshift-2026-10-02/hero-viewport-fit.webp`.
+Links Desktop 1366 × 768, rechts Mobile 390 × 844, beide DPR 1 ohne Skalierung,
+gemeinsames Bild 1756 × 844. Unter dem Desktopbild liegt ausschließlich
+Auffüllfläche des Belegs. Hero-Zustand Nutzen / 100 % / reduzierte Bewegung.
+Quelle und aktueller Desktop wurden gemeinsam geöffnet; Farben, Schriftfamilien,
+vierzeilige Hierarchie, Bildstil und Wortlaut bleiben erhalten. Die abweichende
+Höhe ist die gewünschte Korrektur, kein weiterer Nachbaufehler.
+
+Prüfung: 1920 × 1080, 1440 × 900, 1366 × 768, 1280 × 720, 1024 × 768,
+390 × 844, 375 × 667 und 360 × 640. Bei normaler Schrift ist die Herohöhe
+jeweils exakt die Viewporthöhe; CTA und Zeitleiste sind vollständig sichtbar.
+Bei 200 % Schrift darf der Inhalt zugunsten der Lesbarkeit nach unten wachsen.
+Die erneute Sichtprüfung korrigierte mobile Wortüberläufe und die Überlagerung
+von Bildbeschriftung und CTA: Beschriftung im normalen Layoutfluss, flexible
+Umbrüche und eine mit der Schrift wachsende Kopfzeile. Alle Bedienelemente
+bleiben per Scroll erreichbar. Keine horizontalen Überläufe oder JavaScriptfehler.
+Build und Typecheck bestanden. Keine Funktions-, Inhalts- oder Hostingänderung.
+
+Aktueller final result: passed
+
 ## Vergleichsgrundlage
 
 Der Nutzer wählte die dritte **angezeigte** Variante der Night-Shift-Entwürfe.
