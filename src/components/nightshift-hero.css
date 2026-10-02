@@ -135,7 +135,7 @@
   object-fit: contain;
 }
 .gateway-editorial .nightshift-hero-photo {
-  filter: brightness(0.56);
+  filter: brightness(0.72);
   transition: filter 1s ease;
 }
 .gateway-editorial .energy-scene[data-active="3"] .nightshift-hero-photo {

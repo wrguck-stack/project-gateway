@@ -1,0 +1,12 @@
+Use case: lighting-weather.
+Asset type: website hero photograph, 3:2 landscape, 1536x1024.
+Input image is the exact edit target: the current photorealistic daytime industrial campus.
+User request: show THIS EXACT SCENE AT NIGHT.
+
+Change ONLY time of day, sky illumination, surface light and the operation of plausible existing exterior/interior lamps. Keep the exact camera position, perspective, composition, crop, building geometry, roof PV layout, equipment, transformer station, battery cabinets, cars, roads, vegetation, material imperfections and surrounding buildings unchanged. Preserve all three identifiable equipment areas at their existing positions.
+
+Create the appearance of a highly realistic professional industrial drone NIGHT PHOTOGRAPH. It is properly nighttime, with a deep dark navy sky and only faint residual ambient skylight. Use believable, restrained utilitarian exterior security lighting on the existing warehouse facade, entrances and service yard. A few windows may have subdued neutral/warm working lights, not every window. Light sources have physically consistent light falloff and shadows; most of the scene remains dim but the warehouse silhouette, solar modules, front-left transformer and right-hand storage cabinets remain legible. The concrete transformer and battery service pad receive modest practical reflected illumination from the facility, not theatrical spotlights. Panels are dark at night, with low-key faint sky reflections, never glowing or generating luminous effects. Keep neighboring buildings and trees as a natural nighttime setting, with a few distant lamps. Preserve the real-site look and continuity all the way to the frame edges.
+
+Photographic treatment: natural long-exposure drone photograph, realistic fine high-ISO grain, restrained dynamic range, controlled highlights without blown-out bulbs, believable dark shadows retaining some texture, neutral white balance with realistic mixed lighting. Keep weather dry and all surface textures unchanged.
+Avoid: architectural 3D render, CGI, miniature, isolated model, black studio void, orange/teal movie grading, all-over golden illumination, glowing solar cells, neon edges, fake energy lines, artificial lens flares, excessive bloom, painted light trails, star fields, dramatic added moon, fog, rain, wet reflections, added people/vehicles/objects, text, logos, UI, labels, watermarks.
+This is a lighting edit only; retain all geometry and spatial relationships.

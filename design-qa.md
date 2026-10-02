@@ -6,13 +6,14 @@ final result: passed
 
 Auf Wunsch des Nutzers wurde der freigestellte, wie ein Modell wirkende Hero
 in eine fotorealistische Tageslichtszene mit zusammenhängender Gewerbeumgebung
-umgearbeitet. Neues Asset: `public/energy/gateway-energy-site-v2.webp`.
+umgearbeitet. Auf anschließenden Wunsch zeigt genau diese Kulisse nun Nachtbeleuchtung.
+Aktuelles Asset: `public/energy/gateway-energy-site-v3-night.webp`.
 Es ist weiterhin eine KI-Visualisierung, kein Foto eines realen Kundenprojekts.
 Diese Herkunft wurde dem Nutzer ausdrücklich mitgeteilt und im Alttext benannt.
 
 Die große Randvignette entfällt, damit Gebäude, Nachbarbauten, Gelände und
 Horizont zusammenhängend sichtbar bleiben. Die Helligkeit im Fokusmodus wurde
-von 38 auf 56 Prozent erhöht. Marker und Fokusmasken folgen dem neuen Bild.
+für die Nachtfassung auf 72 Prozent angehoben. Marker und Fokusmasken folgen dem neuen Bild.
 Der bisherige Seitenaufbau, die Schriftgrößen und die Aktionen bleiben erhalten.
 
 Bildprompt, Herkunft und aktuelle Prüfung:

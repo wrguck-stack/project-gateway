@@ -64,7 +64,7 @@ const stages = [
 ] as const;
 
 const DURATION = 16_000;
-const SITE_IMAGE = "/energy/gateway-energy-site-v2.webp";
+const SITE_IMAGE = "/energy/gateway-energy-site-v3-night.webp";
 
 export function NightshiftHero({
   onStart,
@@ -230,7 +230,7 @@ export function NightshiftHero({
               sizes="(max-width: 900px) 90vw, 58vw"
               preload
               unoptimized
-              alt="Fotorealistische KI-Visualisierung eines Gewerbestandorts bei Tageslicht: PV auf dem Hallendach, Batteriespeicher rechts und eine Trafostation im Vordergrund, eingebettet in ein Gewerbegebiet."
+              alt="Fotorealistische KI-Visualisierung eines Gewerbestandorts bei Nacht: PV auf dem Hallendach, Batteriespeicher rechts und eine Trafostation im Vordergrund, mit dezenter Beleuchtung im Gewerbegebiet."
               onLoad={() => setImageReady(true)}
             />
             {stages.slice(0, 3).map((stage, index) => (
