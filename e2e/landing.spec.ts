@@ -1,5 +1,45 @@
 import { test, expect } from "@playwright/test";
 
+test("the complete hero fits short desktop and mobile viewports in every station", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const [width, height] of [
+    [1366, 768],
+    [375, 667],
+    [320, 640],
+  ]) {
+    await page.setViewportSize({ width, height });
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+    const hero = page.locator(".nightshift-hero");
+    await expect(hero).toHaveAttribute("data-motion", "reduced");
+    for (const name of [
+      "Netzanschluss",
+      "Dachfläche",
+      "Speicher",
+      "Zusammenspiel",
+    ]) {
+      await hero
+        .locator(".nightshift-hero-stages")
+        .getByRole("button", { name, exact: true })
+        .click();
+      await page.evaluate(() => scrollTo(0, 0));
+      const box = await hero.boundingBox();
+      const controls = await hero
+        .locator(".nightshift-hero-controls")
+        .boundingBox();
+      expect(box!.height, `${width}×${height}, ${name}`).toBeLessThanOrEqual(
+        height + 1,
+      );
+      expect(controls!.y + controls!.height).toBeLessThanOrEqual(height + 1);
+    }
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBeLessThanOrEqual(width + 1);
+  }
+});
+
 for (const width of [1440, 390]) {
   test.describe(`Landing at ${width}px`, () => {
     test.use({ hasTouch: width < 768, isMobile: width < 768 });
@@ -9,7 +49,7 @@ for (const width of [1440, 390]) {
       await expect(
         page.getByRole("heading", {
           level: 1,
-          name: "Können PV und Speicher Ihre Stromkosten senken?",
+          name: "Vom Stromanschluss zum Energiestandort.",
           exact: true,
         }),
       ).toBeVisible();
@@ -35,6 +75,14 @@ for (const width of [1440, 390]) {
         }
         await expect(page).toHaveURL(target);
       };
+      const discovery = page.locator(".nightshift-hero").getByRole("link", {
+        name: "Standort entdecken",
+        exact: true,
+      });
+      await expect(discovery).toHaveAttribute("href", "#ausgangslage");
+      await discovery.click();
+      await expect(page).toHaveURL(/\/#ausgangslage$/);
+      await expect(page.locator("#ausgangslage h2")).toBeInViewport();
       await page.locator(".closing").scrollIntoViewIfNeeded();
       await navigate("Möglichkeiten", /\/#projektarten$/);
       await expect(page.locator("#projektarten h2")).toBeInViewport();
@@ -159,6 +207,121 @@ for (const width of [1440, 390]) {
         .click();
       await expect(page).toHaveURL(/\/beispiel$/);
       await expect(page.locator("#score")).toBeVisible();
+    });
+
+    test("site situations open the matching entry and clear stale project intent", async ({
+      page,
+    }) => {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      const situations = page.locator("#ausgangslage");
+      const dialog = page.getByRole("dialog", {
+        name: "Wo liegt Ihr Standort?",
+        exact: true,
+      });
+      const draftWrites: string[] = [];
+      page.on("request", (request) => {
+        if (
+          request.method() === "POST" &&
+          new URL(request.url()).pathname === "/api/drafts"
+        )
+          draftWrites.push(request.url());
+      });
+      await expect(
+        situations.getByRole("button", {
+          name: "Hoher Stromverbrauch",
+          exact: true,
+        }),
+      ).toHaveAttribute("aria-expanded", "true");
+
+      for (const scenario of [
+        {
+          title: "PV bereits vorhanden",
+          action: "Meine PV-Erweiterung vorbereiten",
+          selected: "PV-Erweiterung",
+        },
+        {
+          title: "Ungenutzte Dachfläche",
+          action: "Meine Dachfläche erfassen",
+          selected: "Gewerbedach-PV",
+        },
+        {
+          title: "Hoher Stromverbrauch",
+          action: "Mein Verbrauchsprofil erfassen",
+          selected: undefined,
+        },
+      ]) {
+        const toggle = situations.getByRole("button", {
+          name: scenario.title,
+          exact: true,
+        });
+        if (width < 768) await toggle.tap();
+        else await toggle.click();
+        await expect(toggle).toHaveAttribute("aria-expanded", "true");
+        await expect(
+          situations.locator(".site-situation-panel:visible"),
+        ).toHaveCount(1);
+        const panel = situations.getByRole("region", {
+          name: scenario.title,
+          exact: true,
+        });
+        const action = panel.getByRole("button", {
+          name: scenario.action,
+          exact: true,
+        });
+        if (width < 768) await action.tap();
+        else await action.click();
+        await expect(dialog).toBeVisible();
+        await expect(
+          dialog.getByRole("combobox", {
+            name: "Adresse Ihrer Immobilie oder Fläche",
+            exact: true,
+          }),
+        ).toBeVisible();
+        if (scenario.selected) {
+          await expect(dialog.getByRole("status")).toContainText(
+            `${scenario.selected} ausgewählt`,
+          );
+          const close = dialog.getByRole("button", {
+            name: "Schließen",
+            exact: true,
+          });
+          if (width < 768) await close.tap();
+          else await close.click();
+          await expect(dialog).toHaveCount(0);
+          await expect(action).toBeFocused();
+        } else {
+          // A general consumption enquiry must not inherit the earlier roof choice.
+          await expect(dialog.locator(".selected-intent")).toHaveCount(0);
+          await expect(
+            dialog.getByRole("button", {
+              name: "Auswahl aufheben",
+              exact: true,
+            }),
+          ).toHaveCount(0);
+        }
+        expect(draftWrites).toEqual([]);
+      }
+
+      const address = "QA Verbrauchsprofil · Gewerbepark 2";
+      const input = dialog.getByRole("combobox");
+      await input.fill(address);
+      const created = page.waitForResponse(
+        (response) =>
+          new URL(response.url()).pathname === "/api/drafts" &&
+          response.request().method() === "POST",
+      );
+      await input.press("Enter");
+      const response = await created;
+      expect(response.ok()).toBeTruthy();
+      expect(response.request().postDataJSON()).toEqual({ address });
+      const project = await response.json();
+      await expect(page).toHaveURL(
+        new RegExp(`/standortcheck/${project.id}/1$`),
+      );
+      await expect(
+        page.getByLabel("Adresse oder Standortbeschreibung", { exact: true }),
+      ).toHaveValue(address);
+      expect(draftWrites).toHaveLength(1);
     });
 
     for (const scenario of [
@@ -417,6 +580,7 @@ test("the hero remains keyboard explorable with reduced motion and does not auto
     exact: true,
   });
   await expect(hero).toHaveAttribute("data-motion", "reduced");
+  await expect(hero).toHaveAttribute("data-stage", "Zusammenspiel");
   await expect(concept).toBeEnabled();
   await expect(concept).toHaveValue("100");
   await expect(hero.getByRole("button", { name: /Animation/ })).toBeDisabled();
@@ -441,13 +605,48 @@ test("the hero remains keyboard explorable with reduced motion and does not auto
       }),
   );
   expect(observedValues).toEqual(["1"]);
-  await hero.getByRole("button", { name: "Speichern", exact: true }).click();
-  await expect(concept).toHaveValue("50");
-  await expect(hero.locator("figcaption")).toHaveText(
-    "Strom zeitversetzt nutzen",
-  );
-  // A different control remains usable while autoplay is suppressed.
-  await hero.getByRole("button", { name: "Nutzen", exact: true }).click();
-  await expect(concept).toHaveValue("100");
+  for (const stage of [
+    {
+      name: "Netzanschluss",
+      value: "0",
+      title: "Der Anschluss setzt den Rahmen.",
+    },
+    {
+      name: "Dachfläche",
+      value: "34",
+      title: "Erzeugung beginnt auf dem Dach.",
+    },
+    {
+      name: "Speicher",
+      value: "67",
+      title: "Strom dann nutzen, wenn er gebraucht wird.",
+    },
+    {
+      name: "Zusammenspiel",
+      value: "100",
+      title: "Ein Standort. Ein abgestimmtes Konzept.",
+    },
+  ]) {
+    const station = hero.getByRole("button", { name: stage.name, exact: true });
+    await station.click();
+    await expect(concept).toHaveValue(stage.value);
+    await expect(station).toHaveAttribute("aria-pressed", "true");
+    await expect(hero).toHaveAttribute("data-stage", stage.name);
+    await expect(hero.locator("figcaption")).toContainText(stage.title);
+  }
+  for (const [name, value] of [
+    ["Netzanschluss", "0"],
+    ["Dachfläche", "34"],
+    ["Speicher", "67"],
+  ]) {
+    await hero
+      .getByRole("button", {
+        name: `${name} im Standortbild erkunden`,
+        exact: true,
+      })
+      .click();
+    await expect(concept).toHaveValue(value);
+    await expect(hero).toHaveAttribute("data-stage", name);
+  }
   await expect(hero).toHaveAttribute("data-motion", "reduced");
 });

@@ -60,9 +60,9 @@ export function Header({
           <Brand editorial={nightshift} />
           {nightshift && (
             <p className="brand-description">
-              Energie für
+              Vom Anschluss
               <br />
-              Ihren Standort.
+              zum Energiestandort.
             </p>
           )}
         </div>
@@ -93,7 +93,7 @@ export function Footer({ editorial = false }: { editorial?: boolean }) {
       {editorial ? (
         <>
           <div className="footer-intro">
-            <p>Photovoltaik. Speicher. Ihr Standort.</p>
+            <p>Anschluss. Erzeugung. Nutzung.</p>
             <a href="#main">Zurück nach oben</a>
           </div>
           <Link

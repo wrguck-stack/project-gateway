@@ -337,9 +337,9 @@ export function ScorePreview() {
         <div>
           <p className="overline">06 / EINORDNUNG MIT BEGRÜNDUNG</p>
           <h2>
-            Eine Zahl braucht
+            Was spricht für Ihr Projekt?
             <br />
-            <em>eine Grundlage.</em>
+            <em>Was ist noch offen?</em>
           </h2>
         </div>
         <p>

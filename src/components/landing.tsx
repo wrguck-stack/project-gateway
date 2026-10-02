@@ -28,6 +28,7 @@ import "@fontsource/arimo/latin-700.css";
 import "@fontsource/gelasio/latin-400-italic.css";
 import "./landing.css";
 import { NightshiftHero } from "./nightshift-hero";
+import { SiteSituations } from "./site-situations";
 import "./nightshift-landing.css";
 
 const faq = [
@@ -412,68 +413,25 @@ export function Landing({ mode }: { mode: string }) {
           </Modal>
         )}
 
-        <section
-          className="section wrap potential-section"
-          id="potenzial"
-          aria-labelledby="potential-title"
-        >
-          <p className="overline">01 / WAS IHREN STANDORT AUSMACHT</p>
-          <h2 id="potential-title">
-            Nicht jede Anlage passt.
-            <br />
-            <em>Aber vielleicht Ihre.</em>
-          </h2>
-          <div className="potential-grid">
-            <article>
-              <img
-                src="/energy/gateway-solar-detail-v1.webp"
-                width={1200}
-                height={720}
-                alt="Photovoltaikmodule auf einem weitläufigen Gewerbedach im Abendlicht."
-                loading="lazy"
-              />
-              <h3>Das Dach als Ausgangspunkt</h3>
-              <p>
-                Dachflächen, Statik, Ausrichtung und vorhandene Infrastruktur
-                bestimmen, welches Potenzial an Ihrem Standort realistisch ist.
-              </p>
-              <a href="#projektarten" className="text-link">
-                Mehr zu PV am Standort
-              </a>
-            </article>
-            <article>
-              <img
-                src="/energy/gateway-storage-detail-v1.webp"
-                width={1200}
-                height={720}
-                alt="Batteriespeicher neben einer beleuchteten Gewerbehalle."
-                loading="lazy"
-              />
-              <h3>Speicher im Gesamtkonzept</h3>
-              <p>
-                Ein Speicher kann Lastspitzen abfedern und den eigenen Strom
-                flexibel im Betrieb nutzbar machen – abhängig von Ihrem
-                Verbrauch und Netzanschluss.
-              </p>
-              <a href="#projektarten" className="text-link">
-                Mehr zu Speichern und Integration
-              </a>
-            </article>
-          </div>
-        </section>
+        <SiteSituations
+          onStart={(value) => {
+            setIntent(value);
+            focusEntry();
+          }}
+        />
 
         <section id="ablauf" className="section wrap decision-section">
           <div className="decision-intro">
-            <p className="overline">02 / DIE GRUNDLAGE FÜR IHRE ENTSCHEIDUNG</p>
+            <p className="overline">02 / VOR DER ANLAGENPLANUNG</p>
             <h2>
-              Chancen erkennen.
+              Erst den Betrieb verstehen.
               <br />
-              <em>Voraussetzungen klären.</em>
+              <em>Dann die Anlage planen.</em>
             </h2>
             <p>
-              Ein Energiekonzept beginnt mit Ihrem Standort. Wir ordnen die
-              Ausgangslage und machen sichtbar, was vor einer Investition
-              geklärt werden muss.
+              Ein großes Dach allein entscheidet noch nicht über eine passende
+              Anlage. Verbrauchszeiten, Anschlussleistung und Gebäude müssen
+              zusammenpassen. Diese drei Fragen stehen am Anfang.
             </p>
             <a href="#standortcheck-vorschau" className="text-link">
               Den Standortcheck kennenlernen{" "}
@@ -484,18 +442,18 @@ export function Landing({ mode }: { mode: string }) {
             {[
               [
                 "moeglichkeiten",
-                "Was ist möglich?",
-                "Ihre Fläche, Ihr Strombedarf und Ihr bestehender Netzanschluss bilden die Ausgangslage. Wir erfassen Ihre Angaben und machen sichtbar, welche technischen und rechtlichen Voraussetzungen fachlich zu klären sind.",
+                "Wann benötigt Ihr Betrieb Strom?",
+                "Stromabrechnung, Betriebszeiten und ein vorhandener Lastgang zeigen unterschiedliche Aspekte Ihres Bedarfs. Sie helfen dabei, Erzeugung und Nutzung zeitlich zusammenzudenken.",
               ],
               [
                 "wirtschaftlichkeit",
-                "Was kann sich rechnen?",
-                "Eigenverbrauch, Erweiterung oder Speicher: Entscheidend ist das passende Nutzungskonzept. Kosten, mögliche Erträge und Risiken gehören in die anschließende fachliche Bewertung. Annahmen und offene Fragen bleiben nachvollziehbar.",
+                "Was lässt Ihr Netzanschluss zu?",
+                "Die verfügbare Leistung für Bezug und Einspeisung ist eine eigene Planungsfrage. Vorhandene Anschlussunterlagen werden ergänzt; offene Punkte müssen mit Fachplanung und Netzbetreiber geklärt werden.",
               ],
               [
                 "naechste-schritte",
-                "Was passiert als Nächstes?",
-                "Sie erfassen Ihren Standort und ergänzen vorhandene Angaben und Unterlagen. Daraus entsteht Ihre Projektakte mit offenen Prüfpunkten – die Grundlage für ein Fachgespräch, bevor Sie über eine Investition entscheiden.",
+                "Was steht einer Investition noch im Weg?",
+                "Dachzustand, Statik, Genehmigungen und die Wirtschaftlichkeit brauchen belastbare Nachweise. Der Standortcheck sammelt die Ausgangsdaten und hält fest, welche Prüfungen noch fehlen.",
               ],
             ].map(([id, title, text], i) => (
               <article key={id} id={id}>
@@ -513,14 +471,14 @@ export function Landing({ mode }: { mode: string }) {
           <div className="dossier-intro">
             <p className="overline">03 / IHRE PROJEKTAKTE</p>
             <h2>
-              Ihre Angaben.
+              Vom Strombeleg
               <br />
-              Eine klare <em>Grundlage.</em>
+              <em>zur Projektakte.</em>
             </h2>
             <p className="lead">
-              Ihre Projektakte führt die Ausgangslage, vorhandene Nachweise und
-              offene Prüfungen zusammen. So wird sichtbar, was bereits bekannt
-              ist und was vor einer Investition noch geklärt werden muss.
+              Stromrechnung, Dachplan, vorhandene Anlagen: Aus einzelnen Angaben
+              entsteht eine gemeinsame Standortakte. Bekannte Werte, Schätzungen
+              und fehlende Nachweise bleiben darin klar unterscheidbar.
             </p>
             <ul className="value-list">
               <li>
@@ -551,14 +509,14 @@ export function Landing({ mode }: { mode: string }) {
           <div>
             <p className="overline">04 / DER STANDORTCHECK</p>
             <h2>
-              Sie müssen noch nicht
+              Wie viel Dach ist
               <br />
-              <em>alles wissen.</em>
+              <em>wirklich nutzbar?</em>
             </h2>
             <p className="lead">
-              Zehn verständliche Schritte führen durch die Angaben. Sie müssen
-              dafür weder eine fertige Planung noch jede technische Antwort
-              mitbringen.
+              Eine der Fragen im Standortcheck. Probieren Sie aus, wie sich
+              Angaben, Schätzwerte und unbekannte Werte erfassen lassen. Eine
+              fertige Planung benötigen Sie für den Einstieg nicht.
             </p>
             {[
               [
@@ -599,14 +557,14 @@ export function Landing({ mode }: { mode: string }) {
             <div>
               <p className="overline">05 / IHRE MÖGLICHKEITEN</p>
               <h2>
-                Ihr Standort.
+                Neu erzeugen.
                 <br />
-                <em>Ihre Möglichkeiten.</em>
+                <em>Bestehendes ergänzen.</em>
               </h2>
             </div>
             <p>
-              Öffnen Sie die passende Projektart und starten Sie mit einer
-              Auswahl, die zu Ihrem Vorhaben passt.
+              Dach-PV, Erweiterung, Speicher oder Freifläche: Hier sehen Sie,
+              welche Angaben für den jeweiligen Projektweg gebraucht werden.
             </p>
           </div>
           <ProjectTypes selected={intent} onSelect={selectIntent} />
@@ -616,9 +574,9 @@ export function Landing({ mode }: { mode: string }) {
         <section className="section wrap audience-section" id="eigentuemer">
           <p className="overline">07 / FÜR EIGENTÜMER UND UNTERNEHMEN</p>
           <h2>
-            Ein Standort. Viele Fragen.
+            Ein Betrieb.
             <br />
-            <em>Eine fundierte Entscheidung.</em>
+            <em>Oder ein ganzes Portfolio.</em>
           </h2>
           <div className="audience-columns">
             <article>
@@ -655,9 +613,9 @@ export function Landing({ mode }: { mode: string }) {
           <div>
             <p className="overline">08 / DIE ZUSAMMENARBEIT</p>
             <h2>
-              Gut vorbereitet.
+              Wer prüft Ihren Standort?
               <br />
-              <em>Gemeinsam weiter.</em>
+              <em>Wer plant die Anlage?</em>
             </h2>
             <p className="lead">
               Project Gateway bündelt die Angaben. Der tatsächlich benannte
@@ -706,9 +664,9 @@ export function Landing({ mode }: { mode: string }) {
           <div>
             <p className="overline">09 / HÄUFIGE FRAGEN</p>
             <h2>
-              Ihre Fragen.
+              Was vor einer Investition
               <br />
-              <em>Klare Antworten.</em>
+              <em>zu klären ist.</em>
             </h2>
             <Link href="/kontakt" className="text-link">
               Kontakt und Ansprechpartner <ArrowRight size={20} aria-hidden />
@@ -730,14 +688,14 @@ export function Landing({ mode }: { mode: string }) {
           <div>
             <p className="overline">10 / IHR NÄCHSTER SCHRITT</p>
             <h2>
-              Was kann Ihr Standort?
+              Ihr Energiekonzept beginnt
               <br />
-              <em>Finden wir es heraus.</em>
+              <em>mit Ihrem Standort.</em>
             </h2>
             <p>
-              Erfassen Sie Ihren Standort. Ordnen Sie Ihre Ausgangslage und
-              bereiten Sie die Fragen vor, die vor einer Investition geklärt
-              werden müssen.
+              Beginnen Sie mit Ihrer Adresse. Ergänzen Sie, was Sie über Dach,
+              Verbrauch und bestehende Anlagen wissen. Offene Fragen bleiben
+              sichtbar, bis sie fachlich geklärt sind.
             </p>
           </div>
           <div>

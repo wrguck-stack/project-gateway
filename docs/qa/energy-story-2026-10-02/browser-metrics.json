@@ -1,0 +1,999 @@
+{
+  "viewports": {
+    "rows": [
+      {
+        "width": 1440,
+        "height": 900,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "left": 0
+        },
+        "viewport": 1440,
+        "controls": {
+          "x": 70.5625,
+          "y": 800,
+          "width": 1298.875,
+          "height": 99,
+          "top": 800,
+          "right": 1369.4375,
+          "bottom": 899,
+          "left": 70.5625
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "left": 0
+        },
+        "viewport": 1440,
+        "controls": {
+          "x": 70.5625,
+          "y": 800,
+          "width": 1298.875,
+          "height": 99,
+          "top": 800,
+          "right": 1369.4375,
+          "bottom": 899,
+          "left": 70.5625
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "left": 0
+        },
+        "viewport": 1440,
+        "controls": {
+          "x": 70.5625,
+          "y": 800,
+          "width": 1298.875,
+          "height": 99,
+          "top": 800,
+          "right": 1369.4375,
+          "bottom": 899,
+          "left": 70.5625
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "left": 0
+        },
+        "viewport": 1440,
+        "controls": {
+          "x": 70.5625,
+          "y": 800,
+          "width": 1298.875,
+          "height": 99,
+          "top": 800,
+          "right": 1369.4375,
+          "bottom": 899,
+          "left": 70.5625
+        },
+        "stage": "Speicher"
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 768,
+          "top": 0,
+          "right": 1366,
+          "bottom": 768,
+          "left": 0
+        },
+        "viewport": 1366,
+        "controls": {
+          "x": 66.9375,
+          "y": 668,
+          "width": 1232.125,
+          "height": 99,
+          "top": 668,
+          "right": 1299.0625,
+          "bottom": 767,
+          "left": 66.9375
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 768,
+          "top": 0,
+          "right": 1366,
+          "bottom": 768,
+          "left": 0
+        },
+        "viewport": 1366,
+        "controls": {
+          "x": 66.9375,
+          "y": 668,
+          "width": 1232.125,
+          "height": 99,
+          "top": 668,
+          "right": 1299.0625,
+          "bottom": 767,
+          "left": 66.9375
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 768,
+          "top": 0,
+          "right": 1366,
+          "bottom": 768,
+          "left": 0
+        },
+        "viewport": 1366,
+        "controls": {
+          "x": 66.9375,
+          "y": 668,
+          "width": 1232.125,
+          "height": 99,
+          "top": 668,
+          "right": 1299.0625,
+          "bottom": 767,
+          "left": 66.9375
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 768,
+          "top": 0,
+          "right": 1366,
+          "bottom": 768,
+          "left": 0
+        },
+        "viewport": 1366,
+        "controls": {
+          "x": 66.9375,
+          "y": 668,
+          "width": 1232.125,
+          "height": 99,
+          "top": 668,
+          "right": 1299.0625,
+          "bottom": 767,
+          "left": 66.9375
+        },
+        "stage": "Speicher"
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 720,
+          "top": 0,
+          "right": 1280,
+          "bottom": 720,
+          "left": 0
+        },
+        "viewport": 1280,
+        "controls": {
+          "x": 62.71875,
+          "y": 620,
+          "width": 1154.546875,
+          "height": 99,
+          "top": 620,
+          "right": 1217.265625,
+          "bottom": 719,
+          "left": 62.71875
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 720,
+          "top": 0,
+          "right": 1280,
+          "bottom": 720,
+          "left": 0
+        },
+        "viewport": 1280,
+        "controls": {
+          "x": 62.71875,
+          "y": 620,
+          "width": 1154.546875,
+          "height": 99,
+          "top": 620,
+          "right": 1217.265625,
+          "bottom": 719,
+          "left": 62.71875
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 720,
+          "top": 0,
+          "right": 1280,
+          "bottom": 720,
+          "left": 0
+        },
+        "viewport": 1280,
+        "controls": {
+          "x": 62.71875,
+          "y": 620,
+          "width": 1154.546875,
+          "height": 99,
+          "top": 620,
+          "right": 1217.265625,
+          "bottom": 719,
+          "left": 62.71875
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 720,
+          "top": 0,
+          "right": 1280,
+          "bottom": 720,
+          "left": 0
+        },
+        "viewport": 1280,
+        "controls": {
+          "x": 62.71875,
+          "y": 620,
+          "width": 1154.546875,
+          "height": 99,
+          "top": 620,
+          "right": 1217.265625,
+          "bottom": 719,
+          "left": 62.71875
+        },
+        "stage": "Speicher"
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 768,
+          "top": 0,
+          "right": 1024,
+          "bottom": 768,
+          "left": 0
+        },
+        "viewport": 1024,
+        "controls": {
+          "x": 50.171875,
+          "y": 668,
+          "width": 923.640625,
+          "height": 99,
+          "top": 668,
+          "right": 973.8125,
+          "bottom": 767,
+          "left": 50.171875
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 768,
+          "top": 0,
+          "right": 1024,
+          "bottom": 768,
+          "left": 0
+        },
+        "viewport": 1024,
+        "controls": {
+          "x": 50.171875,
+          "y": 668,
+          "width": 923.640625,
+          "height": 99,
+          "top": 668,
+          "right": 973.8125,
+          "bottom": 767,
+          "left": 50.171875
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 768,
+          "top": 0,
+          "right": 1024,
+          "bottom": 768,
+          "left": 0
+        },
+        "viewport": 1024,
+        "controls": {
+          "x": 50.171875,
+          "y": 668,
+          "width": 923.640625,
+          "height": 99,
+          "top": 668,
+          "right": 973.8125,
+          "bottom": 767,
+          "left": 50.171875
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 768,
+          "top": 0,
+          "right": 1024,
+          "bottom": 768,
+          "left": 0
+        },
+        "viewport": 1024,
+        "controls": {
+          "x": 50.171875,
+          "y": 668,
+          "width": 923.640625,
+          "height": 99,
+          "top": 668,
+          "right": 973.8125,
+          "bottom": 767,
+          "left": 50.171875
+        },
+        "stage": "Speicher"
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 1024,
+          "top": 0,
+          "right": 768,
+          "bottom": 1024,
+          "left": 0
+        },
+        "viewport": 768,
+        "controls": {
+          "x": 20,
+          "y": 934,
+          "width": 728,
+          "height": 89,
+          "top": 934,
+          "right": 748,
+          "bottom": 1023,
+          "left": 20
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 1024,
+          "top": 0,
+          "right": 768,
+          "bottom": 1024,
+          "left": 0
+        },
+        "viewport": 768,
+        "controls": {
+          "x": 20,
+          "y": 934,
+          "width": 728,
+          "height": 89,
+          "top": 934,
+          "right": 748,
+          "bottom": 1023,
+          "left": 20
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 1024,
+          "top": 0,
+          "right": 768,
+          "bottom": 1024,
+          "left": 0
+        },
+        "viewport": 768,
+        "controls": {
+          "x": 20,
+          "y": 934,
+          "width": 728,
+          "height": 89,
+          "top": 934,
+          "right": 748,
+          "bottom": 1023,
+          "left": 20
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 1024,
+          "top": 0,
+          "right": 768,
+          "bottom": 1024,
+          "left": 0
+        },
+        "viewport": 768,
+        "controls": {
+          "x": 20,
+          "y": 934,
+          "width": 728,
+          "height": 89,
+          "top": 934,
+          "right": 748,
+          "bottom": 1023,
+          "left": 20
+        },
+        "stage": "Speicher"
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "viewport": 390,
+        "controls": {
+          "x": 20,
+          "y": 754,
+          "width": 350,
+          "height": 89,
+          "top": 754,
+          "right": 370,
+          "bottom": 843,
+          "left": 20
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "viewport": 390,
+        "controls": {
+          "x": 20,
+          "y": 754,
+          "width": 350,
+          "height": 89,
+          "top": 754,
+          "right": 370,
+          "bottom": 843,
+          "left": 20
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "viewport": 390,
+        "controls": {
+          "x": 20,
+          "y": 754,
+          "width": 350,
+          "height": 89,
+          "top": 754,
+          "right": 370,
+          "bottom": 843,
+          "left": 20
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "viewport": 390,
+        "controls": {
+          "x": 20,
+          "y": 754,
+          "width": 350,
+          "height": 89,
+          "top": 754,
+          "right": 370,
+          "bottom": 843,
+          "left": 20
+        },
+        "stage": "Speicher"
+      },
+      {
+        "width": 375,
+        "height": 667,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 667,
+          "top": 0,
+          "right": 375,
+          "bottom": 667,
+          "left": 0
+        },
+        "viewport": 375,
+        "controls": {
+          "x": 20,
+          "y": 585,
+          "width": 335,
+          "height": 81,
+          "top": 585,
+          "right": 355,
+          "bottom": 666,
+          "left": 20
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 375,
+        "height": 667,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 667,
+          "top": 0,
+          "right": 375,
+          "bottom": 667,
+          "left": 0
+        },
+        "viewport": 375,
+        "controls": {
+          "x": 20,
+          "y": 585,
+          "width": 335,
+          "height": 81,
+          "top": 585,
+          "right": 355,
+          "bottom": 666,
+          "left": 20
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 375,
+        "height": 667,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 667,
+          "top": 0,
+          "right": 375,
+          "bottom": 667,
+          "left": 0
+        },
+        "viewport": 375,
+        "controls": {
+          "x": 20,
+          "y": 585,
+          "width": 335,
+          "height": 81,
+          "top": 585,
+          "right": 355,
+          "bottom": 666,
+          "left": 20
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 375,
+        "height": 667,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 667,
+          "top": 0,
+          "right": 375,
+          "bottom": 667,
+          "left": 0
+        },
+        "viewport": 375,
+        "controls": {
+          "x": 20,
+          "y": 585,
+          "width": 335,
+          "height": 81,
+          "top": 585,
+          "right": 355,
+          "bottom": 666,
+          "left": 20
+        },
+        "stage": "Speicher"
+      },
+      {
+        "width": 360,
+        "height": 640,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 640,
+          "top": 0,
+          "right": 360,
+          "bottom": 640,
+          "left": 0
+        },
+        "viewport": 360,
+        "controls": {
+          "x": 20,
+          "y": 558,
+          "width": 320,
+          "height": 81,
+          "top": 558,
+          "right": 340,
+          "bottom": 639,
+          "left": 20
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 360,
+        "height": 640,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 640,
+          "top": 0,
+          "right": 360,
+          "bottom": 640,
+          "left": 0
+        },
+        "viewport": 360,
+        "controls": {
+          "x": 20,
+          "y": 558,
+          "width": 320,
+          "height": 81,
+          "top": 558,
+          "right": 340,
+          "bottom": 639,
+          "left": 20
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 360,
+        "height": 640,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 640,
+          "top": 0,
+          "right": 360,
+          "bottom": 640,
+          "left": 0
+        },
+        "viewport": 360,
+        "controls": {
+          "x": 20,
+          "y": 558,
+          "width": 320,
+          "height": 81,
+          "top": 558,
+          "right": 340,
+          "bottom": 639,
+          "left": 20
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 360,
+        "height": 640,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 640,
+          "top": 0,
+          "right": 360,
+          "bottom": 640,
+          "left": 0
+        },
+        "viewport": 360,
+        "controls": {
+          "x": 20,
+          "y": 558,
+          "width": 320,
+          "height": 81,
+          "top": 558,
+          "right": 340,
+          "bottom": 639,
+          "left": 20
+        },
+        "stage": "Speicher"
+      },
+      {
+        "width": 320,
+        "height": 640,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 640,
+          "top": 0,
+          "right": 320,
+          "bottom": 640,
+          "left": 0
+        },
+        "viewport": 320,
+        "controls": {
+          "x": 20,
+          "y": 558,
+          "width": 280,
+          "height": 81,
+          "top": 558,
+          "right": 300,
+          "bottom": 639,
+          "left": 20
+        },
+        "stage": "Zusammenspiel"
+      },
+      {
+        "width": 320,
+        "height": 640,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 640,
+          "top": 0,
+          "right": 320,
+          "bottom": 640,
+          "left": 0
+        },
+        "viewport": 320,
+        "controls": {
+          "x": 20,
+          "y": 558,
+          "width": 280,
+          "height": 81,
+          "top": 558,
+          "right": 300,
+          "bottom": 639,
+          "left": 20
+        },
+        "stage": "Netzanschluss"
+      },
+      {
+        "width": 320,
+        "height": 640,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 640,
+          "top": 0,
+          "right": 320,
+          "bottom": 640,
+          "left": 0
+        },
+        "viewport": 320,
+        "controls": {
+          "x": 20,
+          "y": 558,
+          "width": 280,
+          "height": 81,
+          "top": 558,
+          "right": 300,
+          "bottom": 639,
+          "left": 20
+        },
+        "stage": "Dachfläche"
+      },
+      {
+        "width": 320,
+        "height": 640,
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 640,
+          "top": 0,
+          "right": 320,
+          "bottom": 640,
+          "left": 0
+        },
+        "viewport": 320,
+        "controls": {
+          "x": 20,
+          "y": 558,
+          "width": 280,
+          "height": 81,
+          "top": 558,
+          "right": 300,
+          "bottom": 639,
+          "left": 20
+        },
+        "stage": "Speicher"
+      }
+    ],
+    "errors": []
+  },
+  "finalCheck": {
+    "fits": [
+      {
+        "stage": "Zusammenspiel",
+        "height": 640,
+        "width": 320
+      },
+      {
+        "stage": "Netzanschluss",
+        "height": 640,
+        "width": 320
+      },
+      {
+        "stage": "Dachfläche",
+        "height": 640,
+        "width": 320
+      },
+      {
+        "stage": "Speicher",
+        "height": 640,
+        "width": 320
+      }
+    ],
+    "skip": [
+      {
+        "rect": {
+          "x": 20,
+          "y": -100,
+          "width": 112.359375,
+          "height": 59,
+          "top": -100,
+          "right": 132.359375,
+          "bottom": -41,
+          "left": 20
+        },
+        "active": false,
+        "top": "-100px"
+      },
+      {
+        "rect": {
+          "x": 20,
+          "y": -100,
+          "width": 112.359375,
+          "height": 59,
+          "top": -100,
+          "right": 132.359375,
+          "bottom": -41,
+          "left": 20
+        },
+        "active": false,
+        "top": "-100px"
+      }
+    ],
+    "autoplay": "pause/resume/completion/replay passed",
+    "errors": []
+  }
+}

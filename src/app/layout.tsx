@@ -9,12 +9,11 @@ import "./globals.css";
 import { RouteFocus } from "@/components/route-focus";
 export const metadata: Metadata = {
   title: {
-    default:
-      "Project Gateway · Können PV und Speicher Ihre Stromkosten senken?",
+    default: "Project Gateway · Vom Stromanschluss zum Energiestandort",
     template: "%s · Project Gateway",
   },
   description:
-    "Eigenen Solarstrom erzeugen, speichern und im Betrieb nutzen: Erfassen Sie Ihren Standort und bereiten Sie die Prüfung von Einsparpotenzial, Kosten und Voraussetzungen vor.",
+    "PV-Dach, Speicher, Verbrauch und Netzanschluss gemeinsam betrachten. Finden Sie den passenden Einstieg und bereiten Sie die fachliche Prüfung Ihres Gewerbestandorts vor.",
   robots: { index: false, follow: false },
 };
 export default function RootLayout({

@@ -1,103 +1,115 @@
-# Project Gateway · Night Shift Variante 3
+# Project Gateway · Vom Stromanschluss zum Energiestandort
 
 final result: passed
 
-## Korrektur nach Nutzerfeedback: Hero in einer Bildschirmhöhe
+## Auftrag und Vergleichsgrundlage
 
-Die frühere Abnahme hat die Gesamthöhe auf üblichen Laptopbildschirmen nicht
-korrekt gewichtet. Der Nutzer verlangt jetzt ausdrücklich einen vollständig
-sichtbaren Hero. Diese Vorgabe ersetzt die ursprüngliche hohe Proportion des
-Rasterentwurfs. Die folgenden älteren Vergleichsangaben sind historisch.
+Am 02.10.2026 hat der Nutzer die vorgeschlagene eigenständige Standortgeschichte,
+drei konkrete Einstiegssituationen und eine entsprechende visuelle Überarbeitung
+freigegeben. Diese Änderung entwickelt den zuvor gewählten Night-Shift-Stil weiter
+und ersetzt die bisherige Hero-Aussage sowie den ersten Bildabschnitt. Die frühere
+Atlas-Vorgabe ist für diese öffentliche Homepage durch die Nutzerauswahl ersetzt;
+fachliche Verträge, Score-Geometrie und bestehende Abläufe bleiben maßgeblich.
 
-P1 behoben: feste Mindesthöhe von 900–1256 px durch `min-height: 100svh`
-ersetzt; Typografie und Abstände berücksichtigen nun auch die Viewporthöhe.
-Header, Text, CTA und Zeitleiste passen gemeinsam in die erste Ansicht.
-Mobil liegt das vorhandene Foto ebenfalls hinter dem Inhalt. Keine Texte oder
-Bedienelemente werden zum Erreichen der Höhe ausgeblendet.
+Ausgangspunkt ist `docs/qa/nightshift-2026-10-02/hero-viewport-fit.webp`.
+Diese Aufnahme wurde gemeinsam mit der neuen Desktop-/Mobilansicht geöffnet.
+Die jetzige Umsetzung ist eine ausdrücklich gewünschte Weiterentwicklung,
+kein pixelidentischer Nachbau des älteren Rasterentwurfs.
 
-Aktueller Browserbeleg: `docs/qa/nightshift-2026-10-02/hero-viewport-fit.webp`.
-Links Desktop 1366 × 768, rechts Mobile 390 × 844, beide DPR 1 ohne Skalierung,
-gemeinsames Bild 1756 × 844. Unter dem Desktopbild liegt ausschließlich
-Auffüllfläche des Belegs. Hero-Zustand Nutzen / 100 % / reduzierte Bewegung.
-Quelle und aktueller Desktop wurden gemeinsam geöffnet; Farben, Schriftfamilien,
-vierzeilige Hierarchie, Bildstil und Wortlaut bleiben erhalten. Die abweichende
-Höhe ist die gewünschte Korrektur, kein weiterer Nachbaufehler.
+Figma war verbunden. Ein neuer leerer Entwurf wurde angelegt, die erste
+Canvas-Bearbeitung jedoch vom Figma-MCP-Limit des Starter-Plans blockiert.
+Es entstand kein Figma-Design. Die Umsetzung erfolgte direkt im bestehenden
+Frontend, ohne Upgrade oder neue kostenpflichtige Ressource.
 
-Prüfung: 1920 × 1080, 1440 × 900, 1366 × 768, 1280 × 720, 1024 × 768,
-390 × 844, 375 × 667 und 360 × 640. Bei normaler Schrift ist die Herohöhe
-jeweils exakt die Viewporthöhe; CTA und Zeitleiste sind vollständig sichtbar.
-Bei 200 % Schrift darf der Inhalt zugunsten der Lesbarkeit nach unten wachsen.
-Die erneute Sichtprüfung korrigierte mobile Wortüberläufe und die Überlagerung
-von Bildbeschriftung und CTA: Beschriftung im normalen Layoutfluss, flexible
-Umbrüche und eine mit der Schrift wachsende Kopfzeile. Alle Bedienelemente
-bleiben per Scroll erreichbar. Keine horizontalen Überläufe oder JavaScriptfehler.
-Build und Typecheck bestanden. Keine Funktions-, Inhalts- oder Hostingänderung.
+## Umsetzung
 
-Aktueller final result: passed
+- Hero: „Vom Stromanschluss zum Energiestandort.“ Ein zusammenhängender
+  Gewerbestandort zeigt Netzanschluss, PV-Dach und Batteriespeicher.
+- Vier Stationen heben die tatsächlichen Bildbereiche hervor und erklären die
+  jeweilige Planungsfrage. Hotspots und Zeitleiste sind echte HTML-Bedienelemente.
+- Automatische Erkundung über 16 Sekunden, Pause/Fortsetzen/Neustart,
+  manuelle Auswahl und Regler mit Tastaturbedienung. Bei reduzierter Bewegung
+  bleibt das Gesamtbild stehen; alle Stationen sind manuell erreichbar.
+- Drei aufklappbare Einstiege: hoher Stromverbrauch, bestehende PV-Anlage,
+  ungenutzte Dachfläche. Jeder erläutert die erste Prüffrage, benötigte Angaben
+  und einen konkreten nächsten Schritt im vorhandenen Standortcheck.
+- Die Projektart wird passend vorausgewählt; hoher Stromverbrauch löscht eine
+  zuvor gewählte Art und legt keine Technik fest.
+- Folgeabschnitte, Metadaten und Rahmentexte benennen Verbrauch, Anschluss,
+  Dachzustand, Nachweise und offene Prüfungen konkret.
 
-## Vergleichsgrundlage
+## Sichtprüfung: fünf Flächen
 
-Der Nutzer wählte die dritte **angezeigte** Variante der Night-Shift-Entwürfe.
-Diese Auswahl ersetzt die ältere Atlas-Vorgabe für die öffentliche Homepage.
-Fachliche Verträge und die bestehende Anwendung bleiben maßgeblich.
+1. **Typografie:** Selbst gehostete Arimo und Gelasio bleiben erhalten; CDP
+   bestätigt die tatsächlich gerenderten Webfonts. Klare große Hierarchie,
+   mobile Stationsnamen 12 px, Text und sekundärer CTA mindestens 14 px.
+2. **Layout und Rhythmus:** Desktop mit Text-/Bildspalte, mobile Anordnung im
+   normalen Dokumentfluss. Hero samt Kopfzeile, CTA, Erklärung und Zeitleiste
+   passt bei normaler Schrift in eine Bildschirmhöhe. Bei 200 % Text darf
+   er zugunsten der Lesbarkeit wachsen. Neue nummerierte Einstiege ersetzen
+   die bisherige allgemeine Bildfolge.
+3. **Farben und Zustände:** Navy, eisblaue Akzente und feine Trennlinien führen
+   den gewählten Stil fort. Kontrastreiche Buttons, sichtbare Fokusrahmen,
+   aktive Station und auf-/zugeklappte Bereiche sind unterscheidbar.
+4. **Bild:** Neues erzeugtes Architekturmotiv, 1536 × 1024, WebP, 303610 Byte.
+   3:2-Darstellung ohne Beschnitt bewahrt die Zuordnung der Hotspots:
+   Anschluss 28/69 %, Dach 50/24 %, Speicher 82/58 %. Weiche Bildränder,
+   keine eingebrannten Texte, keine erfundenen Messdaten oder Stromflüsse.
+   Alttext bezeichnet die Szene als Architekturvisualisierung; sie ist keine
+   behauptete Kundenreferenz.
+5. **Inhalt und Funktion:** Überschriften benennen konkrete Fragen. Keine
+   garantierten Einsparungen, keine erfundenen Rechtsaussagen. Vorhandene
+   synthetische Projektbeispiele und nicht angebundene Übergaben behalten
+   ihre sachlich erforderliche Kennzeichnung. Der Standortcheck bleibt eine
+   strukturierte Erfassung und ersetzt keine Fachplanung.
 
-- Visuelle Quelle: `docs/qa/nightshift-2026-10-02/selected-variant-3.webp`, 946 × 1663 Pixel.
-- Gerenderte Umsetzung: `docs/qa/nightshift-2026-10-02/desktop-final.webp`, 1440 × 2531 Pixel, CSS-Viewport 1440 × 2531, DPR 1.
-- Zum Vergleich wurde die Browseraufnahme auf 946 × 1663 Pixel normalisiert. Quelle und Umsetzung wurden gemeinsam geöffnet; keine Browserrahmen.
-- Zustand: Startseite, Bilder und lokal bereitgestellte Fonts geladen, Energiekonzept am Ende (100 %, Nutzen), reduzierte Bewegung.
-- Referenzstil zusätzlich an der tatsächlichen Night-Shift-Seite einschließlich Desktop, Mobilansicht und interaktiven Zuständen geprüft.
-- Browser: Chromium 153 / Playwright 1.63; der Nutzer hatte diesen Browserweg ausdrücklich freigegeben, nachdem der Cloud-Browser nicht funktionierte.
+## Belege und Korrekturen
 
-## Sichtvergleich und Befunde
+Belegordner: `docs/qa/energy-story-2026-10-02/`.
 
-Keine offenen P0/P1/P2-Befunde. Vollansicht sowie fokussierte Ausschnitte wurden nach den Korrekturen erneut verglichen.
+- `hero-desktop-mobile.webp`: Desktop 1366 × 768 und Mobil 390 × 844, DPR 1,
+  nebeneinander ohne Skalierung; Zustand Zusammenspiel, reduzierte Bewegung.
+- `hero-grid-focus.webp`: Desktop 1440 × 900, aktive Station Netzanschluss.
+- `entry-desktop-mobile.webp`: neue Einstiegssektion mit geöffnetem PV-Bestand,
+  Elementaufnahmen bei 1440 bzw. 390 Pixeln Viewportbreite, nebeneinander.
+- `browser-metrics.json`: alle 36 finalen Breiten-/Stationsmessungen sowie
+  Wiedergabe- und Skiplink-Prüfung.
 
-1. **Fonts / Typografie:** Arimo Regular/Bold und Gelasio Italic werden selbst gehostet. CDP bestätigt die tatsächlich verwendeten Webfonts. Sie ersetzen die zuvor sichtbaren Linux-Fallbacks und bilden den Arial/Georgia-Charakter der Quelle ab. Vierzeilige Hero-Hierarchie, eisblaues `Stromkosten` und kursives `senken?` sind erhalten. Geringe Glyphen-/Breitenunterschiede zum Rasterentwurf sind P3.
-2. **Layout / Rhythmus:** vollständiges Hero-Bild, linker Texteinstieg, schmale Kopfzeile, untere Zeitleiste und versetzte Bildspalten folgen der Vorlage. Hero-Ende bei 1265 CSS-Pixeln entspricht nach Normalisierung ungefähr dem Vorlagenende. Nachfolgende bestehende Abschnitte übernehmen Schrift, Abstände, Linien und Farben. Mobil werden Bild und Text lesbar angeordnet; die Referenz enthält keinen separaten mobilen Entwurf.
-3. **Farben / Zustände:** Navy-Grund #080d13, helle Schrift und eisblaue Akzente. Felder, Buttons, Tabs, Fokus und Vorschläge haben sichtbare Konturen und Zustände. Dropdown-Vorschläge wurden ausdrücklich auf dunkle Flächen mit kontrastreichen Texten umgestellt. Axe- und Tastaturprüfung bestanden.
-4. **Bildqualität:** drei eigenständige, optimierte WebP-Motive mit PV-Dach, Speicher und beleuchtetem Gewerbebetrieb. Keine eingebrannte UI; Texte und Bedienelemente bleiben echtes HTML. Die Bildszene ist eine neu erzeugte Interpretation des Entwurfs und etwas wärmer. Kein behauptetes Kundenreferenzprojekt.
-5. **Inhalt:** exakte ausgewählte Hero-Frage und Standortbezug. Keine garantierten Einsparungen, Erträge oder erfundenen Rechtsaussagen. Synthetische Projektbeispiele bleiben als solche bezeichnet. Die vorhandene Erfassung und Übergabesemantik wurde nicht zu einer Live-Fachplanung umgedeutet.
+Vollansicht und fokussierte Zustände wurden vor und nach den Korrekturen
+visuell geprüft. Ein zweiter Designreview bestätigte Bildzuordnung, Hierarchie
+und Bedienbarkeit. Keine offenen P0/P1/P2-Befunde.
 
-Fokussierte Belege (jeweils Quelle links, Umsetzung rechts):
-- `docs/qa/nightshift-2026-10-02/hero-focus.webp`
-- `docs/qa/nightshift-2026-10-02/section-focus.webp`
+Behoben: zu hoher Hero auf 320 × 640 durch angepasste Bildhöhe/Abstände und
+kurze mobile Stationsnamen; kleine mobile Beschriftungen vergrößert.
+Ein gelber Skiplink in überhohen Element-Screenshots war ein Aufnahmeeffekt:
+Im normalen Browser liegt der nicht fokussierte Link vollständig oberhalb
+des Viewports (top −100 px, bottom −41 px), ohne Fokus und ohne Überlagerung.
+Die finalen Elementaufnahmen unterdrücken ausschließlich diesen außerhalb
+des sichtbaren Viewports liegenden, nicht fokussierten Link. Tastaturfokus
+und der echte sichtbare Skiplink bleiben unverändert.
 
-Weitere Browserbelege:
-- `docs/qa/nightshift-2026-10-02/mobile-final.webp`
-- `docs/qa/nightshift-2026-10-02/dialog-mobile.webp`
-- `docs/qa/nightshift-2026-10-02/dialog-text-200.webp`
-
-## Vergleichshistorie
-
-- Erster Durchlauf: P2 bei zu kleiner Typografie im ersten Inhaltsabschnitt und zu breitem Hero-Schriftbild durch System-Fallbacks. Korrektur: selbst gehostete passende Fonts, größere Überschrift/Kartentexte, angepasste Absatzgrößen und führende Linie.
-- Responsiver Durchlauf: P2 bei umbrechenden Nummern und Überbreite mit 200 % Text. Diese Überbreite vergrößerte den mobilen Layout-Viewport und erschwerte das Schließen des Dialogs. Korrektur: sinnvolle Mindestbreiten, zulässige Wortumbrüche, flexible Kopfzeile und Link-/Buttonbreiten; Nummern bleiben zusammen. Der Test vergleicht nun gegen die echte Seitenbreite statt den durch Overflow vergrößerten Layout-Viewport.
-- Dialog: P2 bei hellen Vorschlagflächen mit übernommenem hellen Text. Korrektur: explizite dunkle Vorschlag- und Hoverflächen plus kontrastreiche Texte.
-- Nach Korrekturen: Produktionsbuild, neue Browseraufnahmen und erneuter vollständiger/fokussierter Sichtvergleich; keine offenen P0/P1/P2. Beide prüfenden Agenten bestätigen das Ergebnis.
-
-## Funktionsprüfung
+## Funktions- und Darstellungsprüfung
 
 - Produktionsbuild und Typecheck bestanden.
-- 24 relevante E2E-Szenarien insgesamt bestanden: zunächst 23/24; das fehlerhafte 200-%-Szenario nach Korrektur bestanden. Vier von der Korrektur betroffene Prüfungen wurden gezielt wiederholt und bestanden.
-- Vollständiger Eigentümerablauf auf Desktop und Mobilgerät einschließlich Upload, Review, Ergebnis, Einwilligung und Beleg.
-- Bestehende Landing-Interaktionen, Projektarten, Navigation, Entwurfsfortsetzung, Dialog und Tastaturfokus.
-- Reflow auf 1440, 1280, 1024, 768, 390, 360 und 320 Pixeln; Dialog auf allen Breiten.
-- Reduzierte Bewegung, Touch und 200 % Text; Stationsschalter, Regler und Tastaturbedienung.
-- Axe-Smokecheck und tatsächlich gerenderte Fonts geprüft.
-- Keine JavaScript-Laufzeitfehler in den abschließenden Browseraufnahmen.
+- 26 relevante E2E-Szenarien bestanden: vollständige Eigentümerabläufe auf
+  Desktop/Mobil, Upload, Review, Ergebnis, Einwilligung und Beleg;
+  neue Einstiege, tatsächlicher Draft-Request, Rücksetzen alter Projektart;
+  Hero-Stationen/Hotspots, Navigation, Formulare, Score, Modal, Fokus und Axe.
+- Anschließend neuer Hero-Höhen-Regressionstest und 200-%-Reflow erneut
+  bestanden: 2/2. Damit 27 unterschiedliche relevante Szenarien abgedeckt.
+- Finale Bild-/Höhenprüfung: 1440 × 900, 1366 × 768, 1280 × 720, 1024 × 768,
+  768 × 1024, 390 × 844, 375 × 667, 360 × 640, 320 × 640, jeweils vier Stationen.
+  Alle 36 Zustände passen vollständig in die erste Ansicht; keine horizontale
+  Überbreite, keine JavaScriptfehler.
+- Autoplay, Pause, Fortsetzen, Ende und erneute Wiedergabe im normalen
+  Bewegungsmodus zusätzlich im Browser geprüft.
+- Vergrößerte Schrift, Touch, reduzierte Bewegung und reale Webfonts geprüft.
 
-## Akzeptierte Unterschiede / Restumfang
+## Veröffentlichung
 
-- Echte Formulare und mobile Umbrüche ergänzen Zustände, die der Desktopentwurf nicht spezifiziert.
-- Nativer zugänglicher Regler statt nachgezeichneter statischer Zeitleiste. Animation kann pausiert, erneut abgespielt oder manuell erkundet werden; bei reduzierter Bewegung steht das Bild still.
-- Geringe Schriftkontur- und Fotodetailunterschiede sind P3 und blockieren nicht.
-- Kein neuer Hostingtarif und keine zusätzliche kostenpflichtige Ressource. Veröffentlichung nutzt die bestehende Netlify-Site; Live-Beleg wird separat dokumentiert.
-
-## Abgeschlossene Checkliste
-
-- [x] Exakte Auswahl zugeordnet und Bildmaterial eingebunden.
-- [x] Alle fünf Vergleichsflächen geprüft.
-- [x] P0/P1/P2 behoben und erneut aufgenommen.
-- [x] Kerneinstieg, Mobilansicht und zugängliche Bedienung geprüft.
-- [x] Produktionsbuild und Typecheck bestanden.
+Bestehende Netlify-Site und Free-Plan bleiben erhalten. Kein Hostingwechsel,
+keine Tarifänderung, kein kostenpflichtiges Add-on. Der separate Live-Beleg
+unter `docs/qa/energy-story-2026-10-02/live-verification.md` wird nach dem
+Produktionsdeploy ergänzt. Die lokale Designabnahme ist abgeschlossen.
 
 final result: passed
