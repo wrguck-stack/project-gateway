@@ -108,8 +108,9 @@ und der echte sichtbare Skiplink bleiben unverändert.
 ## Veröffentlichung
 
 Bestehende Netlify-Site und Free-Plan bleiben erhalten. Kein Hostingwechsel,
-keine Tarifänderung, kein kostenpflichtiges Add-on. Der separate Live-Beleg
-unter `docs/qa/energy-story-2026-10-02/live-verification.md` wird nach dem
-Produktionsdeploy ergänzt. Die lokale Designabnahme ist abgeschlossen.
+keine Tarifänderung, kein kostenpflichtiges Add-on. Produktionsdeploy und abschließende Live-Prüfung sind unter
+`docs/qa/energy-story-2026-10-02/live-verification.md` dokumentiert.
+Auch der Produktionsbuild mit 192 Tests und die öffentliche Desktop-/Mobilprüfung
+sind bestanden.
 
 final result: passed
