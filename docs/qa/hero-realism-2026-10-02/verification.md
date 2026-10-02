@@ -39,11 +39,31 @@ Hotspots: Netz 29/74 %, Dach 50/26 %, Speicher 83/61 %.
 Aktueller Screenshot: `night-desktop-mobile.webp`. Tagesbeleg:
 `desktop-mobile.webp`. Sonstige Inhalte und fachliche Funktionen unverändert.
 
-## Veröffentlichung
+## Veröffentlichung und Live-Prüfung
 
-Die Tagesfassung wurde als Commit `1fa0b0295192cf0ddef7614b1f656420ae01e020`
-veröffentlicht und öffentlich geprüft. Der Nutzer verlangte danach die Nachtfassung.
-Deren Produktionsdeploy und Live-Prüfung werden nach der Veröffentlichung unter
-https://project-gateway-wrguck.netlify.app hier ergänzt.
+Status: bestanden.
 
-Lokale Prüfung: bestanden.
+- Anwendungscommit: `416ed65bb0c72f904beaa2a617f00da85c2371b4`.
+- Branch: `feat/homepage-professional-pass`.
+- Netlify-Deploy: `6ac02b638f35b18dcc992fc6`.
+- Produktion: https://project-gateway-wrguck.netlify.app
+- Fester Deploy: https://6ac02b638f35b18dcc992fc6--project-gateway-wrguck.netlify.app
+
+Der erste Veröffentlichungsversuch scheiterte vor dem Upload an übrig gebliebenen
+Next-Build-Dateien (ENOTEMPTY). Nach Bereinigung ausschließlich des generierten
+`.next`-Verzeichnisses wurde derselbe unveränderte Quellstand sauber gebaut und
+veröffentlicht. 192 Tests, Produktionsbuild und Typecheck bestanden.
+
+Strikte HTTPS-Prüfung: Homepage, neues Nachtbild, Projektbeispiel und Kontakt
+liefern HTTP 200. Das Bild stimmt bytegenau mit dem committeten Asset überein:
+SHA-256 `b84c699dd2a81a1c5ef1aae46a8704d79417343990fbea897c51a1fff55fe99b`.
+
+Live auf Desktop 1366 × 768 und Mobil 390 × 844 geprüft: Nachtmotiv geladen,
+alle vier Stationen und drei Bildpunkte funktionsfähig, Hero vollständig im
+Viewport, reale Webfonts, drei passende Einstiegspfade, Dialog-/Fokusrückgabe,
+keine Überbreite und keine JavaScriptfehler. Die Prüfung war lesend, ohne
+Formularversand; Schreibrequests waren gesperrt und es gab keine Schreibversuche.
+Ein lokaler Proxy-Zertifikatsbypass war ausschließlich auf den Wegwerfbrowser
+beschränkt; die unabhängige HTTPS-Prüfung nutzte strikte Zertifikatsvalidierung.
+
+final result: passed
