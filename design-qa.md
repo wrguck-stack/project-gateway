@@ -73,3 +73,11 @@ final result: passed
 Die frühere Blockade der visuellen Abnahme ist durch den freigegebenen
 Playwright-Weg behoben. Umsetzung für die bestehende Netlify-Site freigegeben.
 Hosting-Tarif und Ressourcen bleiben unverändert.
+
+## Live-Nachweis
+
+Commit `eba9d317` mit Netlify-Deploy `6abfa22cde313623a350e370` veröffentlicht.
+Die öffentliche Desktop-/Mobilansicht und der Dialog wurden zusätzlich mit
+Playwright geprüft. Kein horizontaler Überlauf und keine JS-Laufzeitfehler.
+Der Live-Zustand entspricht dem abgenommenen lokalen Build. Details:
+[Veröffentlichung](docs/qa/HERO-ENERGY-2026-10-02.md#veröffentlichung-und-live-kontrolle).

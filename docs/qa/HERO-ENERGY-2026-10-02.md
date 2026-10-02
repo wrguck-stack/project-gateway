@@ -68,5 +68,25 @@ Visuelle Abnahme: bestanden. Belege und vollständiger Prüfumfang stehen in
 bleibt trotz kräftigerer Schriftanmutung im generierten Mockup erhalten.
 Keine JavaScript-Laufzeitfehler; fehlendes Favicon als P3 dokumentiert.
 
-Veröffentlichung auf der bestehenden Netlify-Site folgt nach Sicherung dieses
-Abnahmestands. Keine Tarifänderung und keine kostenpflichtige Einrichtung.
+Der geprüfte Stand wurde anschließend auf der bestehenden Netlify-Site
+veröffentlicht. Keine Tarifänderung und keine kostenpflichtige Einrichtung.
+
+## Veröffentlichung und Live-Kontrolle
+
+- Anwendungscommit: `eba9d317629e407bd37ade45f5f8408443cb6594`.
+- Netlify-Deploy: `6abfa22cde313623a350e370`, erfolgreich, Exit 0;
+  vollständiger Netlify-Build in 45 Sekunden, Next Runtime 5.16.1.
+- Öffentlich: https://project-gateway-wrguck.netlify.app
+- Eindeutiger Deploy: https://6abfa22cde313623a350e370--project-gateway-wrguck.netlify.app
+- Produktionsgate: 192 Tests, Build und Typecheck erneut bestanden.
+- HTTP 200 für `/`, `/beispiel`, `/kontakt`, `/partner/login` und das neue
+  Hero-WebP. Neue Headline/CTA/Bild und Footer-Verweis im ausgelieferten HTML;
+  die alte Headline ist nicht mehr vorhanden.
+- Live-Playwright: Desktop 1487 × 1058 und Mobile 390 × 844 aufgenommen und
+  visuell kontrolliert. Standortdialog öffnet und schließt. Mobile
+  Dokumentbreite 390 px bei 390-px-Viewport. Keine JavaScript-Laufzeitfehler.
+- Der isolierte Live-Testbrowser benötigte `ignoreHTTPSErrors` für das lokale
+  Prüfproxy-Zertifikat. Separate HTTPS-Abrufe waren zuvor erfolgreich; die
+  Browseraufnahme wird nicht als unabhängige TLS-Zertifikatsprüfung gewertet.
+- Bestehende Site und Hostingkonfiguration weiterverwendet; keine neue
+  Ressource oder kostenpflichtige Einrichtung.
