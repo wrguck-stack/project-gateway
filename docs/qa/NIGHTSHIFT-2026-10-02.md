@@ -56,3 +56,21 @@ Die finalen lokalen Referenz-/Umsetzungsbelege sind unter
 `docs/qa/nightshift-2026-10-02/` versioniert. Der einzige nachträgliche Commit
 dokumentiert diese Veröffentlichung; die veröffentlichte Anwendung bleibt
 identisch mit dem oben genannten Anwendungscommit.
+
+## Nachkorrektur: Hero vollständig im Viewport
+
+Auf Nutzerhinweis wurde die zu große Mindesthöhe korrigiert. Die vollständige
+erste Ansicht richtet sich nun nach `100svh`; Typografie und Abstände passen
+sich auch der Bildschirmhöhe an. Bei 200 % Text wächst der Inhalt bei Bedarf
+zugunsten der Lesbarkeit. Keine Bestandteile werden ausgeblendet.
+
+- Anwendungscommit: `c33641a8d775aeea6e2757c0de3ee4d7398ab52e`.
+- Deploy: `6ac0182cdbc4b5ece031615c`, erfolgreich, 31,9 Sekunden.
+- 192 Unit-Tests, Build und Typecheck bestanden.
+- 16 Browserfälle bestanden: acht Bildschirmgrößen jeweils bei normaler und
+  200-%-Textgröße. Alle normalen Heros entsprechen exakt der Viewporthöhe.
+- Live geprüft: Desktop 1366 × 768 und Mobile 390 × 844, vollständiger Hero
+  einschließlich Zeitleiste sichtbar, Stationswechsel und Standortdialog
+  funktionieren, Webfonts geladen, keine JavaScriptfehler oder Überbreite.
+- Visueller Beleg: `nightshift-2026-10-02/hero-viewport-fit.webp`.
+- Keine kostenpflichtige Einrichtung oder Änderung der Datenhaltung.
