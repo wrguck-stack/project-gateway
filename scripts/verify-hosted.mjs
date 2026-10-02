@@ -232,7 +232,7 @@ try {
   const homepage = await (await request(origin, "/")).text();
   ensure(
     homepage.includes("PROJECT GATEWAY") &&
-      homepage.includes("Meine Möglichkeiten prüfen"),
+      homepage.includes("Meinen Standort prüfen"),
     "The homepage does not identify the expected Gateway application.",
   );
 

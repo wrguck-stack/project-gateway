@@ -12,7 +12,7 @@ import {
   ChevronDown,
 } from "@carbon/icons-react";
 import { Header, Footer } from "./shell";
-import { Button } from "./ui";
+import { Button, Modal } from "./ui";
 import { api } from "./client-api";
 import {
   DossierPreview,
@@ -176,6 +176,10 @@ export function AddressEntry({
                 setIndex((i) => (suggestions.length ? Math.max(i - 1, 0) : -1));
               }
               if (e.key === "Escape") {
+                if (open && (suggestions.length > 0 || searching)) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
                 setOpen(false);
                 setIndex(-1);
               }
@@ -218,7 +222,7 @@ export function AddressEntry({
           )}
         </div>
         <Button type="submit" pending={pending}>
-          {pending ? "Entwurf wird angelegt …" : "Meine Möglichkeiten prüfen"}
+          {pending ? "Entwurf wird angelegt …" : "Standortcheck starten"}
         </Button>
       </div>
       <small id={`${id}-help`} aria-live="polite">
@@ -253,6 +257,7 @@ export function Landing({ mode }: { mode: string }) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const [activeForm, setActiveForm] = useState("hero");
+  const [entryOpen, setEntryOpen] = useState(false);
   const [intent, setIntent] = useState<ProjectIntent>();
   const [draft, setDraft] = useState<SavedDraft | null>(null);
   const starting = useRef(false);
@@ -320,14 +325,8 @@ export function Landing({ mode }: { mode: string }) {
     }
   }
   function focusEntry() {
-    document.getElementById("standort-start")?.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "instant"
-        : "smooth",
-    });
-    document
-      .getElementById("gateway-address-hero")
-      ?.focus({ preventScroll: true });
+    setError("");
+    setEntryOpen(true);
   }
   function selectIntent(value: ProjectIntent) {
     setIntent(value);
@@ -350,49 +349,37 @@ export function Landing({ mode }: { mode: string }) {
   );
   return (
     <>
-      <Header mode={mode} />
+      <Header mode={mode} editorial />
       <main id="main" className="landing-page">
-        <section className="hero editorial-hero" id="standort-start">
+        <section
+          className="hero editorial-hero energy-hero"
+          id="standort-start"
+        >
           <div className="wrap editorial-hero-content">
             <div className="hero-copy">
               <p className="overline hero-overline">
-                PHOTOVOLTAIK · SPEICHER · NETZANSCHLUSS
+                PHOTOVOLTAIK FÜR GEWERBE UND INDUSTRIE
               </p>
               <h1>
-                <span>Erst Klarheit.</span>{" "}
-                <span className="hero-accent">Dann investieren.</span>
+                <span>Können PV und Speicher</span>{" "}
+                <span className="hero-accent">Ihre Stromkosten</span>{" "}
+                <span className="hero-accent">senken?</span>
               </h1>
+            </div>
+            <div className="hero-intro">
               <p className="lead">
-                Gesetzliche Vorgaben und unsichere Erträge werfen Fragen auf.
-                Wir prüfen, welche Möglichkeiten Ihre Fläche und Ihr bestehender
-                Netzanschluss bieten – und unter welchen Voraussetzungen sich
-                Photovoltaik oder Speicher für Sie lohnen können.
+                Eigenen Solarstrom erzeugen, speichern und im Betrieb nutzen:
+                Entscheidend ist, was zu Ihrem Verbrauch passt. Bereiten Sie die
+                Prüfung von Einsparpotenzial, Kosten und Voraussetzungen vor.
               </p>
-              {selectedTitle && (
-                <div className="selected-intent" role="status">
-                  <span>
-                    <Checkmark size={20} aria-hidden />
-                    {selectedTitle} ausgewählt
-                  </span>
-                  <button
-                    type="button"
-                    className="text-button"
-                    onClick={() => setIntent(undefined)}
-                  >
-                    Auswahl aufheben
-                  </button>
-                </div>
-              )}
-              {entry("hero")}
+              <Button onClick={focusEntry} aria-haspopup="dialog">
+                Meinen Standort prüfen
+              </Button>
               <div className="hero-secondary">
                 <a href="#ablauf" className="text-link">
-                  So prüfen wir Ihren Standort{" "}
-                  <ArrowRight size={20} aria-hidden />
+                  Was wird geprüft?
                 </a>
-                <p className="meta">
-                  Ohne Pflichtkonto · Der Standortcheck bereitet die fachliche
-                  Prüfung vor.
-                </p>
+                <p className="meta">Für neue Anlagen und bestehende PV.</p>
               </div>
               {draft && (
                 <p className="draft-return">
@@ -408,6 +395,7 @@ export function Landing({ mode }: { mode: string }) {
                       try {
                         sessionStorage.removeItem("gateway-draft");
                       } catch {}
+                      focusEntry();
                     }}
                   >
                     Neuen Standort beginnen
@@ -416,34 +404,67 @@ export function Landing({ mode }: { mode: string }) {
               )}
             </div>
           </div>
-          <figure className="landing-aerial hero-site">
-            <img
-              src="/atlas/gateway-industrial-hero-v3.webp"
-              width={1586}
-              height={992}
-              alt="Illustrative Luftansicht einer Gewerbehalle im Abendlicht; eine Amberlinie hebt das Beispieldach hervor."
-              fetchPriority="high"
-            />
-            <figcaption>
-              <span>
-                KI-generierte Illustration · kein analysierter Standort
+          <figure className="energy-panorama">
+            <div className="energy-panorama-image">
+              <img
+                src="/atlas/gateway-energy-panorama-v1.webp"
+                width={1999}
+                height={787}
+                alt="Gewerbebetrieb mit Photovoltaik auf dem Hallendach, Batteriespeichern vor der Werkhalle und einem Lieferfahrzeug an einer Ladestation."
+                fetchPriority="high"
+              />
+              <ul className="energy-labels" aria-label="Energie am Standort">
+                <li className="energy-label energy-label-solar">
+                  Solarstrom erzeugen
+                </li>
+                <li className="energy-label energy-label-storage">
+                  Strom speichern
+                </li>
+                <li className="energy-label energy-label-use">
+                  Im Betrieb nutzen
+                </li>
+              </ul>
+            </div>
+            <figcaption className="wrap energy-panorama-caption">
+              <span className="mono">
+                Erzeugung, Speicher und Verbrauch gemeinsam betrachten.
               </span>
+              <span>Illustration eines Energiekonzepts</span>
             </figcaption>
           </figure>
-          <nav
-            className="hero-stages wrap"
-            aria-label="Klarheit vor der Investition"
-          >
-            <a href="#moeglichkeiten">
-              <span className="mono">01</span> Möglichkeiten erkennen
-            </a>
-            <a href="#wirtschaftlichkeit">
-              <span className="mono">02</span> Wirtschaftlichkeit einordnen
-            </a>
-            <a href="#naechste-schritte">
-              <span className="mono">03</span> Nächste Schritte klären
-            </a>
-          </nav>
+          {entryOpen && (
+            <Modal
+              title="Wo liegt Ihr Standort?"
+              onClose={() => setEntryOpen(false)}
+            >
+              <div className="site-entry-dialog">
+                <p>
+                  Beginnen Sie mit der Adresse Ihrer Immobilie oder einer
+                  Beschreibung Ihrer Fläche.
+                </p>
+                {selectedTitle && (
+                  <div className="selected-intent" role="status">
+                    <span>
+                      <Checkmark size={20} aria-hidden />
+                      {selectedTitle} ausgewählt
+                    </span>
+                    <button
+                      type="button"
+                      className="text-button"
+                      onClick={() => setIntent(undefined)}
+                    >
+                      Auswahl aufheben
+                    </button>
+                  </div>
+                )}
+                {entry("hero")}
+                <p className="meta">
+                  Ohne Pflichtkonto · Ihre Angaben bereiten die fachliche
+                  Prüfung vor.
+                </p>
+              </div>
+            </Modal>
+          )}
         </section>
 
         <section id="ablauf" className="section wrap">

@@ -9,11 +9,12 @@ import "./globals.css";
 import { RouteFocus } from "@/components/route-focus";
 export const metadata: Metadata = {
   title: {
-    default: "Project Gateway · Erst Klarheit. Dann investieren.",
+    default:
+      "Project Gateway · Können PV und Speicher Ihre Stromkosten senken?",
     template: "%s · Project Gateway",
   },
   description:
-    "Photovoltaik, Speicher und Netzanschluss gemeinsam betrachten: Ausgangslage erfassen, offene Fragen erkennen und die fachliche Prüfung vorbereiten.",
+    "Eigenen Solarstrom erzeugen, speichern und im Betrieb nutzen: Erfassen Sie Ihren Standort und bereiten Sie die Prüfung von Einsparpotenzial, Kosten und Voraussetzungen vor.",
   robots: { index: false, follow: false },
 };
 export default function RootLayout({

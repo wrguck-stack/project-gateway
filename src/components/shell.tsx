@@ -13,8 +13,10 @@ export function Brand() {
 }
 export function Header({
   partner = false,
+  editorial = false,
 }: {
   partner?: boolean;
+  editorial?: boolean;
   mode?: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -26,15 +28,14 @@ export function Header({
     </>
   ) : (
     <>
-      <a href="/#ablauf">So funktioniert’s</a>
-      <Link href="/beispiel">Beispiel ansehen</Link>
-      <a href="/#projektpartner">Für Projektpartner</a>
-      <Link href="/partner/login">Partner-Login</Link>
+      <a href="/#ablauf">Unser Ansatz</a>
+      <Link href="/beispiel">Projektbeispiel</Link>
+      <Link href="/kontakt">Kontakt</Link>
     </>
   );
   return (
     <>
-      <header className="header wrap">
+      <header className={`header wrap${editorial ? " editorial-header" : ""}`}>
         <Brand />
         <nav aria-label="Hauptnavigation" className="desktop-nav">
           {links}

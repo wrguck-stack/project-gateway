@@ -71,13 +71,20 @@ for (const width of [1440, 390]) {
       page.on("pageerror", (e) => errors.push(e.message));
       await page.setViewportSize({ width, height: width < 768 ? 844 : 1000 });
       await page.goto("/");
-      await page.getByRole("combobox").first().fill(address);
       await page
         .getByRole("button", {
-          name: "Meine Möglichkeiten prüfen",
+          name: "Meinen Standort prüfen",
           exact: true,
         })
-        .first()
+        .click();
+      const locationDialog = page.getByRole("dialog", {
+        name: "Wo liegt Ihr Standort?",
+        exact: true,
+      });
+      await expect(locationDialog).toBeVisible();
+      await locationDialog.getByRole("combobox").fill(address);
+      await locationDialog
+        .getByRole("button", { name: "Standortcheck starten", exact: true })
         .click();
       await expect(
         page.getByRole("heading", { name: "Ist das Ihr Standort?" }),
@@ -448,12 +455,36 @@ test("keyboard combobox and native dialog focus return; accessibility smoke", as
   request,
 }) => {
   await page.goto("/");
-  const input = page.getByRole("combobox").first();
+  const opener = page.getByRole("button", {
+    name: "Meinen Standort prüfen",
+    exact: true,
+  });
+  await opener.click();
+  const locationDialog = page.getByRole("dialog", {
+    name: "Wo liegt Ihr Standort?",
+    exact: true,
+  });
+  await expect(locationDialog.getByRole("heading")).toBeFocused();
+  const input = locationDialog.getByRole("combobox");
   await input.fill("Muster");
-  await expect(page.getByRole("listbox").getByRole("option")).toHaveCount(1);
+  await expect(
+    locationDialog.getByRole("listbox").getByRole("option"),
+  ).toHaveCount(1);
   await input.press("ArrowDown");
   await input.press("Enter");
   await expect(input).toHaveValue(address);
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  await page.keyboard.press("Escape");
+  await expect(locationDialog).toHaveCount(0);
+  await expect(opener).toBeFocused();
+  await expect(page.locator("#gateway-address-closing")).toHaveValue(address);
+  await opener.click();
+  await expect(input).toHaveValue(address);
+  await locationDialog
+    .getByRole("button", { name: "Schließen", exact: true })
+    .click();
+  await expect(locationDialog).toHaveCount(0);
+  await expect(opener).toBeFocused();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   const p = await fixture(page.request);
   await page.goto(`/standortcheck/${p.id}/5`);
@@ -529,6 +560,25 @@ test("responsive browser screenshots and reflow across every required width", as
         `${name} ${width}px horizontal reflow`,
       ).toBe(true);
       await screenshot(page, `${name}-${width}`);
+      if (name === "landing") {
+        await page
+          .getByRole("button", { name: "Meinen Standort prüfen", exact: true })
+          .click();
+        const locationDialog = page.getByRole("dialog", {
+          name: "Wo liegt Ihr Standort?",
+          exact: true,
+        });
+        await expect(locationDialog.getByRole("combobox")).toBeVisible();
+        expect(
+          await locationDialog.evaluate(
+            (dialog) => dialog.scrollWidth <= dialog.clientWidth + 1,
+          ),
+          `location entry ${width}px horizontal reflow`,
+        ).toBe(true);
+        await screenshot(page, `landing-location-entry-${width}`, false);
+        await page.keyboard.press("Escape");
+        await expect(locationDialog).toHaveCount(0);
+      }
     }
   }
 });
@@ -560,6 +610,27 @@ test("200% text, touch without hover, reduced motion and map landscape", async (
     ),
   ).toBe(true);
   await screenshot(page, "landing-text-200-touch");
+  const locationOpener = page.getByRole("button", {
+    name: "Meinen Standort prüfen",
+    exact: true,
+  });
+  await locationOpener.tap();
+  const locationDialog = page.getByRole("dialog", {
+    name: "Wo liegt Ihr Standort?",
+    exact: true,
+  });
+  await locationDialog.getByRole("combobox").fill(address);
+  expect(
+    await locationDialog.evaluate(
+      (dialog) => dialog.scrollWidth <= dialog.clientWidth + 1,
+    ),
+  ).toBe(true);
+  await screenshot(page, "landing-location-entry-text-200-touch", false);
+  await locationDialog
+    .getByRole("button", { name: "Schließen", exact: true })
+    .tap();
+  await expect(locationDialog).toHaveCount(0);
+  await expect(locationOpener).toBeFocused();
   await page.goto("/beispiel");
   await page.setViewportSize({ width: 844, height: 390 });
   await page.getByRole("button", { name: "Karte öffnen", exact: true }).click();

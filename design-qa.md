@@ -1,8 +1,34 @@
-# Atlas-Hero · Umsetzungsstand 29. September 2026
+# Atlas-Hero · Umsetzungsstand 2. Oktober 2026
 
 final result: blocked
 
-## Aktueller Auftrag · 1. Oktober 2026
+## Aktueller Auftrag · 2. Oktober 2026
+
+Gewählter visueller Zielstand ist Variante 3 der zuletzt gezeigten Entwürfe:
+„Können PV und Speicher Ihre Stromkosten senken?“.
+
+- Source: `docs/qa/homepage-overhaul/hero-energy-reference.webp`, 1487 × 1058 px.
+- Zustand: Homepage ohne gespeicherten Entwurf, geschlossener Standortdialog.
+- Implementierung: `src/components/landing.tsx`, `landing-hero.css`,
+  `public/atlas/gateway-energy-panorama-v1.webp`.
+- Geplante Vergleichsansichten: 1487 × 1058 und 390 × 844 CSS-Pixel, DPR 1;
+  zusätzlich 320 px sowie geöffneter Adresseingabedialog und Tastaturbedienung.
+- Aktueller Browser-Screenshot: nicht verfügbar. Keine Dichtenormalisierung,
+  kein Vollbild- oder Detailvergleich, keine Prüfung der Browserkonsole möglich.
+- Fonts, Layoutabstände, Farben, Bildausschnitt und Inhalte sind im Code an der
+  geöffneten Referenz ausgerichtet, aber noch nicht visuell abgenommen.
+- Ein neuer Cloud-Browser-Navigationsversuch hing trotz 20-Sekunden-Timeout
+  602,9 Sekunden bis zum Abbruch. Keine weiteren unveränderten Versuche.
+- Lokale Vorschau liefert HTTP 200; das ersetzt keine Browserprüfung.
+
+final result: blocked
+
+Details: [Umsetzung und Prüfumfang](docs/qa/HERO-ENERGY-2026-10-02.md).
+Für die Abnahme wird ein funktionierender Cloud-Browser oder die ausdrückliche
+Zustimmung zu Playwright CLI/MCP benötigt. Für die Veröffentlichung ist außerdem
+eine erneute Netlify-Anmeldung erforderlich.
+
+## Vorheriger Auftrag · 1. Oktober 2026
 
 Der freigegebene Einstieg lautet jetzt „Erst Klarheit. Dann investieren.“.
 Die Homepage stellt Möglichkeiten, Wirtschaftlichkeit und nächste Schritte in

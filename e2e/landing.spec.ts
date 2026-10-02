@@ -6,14 +6,20 @@ for (const width of [1440, 390]) {
     test.beforeEach(async ({ page }) => {
       await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
       await page.goto("/");
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expect(
+        page.getByRole("heading", {
+          level: 1,
+          name: "Können PV und Speicher Ihre Stromkosten senken?",
+          exact: true,
+        }),
+      ).toBeVisible();
     });
 
-    test("section navigation scrolls to its target on the homepage and from the example", async ({
+    test("public navigation reaches its pages and the approach section from the example", async ({
       page,
     }) => {
       await page.emulateMedia({ reducedMotion: "reduce" });
-      const navigate = async (name: string, target: string) => {
+      const navigate = async (name: string, target: RegExp) => {
         if (width < 768) {
           await page.getByRole("button", { name: "Menü öffnen" }).tap();
           await page
@@ -27,14 +33,17 @@ for (const width of [1440, 390]) {
             .getByRole("link", { name, exact: true })
             .click();
         }
-        await expect(page).toHaveURL(new RegExp(`#${target}$`));
-        await expect(page.locator(`#${target} h2`)).toBeInViewport();
+        await expect(page).toHaveURL(target);
       };
       await page.locator(".closing").scrollIntoViewIfNeeded();
-      await navigate("So funktioniert’s", "ablauf");
-      await navigate("Für Projektpartner", "projektpartner");
-      await page.goto("/beispiel");
-      await navigate("So funktioniert’s", "ablauf");
+      await navigate("Unser Ansatz", /\/#ablauf$/);
+      await expect(page.locator("#ablauf h2")).toBeInViewport();
+      await navigate("Projektbeispiel", /\/beispiel$/);
+      await expect(page.locator("#score")).toBeVisible();
+      await navigate("Unser Ansatz", /\/#ablauf$/);
+      await expect(page.locator("#ablauf h2")).toBeInViewport();
+      await navigate("Kontakt", /\/kontakt$/);
+      await expect(page.locator("main h1")).toBeVisible();
       if (width < 768) {
         const menu = page.getByRole("button", { name: "Menü öffnen" });
         await menu.tap();
@@ -194,13 +203,17 @@ for (const width of [1440, 390]) {
         await types
           .getByRole("button", { name: scenario.action, exact: true })
           .click();
-        const hero = page.locator(".hero");
-        const input = hero.getByRole("combobox", {
+        const dialog = page.getByRole("dialog", {
+          name: "Wo liegt Ihr Standort?",
+          exact: true,
+        });
+        await expect(dialog).toBeVisible();
+        const input = dialog.getByRole("combobox", {
           name: "Adresse Ihrer Immobilie oder Fläche",
           exact: true,
         });
-        await expect(input).toBeFocused();
-        await expect(hero.getByRole("status")).toContainText(
+        await expect(input).toBeVisible();
+        await expect(dialog.getByRole("status")).toContainText(
           `${scenario.title} ausgewählt`,
         );
         const address = `QA ${scenario.title} · Gewerbepark 1`;
@@ -302,7 +315,7 @@ for (const width of [1440, 390]) {
       const closing = page.locator(".closing .address-form");
       const input = closing.getByRole("combobox");
       const button = closing.getByRole("button", {
-        name: "Meine Möglichkeiten prüfen",
+        name: "Standortcheck starten",
         exact: true,
       });
       const address = "QA Rückkehr · Gewerbepark 5";
@@ -312,7 +325,7 @@ for (const width of [1440, 390]) {
       await expect(error).toContainText("HTTP 502");
       await expect(error).toBeFocused();
       await expect(error).toBeInViewport();
-      await expect(page.locator(".hero").getByRole("alert")).toHaveCount(0);
+      await expect(page.getByRole("dialog")).toHaveCount(0);
       await expect(input).toHaveValue(address);
       await expect(input).toBeEnabled();
       await expect(button).toBeEnabled();

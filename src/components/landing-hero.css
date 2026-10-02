@@ -1,267 +1,310 @@
-/* Approved Atlas editorial hero. Only the photograph is masked; controls,
-   suggestions and focus outlines remain in normal, unclipped document flow. */
-.landing-page .hero.editorial-hero {
+/* Selected editorial energy concept: live typography and controls above a
+   panoramic photograph. Only the photo fades into the shared Atlas canvas. */
+.header.editorial-header,
+.energy-hero .wrap {
+  width: calc(100% - 112px);
+  max-width: 1480px;
+}
+.landing-page .hero.energy-hero {
   display: block;
   isolation: isolate;
   min-height: 0;
-  padding: 0 0 24px;
+  padding: 0;
+  border-top: 1px solid var(--color-line);
 }
-.editorial-hero-content {
+.energy-hero .editorial-hero-content {
   position: relative;
   z-index: 2;
-  padding-block: 72px 64px;
+  display: grid;
+  grid-template-columns: minmax(0, 2.25fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+  padding-block: 28px 8px;
 }
-.landing-page .editorial-hero .hero-copy {
-  width: min(100%, 42.5rem);
+.landing-page .energy-hero .hero-copy {
+  width: auto;
   padding: 0;
 }
-.landing-page .editorial-hero .hero-overline {
+.landing-page .energy-hero .hero-overline {
   display: flex;
   align-items: center;
   gap: 24px;
-  margin-bottom: 32px;
+  margin-bottom: 18px;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
 }
-.editorial-hero .hero-overline::after {
+.energy-hero .hero-overline::after {
   content: "";
-  flex: 1;
+  width: 250px;
+  max-width: 28%;
   height: 1px;
   background: var(--color-accent);
 }
-.landing-page .editorial-hero h1 {
+.landing-page .energy-hero h1 {
   max-width: none;
-  margin-bottom: 24px;
-  font-size: clamp(4.5rem, 6.3vw, 5.75rem);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  margin: 0;
+  font-size: clamp(3.5rem, 6.3vw, 6.3rem);
+  line-height: 0.99;
+  letter-spacing: -0.045em;
   text-wrap: initial;
 }
-.editorial-hero h1 > span {
+.energy-hero h1 > span {
   display: block;
 }
-.editorial-hero .hero-accent {
+.energy-hero .hero-accent {
   color: var(--color-accent);
 }
-.landing-page .editorial-hero .hero-copy > .lead {
-  max-width: 42.5rem;
-  margin-bottom: 32px;
+.energy-hero .hero-intro {
+  min-width: 0;
+  padding-top: 28px;
+}
+.energy-hero .hero-intro > .lead {
+  margin: 0 0 20px;
   font-size: 1.25rem;
-  line-height: 1.45;
+  line-height: 1.35;
+  color: var(--color-secondary);
 }
-.landing-page .editorial-hero .address-form {
-  width: min(57.25rem, calc(100vw - 112px));
-  max-width: none;
-}
-.landing-page .editorial-hero .address-line {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 4px;
-}
-.landing-page .editorial-hero .address-input {
-  flex: 1 1 auto;
-}
-.editorial-hero
-  .address-input
-  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-  min-height: 64px;
-}
-.landing-page .editorial-hero .address-line .button {
-  width: auto;
-  min-height: 64px;
+.energy-hero .hero-intro > .button {
+  width: 100%;
+  min-height: 56px;
+  justify-content: space-between;
   padding-inline: 24px;
+  font-size: 1.125rem;
 }
-.landing-page .editorial-hero .hero-secondary {
-  margin-top: 24px;
+.landing-page .energy-hero .hero-secondary {
+  margin-top: 12px;
 }
-.editorial-hero .hero-secondary .text-link {
+.energy-hero .hero-secondary .text-link {
+  min-height: 32px;
   text-decoration-color: var(--color-accent);
 }
-.landing-page .editorial-hero > .landing-aerial {
-  position: absolute;
-  z-index: 0;
-  inset: 0 0 88px;
+.energy-hero .hero-secondary .meta {
+  font-size: 0.9375rem;
+  color: var(--color-secondary);
+}
+.energy-hero .energy-panorama {
+  position: relative;
+  margin: 0;
+}
+.energy-panorama-image {
+  position: relative;
+  margin-top: -28px;
+}
+.energy-panorama-image > img {
   display: block;
   width: 100%;
   height: auto;
-  max-width: none;
-  max-height: none;
-  margin: 0;
-  background: transparent;
-  pointer-events: none;
-}
-.landing-page .editorial-hero > .landing-aerial img {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  aspect-ratio: auto;
+  aspect-ratio: 1999 / 787;
   object-fit: cover;
-  object-position: 50% 50%;
-  /* Photographic opacity treatment approved in the refined visual target. */
-  mask-image: linear-gradient(
-    to right,
-    transparent 27%,
-    #0002 38%,
-    #0009 49%,
-    #000 65%
-  );
+  /* Opacity treatment of the photo itself, matching the selected mockup. */
+  mask-image: linear-gradient(to bottom, transparent, #000 12%);
 }
-.landing-page .editorial-hero .landing-aerial figcaption {
-  position: absolute;
-  right: max(56px, calc((100% - 1328px) / 2));
-  bottom: 20px;
-  display: block;
-  max-width: 28rem;
-  border: 0;
-  padding: 4px 8px;
+.energy-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   color: var(--color-primary);
-  background: #11171cd9;
-  font-size: 0.75rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
 }
-.landing-page .editorial-hero .hero-stages {
-  z-index: 1;
-  width: calc(100% - 112px);
-  max-width: 1328px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 0;
-  padding-top: 0;
-  border-top-color: var(--color-secondary);
+.energy-label {
+  position: absolute;
+  padding: 4px 8px;
+  background: #11171cbd;
 }
-.landing-page .editorial-hero .hero-stages a {
-  min-height: 64px;
-  padding: 12px 24px;
-  border-left: 1px solid var(--color-line);
+.energy-label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  height: 32px;
+  border-left: 1px solid var(--color-primary);
 }
-.editorial-hero .hero-stages a:last-child {
-  border-right: 1px solid var(--color-line);
+.energy-label-solar {
+  left: 56%;
+  top: 15%;
 }
-
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .editorial-hero-content {
-    padding-block: 56px 72px;
-  }
-  .landing-page .editorial-hero .hero-copy {
-    width: min(100%, 36rem);
-  }
-  .landing-page .editorial-hero h1 {
-    font-size: 4.75rem;
-  }
-  .landing-page .editorial-hero .address-form {
-    width: min(48rem, calc(100vw - 64px));
-  }
-  .landing-page .editorial-hero .hero-stages {
+.energy-label-storage {
+  left: 65%;
+  top: 78%;
+}
+.energy-label-storage::after {
+  top: auto;
+  bottom: 100%;
+}
+.energy-label-use {
+  right: 5%;
+  top: 48%;
+}
+.energy-hero .energy-panorama-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px 32px;
+  padding-block: 16px 28px;
+  border-top: 1px solid var(--color-control);
+  font-size: 0.8125rem;
+  color: var(--color-secondary);
+}
+.energy-panorama-caption .mono {
+  font-size: 0.875rem;
+}
+.energy-panorama-caption > :last-child {
+  flex-shrink: 0;
+}
+.site-entry-dialog > p:first-child {
+  margin-bottom: 24px;
+  color: var(--color-secondary);
+}
+.landing-page .energy-hero .site-entry-dialog .address-form {
+  width: 100%;
+  max-width: none;
+}
+.landing-page .site-entry-dialog .address-line {
+  flex-direction: column;
+  gap: 12px;
+}
+.landing-page .site-entry-dialog .address-input {
+  flex-basis: auto;
+}
+.site-entry-dialog .address-line .button {
+  width: 100%;
+  min-height: 56px;
+}
+.site-entry-dialog .suggestions {
+  position: static;
+  width: 100%;
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 8px 0 0;
+}
+.site-entry-dialog .address-input:has(.suggestions) {
+  flex-wrap: wrap;
+}
+.site-entry-dialog .address-input input {
+  width: calc(100% - 48px);
+}
+.site-entry-dialog > .meta {
+  margin-top: 20px;
+}
+@media (max-width: 1279px) {
+  .header.editorial-header,
+  .energy-hero .wrap {
     width: calc(100% - 64px);
   }
-  .landing-page .editorial-hero .landing-aerial figcaption {
-    right: 32px;
+  .energy-hero .editorial-hero-content {
+    gap: 32px;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   }
-}
-
-@media (max-width: 1023px) {
-  .editorial-hero-content {
-    padding-block: 40px 24px;
+  .landing-page .energy-hero h1 {
+    font-size: clamp(3.5rem, 6.3vw, 5.125rem);
   }
-  .landing-page .editorial-hero .hero-copy {
-    width: 100%;
+  .energy-hero .hero-intro > .lead {
+    font-size: 1.125rem;
   }
-  .landing-page .editorial-hero h1 {
-    font-size: 5.75rem;
-    max-width: 42.5rem;
-  }
-  .landing-page .editorial-hero .address-form {
-    width: 100%;
-    max-width: 44rem;
-  }
-  .landing-page .editorial-hero > .landing-aerial {
-    position: relative;
-    inset: auto;
-    height: auto;
-    margin: 0 0 24px;
-  }
-  .landing-page .editorial-hero > .landing-aerial img {
-    height: 360px;
-    object-position: 70% 55%;
-    mask-image: linear-gradient(
-      to bottom,
-      transparent,
-      #000 18%,
-      #000 88%,
-      transparent
-    );
-  }
-  .landing-page .editorial-hero .landing-aerial figcaption {
-    position: static;
-    width: calc(100% - 64px);
-    max-width: none;
-    margin-inline: auto;
-    padding: 8px 0 0;
-    background: transparent;
-    color: var(--color-muted);
-  }
-  .landing-page .editorial-hero .hero-stages {
-    width: calc(100% - 64px);
-  }
-  .landing-page .editorial-hero .hero-stages a {
+  .energy-hero .hero-intro > .button {
     padding-inline: 16px;
   }
+  .energy-hero .hero-overline::after {
+    flex: 1;
+  }
 }
-
-@media (max-width: 767px) {
-  .editorial-hero-content {
-    padding-block: 32px 8px;
+@media (max-width: 1023px) {
+  .energy-hero .editorial-hero-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 32px 40px;
   }
-  .landing-page .editorial-hero .hero-overline {
-    gap: 12px;
-    font-size: 0.625rem;
-    letter-spacing: 0.055em;
-    margin-bottom: 24px;
+  .landing-page .energy-hero h1 {
+    font-size: clamp(3.5rem, 8.4vw, 5.125rem);
+    max-width: 54rem;
   }
-  .landing-page .editorial-hero h1 {
-    font-size: clamp(2.5rem, 12.5vw, 3.5rem);
-    line-height: 1.04;
+  .energy-hero .hero-intro {
+    padding: 0;
+    max-width: 40rem;
   }
-  .landing-page .editorial-hero .hero-copy > .lead {
-    font-size: 1.125rem;
-    line-height: 1.45;
-    margin-bottom: 24px;
+  .energy-hero .hero-intro > .button {
+    width: min(100%, 25rem);
   }
-  .editorial-hero .lead br {
-    display: none;
+  .energy-panorama-image {
+    margin-top: -24px;
   }
-  .landing-page .editorial-hero .address-line {
+  .energy-labels {
+    font-size: 0.875rem;
+  }
+  .energy-label-use {
+    right: 3%;
+  }
+  .energy-hero .energy-panorama-caption {
     flex-direction: column;
     gap: 8px;
   }
-  .landing-page .editorial-hero .address-line .button {
+}
+@media (max-width: 767px) {
+  .header.editorial-header,
+  .energy-hero .wrap {
+    width: calc(100% - 40px);
+  }
+  .energy-hero .editorial-hero-content {
+    gap: 24px;
+    padding-block: 28px 32px;
+  }
+  .landing-page .energy-hero .hero-overline {
+    gap: 8px;
+    max-width: 32rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+  }
+  .energy-hero .hero-overline::after {
+    min-width: 16px;
+    width: auto;
+  }
+  .landing-page .energy-hero h1 {
+    font-size: clamp(2.5rem, 10.9vw, 4.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+  .energy-hero h1 > span:first-child {
+    max-width: 15ch;
+  }
+  .energy-hero .hero-intro > .lead {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+  .energy-hero .hero-intro > .button {
     width: 100%;
-    min-height: 56px;
   }
-  .editorial-hero
-    .address-input
-    input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-    min-height: 56px;
-  }
-  .landing-page .editorial-hero .hero-secondary {
-    margin-top: 20px;
-  }
-  .landing-page .editorial-hero > .landing-aerial img {
+  .energy-panorama-image > img {
     height: auto;
-    aspect-ratio: 6 / 5;
-    object-position: 75% 55%;
+    aspect-ratio: 1.4;
+    object-position: 65% 50%;
   }
-  .landing-page .editorial-hero .landing-aerial figcaption {
-    width: calc(100% - 40px);
+  .energy-labels {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    padding: 16px 20px;
+    font-size: 0.875rem;
   }
-  .landing-page .editorial-hero .hero-stages {
-    width: calc(100% - 40px);
-    grid-template-columns: 1fr;
+  .energy-label {
+    position: static;
+    padding: 0;
+    background: transparent;
   }
-  .landing-page .editorial-hero .hero-stages a {
-    min-height: 48px;
-    border-right: 0;
-    padding-block: 8px;
+  .energy-label::after {
+    display: none;
+  }
+  .energy-hero .energy-panorama-caption {
+    padding-block: 16px 24px;
+  }
+  .energy-panorama-caption .mono {
+    font-size: 0.75rem;
+    line-height: 1.6;
   }
 }
