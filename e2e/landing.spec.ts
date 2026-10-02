@@ -15,7 +15,7 @@ for (const width of [1440, 390]) {
       ).toBeVisible();
     });
 
-    test("public navigation reaches its pages and the approach section from the example", async ({
+    test("public navigation reaches its pages and the opportunities section from the example", async ({
       page,
     }) => {
       await page.emulateMedia({ reducedMotion: "reduce" });
@@ -36,12 +36,12 @@ for (const width of [1440, 390]) {
         await expect(page).toHaveURL(target);
       };
       await page.locator(".closing").scrollIntoViewIfNeeded();
-      await navigate("Unser Ansatz", /\/#ablauf$/);
-      await expect(page.locator("#ablauf h2")).toBeInViewport();
+      await navigate("Möglichkeiten", /\/#projektarten$/);
+      await expect(page.locator("#projektarten h2")).toBeInViewport();
       await navigate("Projektbeispiel", /\/beispiel$/);
       await expect(page.locator("#score")).toBeVisible();
-      await navigate("Unser Ansatz", /\/#ablauf$/);
-      await expect(page.locator("#ablauf h2")).toBeInViewport();
+      await navigate("Möglichkeiten", /\/#projektarten$/);
+      await expect(page.locator("#projektarten h2")).toBeInViewport();
       await navigate("Kontakt", /\/kontakt$/);
       await expect(page.locator("main h1")).toBeVisible();
       if (width < 768) {
@@ -405,3 +405,49 @@ for (const width of [1440, 390]) {
     });
   });
 }
+
+test("the hero remains keyboard explorable with reduced motion and does not autoplay", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const hero = page.locator(".nightshift-hero");
+  const concept = hero.getByRole("slider", {
+    name: "Energiekonzept erkunden",
+    exact: true,
+  });
+  await expect(hero).toHaveAttribute("data-motion", "reduced");
+  await expect(concept).toBeEnabled();
+  await expect(concept).toHaveValue("100");
+  await expect(hero.getByRole("button", { name: /Animation/ })).toBeDisabled();
+
+  await concept.focus();
+  await concept.press("Home");
+  await expect(concept).toHaveValue("0");
+  await concept.press("ArrowRight");
+  await expect(concept).toHaveValue("1");
+  await expect(concept).toBeFocused();
+  const observedValues = await concept.evaluate(
+    (element) =>
+      new Promise<string[]>((resolve) => {
+        const values = new Set<string>();
+        const start = performance.now();
+        const sample = () => {
+          values.add((element as HTMLInputElement).value);
+          if (performance.now() - start >= 500) resolve([...values]);
+          else requestAnimationFrame(sample);
+        };
+        requestAnimationFrame(sample);
+      }),
+  );
+  expect(observedValues).toEqual(["1"]);
+  await hero.getByRole("button", { name: "Speichern", exact: true }).click();
+  await expect(concept).toHaveValue("50");
+  await expect(hero.locator("figcaption")).toHaveText(
+    "Strom zeitversetzt nutzen",
+  );
+  // A different control remains usable while autoplay is suppressed.
+  await hero.getByRole("button", { name: "Nutzen", exact: true }).click();
+  await expect(concept).toHaveValue("100");
+  await expect(hero).toHaveAttribute("data-motion", "reduced");
+});

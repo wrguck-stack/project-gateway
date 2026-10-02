@@ -3,7 +3,23 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu } from "@carbon/icons-react";
 import { Modal } from "./ui";
-export function Brand() {
+export function Brand({ editorial = false }: { editorial?: boolean }) {
+  if (editorial)
+    return (
+      <Link
+        href="/"
+        className="brand editorial-brand"
+        aria-label="Project Gateway – Startseite"
+      >
+        <span>
+          PROJECT GATEWAY
+          <span className="brand-slash" aria-hidden>
+            {" "}
+            /
+          </span>
+        </span>
+      </Link>
+    );
   return (
     <Link href="/" className="brand" aria-label="Project Gateway – Startseite">
       <span className="brand-mark" aria-hidden />
@@ -14,9 +30,11 @@ export function Brand() {
 export function Header({
   partner = false,
   editorial = false,
+  nightshift = false,
 }: {
   partner?: boolean;
   editorial?: boolean;
+  nightshift?: boolean;
   mode?: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -28,15 +46,26 @@ export function Header({
     </>
   ) : (
     <>
-      <a href="/#ablauf">Unser Ansatz</a>
+      <a href="/#projektarten">Möglichkeiten</a>
       <Link href="/beispiel">Projektbeispiel</Link>
       <Link href="/kontakt">Kontakt</Link>
     </>
   );
   return (
     <>
-      <header className={`header wrap${editorial ? " editorial-header" : ""}`}>
-        <Brand />
+      <header
+        className={`header wrap${editorial ? " editorial-header" : ""}${nightshift ? " nightshift-header" : ""}`}
+      >
+        <div className={nightshift ? "editorial-brand-group" : undefined}>
+          <Brand editorial={nightshift} />
+          {nightshift && (
+            <p className="brand-description">
+              Energie für
+              <br />
+              Ihren Standort.
+            </p>
+          )}
+        </div>
         <nav aria-label="Hauptnavigation" className="desktop-nav">
           {links}
         </nav>
@@ -58,10 +87,28 @@ export function Header({
     </>
   );
 }
-export function Footer() {
+export function Footer({ editorial = false }: { editorial?: boolean }) {
   return (
-    <footer className="footer wrap">
-      <Brand />
+    <footer className={`footer wrap${editorial ? " editorial-footer" : ""}`}>
+      {editorial ? (
+        <>
+          <div className="footer-intro">
+            <p>Photovoltaik. Speicher. Ihr Standort.</p>
+            <a href="#main">Zurück nach oben</a>
+          </div>
+          <Link
+            href="/"
+            className="editorial-wordmark"
+            aria-label="Project Gateway – Startseite"
+          >
+            PROJECT
+            <br />
+            GATEWAY<span aria-hidden>/</span>
+          </Link>
+        </>
+      ) : (
+        <Brand />
+      )}
       <nav aria-label="Fußnavigation">
         <Link href="/kontakt">Kontakt</Link>
         <Link href="/datenschutz">Datenschutz</Link>

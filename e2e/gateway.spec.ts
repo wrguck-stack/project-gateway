@@ -520,42 +520,61 @@ test("responsive browser screenshots and reflow across every required width", as
       await page.goto(url);
       await page.evaluate(() => document.fonts.ready);
       if (name === "landing" && width === 1440) {
-        const typography = await page.evaluate(() =>
-          Object.fromEntries(
-            ["body", "h1", "p.lead", "button", "input"].map((selector) => [
-              selector,
-              {
-                family: getComputedStyle(document.querySelector(selector)!)
-                  .fontFamily,
-                size: getComputedStyle(document.querySelector(selector)!)
-                  .fontSize,
-              },
-            ]),
-          ),
+        const typographySelectors = [
+          ".gateway-editorial",
+          ".nightshift-hero h1",
+          ".nightshift-hero h1 em",
+          ".nightshift-hero-intro",
+          ".nightshift-hero-primary",
+        ];
+        const typography = await page.evaluate(
+          (selectors) =>
+            Object.fromEntries(
+              selectors.map((selector) => [
+                selector,
+                {
+                  family: getComputedStyle(document.querySelector(selector)!)
+                    .fontFamily,
+                  size: getComputedStyle(document.querySelector(selector)!)
+                    .fontSize,
+                },
+              ]),
+            ),
+          typographySelectors,
         );
         console.log("Typography QA:", typography);
         const cdp = await page.context().newCDPSession(page);
         await cdp.send("DOM.enable");
         await cdp.send("CSS.enable");
         const { root } = await cdp.send("DOM.getDocument");
-        for (const selector of ["h1", "p.lead", "button", "input"]) {
+        for (const selector of typographySelectors.slice(1)) {
           const { nodeId } = await cdp.send("DOM.querySelector", {
             nodeId: root.nodeId,
             selector,
           });
-          console.log(
-            "Rendered fonts",
-            selector,
-            await cdp.send("CSS.getPlatformFontsForNode", { nodeId }),
-          );
+          const rendered = await cdp.send("CSS.getPlatformFontsForNode", {
+            nodeId,
+          });
+          console.log("Rendered fonts", selector, rendered);
+          expect(
+            rendered.fonts.some(
+              (font) =>
+                font.familyName ===
+                (selector.endsWith(" em") ? "Gelasio" : "Arimo"),
+            ),
+          ).toBe(true);
         }
         await cdp.detach();
-        for (const value of Object.values(typography))
-          expect(value.family).toContain("IBM Plex Sans Condensed");
+        for (const [selector, value] of Object.entries(typography))
+          expect(value.family).toContain(
+            selector.endsWith(" em") ? "Gelasio" : "Arimo",
+          );
       }
       expect(
         await page.evaluate(
-          () => document.documentElement.scrollWidth <= window.innerWidth + 1,
+          () =>
+            document.documentElement.scrollWidth <=
+            document.documentElement.clientWidth + 1,
         ),
         `${name} ${width}px horizontal reflow`,
       ).toBe(true);
@@ -606,7 +625,9 @@ test("200% text, touch without hover, reduced motion and map landscape", async (
   await page.addStyleTag({ content: ":root {font-size:32px !important;}" });
   expect(
     await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth + 1,
+      () =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth + 1,
     ),
   ).toBe(true);
   await screenshot(page, "landing-text-200-touch");

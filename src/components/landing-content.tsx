@@ -287,7 +287,13 @@ export function ProjectTypes({
             hidden={expanded !== p.id}
           >
             <img
-              src={`/atlas/${p.image}`}
+              src={
+                p.id === "roof"
+                  ? "/energy/gateway-solar-detail-v1.webp"
+                  : p.id === "storage"
+                    ? "/energy/gateway-storage-detail-v1.webp"
+                    : `/atlas/${p.image}`
+              }
               alt={`Illustration: ${p.title === "Gewerbedach-PV" ? "Gewerbehalle mit großer Dachfläche" : p.title}`}
               width={p.id === "roof" ? 1254 : 1536}
               height={p.id === "roof" ? 1254 : 1024}
@@ -329,8 +335,12 @@ export function ScorePreview() {
     <section className="section wrap score-preview" id="bewertung">
       <div className="section-intro">
         <div>
-          <p className="overline">EINORDNUNG MIT BEGRÜNDUNG</p>
-          <h2>Eine Zahl braucht eine Grundlage.</h2>
+          <p className="overline">06 / EINORDNUNG MIT BEGRÜNDUNG</p>
+          <h2>
+            Eine Zahl braucht
+            <br />
+            <em>eine Grundlage.</em>
+          </h2>
         </div>
         <p>
           Sie sehen, welche Angaben für Ihr Projekt sprechen und was noch offen

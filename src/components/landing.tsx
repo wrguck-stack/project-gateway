@@ -23,8 +23,12 @@ import {
   type ProjectIntent,
 } from "./landing-content";
 import type { Project } from "@/domain/model";
+import "@fontsource/arimo/latin-400.css";
+import "@fontsource/arimo/latin-700.css";
+import "@fontsource/gelasio/latin-400-italic.css";
 import "./landing.css";
-import "./landing-hero.css";
+import { NightshiftHero } from "./nightshift-hero";
+import "./nightshift-landing.css";
 
 const faq = [
   [
@@ -348,128 +352,134 @@ export function Landing({ mode }: { mode: string }) {
     />
   );
   return (
-    <>
-      <Header mode={mode} editorial />
+    <div className="gateway-editorial">
+      <Header mode={mode} editorial nightshift />
       <main id="main" className="landing-page">
-        <section
-          className="hero editorial-hero energy-hero"
-          id="standort-start"
-        >
-          <div className="wrap editorial-hero-content">
-            <div className="hero-copy">
-              <p className="overline hero-overline">
-                PHOTOVOLTAIK FÜR GEWERBE UND INDUSTRIE
-              </p>
-              <h1>
-                <span>Können PV und Speicher</span>{" "}
-                <span className="hero-accent">Ihre Stromkosten</span>{" "}
-                <span className="hero-accent">senken?</span>
-              </h1>
-            </div>
-            <div className="hero-intro">
-              <p className="lead">
-                Eigenen Solarstrom erzeugen, speichern und im Betrieb nutzen:
-                Entscheidend ist, was zu Ihrem Verbrauch passt. Bereiten Sie die
-                Prüfung von Einsparpotenzial, Kosten und Voraussetzungen vor.
-              </p>
-              <Button onClick={focusEntry} aria-haspopup="dialog">
-                Meinen Standort prüfen
-              </Button>
-              <div className="hero-secondary">
-                <a href="#ablauf" className="text-link">
-                  Was wird geprüft?
-                </a>
-                <p className="meta">Für neue Anlagen und bestehende PV.</p>
-              </div>
-              {draft && (
-                <p className="draft-return">
-                  <Link href={`/standortcheck/${draft.id}/1`}>
-                    Entwurf fortsetzen
-                  </Link>
-                  <button
-                    className="text-button"
-                    onClick={() => {
-                      setDraft(null);
-                      setAddress("");
-                      setIntent(undefined);
-                      try {
-                        sessionStorage.removeItem("gateway-draft");
-                      } catch {}
-                      focusEntry();
-                    }}
-                  >
-                    Neuen Standort beginnen
-                  </button>
-                </p>
-              )}
-            </div>
-          </div>
-          <figure className="energy-panorama">
-            <div className="energy-panorama-image">
-              <img
-                src="/atlas/gateway-energy-panorama-v1.webp"
-                width={1999}
-                height={787}
-                alt="Gewerbebetrieb mit Photovoltaik auf dem Hallendach, Batteriespeichern vor der Werkhalle und einem Lieferfahrzeug an einer Ladestation."
-                fetchPriority="high"
-              />
-              <ul className="energy-labels" aria-label="Energie am Standort">
-                <li className="energy-label energy-label-solar">
-                  Solarstrom erzeugen
-                </li>
-                <li className="energy-label energy-label-storage">
-                  Strom speichern
-                </li>
-                <li className="energy-label energy-label-use">
-                  Im Betrieb nutzen
-                </li>
-              </ul>
-            </div>
-            <figcaption className="wrap energy-panorama-caption">
-              <span className="mono">
-                Erzeugung, Speicher und Verbrauch gemeinsam betrachten.
-              </span>
-              <span>Illustration eines Energiekonzepts</span>
-            </figcaption>
-          </figure>
-          {entryOpen && (
-            <Modal
-              title="Wo liegt Ihr Standort?"
-              onClose={() => setEntryOpen(false)}
-            >
-              <div className="site-entry-dialog">
-                <p>
-                  Beginnen Sie mit der Adresse Ihrer Immobilie oder einer
-                  Beschreibung Ihrer Fläche.
-                </p>
-                {selectedTitle && (
-                  <div className="selected-intent" role="status">
-                    <span>
-                      <Checkmark size={20} aria-hidden />
-                      {selectedTitle} ausgewählt
-                    </span>
-                    <button
-                      type="button"
-                      className="text-button"
-                      onClick={() => setIntent(undefined)}
-                    >
-                      Auswahl aufheben
-                    </button>
-                  </div>
-                )}
-                {entry("hero")}
-                <p className="meta">
-                  Ohne Pflichtkonto · Ihre Angaben bereiten die fachliche
-                  Prüfung vor.
-                </p>
-              </div>
-            </Modal>
+        <NightshiftHero onStart={focusEntry}>
+          {draft && (
+            <p className="draft-return">
+              <Link href={`/standortcheck/${draft.id}/1`}>
+                Entwurf fortsetzen
+              </Link>
+              <button
+                className="text-button"
+                onClick={() => {
+                  setDraft(null);
+                  setAddress("");
+                  setIntent(undefined);
+                  try {
+                    sessionStorage.removeItem("gateway-draft");
+                  } catch {}
+                  focusEntry();
+                }}
+              >
+                Neuen Standort beginnen
+              </button>
+            </p>
           )}
+        </NightshiftHero>
+        {entryOpen && (
+          <Modal
+            title="Wo liegt Ihr Standort?"
+            onClose={() => setEntryOpen(false)}
+          >
+            <div className="site-entry-dialog">
+              <p>
+                Beginnen Sie mit der Adresse Ihrer Immobilie oder einer
+                Beschreibung Ihrer Fläche.
+              </p>
+              {selectedTitle && (
+                <div className="selected-intent" role="status">
+                  <span>
+                    <Checkmark size={20} aria-hidden />
+                    {selectedTitle} ausgewählt
+                  </span>
+                  <button
+                    type="button"
+                    className="text-button"
+                    onClick={() => setIntent(undefined)}
+                  >
+                    Auswahl aufheben
+                  </button>
+                </div>
+              )}
+              {entry("hero")}
+              <p className="meta">
+                Ohne Pflichtkonto · Ihre Angaben bereiten die fachliche Prüfung
+                vor.
+              </p>
+            </div>
+          </Modal>
+        )}
+
+        <section
+          className="section wrap potential-section"
+          id="potenzial"
+          aria-labelledby="potential-title"
+        >
+          <p className="overline">01 / WAS IHREN STANDORT AUSMACHT</p>
+          <h2 id="potential-title">
+            Nicht jede Anlage passt.
+            <br />
+            <em>Aber vielleicht Ihre.</em>
+          </h2>
+          <div className="potential-grid">
+            <article>
+              <img
+                src="/energy/gateway-solar-detail-v1.webp"
+                width={1200}
+                height={720}
+                alt="Photovoltaikmodule auf einem weitläufigen Gewerbedach im Abendlicht."
+                loading="lazy"
+              />
+              <h3>Das Dach als Ausgangspunkt</h3>
+              <p>
+                Dachflächen, Statik, Ausrichtung und vorhandene Infrastruktur
+                bestimmen, welches Potenzial an Ihrem Standort realistisch ist.
+              </p>
+              <a href="#projektarten" className="text-link">
+                Mehr zu PV am Standort
+              </a>
+            </article>
+            <article>
+              <img
+                src="/energy/gateway-storage-detail-v1.webp"
+                width={1200}
+                height={720}
+                alt="Batteriespeicher neben einer beleuchteten Gewerbehalle."
+                loading="lazy"
+              />
+              <h3>Speicher im Gesamtkonzept</h3>
+              <p>
+                Ein Speicher kann Lastspitzen abfedern und den eigenen Strom
+                flexibel im Betrieb nutzbar machen – abhängig von Ihrem
+                Verbrauch und Netzanschluss.
+              </p>
+              <a href="#projektarten" className="text-link">
+                Mehr zu Speichern und Integration
+              </a>
+            </article>
+          </div>
         </section>
 
-        <section id="ablauf" className="section wrap">
-          <p className="overline">DIE GRUNDLAGE FÜR IHRE ENTSCHEIDUNG</p>
-          <h2>Chancen erkennen. Voraussetzungen klären.</h2>
+        <section id="ablauf" className="section wrap decision-section">
+          <div className="decision-intro">
+            <p className="overline">02 / DIE GRUNDLAGE FÜR IHRE ENTSCHEIDUNG</p>
+            <h2>
+              Chancen erkennen.
+              <br />
+              <em>Voraussetzungen klären.</em>
+            </h2>
+            <p>
+              Ein Energiekonzept beginnt mit Ihrem Standort. Wir ordnen die
+              Ausgangslage und machen sichtbar, was vor einer Investition
+              geklärt werden muss.
+            </p>
+            <a href="#standortcheck-vorschau" className="text-link">
+              Den Standortcheck kennenlernen{" "}
+              <ArrowRight size={20} aria-hidden />
+            </a>
+          </div>
           <div className="process-grid">
             {[
               [
@@ -501,8 +511,12 @@ export function Landing({ mode }: { mode: string }) {
 
         <section className="section wrap dossier-section" id="projektakte">
           <div className="dossier-intro">
-            <p className="overline">IHR ERGEBNIS / VORAB ANSEHEN</p>
-            <h2>Eine klare Grundlage, bevor Sie entscheiden.</h2>
+            <p className="overline">03 / IHRE PROJEKTAKTE</p>
+            <h2>
+              Ihre Angaben.
+              <br />
+              Eine klare <em>Grundlage.</em>
+            </h2>
             <p className="lead">
               Ihre Projektakte führt die Ausgangslage, vorhandene Nachweise und
               offene Prüfungen zusammen. So wird sichtbar, was bereits bekannt
@@ -535,8 +549,12 @@ export function Landing({ mode }: { mode: string }) {
         >
           <LandingCheckPreview />
           <div>
-            <p className="overline">DER STANDORTCHECK / DIREKT AUSPROBIEREN</p>
-            <h2>Sie müssen noch nicht alle Antworten kennen.</h2>
+            <p className="overline">04 / DER STANDORTCHECK</p>
+            <h2>
+              Sie müssen noch nicht
+              <br />
+              <em>alles wissen.</em>
+            </h2>
             <p className="lead">
               Zehn verständliche Schritte führen durch die Angaben. Sie müssen
               dafür weder eine fertige Planung noch jede technische Antwort
@@ -579,8 +597,12 @@ export function Landing({ mode }: { mode: string }) {
         <section className="section wrap" id="projektarten">
           <div className="section-intro">
             <div>
-              <p className="overline">VIER AUSGANGSPUNKTE</p>
-              <h2>Welche Möglichkeiten bietet Ihr Standort?</h2>
+              <p className="overline">05 / IHRE MÖGLICHKEITEN</p>
+              <h2>
+                Ihr Standort.
+                <br />
+                <em>Ihre Möglichkeiten.</em>
+              </h2>
             </div>
             <p>
               Öffnen Sie die passende Projektart und starten Sie mit einer
@@ -592,10 +614,12 @@ export function Landing({ mode }: { mode: string }) {
         <ScorePreview />
 
         <section className="section wrap audience-section" id="eigentuemer">
-          <p className="overline">
-            FÜR EIGENTÜMER, UNTERNEHMEN UND BESTANDSHALTER
-          </p>
-          <h2>Ihr Standort verdient eine fundierte Entscheidung.</h2>
+          <p className="overline">07 / FÜR EIGENTÜMER UND UNTERNEHMEN</p>
+          <h2>
+            Ein Standort. Viele Fragen.
+            <br />
+            <em>Eine fundierte Entscheidung.</em>
+          </h2>
           <div className="audience-columns">
             <article>
               <span className="mono muted">01 / EIGENTÜMER & UNTERNEHMEN</span>
@@ -629,8 +653,12 @@ export function Landing({ mode }: { mode: string }) {
 
         <section className="section wrap partner-section" id="projektpartner">
           <div>
-            <p className="overline">FÜR PROJEKTENTWICKLER UND PARTNER</p>
-            <h2>Gut vorbereitet in die fachliche Prüfung.</h2>
+            <p className="overline">08 / DIE ZUSAMMENARBEIT</p>
+            <h2>
+              Gut vorbereitet.
+              <br />
+              <em>Gemeinsam weiter.</em>
+            </h2>
             <p className="lead">
               Project Gateway bündelt die Angaben. Der tatsächlich benannte
               Projektpartner bewertet die fachlichen Voraussetzungen und
@@ -676,11 +704,11 @@ export function Landing({ mode }: { mode: string }) {
 
         <section className="section wrap faq">
           <div>
-            <p className="overline">VOR DEM ERSTEN SCHRITT</p>
+            <p className="overline">09 / HÄUFIGE FRAGEN</p>
             <h2>
               Ihre Fragen.
               <br />
-              Klare Antworten.
+              <em>Klare Antworten.</em>
             </h2>
             <Link href="/kontakt" className="text-link">
               Kontakt und Ansprechpartner <ArrowRight size={20} aria-hidden />
@@ -700,8 +728,12 @@ export function Landing({ mode }: { mode: string }) {
         </section>
         <section className="section wrap closing">
           <div>
-            <p className="overline">DER ERSTE SCHRITT ZU MEHR KLARHEIT</p>
-            <h2>Beginnen Sie mit Ihren Möglichkeiten.</h2>
+            <p className="overline">10 / IHR NÄCHSTER SCHRITT</p>
+            <h2>
+              Was kann Ihr Standort?
+              <br />
+              <em>Finden wir es heraus.</em>
+            </h2>
             <p>
               Erfassen Sie Ihren Standort. Ordnen Sie Ihre Ausgangslage und
               bereiten Sie die Fragen vor, die vor einer Investition geklärt
@@ -719,7 +751,7 @@ export function Landing({ mode }: { mode: string }) {
           </div>
         </section>
       </main>
-      <Footer />
-    </>
+      <Footer editorial />
+    </div>
   );
 }

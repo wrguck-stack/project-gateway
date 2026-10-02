@@ -1,83 +1,70 @@
-# Project Gateway · Energie-Hero · Visuelle Abnahme 2. Oktober 2026
+# Project Gateway · Night Shift Variante 3
 
 final result: passed
 
 ## Vergleichsgrundlage
 
-- Gewählt: Variante 3 der letzten Entwurfsrunde, „Können PV und Speicher Ihre
-  Stromkosten senken?“.
-- Source: `docs/qa/homepage-overhaul/hero-energy-reference.webp`, 1487 × 1058 px.
-- Implementierung: `docs/qa/hero-energy-2026-10-02/hero-1487.webp`, gleicher
-  Viewport 1487 × 1058 CSS-Pixel, deviceScaleFactor 1. Keine Skalierung oder
-  Dichtenormalisierung nötig. Zustand: Homepage, kein gespeicherter Entwurf,
-  geschlossener Standortdialog.
-- Direkte Playwright-Prüfung vom Nutzer am 02.10.2026 ausdrücklich freigegeben,
-  nachdem der Cloud-Browser wiederholt ohne DOM oder Screenshot hängen blieb.
-- Chromium 153.0.8010.12 gegen den lokalen Next-Produktionsbuild.
+Der Nutzer wählte die dritte **angezeigte** Variante der Night-Shift-Entwürfe.
+Diese Auswahl ersetzt die ältere Atlas-Vorgabe für die öffentliche Homepage.
+Fachliche Verträge und die bestehende Anwendung bleiben maßgeblich.
 
-## Vergleich und Korrekturschleife
+- Visuelle Quelle: `docs/qa/nightshift-2026-10-02/selected-variant-3.webp`, 946 × 1663 Pixel.
+- Gerenderte Umsetzung: `docs/qa/nightshift-2026-10-02/desktop-final.webp`, 1440 × 2531 Pixel, CSS-Viewport 1440 × 2531, DPR 1.
+- Zum Vergleich wurde die Browseraufnahme auf 946 × 1663 Pixel normalisiert. Quelle und Umsetzung wurden gemeinsam geöffnet; keine Browserrahmen.
+- Zustand: Startseite, Bilder und lokal bereitgestellte Fonts geladen, Energiekonzept am Ende (100 %, Nutzen), reduzierte Bewegung.
+- Referenzstil zusätzlich an der tatsächlichen Night-Shift-Seite einschließlich Desktop, Mobilansicht und interaktiven Zuständen geprüft.
+- Browser: Chromium 153 / Playwright 1.63; der Nutzer hatte diesen Browserweg ausdrücklich freigegeben, nachdem der Cloud-Browser nicht funktionierte.
 
-1. Referenz und erste Implementierungsaufnahme gemeinsam geöffnet. P2:
-   Die technische Overline brach auf Desktop unerwünscht in zwei Zeilen um.
-   Ursache: geerbtes `p { max-width: 62ch }` zusammen mit der Zierlinie.
-   Vorher-Beleg: `docs/qa/hero-energy-2026-10-02/hero-1487-before.webp`.
-2. Scoped `max-width: none` und `flex-shrink: 0` für die Linie ergänzt.
-   Produktionsbuild und Typecheck erneut bestanden.
-3. Neu aufgenommen und mit der Referenz verglichen, einschließlich Detailcrop
-   (x40/y90, 1400 × 350 px) der Überschrift, Overline, Einleitung und CTA.
-   Overline nun einzeilig. Desktop-Headline bleibt dreizeilig, rechte
-   CTA-Spalte und Panorama entsprechen der ausgewählten Komposition.
-   Keine offenen P0/P1/P2-Befunde.
+## Sichtvergleich und Befunde
 
-## Geprüfte Gestaltungsflächen
+Keine offenen P0/P1/P2-Befunde. Vollansicht sowie fokussierte Ausschnitte wurden nach den Korrekturen erneut verglichen.
 
-- **Schrift:** tatsächliche IBM Plex Sans Condensed 700 und IBM Plex Mono aus
-  der bestehenden Marke. Headline, Akzentzeilen und Hierarchie stimmen; die
-  Bildgenerierung stellt den Schriftzug kräftiger dar als die reale
-  Markenschrift. Diese Abweichung ist bewusst akzeptiert, keine dritte
-  Schrift eingeführt. Text bleibt echtes, skalierbares HTML.
-- **Abstände/Layout:** Textspalten, CTA, breites Motiv und Caption geprüft.
-  Korrigierter Overline-Umbruch; keine abgeschnittenen Controls oder
-  horizontalen Überläufe in den gemessenen Viewports.
-- **Farben:** vorhandene Atlas-Tokens, Amber-Akzent, dunkle Oberfläche und
-  sichtbare Interaktionskonturen. Unterstrichene Links bleiben erkennbar.
-- **Bild:** eigenständiges WebP 1999 × 787 px, PV-Dach, Werkhalle, Speicher und
-  Ladefahrzeug wie in der Vorlage. Sanfter Übergang am oberen Bildrand.
-  Kleine dunkle Hintergründe der Beschriftungen dienen der Lesbarkeit.
-- **Inhalt:** gewählte Überschrift, Einleitung und CTA; keine zugesagten
-  Einsparbeträge oder garantierten Erträge. Der Standortcheck bereitet die
-  fachliche Prüfung vor.
+1. **Fonts / Typografie:** Arimo Regular/Bold und Gelasio Italic werden selbst gehostet. CDP bestätigt die tatsächlich verwendeten Webfonts. Sie ersetzen die zuvor sichtbaren Linux-Fallbacks und bilden den Arial/Georgia-Charakter der Quelle ab. Vierzeilige Hero-Hierarchie, eisblaues `Stromkosten` und kursives `senken?` sind erhalten. Geringe Glyphen-/Breitenunterschiede zum Rasterentwurf sind P3.
+2. **Layout / Rhythmus:** vollständiges Hero-Bild, linker Texteinstieg, schmale Kopfzeile, untere Zeitleiste und versetzte Bildspalten folgen der Vorlage. Hero-Ende bei 1265 CSS-Pixeln entspricht nach Normalisierung ungefähr dem Vorlagenende. Nachfolgende bestehende Abschnitte übernehmen Schrift, Abstände, Linien und Farben. Mobil werden Bild und Text lesbar angeordnet; die Referenz enthält keinen separaten mobilen Entwurf.
+3. **Farben / Zustände:** Navy-Grund #080d13, helle Schrift und eisblaue Akzente. Felder, Buttons, Tabs, Fokus und Vorschläge haben sichtbare Konturen und Zustände. Dropdown-Vorschläge wurden ausdrücklich auf dunkle Flächen mit kontrastreichen Texten umgestellt. Axe- und Tastaturprüfung bestanden.
+4. **Bildqualität:** drei eigenständige, optimierte WebP-Motive mit PV-Dach, Speicher und beleuchtetem Gewerbebetrieb. Keine eingebrannte UI; Texte und Bedienelemente bleiben echtes HTML. Die Bildszene ist eine neu erzeugte Interpretation des Entwurfs und etwas wärmer. Kein behauptetes Kundenreferenzprojekt.
+5. **Inhalt:** exakte ausgewählte Hero-Frage und Standortbezug. Keine garantierten Einsparungen, Erträge oder erfundenen Rechtsaussagen. Synthetische Projektbeispiele bleiben als solche bezeichnet. Die vorhandene Erfassung und Übergabesemantik wurde nicht zu einer Live-Fachplanung umgedeutet.
 
-## Responsive- und Funktionsprüfung
+Fokussierte Belege (jeweils Quelle links, Umsetzung rechts):
+- `docs/qa/nightshift-2026-10-02/hero-focus.webp`
+- `docs/qa/nightshift-2026-10-02/section-focus.webp`
 
-- Neue Aufnahmen und DOM-Messungen bei 1487/1440/1280/1024/768/390/320 px.
-  In allen Fällen entspricht Dokumentbreite der Viewportbreite.
-- Standortdialog bei 1487/768/390/320 px ohne horizontalen Überlauf;
-  Escape schließt und der Fokus kehrt zum öffnenden Button zurück.
-- Mobile Belege: `hero-390-complete.webp`, `hero-320.webp`, `dialog-390.webp`
-  im oben genannten QA-Verzeichnis. Auf Mobile stehen Bildbeschriftungen
-  unter dem Motiv; Text und Einstieg stehen vor dem Bild.
-- `capture-metrics.json` enthält Größen, Fokusnachweise und Konsolenergebnisse.
-- 23/23 bestehende ausgewählte Playwright-Tests bestanden (1,4 Minuten):
-  alle 18 Landing-Tests bei 1440/390 px; zwei vollständige Nutzerabläufe mit
-  Upload, Ergebnis, Review und Einreichung; Tastatur/Dialog/axe-Smoke;
-  42 Seitenansichten und sieben Dialog-Reflows; 200 % Text, Touch,
-  reduzierte Bewegung und Querformat.
-- 192/192 Unit-Tests, Produktionsbuild und Typecheck bestanden.
-- Keine JavaScript-Laufzeitfehler. Ein erster automatischer Aufruf von
-  `/favicon.ico` liefert 404; die Anwendung und ihre Bild-/Schriftdateien
-  laden. Dies ist ein P3-Nachtrag, keine Funktions- oder Abnahmeblockade.
+Weitere Browserbelege:
+- `docs/qa/nightshift-2026-10-02/mobile-final.webp`
+- `docs/qa/nightshift-2026-10-02/dialog-mobile.webp`
+- `docs/qa/nightshift-2026-10-02/dialog-text-200.webp`
 
-## Ergebnis
+## Vergleichshistorie
 
-Die frühere Blockade der visuellen Abnahme ist durch den freigegebenen
-Playwright-Weg behoben. Umsetzung für die bestehende Netlify-Site freigegeben.
-Hosting-Tarif und Ressourcen bleiben unverändert.
+- Erster Durchlauf: P2 bei zu kleiner Typografie im ersten Inhaltsabschnitt und zu breitem Hero-Schriftbild durch System-Fallbacks. Korrektur: selbst gehostete passende Fonts, größere Überschrift/Kartentexte, angepasste Absatzgrößen und führende Linie.
+- Responsiver Durchlauf: P2 bei umbrechenden Nummern und Überbreite mit 200 % Text. Diese Überbreite vergrößerte den mobilen Layout-Viewport und erschwerte das Schließen des Dialogs. Korrektur: sinnvolle Mindestbreiten, zulässige Wortumbrüche, flexible Kopfzeile und Link-/Buttonbreiten; Nummern bleiben zusammen. Der Test vergleicht nun gegen die echte Seitenbreite statt den durch Overflow vergrößerten Layout-Viewport.
+- Dialog: P2 bei hellen Vorschlagflächen mit übernommenem hellen Text. Korrektur: explizite dunkle Vorschlag- und Hoverflächen plus kontrastreiche Texte.
+- Nach Korrekturen: Produktionsbuild, neue Browseraufnahmen und erneuter vollständiger/fokussierter Sichtvergleich; keine offenen P0/P1/P2. Beide prüfenden Agenten bestätigen das Ergebnis.
 
-## Live-Nachweis
+## Funktionsprüfung
 
-Commit `eba9d317` mit Netlify-Deploy `6abfa22cde313623a350e370` veröffentlicht.
-Die öffentliche Desktop-/Mobilansicht und der Dialog wurden zusätzlich mit
-Playwright geprüft. Kein horizontaler Überlauf und keine JS-Laufzeitfehler.
-Der Live-Zustand entspricht dem abgenommenen lokalen Build. Details:
-[Veröffentlichung](docs/qa/HERO-ENERGY-2026-10-02.md#veröffentlichung-und-live-kontrolle).
+- Produktionsbuild und Typecheck bestanden.
+- 24 relevante E2E-Szenarien insgesamt bestanden: zunächst 23/24; das fehlerhafte 200-%-Szenario nach Korrektur bestanden. Vier von der Korrektur betroffene Prüfungen wurden gezielt wiederholt und bestanden.
+- Vollständiger Eigentümerablauf auf Desktop und Mobilgerät einschließlich Upload, Review, Ergebnis, Einwilligung und Beleg.
+- Bestehende Landing-Interaktionen, Projektarten, Navigation, Entwurfsfortsetzung, Dialog und Tastaturfokus.
+- Reflow auf 1440, 1280, 1024, 768, 390, 360 und 320 Pixeln; Dialog auf allen Breiten.
+- Reduzierte Bewegung, Touch und 200 % Text; Stationsschalter, Regler und Tastaturbedienung.
+- Axe-Smokecheck und tatsächlich gerenderte Fonts geprüft.
+- Keine JavaScript-Laufzeitfehler in den abschließenden Browseraufnahmen.
+
+## Akzeptierte Unterschiede / Restumfang
+
+- Echte Formulare und mobile Umbrüche ergänzen Zustände, die der Desktopentwurf nicht spezifiziert.
+- Nativer zugänglicher Regler statt nachgezeichneter statischer Zeitleiste. Animation kann pausiert, erneut abgespielt oder manuell erkundet werden; bei reduzierter Bewegung steht das Bild still.
+- Geringe Schriftkontur- und Fotodetailunterschiede sind P3 und blockieren nicht.
+- Kein neuer Hostingtarif und keine zusätzliche kostenpflichtige Ressource. Veröffentlichung nutzt die bestehende Netlify-Site; Live-Beleg wird separat dokumentiert.
+
+## Abgeschlossene Checkliste
+
+- [x] Exakte Auswahl zugeordnet und Bildmaterial eingebunden.
+- [x] Alle fünf Vergleichsflächen geprüft.
+- [x] P0/P1/P2 behoben und erneut aufgenommen.
+- [x] Kerneinstieg, Mobilansicht und zugängliche Bedienung geprüft.
+- [x] Produktionsbuild und Typecheck bestanden.
+
+final result: passed
