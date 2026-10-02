@@ -2,6 +2,24 @@
 
 final result: passed
 
+## Aktuelle Bildkorrektur · 02.10.2026
+
+Auf Wunsch des Nutzers wurde der freigestellte, wie ein Modell wirkende Hero
+in eine fotorealistische Tageslichtszene mit zusammenhängender Gewerbeumgebung
+umgearbeitet. Neues Asset: `public/energy/gateway-energy-site-v2.webp`.
+Es ist weiterhin eine KI-Visualisierung, kein Foto eines realen Kundenprojekts.
+Diese Herkunft wurde dem Nutzer ausdrücklich mitgeteilt und im Alttext benannt.
+
+Die große Randvignette entfällt, damit Gebäude, Nachbarbauten, Gelände und
+Horizont zusammenhängend sichtbar bleiben. Die Helligkeit im Fokusmodus wurde
+von 38 auf 56 Prozent erhöht. Marker und Fokusmasken folgen dem neuen Bild.
+Der bisherige Seitenaufbau, die Schriftgrößen und die Aktionen bleiben erhalten.
+
+Bildprompt, Herkunft und aktuelle Prüfung:
+`docs/qa/hero-realism-2026-10-02/verification.md`.
+Die folgenden Abschnitte dokumentieren die ursprüngliche Konzeptabnahme;
+ihre Angaben zum alten Bild sind historisch.
+
 ## Auftrag und Vergleichsgrundlage
 
 Am 02.10.2026 hat der Nutzer die vorgeschlagene eigenständige Standortgeschichte,

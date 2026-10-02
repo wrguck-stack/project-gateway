@@ -22,8 +22,8 @@ const stages = [
     caption:
       "Anschlussleistung, Bezug und Einspeisung bestimmen, was technisch zu prüfen ist.",
     description: "Vorhandenen Netzanschluss und verfügbare Leistung einordnen",
-    x: 28,
-    y: 69,
+    x: 29,
+    y: 74,
   },
   {
     name: "Dachfläche",
@@ -35,7 +35,7 @@ const stages = [
     description:
       "Nutzbare Dachfläche, Dachzustand und Statik gemeinsam betrachten",
     x: 50,
-    y: 24,
+    y: 26,
   },
   {
     name: "Speicher",
@@ -46,8 +46,8 @@ const stages = [
       "Ob ein Speicher passt, hängt von Erzeugung, Verbrauch und dem zeitlichen Bedarf ab.",
     description:
       "Speicher passend zu Erzeugung und zeitlichem Strombedarf prüfen",
-    x: 82,
-    y: 58,
+    x: 83,
+    y: 61,
   },
   {
     name: "Zusammenspiel",
@@ -64,7 +64,7 @@ const stages = [
 ] as const;
 
 const DURATION = 16_000;
-const SITE_IMAGE = "/energy/gateway-energy-site-v1.webp";
+const SITE_IMAGE = "/energy/gateway-energy-site-v2.webp";
 
 export function NightshiftHero({
   onStart,
@@ -230,7 +230,7 @@ export function NightshiftHero({
               sizes="(max-width: 900px) 90vw, 58vw"
               preload
               unoptimized
-              alt="Architekturvisualisierung eines Gewerbestandorts: PV-Module auf dem Hallendach, Batteriespeicher rechts und eine Trafostation für den Netzanschluss im Vordergrund."
+              alt="Fotorealistische KI-Visualisierung eines Gewerbestandorts bei Tageslicht: PV auf dem Hallendach, Batteriespeicher rechts und eine Trafostation im Vordergrund, eingebettet in ein Gewerbegebiet."
               onLoad={() => setImageReady(true)}
             />
             {stages.slice(0, 3).map((stage, index) => (

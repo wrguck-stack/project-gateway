@@ -135,12 +135,7 @@
   object-fit: contain;
 }
 .gateway-editorial .nightshift-hero-photo {
-  mask-image: radial-gradient(
-    ellipse 80% 82% at 50% 50%,
-    #000 58%,
-    transparent 100%
-  );
-  filter: brightness(0.38);
+  filter: brightness(0.56);
   transition: filter 1s ease;
 }
 .gateway-editorial .energy-scene[data-active="3"] .nightshift-hero-photo {
@@ -156,10 +151,10 @@
 .gateway-editorial .energy-focus[data-active="true"] {
   opacity: 1;
 }
-/* These masks reveal the same photograph, with no invented energy-flow graphics. */
+/* These masks reveal areas of the same site visualization. */
 .gateway-editorial .energy-focus-0 {
   mask-image: radial-gradient(
-    ellipse 25% 34% at 28% 69%,
+    ellipse 25% 34% at 29% 74%,
     #000 48%,
     transparent 100%
   );
@@ -173,7 +168,7 @@
 }
 .gateway-editorial .energy-focus-2 {
   mask-image: radial-gradient(
-    ellipse 22% 26% at 81% 60%,
+    ellipse 22% 26% at 83% 62%,
     #000 48%,
     transparent 100%
   );

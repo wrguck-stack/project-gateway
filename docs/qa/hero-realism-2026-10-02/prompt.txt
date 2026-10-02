@@ -1,0 +1,16 @@
+Use case: photorealistic-natural.
+Asset type: replacement website hero photograph, landscape 3:2, ideally 1536x1024.
+Input image: the existing website's schematic architectural visualization. Use it ONLY as a loose reference for the three subjects and their rough arrangement. Completely replace its synthetic 3D-render style and black void with the appearance of an unretouched REAL INDUSTRIAL DRONE PHOTOGRAPH.
+
+Primary request: a maximally convincing documentary photograph of an ordinary established German light-industrial commercial site, PV array on a metal hall roof, an actual compact concrete transformer station front-left, and an appropriate outdoor commercial battery installation on a separate concrete pad at right. All three need to remain identifiable from the elevated oblique drone camera. The image fills the entire frame with a continuous real place, not a miniature or isolated architectural model.
+
+Camera: realistic drone photography from about 20 metres elevation, 35mm-equivalent perspective, no tilt-shift, no orthographic projection, restrained photographic sharpness with natural fine grain and believable aerial atmosphere. The warehouse is plausibly about 60m wide, 9m high. Grey corrugated siding with subtle discoloration, normal working yard with patched asphalt, tyre marks, drainage grates, worn white parking lines and mundane service-road geometry. Show neighbouring industrial buildings, a few parked vehicles and distant ordinary trees continuing to the edges/background, with absolutely no dark studio void. All assets must look large and fixed in the real environment.
+
+PV: dark blue-black framed rectangular crystalline-silicon modules in regular buildable rows, practical setbacks and access corridors around rooflights; real reflections, subtle panel colour variation, believable racks and separate service walkway.
+Transformer: compact weathered light-grey concrete electrical cabin with real closed steel service doors, ventilation grilles and protective bollards; foreground-left around x27%,y72%. No exposed dangerous fantasy wiring.
+Battery: clearly distinct bank of 3-4 practical off-white outdoor battery cabinets with cooling units, doors, vent grilles on a simple pad at right around x82%,y66%; physically realistic dimensions, service access and separation from the building. DO NOT make them sci-fi appliances.
+PV roof broad area around x47%,y35%.
+
+Lighting: soft natural late-afternoon daylight under thin high clouds, light from one consistent direction. Plausible neutral white balance, moderate saturation, honest dynamic range, ordinary sky light. No cinematic amber glow, no spotlights, no heavy HDR, no glowing windows, no vignette, no graphic shadows.
+Materials: real weathering, concrete aggregate, asphalt repairs, inconsistent vegetation, restrained practical architecture; authentic working industrial site photographed for an engineering case study.
+No illustration, no CAD, no CGI, no 3D rendering, no toy model, no miniature, no unrealistically immaculate new surfaces, no ornamental landscaping, no black background. No captions, no UI, no labels, no logos, no watermarks. Do not reproduce a named existing company or claim a real location.
