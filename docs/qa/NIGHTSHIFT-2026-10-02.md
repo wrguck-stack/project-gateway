@@ -28,3 +28,31 @@ bestehenden Integrations- und Beispielsemantik. Es wurden keine neuen Aussagen
 hinzugefügt.
 
 Die bestehende Netlify-Free-Site wird unverändert als Hostingziel genutzt.
+
+## Veröffentlichung und Live-Kontrolle
+
+- Anwendungscommit: `3d583743c3bc65e9082eeb7ec76eed62c09c9b6e`.
+- Netlify-Deploy: `6abfcb1c2650ff8893a9e308`, erfolgreich, Exit 0.
+- Öffentlich: https://project-gateway-wrguck.netlify.app
+- Eindeutiger Deploy: https://6abfcb1c2650ff8893a9e308--project-gateway-wrguck.netlify.app
+- Vollständiger Netlify-Build in 35,7 Sekunden. 192 Unit-Tests, Produktionsbuild
+  und Typecheck bestanden.
+- HTTPS: HTTP 200 für Homepage, alle drei neuen Bilddateien, Projektbeispiel
+  und Kontakt. Neue Hero-Klasse, Bildquelle, Headline und CTA ausgeliefert.
+- Live-Browserprüfung auf Desktop 1440 × 1000 und Mobil 390 × 844 bestanden.
+  Beide Ansichten sowie der mobile Standortdialog wurden visuell geprüft.
+- Arimo Regular/Bold und Gelasio Italic tatsächlich als Webfonts gerendert.
+  Keine horizontale Überbreite; Dokumentbreite 1440 bzw. 390 Pixel.
+- Stationswechsel Speichern / Nutzen, passender sichtbarer Bildtext,
+  Dialog öffnen/schließen und Fokusrückgabe funktionieren.
+- Keine JavaScript-Laufzeitfehler und keine schreibenden Requests beim Livecheck.
+- Der isolierte Browser benötigte für das lokale Prüfproxy-Zertifikat
+  `ignoreHTTPSErrors`. Die zusätzlichen Node-HTTPS-Abrufe verwendeten keinen
+  Zertifikatsbypass. Die Browseraufnahme ersetzt keine TLS-Prüfung.
+- Keine neue Ressource, Tarifänderung oder kostenpflichtige Einrichtung.
+  Bestehende Datenhaltung und Produktionskonfiguration weiterverwendet.
+
+Die finalen lokalen Referenz-/Umsetzungsbelege sind unter
+`docs/qa/nightshift-2026-10-02/` versioniert. Der einzige nachträgliche Commit
+dokumentiert diese Veröffentlichung; die veröffentlichte Anwendung bleibt
+identisch mit dem oben genannten Anwendungscommit.
