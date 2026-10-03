@@ -74,6 +74,23 @@
   overflow: hidden;
 }
 
+/* Feather only the photograph's edges; the overlay never intercepts input. */
+.gateway-fieldbook .energy-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    #10202a 0,
+    #10202a80 18px,
+    #10202a00 64px,
+    #10202a00 calc(100% - 64px),
+    #10202a80 calc(100% - 18px),
+    #10202a 100%
+  );
+}
+
 /* Cropping happens outside this plane, so labels cannot drift off objects. */
 .gateway-fieldbook .energy-scene-plane {
   position: absolute;
@@ -185,6 +202,7 @@
   margin: auto 0 0;
   background: var(--hero-paper);
   color: #13212b;
+  box-shadow: 0 0 32px #10202a24;
 }
 
 .gateway-fieldbook .nightshift-context-label {
@@ -430,6 +448,29 @@
     inset: auto;
     width: 100%;
     padding: 14px var(--fieldbook-gutter) 10px;
+    background: var(--hero-ink);
+    color: var(--hero-paper);
+    box-shadow: none;
+  }
+  .gateway-fieldbook .nightshift-context-label {
+    color: #ff9a6f;
+  }
+  .gateway-fieldbook .nightshift-context-question {
+    color: var(--hero-paper);
+  }
+  .gateway-fieldbook .nightshift-context-action {
+    background: #182b36;
+    border-color: #7f909b;
+    color: var(--hero-paper);
+  }
+  .gateway-fieldbook .nightshift-context-action:hover {
+    background: #304550;
+    border-color: var(--hero-paper);
+    color: #fff;
+  }
+  .gateway-fieldbook .nightshift-hero-context
+    :is(button, [role="tabpanel"]):focus-visible {
+    outline-color: #ff9a6f;
   }
   .gateway-fieldbook .nightshift-hero-controls {
     gap: 18px;

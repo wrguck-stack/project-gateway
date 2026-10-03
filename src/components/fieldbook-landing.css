@@ -5,6 +5,7 @@
   --font-sans: var(--font-fieldbook);
   --font-mono: "IBM Plex Mono", monospace;
   --fieldbook-gutter: clamp(20px, 4.1667vw, 80px);
+  --fieldbook-transition: clamp(64px, 7vw, 104px);
   --color-canvas: #10202a;
   --color-surface: #22323b;
   --color-raised: #2b3d47;
@@ -271,7 +272,7 @@
   --color-secondary: #405461;
   --color-muted: #50636e;
   --color-line: #a3b1ba;
-  background: #f2f3ee;
+  background: linear-gradient(to bottom, #d8e2e7, #f2f3ee 112px);
   color: #18242b;
   padding: clamp(48px, 6vw, 96px) var(--fieldbook-gutter);
 }
@@ -325,9 +326,21 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
   gap: 8vw;
-  background: #18242b;
+  /* Keep the light-to-dark blend in empty space above the readable content. */
+  background:
+    linear-gradient(
+      to bottom,
+      #f2f3ee,
+      #e0e5e1 14%,
+      #aab7b8 36%,
+      #586c75 65%,
+      #243740 87%,
+      #18242b
+    ) top / 100% var(--fieldbook-transition) no-repeat,
+    linear-gradient(to bottom, #18242b 60%, #10202a);
   border: 0;
   padding: clamp(48px, 6vw, 96px) var(--fieldbook-gutter);
+  padding-top: calc(clamp(48px, 6vw, 96px) + var(--fieldbook-transition));
   align-items: center;
 }
 .gateway-fieldbook .fieldbook-closing h2 {
@@ -378,8 +391,19 @@
   grid-template-columns: minmax(150px, 0.65fr) minmax(0, 3fr);
   gap: 32px;
   padding: 28px var(--fieldbook-gutter);
-  border-bottom: 1px solid #aab8bf;
-  background: #e3e9eb;
+  padding-top: calc(28px + var(--fieldbook-transition));
+  border-bottom: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      #10202a,
+      #1d2d36 12%,
+      #52626a 34%,
+      #a9b5b9 67%,
+      #d5dee0 86%,
+      #e3e9eb
+    ) top / 100% var(--fieldbook-transition) no-repeat,
+    linear-gradient(to bottom, #e3e9eb 45%, #f2f3ee);
   color: #18242b;
 }
 .gateway-fieldbook .fieldbook-route > p {

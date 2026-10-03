@@ -1,5 +1,21 @@
 # Project Gateway — Variante 3
 
+## Softer color transitions — 3 October 2026
+
+Scoped follow-up to the user's request: feather the night photograph into the
+hero, connect the light chapters with subtle background gradients, and blend
+the two major light/dark section boundaries in dedicated empty space. The
+mobile context now shares the dark hero surface. Controls retain explicit
+borders, selected states and readable contrast; the overlay cannot intercept
+pointer input. Header and hero retain their existing viewport dimensions.
+
+Production build and typecheck passed. Existing checks for keyboard/Axe,
+200% text/touch/reduced motion and hero geometry across all required viewports
+passed. Production screenshots at 1440, 390 and 320px were visually reviewed.
+No application behavior or analytics contracts changed.
+
+## Clear interaction and guidance
+
 Latest scoped refinement: [clear interaction and user guidance, 3 October 2026](docs/qa/GUIDANCE-2026-10-03.md).
 This adds explicit control affordances and next-step guidance to the selected
 visual direction documented below.

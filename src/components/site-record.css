@@ -1,6 +1,6 @@
 /* A compact evidence record, visually connected to the hero location. */
 .gateway-fieldbook .site-record {
-  background: #d8e2e7;
+  background: linear-gradient(to bottom, #f2f3ee, #d8e2e7 144px);
   color: #18242b;
   scroll-margin-top: 24px;
 }
