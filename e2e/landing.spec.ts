@@ -5,21 +5,21 @@ const heroStations = [
     name: "Dachfläche",
     id: "roof",
     question: "Welche Fläche steht zur Verfügung?",
-    action: "Meine Dachfläche erfassen",
+    action: "Standort angeben",
     intent: "roof",
   },
   {
     name: "Netzanschluss",
     id: "grid",
     question: "Welche Leistung steht zur Verfügung?",
-    action: "Anschlussunterlagen erfassen",
+    action: "Standort angeben",
     intent: "",
   },
   {
     name: "Speicher",
     id: "storage",
     question: "Wann braucht Ihr Betrieb den Strom?",
-    action: "Mein Speicherprojekt vorbereiten",
+    action: "Standort angeben",
     intent: "storage",
   },
 ] as const;
@@ -131,7 +131,7 @@ for (const width of [1440, 390]) {
         await expect(action).toBeFocused();
       }
       await hero
-        .getByRole("button", { name: "Meinen Standort prüfen", exact: true })
+        .getByRole("button", { name: "Standortcheck starten", exact: true })
         .click();
       await expect(
         dialog.getByLabel("Projektvorhaben", { exact: true }),
@@ -165,7 +165,7 @@ for (const width of [1440, 390]) {
       await expect(page.locator("#projektakte h2")).toBeInViewport();
       await page
         .locator("#projektakte")
-        .getByRole("link", { name: "Projektakte ansehen", exact: true })
+        .getByRole("link", { name: "Beispielakte öffnen", exact: true })
         .click();
       await expect(page).toHaveURL(/\/beispiel$/);
       await expect(page.locator("#score")).toBeVisible();
@@ -234,7 +234,7 @@ for (const width of [1440, 390]) {
       );
       expect(writes).toEqual([]);
       await record
-        .getByRole("link", { name: "Projektakte ansehen", exact: true })
+        .getByRole("link", { name: "Beispielakte öffnen", exact: true })
         .click();
       await expect(page).toHaveURL(/\/beispiel$/);
       await expect(page.locator("#score")).toBeVisible();
@@ -291,17 +291,17 @@ for (const width of [1440, 390]) {
       for (const scenario of [
         {
           title: "PV bereits vorhanden",
-          action: "Meine Erweiterung vorbereiten",
+          action: "Standort angeben",
           selected: "extension",
         },
         {
           title: "Ungenutzte Dachfläche",
-          action: "Meine Dachfläche erfassen",
+          action: "Standort angeben",
           selected: "roof",
         },
         {
           title: "Hoher Stromverbrauch",
-          action: "Mein Verbrauchsprofil erfassen",
+          action: "Standort angeben",
           selected: undefined,
         },
       ]) {
@@ -400,8 +400,16 @@ for (const width of [1440, 390]) {
       test(`${scenario.title} starts through the entry form with editable intent defaults`, async ({
         page,
       }) => {
+        const draftWrites: string[] = [];
+        page.on("request", (request) => {
+          if (
+            request.method() === "POST" &&
+            new URL(request.url()).pathname === "/api/drafts"
+          )
+            draftWrites.push(request.url());
+        });
         await page
-          .getByRole("button", { name: "Meinen Standort prüfen", exact: true })
+          .getByRole("button", { name: "Standortcheck starten", exact: true })
           .click();
         const dialog = page.getByRole("dialog", {
           name: "Wo liegt Ihr Standort?",
@@ -424,6 +432,31 @@ for (const width of [1440, 390]) {
         await expect(page.locator(".closing .address-form input")).toHaveValue(
           address,
         );
+        if (scenario.intent === "roof") {
+          const closing = page.locator(".closing");
+          const changeIntent = closing.getByRole("button", {
+            name: "Projektvorhaben ändern",
+            exact: true,
+          });
+          const closeDialog = dialog.getByRole("button", {
+            name: "Schließen",
+            exact: true,
+          });
+          await closeDialog.click();
+          await expect(dialog).toHaveCount(0);
+          await changeIntent.click();
+          await expect(projectIntent).toHaveValue("roof");
+          await projectIntent.selectOption("storage");
+          await closeDialog.click();
+          await expect(dialog).toHaveCount(0);
+          await expect(changeIntent).toBeFocused();
+          await expect(closing).toContainText("Speicherprojekt");
+          await changeIntent.click();
+          await expect(projectIntent).toHaveValue("storage");
+          await expect(input).toHaveValue(address);
+          await projectIntent.selectOption(scenario.intent);
+        }
+        expect(draftWrites).toEqual([]);
         const created = page.waitForResponse(
           (response) =>
             new URL(response.url()).pathname === "/api/drafts" &&
@@ -432,6 +465,7 @@ for (const width of [1440, 390]) {
         await input.press("Enter");
         const response = await created;
         expect(response.ok()).toBeTruthy();
+        expect(draftWrites).toHaveLength(1);
         expect(response.request().postDataJSON()).toEqual({
           address,
           projectIntent: scenario.intent,
@@ -518,7 +552,7 @@ for (const width of [1440, 390]) {
       const closing = page.locator(".closing .address-form");
       const input = closing.getByRole("combobox");
       const button = closing.getByRole("button", {
-        name: "Standortcheck starten",
+        name: "Weiter zu den Standortangaben",
         exact: true,
       });
       const address = "QA Rückkehr · Gewerbepark 5";

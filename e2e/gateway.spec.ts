@@ -73,7 +73,7 @@ for (const width of [1440, 390]) {
       await page.goto("/");
       await page
         .getByRole("button", {
-          name: "Meinen Standort prüfen",
+          name: "Standortcheck starten",
           exact: true,
         })
         .click();
@@ -89,7 +89,10 @@ for (const width of [1440, 390]) {
         })
         .fill(address);
       await locationDialog
-        .getByRole("button", { name: "Standortcheck starten", exact: true })
+        .getByRole("button", {
+          name: "Weiter zu den Standortangaben",
+          exact: true,
+        })
         .click();
       await expect(
         page.getByRole("heading", { name: "Ist das Ihr Standort?" }),
@@ -461,7 +464,7 @@ test("keyboard combobox and native dialog focus return; accessibility smoke", as
 }) => {
   await page.goto("/");
   const opener = page.getByRole("button", {
-    name: "Meinen Standort prüfen",
+    name: "Standortcheck starten",
     exact: true,
   });
   await opener.click();
@@ -591,7 +594,7 @@ test("responsive browser screenshots and reflow across every required width", as
       await screenshot(page, `${name}-${width}`);
       if (name === "landing") {
         await page
-          .getByRole("button", { name: "Meinen Standort prüfen", exact: true })
+          .getByRole("button", { name: "Standortcheck starten", exact: true })
           .click();
         const locationDialog = page.getByRole("dialog", {
           name: "Wo liegt Ihr Standort?",
@@ -647,7 +650,7 @@ test("200% text, touch without hover, reduced motion and map landscape", async (
   ).toBe(true);
   await screenshot(page, "landing-text-200-touch");
   const locationOpener = page.getByRole("button", {
-    name: "Meinen Standort prüfen",
+    name: "Standortcheck starten",
     exact: true,
   });
   await locationOpener.tap();

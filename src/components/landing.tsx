@@ -213,7 +213,9 @@ export function AddressEntry({
           )}
         </div>
         <Button type="submit" pending={pending}>
-          {pending ? "Entwurf wird angelegt …" : "Standortcheck starten"}
+          {pending
+            ? "Entwurf wird angelegt …"
+            : "Weiter zu den Standortangaben"}
         </Button>
       </div>
       <small id={`${id}-help`} aria-live="polite">
@@ -372,13 +374,14 @@ export function Landing({ mode }: { mode: string }) {
           >
             <div className="site-entry-dialog">
               <p>
-                Beginnen Sie mit der Adresse Ihrer Immobilie oder einer
-                Beschreibung Ihrer Fläche.
+                Geben Sie Ihre Adresse oder eine Beschreibung Ihrer Fläche ein.
+                Danach ergänzen Sie die Angaben zu Ihrem Standort.
               </p>
               <div className="fieldbook-intent field">
                 <label htmlFor="gateway-project-intent">Projektvorhaben</label>
                 <select
                   id="gateway-project-intent"
+                  aria-describedby="gateway-project-intent-help"
                   value={intent ?? ""}
                   onChange={(event) =>
                     setIntent(
@@ -395,6 +398,9 @@ export function Landing({ mode }: { mode: string }) {
                     </option>
                   ))}
                 </select>
+                <small id="gateway-project-intent-help">
+                  Optional – kann noch offen bleiben.
+                </small>
               </div>
               {entry("hero")}
               <p className="meta">
@@ -404,6 +410,39 @@ export function Landing({ mode }: { mode: string }) {
             </div>
           </Modal>
         )}
+
+        <aside
+          className="fieldbook-route"
+          aria-label="Ablauf des Standortchecks"
+        >
+          <p>
+            Ihr Weg zur <br />
+            Standortübersicht
+          </p>
+          <ol>
+            <li>
+              <span aria-hidden="true">01</span>
+              <div>
+                <strong>Standort angeben</strong>
+                <small>Adresse oder Fläche</small>
+              </div>
+            </li>
+            <li>
+              <span aria-hidden="true">02</span>
+              <div>
+                <strong>Angaben ergänzen</strong>
+                <small>Was Ihnen bereits bekannt ist</small>
+              </div>
+            </li>
+            <li>
+              <span aria-hidden="true">03</span>
+              <div>
+                <strong>Übersicht erhalten</strong>
+                <small>Stand und offene Fragen sehen</small>
+              </div>
+            </li>
+          </ol>
+        </aside>
 
         <SiteSituations
           onStart={(value) => {
@@ -432,6 +471,9 @@ export function Landing({ mode }: { mode: string }) {
               </Link>
             </div>
             <div>
+              <p className="fieldbook-faq-guide">
+                Frage auswählen und Antwort aufklappen.
+              </p>
               {faq.map(([q, a]) => (
                 <details key={q}>
                   <summary>
@@ -468,7 +510,16 @@ export function Landing({ mode }: { mode: string }) {
           </div>
           <div>
             {selectedTitle && (
-              <p className="meta">Ausgewählte Projektart: {selectedTitle}</p>
+              <div className="fieldbook-intent-review">
+                <p className="meta">Projektvorhaben: {selectedTitle}</p>
+                <button
+                  type="button"
+                  onClick={focusEntry}
+                  aria-haspopup="dialog"
+                >
+                  Projektvorhaben ändern
+                </button>
+              </div>
             )}
             {entry("closing")}
             <Link href="/beispiel" className="text-link">

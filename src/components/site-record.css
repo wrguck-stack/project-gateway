@@ -14,7 +14,7 @@
 .gateway-fieldbook .site-record-heading {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
   align-items: end;
   column-gap: 36px;
   row-gap: 10px;
@@ -64,47 +64,48 @@
 .gateway-fieldbook .site-record-tabs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  gap: 12px;
+}
+
+.gateway-fieldbook .site-record-controls {
+  min-width: 0;
   margin-bottom: 20px;
-  border-bottom: 1px solid #aab9c2;
+}
+
+.gateway-fieldbook .site-record-control-label {
+  max-width: none;
+  margin: 0 0 12px;
+  color: #344653;
+  font-size: 0.9375rem;
+  line-height: 1.5;
 }
 
 .gateway-fieldbook .site-record-tab {
-  position: relative;
   min-width: 0;
   min-height: 48px;
-  padding: 10px 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: #344653;
+  padding: 12px 16px;
+  border: 1px solid #82939d;
+  border-radius: 2px;
+  background: #f2f3ee;
+  color: #18242b;
   font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.4;
   text-align: left;
   overflow-wrap: anywhere;
-}
-
-.gateway-fieldbook .site-record-tab::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 -1px;
-  height: 3px;
-  background: transparent;
+  cursor: pointer;
 }
 
 .gateway-fieldbook .site-record-tab[aria-selected="true"] {
-  color: #18242b;
+  border-color: #18242b;
+  background: #18242b;
+  color: #f2f3ee;
   font-weight: 600;
 }
 
-.gateway-fieldbook .site-record-tab[aria-selected="true"]::after {
-  background: #c9511f;
-}
-
-.gateway-fieldbook .site-record-tab:hover {
-  color: #18242b;
-  background: #18242b07;
+.gateway-fieldbook .site-record-tab:hover:not([aria-selected="true"]) {
+  border-color: #18242b;
+  background: #e5e9e7;
 }
 
 .gateway-fieldbook .site-record-tab:focus-visible,
@@ -239,6 +240,10 @@
   text-decoration: none;
 }
 
+.gateway-fieldbook .site-record-action svg {
+  flex-shrink: 0;
+}
+
 .gateway-fieldbook .site-record-action:hover {
   background: #304653;
   color: #fff;
@@ -247,11 +252,18 @@
 
 @media (max-width: 1100px) {
   .gateway-fieldbook .site-record-heading {
+    grid-template-columns: minmax(0, 1fr);
     column-gap: 24px;
+    row-gap: 16px;
   }
 
-  .gateway-fieldbook .site-record-tabs {
-    gap: 16px;
+  .gateway-fieldbook .site-record-intro {
+    grid-row: 2;
+  }
+
+  .gateway-fieldbook .site-record-controls {
+    width: 100%;
+    max-width: 32rem;
     margin-bottom: 8px;
   }
 
@@ -296,14 +308,17 @@
     font-size: 1rem;
   }
 
-  .gateway-fieldbook .site-record-tabs {
-    gap: 18px;
+  .gateway-fieldbook .site-record-controls {
+    width: auto;
+    max-width: none;
     margin: 0 0 0 -18px;
   }
 
   .gateway-fieldbook .site-record-tab {
     min-height: 48px;
+    padding: 12px 6px;
     font-size: 0.875rem;
+    hyphens: auto;
   }
 
   .gateway-fieldbook .site-record-panel {

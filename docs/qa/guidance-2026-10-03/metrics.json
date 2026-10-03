@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "documentWidth": 1440,
+    "heroBottom": 900
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "heroBottom": 844
+  },
+  {
+    "width": 320,
+    "height": 640,
+    "documentWidth": 320,
+    "heroBottom": 640
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "documentWidth": 768,
+    "heroBottom": 1024
+  }
+]

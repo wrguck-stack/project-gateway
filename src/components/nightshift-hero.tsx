@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
-import { ArrowRight } from "@carbon/icons-react";
+import { ArrowRight, Information } from "@carbon/icons-react";
 import type { ProjectIntent } from "./landing-content";
 import "./nightshift-hero.css";
 
@@ -23,7 +23,7 @@ const stations: {
     id: "roof",
     name: "Dachfläche",
     question: "Welche Fläche steht zur Verfügung?",
-    action: "Meine Dachfläche erfassen",
+    action: "Standort angeben",
     intent: "roof",
     x: 50,
     y: 26,
@@ -34,7 +34,7 @@ const stations: {
     id: "grid",
     name: "Netzanschluss",
     question: "Welche Leistung steht zur Verfügung?",
-    action: "Anschlussunterlagen erfassen",
+    action: "Standort angeben",
     x: 29,
     y: 74,
     wideX: 32.5,
@@ -44,7 +44,7 @@ const stations: {
     id: "storage",
     name: "Speicher",
     question: "Wann braucht Ihr Betrieb den Strom?",
-    action: "Mein Speicherprojekt vorbereiten",
+    action: "Standort angeben",
     intent: "storage",
     x: 83,
     y: 61,
@@ -174,7 +174,9 @@ export function NightshiftHero({
                 aria-controls={`${id}-panel`}
                 onClick={() => setActive(index)}
               >
-                <span className="energy-hotspot-dot" aria-hidden="true" />
+                <span className="energy-hotspot-dot" aria-hidden="true">
+                  <Information size={22} />
+                </span>
                 <span className="energy-hotspot-leader" aria-hidden="true" />
                 <span className="energy-hotspot-label" aria-hidden="true">
                   {item.name}
@@ -190,7 +192,7 @@ export function NightshiftHero({
             aria-labelledby={`${id}-tab-${active}`}
             tabIndex={0}
           >
-            <p className="nightshift-context-label">{station.name}</p>
+            <p className="nightshift-context-label">Zum Thema {station.name}</p>
             <p className="nightshift-context-question">{station.question}</p>
             <button
               type="button"
@@ -206,51 +208,63 @@ export function NightshiftHero({
       </figure>
 
       <div className="nightshift-hero-controls">
-        <div
-          className="nightshift-hero-stations"
-          role="tablist"
-          aria-label="Bestandteile Ihres Standorts"
-        >
-          {stations.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              role="tab"
-              id={`${id}-tab-${index}`}
-              ref={(element) => {
-                tabs.current[index] = element;
-              }}
-              aria-selected={active === index}
-              aria-controls={`${id}-panel`}
-              tabIndex={active === index ? 0 : -1}
-              onClick={() => setActive(index)}
-              onKeyDown={(event) => {
-                let next: number | undefined;
-                if (event.key === "ArrowRight")
-                  next = (index + 1) % stations.length;
-                if (event.key === "ArrowLeft")
-                  next = (index - 1 + stations.length) % stations.length;
-                if (event.key === "Home") next = 0;
-                if (event.key === "End") next = stations.length - 1;
-                if (next !== undefined) {
-                  event.preventDefault();
-                  focusStation(next);
-                }
-              }}
-            >
-              {item.name}
-            </button>
-          ))}
+        <div className="nightshift-explore">
+          <p className="nightshift-control-caption" id={`${id}-explore`}>
+            Themen im Bild ansehen
+          </p>
+          <div
+            className="nightshift-hero-stations"
+            role="tablist"
+            aria-label="Bestandteile Ihres Standorts"
+            aria-describedby={`${id}-explore`}
+          >
+            {stations.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                id={`${id}-tab-${index}`}
+                ref={(element) => {
+                  tabs.current[index] = element;
+                }}
+                aria-selected={active === index}
+                aria-controls={`${id}-panel`}
+                tabIndex={active === index ? 0 : -1}
+                onClick={() => setActive(index)}
+                onKeyDown={(event) => {
+                  let next: number | undefined;
+                  if (event.key === "ArrowRight")
+                    next = (index + 1) % stations.length;
+                  if (event.key === "ArrowLeft")
+                    next = (index - 1 + stations.length) % stations.length;
+                  if (event.key === "Home") next = 0;
+                  if (event.key === "End") next = stations.length - 1;
+                  if (next !== undefined) {
+                    event.preventDefault();
+                    focusStation(next);
+                  }
+                }}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
         </div>
-        <button
-          className="nightshift-hero-primary"
-          type="button"
-          aria-haspopup="dialog"
-          onClick={() => onStart()}
-        >
-          Meinen Standort prüfen
-          <ArrowRight size={22} aria-hidden />
-        </button>
+        <div className="nightshift-start">
+          <p className="nightshift-control-caption" id={`${id}-start`}>
+            Start mit Ihrer Adresse
+          </p>
+          <button
+            className="nightshift-hero-primary"
+            type="button"
+            aria-haspopup="dialog"
+            onClick={() => onStart()}
+            aria-describedby={`${id}-start`}
+          >
+            Standortcheck starten
+            <ArrowRight size={22} aria-hidden />
+          </button>
+        </div>
       </div>
       {children && <div className="nightshift-hero-return">{children}</div>}
     </section>

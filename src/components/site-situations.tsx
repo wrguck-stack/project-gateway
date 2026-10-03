@@ -11,7 +11,6 @@ type SiteSituation = {
   question: string;
   explanation: string;
   inputs: readonly [string, string, string];
-  action: string;
   intent?: ProjectIntent;
 };
 
@@ -27,7 +26,6 @@ const situations: readonly SiteSituation[] = [
       "Betriebszeiten oder vorhandener Lastgang",
       "Vorhandene Anlagen und Anschlussunterlagen",
     ],
-    action: "Mein Verbrauchsprofil erfassen",
   },
   {
     title: "PV bereits vorhanden",
@@ -40,7 +38,6 @@ const situations: readonly SiteSituation[] = [
       "Erzeugung und Verbrauch",
       "Anschlussunterlagen",
     ],
-    action: "Meine Erweiterung vorbereiten",
     intent: "extension",
   },
   {
@@ -54,7 +51,6 @@ const situations: readonly SiteSituation[] = [
       "Eigentumsverhältnis und vorhandene Statik",
       "Stromverbrauch und Anschlussunterlagen",
     ],
-    action: "Meine Dachfläche erfassen",
     intent: "roof",
   },
 ];
@@ -80,13 +76,18 @@ export function SiteSituations({
             <p className="site-situations-kicker">Ausgangslage</p>
             <h2 id={`${id}-heading`}>Was bringt Ihr Betrieb mit?</h2>
           </div>
-          <p>Wählen Sie den passenden Einstieg.</p>
+          <p>Passenden Einstieg ansehen.</p>
         </header>
 
+        <p className="site-situations-cue" id={`${id}-cue`}>
+          Wählen Sie eine Ausgangslage. Danach sehen Sie, wie Sie beginnen
+          können.
+        </p>
         <div
           className="site-situations-tabs"
           role="tablist"
           aria-label="Ihre Ausgangslage"
+          aria-describedby={`${id}-cue`}
         >
           {situations.map((situation, index) => (
             <button
@@ -143,21 +144,27 @@ export function SiteSituations({
               <p>{situation.explanation}</p>
             </div>
             <div className="site-situations-next">
-              <p className="site-situations-label">Diese Angaben helfen</p>
+              <p className="site-situations-label">Hilfreiche Angaben</p>
               <ul>
                 {situation.inputs.map((input) => (
                   <li key={input}>{input}</li>
                 ))}
               </ul>
+              <p className="site-situations-note">
+                Später ergänzbar – Unbekanntes kann offen bleiben.
+              </p>
               <button
                 type="button"
                 className="site-situations-action"
                 onClick={() => onStart(situation.intent)}
                 aria-haspopup="dialog"
               >
-                <span>{situation.action}</span>
+                <span>Standort angeben</span>
                 <ArrowRight size={22} aria-hidden="true" />
               </button>
+              <p className="site-situations-helper">
+                Danach erfassen Sie die Angaben zu Ihrem Vorhaben.
+              </p>
             </div>
           </div>
         ))}

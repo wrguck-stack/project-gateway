@@ -1,5 +1,9 @@
 # Project Gateway — Variante 3
 
+Latest scoped refinement: [clear interaction and user guidance, 3 October 2026](docs/qa/GUIDANCE-2026-10-03.md).
+This adds explicit control affordances and next-step guidance to the selected
+visual direction documented below.
+
 Source visual truth: `docs/qa/fieldbook-2026-10-03/selected-design.webp`.
 The user selected the third displayed design on 3 October 2026:
 `exec-25d7d1bc-1c9b-486e-b260-d4c3e0885ad7.png` (1024 × 1536).

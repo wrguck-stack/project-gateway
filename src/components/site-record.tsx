@@ -56,53 +56,59 @@ export function SiteRecord() {
       <div className="site-record-inner">
         <header className="site-record-heading">
           <div>
-            <p className="site-record-kicker">Projektakte</p>
+            <p className="site-record-kicker">Ergebnis vorab ansehen</p>
             <h2 id={`${id}-heading`}>
               Offene Fragen
               <br />
               gehören auf den Tisch.
             </h2>
           </div>
-          <div
-            className="site-record-tabs"
-            role="tablist"
-            aria-label="Bereiche der Projektakte"
-          >
-            {records.map((record, index) => (
-              <button
-                key={record.id}
-                type="button"
-                role="tab"
-                className="site-record-tab"
-                ref={(element) => {
-                  triggers.current[index] = element;
-                }}
-                id={`${id}-tab-${index}`}
-                aria-selected={active === index}
-                aria-controls={`${id}-panel-${index}`}
-                tabIndex={active === index ? 0 : -1}
-                onClick={() => setActive(index)}
-                onKeyDown={(event) => {
-                  const next =
-                    event.key === "ArrowRight"
-                      ? (index + 1) % records.length
-                      : event.key === "ArrowLeft"
-                        ? (index + records.length - 1) % records.length
-                        : event.key === "Home"
-                          ? 0
-                          : event.key === "End"
-                            ? records.length - 1
-                            : null;
-                  if (next !== null) {
-                    event.preventDefault();
-                    setActive(next);
-                    triggers.current[next]?.focus();
-                  }
-                }}
-              >
-                {record.label}
-              </button>
-            ))}
+          <div className="site-record-controls">
+            <p className="site-record-control-label" id={`${id}-controls`}>
+              Bereich ansehen
+            </p>
+            <div
+              className="site-record-tabs"
+              role="tablist"
+              aria-label="Bereiche der Projektakte"
+              aria-describedby={`${id}-controls`}
+            >
+              {records.map((record, index) => (
+                <button
+                  key={record.id}
+                  type="button"
+                  role="tab"
+                  className="site-record-tab"
+                  ref={(element) => {
+                    triggers.current[index] = element;
+                  }}
+                  id={`${id}-tab-${index}`}
+                  aria-selected={active === index}
+                  aria-controls={`${id}-panel-${index}`}
+                  tabIndex={active === index ? 0 : -1}
+                  onClick={() => setActive(index)}
+                  onKeyDown={(event) => {
+                    const next =
+                      event.key === "ArrowRight"
+                        ? (index + 1) % records.length
+                        : event.key === "ArrowLeft"
+                          ? (index + records.length - 1) % records.length
+                          : event.key === "Home"
+                            ? 0
+                            : event.key === "End"
+                              ? records.length - 1
+                              : null;
+                    if (next !== null) {
+                      event.preventDefault();
+                      setActive(next);
+                      triggers.current[next]?.focus();
+                    }
+                  }}
+                >
+                  {record.label}
+                </button>
+              ))}
+            </div>
           </div>
           <p className="site-record-intro">
             Ihre Angaben, ihre Herkunft und der nächste Klärungsbedarf bleiben
@@ -151,7 +157,7 @@ export function SiteRecord() {
         <footer className="site-record-footer">
           <p>Ein gemeinsamer Stand für das nächste Fachgespräch.</p>
           <Link href="/beispiel" className="site-record-action">
-            Projektakte ansehen
+            Beispielakte öffnen
             <ArrowRight size={22} aria-hidden="true" />
           </Link>
         </footer>
