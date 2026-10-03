@@ -44,9 +44,15 @@ export function Header({
       <Link href="/partner/pipeline">Pipeline</Link>
       <span className="muted">Gateway Projektpartner</span>
     </>
+  ) : nightshift ? (
+    <>
+      <a href="/#ausgangslage">Standort</a>
+      <a href="/#projektakte">Projektakte</a>
+      <Link href="/kontakt">Kontakt</Link>
+    </>
   ) : (
     <>
-      <a href="/#projektarten">Möglichkeiten</a>
+      <a href="/#ausgangslage">Möglichkeiten</a>
       <Link href="/beispiel">Projektbeispiel</Link>
       <Link href="/kontakt">Kontakt</Link>
     </>
@@ -58,13 +64,6 @@ export function Header({
       >
         <div className={nightshift ? "editorial-brand-group" : undefined}>
           <Brand editorial={nightshift} />
-          {nightshift && (
-            <p className="brand-description">
-              Vom Anschluss
-              <br />
-              zum Energiestandort.
-            </p>
-          )}
         </div>
         <nav aria-label="Hauptnavigation" className="desktop-nav">
           {links}
@@ -87,10 +86,18 @@ export function Header({
     </>
   );
 }
-export function Footer({ editorial = false }: { editorial?: boolean }) {
+export function Footer({
+  editorial = false,
+  fieldbook = false,
+}: {
+  editorial?: boolean;
+  fieldbook?: boolean;
+}) {
   return (
     <footer className={`footer wrap${editorial ? " editorial-footer" : ""}`}>
-      {editorial ? (
+      {fieldbook ? (
+        <Brand editorial />
+      ) : editorial ? (
         <>
           <div className="footer-intro">
             <p>Anschluss. Erzeugung. Nutzung.</p>

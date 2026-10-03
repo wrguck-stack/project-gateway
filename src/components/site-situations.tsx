@@ -1,12 +1,13 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
-import { Add, ArrowRight, Subtract } from "@carbon/icons-react";
+import { ArrowRight } from "@carbon/icons-react";
 import type { ProjectIntent } from "./landing-content";
 import "./site-situations.css";
 
 type SiteSituation = {
   title: string;
+  statement: string;
   question: string;
   explanation: string;
   inputs: readonly [string, string, string];
@@ -17,9 +18,10 @@ type SiteSituation = {
 const situations: readonly SiteSituation[] = [
   {
     title: "Hoher Stromverbrauch",
-    question: "Wann braucht Ihr Betrieb den Strom?",
+    statement: "Ihr Betrieb braucht Strom.",
+    question: "Zu welchen Zeiten?",
     explanation:
-      "Ihre Verbrauchszeiten entscheiden mit darüber, ob eigene Erzeugung oder ein Speicher näher geprüft werden sollte. Der Jahresverbrauch allein reicht dafür nicht.",
+      "Tagsüber, nachts oder rund um die Uhr: Ihr Verbrauchsprofil ist der Ausgangspunkt für die Frage, wie eigene Erzeugung und Speicher dazu passen.",
     inputs: [
       "Jahresverbrauch und Stromabrechnung",
       "Betriebszeiten oder vorhandener Lastgang",
@@ -29,22 +31,24 @@ const situations: readonly SiteSituation[] = [
   },
   {
     title: "PV bereits vorhanden",
-    question: "Was soll Ihre bestehende PV-Anlage künftig leisten?",
+    statement: "Ihre PV ist schon da.",
+    question: "Was soll dazukommen?",
     explanation:
-      "Mehr Eigenverbrauch, zusätzliche Module oder ein Speicher: Ausgangspunkt der fachlichen Prüfung sind Ihre Bestandsanlage und der Verbrauch am Standort.",
+      "Mehr Eigenverbrauch, ein Speicher oder zusätzliche Erzeugung: Zuerst zählt der vorhandene Anlagenbestand.",
     inputs: [
-      "Leistung und Inbetriebnahme der PV-Anlage",
-      "Eigennutzung, Einspeisung und Verbrauchszeiten",
-      "Freie Dachfläche und Anschlussunterlagen",
+      "Leistung und Baujahr",
+      "Erzeugung und Verbrauch",
+      "Anschlussunterlagen",
     ],
-    action: "Meine PV-Erweiterung vorbereiten",
+    action: "Meine Erweiterung vorbereiten",
     intent: "extension",
   },
   {
     title: "Ungenutzte Dachfläche",
-    question: "Was muss vor der Belegung Ihres Dachs geklärt sein?",
+    statement: "Ihr Dach bietet Fläche.",
+    question: "Was lässt sich daraus machen?",
     explanation:
-      "Fläche allein macht noch kein PV-Projekt. Dachzustand, Tragfähigkeit, Nutzungsrechte und Anschluss gehören gemeinsam in die fachliche Prüfung.",
+      "Bevor Module geplant werden, müssen Dachzustand, Tragfähigkeit, Nutzungsrechte und der Anschluss gemeinsam betrachtet werden.",
     inputs: [
       "Dachfläche und bekannter Sanierungsbedarf",
       "Eigentumsverhältnis und vorhandene Statik",
@@ -60,119 +64,104 @@ export function SiteSituations({
 }: {
   onStart: (intent?: ProjectIntent) => void;
 }) {
-  const [expanded, setExpanded] = useState<number | null>(0);
+  const [active, setActive] = useState(1);
   const id = useId();
   const triggers = useRef<(HTMLButtonElement | null)[]>([]);
 
   return (
     <section
       id="ausgangslage"
-      className="section wrap site-situations"
+      className="site-situations"
       aria-labelledby={`${id}-heading`}
     >
-      <p className="overline">01 / WO STEHEN SIE HEUTE?</p>
-      <div className="site-situations-heading">
-        <h2 id={`${id}-heading`}>
-          Was trifft auf Ihren <em>Betrieb zu?</em>
-        </h2>
-        <p>
-          Wählen Sie Ihre Ausgangslage. Sie sehen, welche Frage zuerst zu klären
-          ist und welche Angaben dafür helfen.
-        </p>
-      </div>
+      <div className="site-situations-inner">
+        <header className="site-situations-heading">
+          <div>
+            <p className="site-situations-kicker">Ausgangslage</p>
+            <h2 id={`${id}-heading`}>Was bringt Ihr Betrieb mit?</h2>
+          </div>
+          <p>Wählen Sie den passenden Einstieg.</p>
+        </header>
 
-      <div className="site-situations-list">
-        {situations.map((situation, index) => {
-          const open = expanded === index;
-          const triggerId = `${id}-trigger-${index}`;
-          const panelId = `${id}-panel-${index}`;
-
-          return (
-            <article
+        <div
+          className="site-situations-tabs"
+          role="tablist"
+          aria-label="Ihre Ausgangslage"
+        >
+          {situations.map((situation, index) => (
+            <button
               key={situation.title}
-              className={`site-situation${open ? " is-open" : ""}`}
+              type="button"
+              role="tab"
+              className="site-situations-tab"
+              ref={(element) => {
+                triggers.current[index] = element;
+              }}
+              id={`${id}-tab-${index}`}
+              aria-selected={active === index}
+              aria-controls={`${id}-panel-${index}`}
+              tabIndex={active === index ? 0 : -1}
+              onClick={() => setActive(index)}
+              onKeyDown={(event) => {
+                const next =
+                  event.key === "ArrowRight"
+                    ? (index + 1) % situations.length
+                    : event.key === "ArrowLeft"
+                      ? (index + situations.length - 1) % situations.length
+                      : event.key === "Home"
+                        ? 0
+                        : event.key === "End"
+                          ? situations.length - 1
+                          : null;
+                if (next !== null) {
+                  event.preventDefault();
+                  setActive(next);
+                  triggers.current[next]?.focus();
+                }
+              }}
             >
+              {situation.title}
+            </button>
+          ))}
+        </div>
+
+        {situations.map((situation, index) => (
+          <div
+            key={situation.title}
+            className="site-situations-panel"
+            id={`${id}-panel-${index}`}
+            role="tabpanel"
+            aria-labelledby={`${id}-tab-${index}`}
+            tabIndex={0}
+            hidden={active !== index}
+          >
+            <div className="site-situations-question">
               <h3>
-                <button
-                  type="button"
-                  className="site-situation-trigger"
-                  ref={(element) => {
-                    triggers.current[index] = element;
-                  }}
-                  id={triggerId}
-                  aria-expanded={open}
-                  aria-controls={panelId}
-                  onClick={() => setExpanded(open ? null : index)}
-                  onKeyDown={(event) => {
-                    const next =
-                      event.key === "ArrowDown"
-                        ? (index + 1) % situations.length
-                        : event.key === "ArrowUp"
-                          ? (index + situations.length - 1) % situations.length
-                          : event.key === "Home"
-                            ? 0
-                            : event.key === "End"
-                              ? situations.length - 1
-                              : null;
-                    if (next !== null) {
-                      event.preventDefault();
-                      triggers.current[next]?.focus();
-                    }
-                  }}
-                >
-                  <span className="site-situation-number" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="site-situation-title">
-                    {situation.title}
-                  </span>
-                  <span className="site-situation-toggle" aria-hidden="true">
-                    {open ? <Subtract size={24} /> : <Add size={24} />}
-                  </span>
-                </button>
+                <strong>{situation.statement}</strong>
+                <span>{situation.question}</span>
               </h3>
-
-              <div
-                className="site-situation-panel"
-                id={panelId}
-                role="region"
-                aria-labelledby={triggerId}
-                hidden={!open}
+              <p>{situation.explanation}</p>
+            </div>
+            <div className="site-situations-next">
+              <p className="site-situations-label">Diese Angaben helfen</p>
+              <ul>
+                {situation.inputs.map((input) => (
+                  <li key={input}>{input}</li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                className="site-situations-action"
+                onClick={() => onStart(situation.intent)}
+                aria-haspopup="dialog"
               >
-                <div className="site-situation-question">
-                  <p className="site-situation-label">ZUERST KLÄREN</p>
-                  <h4>{situation.question}</h4>
-                  <p>{situation.explanation}</p>
-                </div>
-                <div className="site-situation-next">
-                  <p className="site-situation-label">
-                    DIESE DREI ANGABEN HELFEN
-                  </p>
-                  <ul>
-                    {situation.inputs.map((input) => (
-                      <li key={input}>{input}</li>
-                    ))}
-                  </ul>
-                  <button
-                    type="button"
-                    className="button primary"
-                    onClick={() => onStart(situation.intent)}
-                    aria-haspopup="dialog"
-                  >
-                    {situation.action}
-                    <ArrowRight size={20} aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
-            </article>
-          );
-        })}
+                <span>{situation.action}</span>
+                <ArrowRight size={22} aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-
-      <p className="site-situations-note">
-        Noch nicht alles zur Hand? Unbekannte Werte können im Standortcheck
-        offen bleiben.
-      </p>
     </section>
   );
 }

@@ -1,0 +1,432 @@
+/* Selected homepage direction: Standort im Detail, 3 October 2026.
+   Keep the public brand composition isolated from the analytical workspace. */
+.gateway-fieldbook {
+  --font-fieldbook: "IBM Plex Sans", Arial, sans-serif;
+  --font-sans: var(--font-fieldbook);
+  --font-mono: "IBM Plex Mono", monospace;
+  --fieldbook-gutter: clamp(20px, 4.1667vw, 80px);
+  --color-canvas: #10202a;
+  --color-surface: #22323b;
+  --color-raised: #2b3d47;
+  --color-inset: #121e25;
+  --color-primary: #f2f3ee;
+  --color-secondary: #c5d2da;
+  --color-muted: #acbbc5;
+  --color-line: #52616a;
+  --color-control: #7f909b;
+  --color-control-strong: #b0bec7;
+  --color-accent: #e96a36;
+  background: var(--color-canvas);
+  color: var(--color-primary);
+  font-family: var(--font-fieldbook);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.gateway-fieldbook [hidden] {
+  display: none !important;
+}
+.gateway-fieldbook .wrap {
+  width: calc(100% - 2 * var(--fieldbook-gutter));
+  max-width: none;
+  margin-inline: auto;
+}
+.gateway-fieldbook :is(button, input, select, textarea) {
+  font-family: inherit;
+}
+.gateway-fieldbook :is(h1, h2, h3) {
+  font-family: var(--font-fieldbook);
+}
+.gateway-fieldbook h2 {
+  font-weight: 500;
+  font-size: clamp(2rem, 4.15vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+.gateway-fieldbook .overline {
+  margin: 0 0 20px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+}
+.gateway-fieldbook :is(a, button, summary, input, select):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+.gateway-fieldbook .button {
+  min-height: 52px;
+  border-radius: 2px;
+  padding: 14px 22px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  gap: 20px;
+  white-space: normal;
+}
+.gateway-fieldbook .button.primary {
+  background: var(--color-accent);
+  color: #18242b;
+  border-color: transparent;
+}
+.gateway-fieldbook .button.primary:hover:not(:disabled) {
+  background: #f58654;
+}
+.gateway-fieldbook .button.primary:active:not(:disabled) {
+  background: #dc5e2a;
+}
+.gateway-fieldbook .button.secondary {
+  color: #f2f3ee;
+  background: #18242b;
+  border-color: #18242b;
+}
+.gateway-fieldbook .button.secondary:hover {
+  background: #2b3d47;
+}
+.gateway-fieldbook .text-link {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  max-width: 100%;
+}
+.gateway-fieldbook .text-link:hover {
+  text-decoration-thickness: 2px;
+}
+.gateway-fieldbook .header.nightshift-header {
+  position: relative;
+  height: auto;
+  min-height: 72px;
+  padding-block: 12px;
+  border-bottom: 1px solid #62727b;
+  gap: 24px;
+  z-index: 5;
+}
+.gateway-fieldbook .editorial-brand-group {
+  min-width: 0;
+}
+.gateway-fieldbook .editorial-brand {
+  white-space: normal;
+  min-width: 0;
+  font-size: clamp(1.0625rem, 1.9vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1.2;
+}
+.gateway-fieldbook .brand-slash {
+  margin-left: 9px;
+  font-weight: 400;
+  color: #f2f3ee;
+}
+.gateway-fieldbook .desktop-nav {
+  gap: 40px;
+  font-size: 0.875rem;
+}
+.gateway-fieldbook .desktop-nav a {
+  font-weight: 400;
+  text-decoration: none;
+}
+.gateway-fieldbook .desktop-nav a:hover {
+  color: #f2f3ee;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+.gateway-fieldbook .mobile-menu {
+  background: transparent;
+  border-color: #62727b;
+}
+.gateway-fieldbook dialog {
+  background: #f2f3ee;
+  color: #18242b;
+  color-scheme: light;
+  --color-primary: #18242b;
+  --color-secondary: #3d515d;
+  --color-muted: #50636e;
+  --color-line: #a8b4bc;
+  --color-control: #647984;
+  border: 0;
+  border-radius: 2px;
+}
+.gateway-fieldbook dialog::backdrop {
+  background: #0b141be0;
+}
+.gateway-fieldbook .dialog-head h2 {
+  font-size: 2rem;
+  line-height: 1.1;
+  margin: 0;
+}
+.gateway-fieldbook .dialog-head .icon-button {
+  background: transparent;
+  color: #18242b;
+  border-color: #8b9ba5;
+}
+.gateway-fieldbook .dialog-head h2:focus {
+  outline: none;
+}
+.gateway-fieldbook .site-entry-dialog > p:first-child {
+  margin-bottom: 24px;
+}
+.gateway-fieldbook .site-entry-dialog > .meta {
+  margin-top: 24px;
+}
+.gateway-fieldbook .fieldbook-intent {
+  margin-bottom: 24px;
+}
+.gateway-fieldbook .fieldbook-intent select {
+  background: #fff;
+  color: #18242b;
+  border: 1px solid #647984;
+  border-radius: 2px;
+}
+.gateway-fieldbook .address-form label {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  margin-bottom: 10px;
+}
+.gateway-fieldbook .address-line {
+  flex-direction: column;
+  gap: 12px;
+}
+.gateway-fieldbook .address-input {
+  flex-basis: auto;
+  background: #fff;
+  color: #18242b;
+  border: 1px solid #647984;
+  border-radius: 2px;
+}
+.gateway-fieldbook
+  .address-input
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+  width: calc(100% - 46px);
+  min-width: 0;
+  color: #18242b;
+  font-size: 1rem;
+  min-height: 56px;
+}
+.gateway-fieldbook .address-input input::placeholder {
+  color: #586773;
+  opacity: 1;
+}
+.gateway-fieldbook .address-input input:focus-visible {
+  outline: 2px solid #18242b;
+  outline-offset: -4px;
+}
+.gateway-fieldbook .address-input:focus-within {
+  outline: 2px solid #e96a36;
+  outline-offset: 3px;
+}
+.gateway-fieldbook .address-input:has(.suggestions) {
+  flex-wrap: wrap;
+}
+.gateway-fieldbook .address-form > small {
+  background: transparent;
+  width: auto;
+  font-size: 0.8125rem;
+  margin-top: 14px;
+}
+.gateway-fieldbook .suggestions {
+  position: static;
+  width: 100%;
+  max-height: 220px;
+  border: 0;
+  border-top: 1px solid #a8b4bc;
+  margin-top: 4px;
+  box-shadow: none;
+  background: #fff;
+  color: #18242b;
+}
+.gateway-fieldbook .suggestions li {
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+.gateway-fieldbook .suggestions small {
+  color: #50636e;
+}
+.gateway-fieldbook .suggestions li:hover,
+.gateway-fieldbook .suggestions li[aria-selected="true"] {
+  background: #d8e2e7;
+}
+.gateway-fieldbook .critical-notice {
+  background: #fbe5df;
+  border-color: #9c3022;
+  color: #772718;
+}
+.gateway-fieldbook .draft-return {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  font-size: 0.8125rem;
+  margin: 0;
+}
+.gateway-fieldbook .fieldbook-faq {
+  --color-primary: #18242b;
+  --color-secondary: #405461;
+  --color-muted: #50636e;
+  --color-line: #a3b1ba;
+  background: #f2f3ee;
+  color: #18242b;
+  padding: clamp(48px, 6vw, 96px) var(--fieldbook-gutter);
+}
+.gateway-fieldbook .fieldbook-faq-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+  gap: 8vw;
+}
+.gateway-fieldbook .fieldbook-faq-inner > div {
+  min-width: 0;
+}
+.gateway-fieldbook .fieldbook-faq h2 {
+  font-size: clamp(2rem, 3.4vw, 3.5rem);
+  max-width: 14ch;
+  margin-bottom: 32px;
+}
+.gateway-fieldbook .fieldbook-faq details {
+  border-bottom: 1px solid #a3b1ba;
+}
+.gateway-fieldbook .fieldbook-faq details:first-child {
+  border-top: 1px solid #a3b1ba;
+}
+.gateway-fieldbook .fieldbook-faq summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 76px;
+  padding: 20px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.gateway-fieldbook .fieldbook-faq summary::-webkit-details-marker {
+  display: none;
+}
+.gateway-fieldbook .fieldbook-faq summary:hover {
+  color: #943811;
+}
+.gateway-fieldbook .fieldbook-faq details p {
+  margin: 0;
+  padding: 0 36px 24px 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+.gateway-fieldbook .fieldbook-faq details[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+.gateway-fieldbook .fieldbook-closing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: 8vw;
+  background: #18242b;
+  border: 0;
+  padding: clamp(48px, 6vw, 96px) var(--fieldbook-gutter);
+  align-items: center;
+}
+.gateway-fieldbook .fieldbook-closing h2 {
+  max-width: 16ch;
+  margin-bottom: 24px;
+}
+.gateway-fieldbook .fieldbook-closing > div {
+  min-width: 0;
+}
+.gateway-fieldbook .fieldbook-closing > div > p:not(.overline) {
+  max-width: 46ch;
+  font-size: 1rem;
+}
+.gateway-fieldbook .fieldbook-closing .address-form > label {
+  color: #f2f3ee;
+}
+.gateway-fieldbook .fieldbook-closing .text-link {
+  margin-top: 20px;
+}
+.gateway-fieldbook .editorial-footer {
+  padding-block: 32px;
+  align-items: center;
+  gap: 24px 40px;
+}
+.gateway-fieldbook .editorial-footer .editorial-brand {
+  font-size: 1.25rem;
+}
+.gateway-fieldbook .editorial-footer nav {
+  gap: 12px 28px;
+  font-size: 0.875rem;
+}
+.gateway-fieldbook .editorial-footer nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.gateway-fieldbook .footer-note {
+  margin: 0;
+  max-width: none;
+  width: 100%;
+  font-size: 0.75rem;
+}
+.gateway-fieldbook .hosting-credit {
+  font-size: 0.75rem;
+}
+@media (max-width: 767px) {
+  .gateway-fieldbook .header.nightshift-header {
+    height: auto;
+    min-height: 64px;
+    padding-block: 9px;
+    gap: 12px;
+  }
+  .gateway-fieldbook .editorial-brand {
+    font-size: 1.15rem;
+  }
+  .gateway-fieldbook h2 {
+    font-size: clamp(2rem, 7.7vw, 3.5rem);
+  }
+  .gateway-fieldbook .overline {
+    font-size: 0.625rem;
+    margin-bottom: 16px;
+  }
+  .gateway-fieldbook .fieldbook-faq-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .gateway-fieldbook .fieldbook-faq h2 {
+    max-width: none;
+    margin-bottom: 20px;
+  }
+  .gateway-fieldbook .fieldbook-faq summary {
+    min-height: 72px;
+    padding-block: 20px;
+    font-size: 0.9375rem;
+  }
+  .gateway-fieldbook .fieldbook-faq details p {
+    padding-right: 0;
+  }
+  .gateway-fieldbook .fieldbook-closing {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .gateway-fieldbook .editorial-footer {
+    padding-block: 28px;
+  }
+  .gateway-fieldbook .editorial-footer nav {
+    gap: 8px 24px;
+  }
+  .gateway-fieldbook .footer-note {
+    gap: 16px;
+  }
+  .gateway-fieldbook dialog {
+    width: calc(100% - 32px);
+    padding: 24px 20px;
+  }
+  .gateway-fieldbook .dialog-head h2 {
+    font-size: 1.6rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gateway-fieldbook *,
+  .gateway-fieldbook *::before,
+  .gateway-fieldbook *::after {
+    transition-duration: 0s !important;
+    animation: none !important;
+  }
+}

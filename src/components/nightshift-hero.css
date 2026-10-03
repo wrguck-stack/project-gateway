@@ -1,552 +1,538 @@
-/* One complete screen at normal text sizes; content may grow when enlarged. */
-.gateway-editorial .nightshift-hero {
+/* The header occupies 72px in normal flow. Content can grow with text zoom. */
+.gateway-fieldbook .nightshift-hero {
+  --hero-paper: #f2f3ee;
+  --hero-ink: #10202a;
+  --hero-accent: #e96a36;
   position: relative;
-  isolation: isolate;
-  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  background: #080d13;
-  color: #eef3f8;
-  border-bottom: 1px solid #293847;
+  min-height: calc(100svh - 72px);
+  background: var(--hero-ink);
+  color: var(--hero-paper);
+  font-family: var(--font-fieldbook), Arial, sans-serif;
 }
-.gateway-editorial .nightshift-hero-body {
-  flex: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+
+.gateway-fieldbook .nightshift-hero-heading {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  padding: clamp(18px, 2.25svh, 28px) var(--fieldbook-gutter) 18px;
+}
+
+.gateway-fieldbook .nightshift-hero h1 {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: clamp(20px, 2vw, 40px);
-  width: 90.2%;
-  max-width: 1640px;
-  margin-inline: auto;
-  padding: max(104px, 12svh) 0 24px;
-}
-.gateway-editorial .nightshift-hero-content {
-  min-width: 0;
-}
-.gateway-editorial .nightshift-hero-eyebrow {
-  margin: 0 0 clamp(16px, 2.5svh, 28px);
-  color: #b7c8da;
-  font:
-    400 0.6875rem/1.5 Arimo,
-    Arial,
-    sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
-.gateway-editorial .nightshift-hero h1 {
+  gap: 32px;
   margin: 0;
-  max-width: 100%;
-  font:
-    400 clamp(2.5rem, min(5.3vw, 8.3svh), 5.8rem)/1.02 Arimo,
-    Arial,
-    sans-serif;
-  letter-spacing: -0.06em;
+  max-width: none;
+  color: var(--hero-paper);
+  font-family: var(--font-fieldbook), Arial, sans-serif;
+  letter-spacing: -0.065em;
   text-wrap: initial;
-  overflow-wrap: anywhere;
 }
-.gateway-editorial .nightshift-hero h1 > span,
-.gateway-editorial .nightshift-hero h1 > em {
+
+.gateway-fieldbook .nightshift-hero-statement {
   display: block;
+  min-width: 0;
+  font-size: clamp(5rem, min(11.9vw, 17.7svh), 13rem);
+  font-weight: 700;
+  line-height: 0.95;
+  white-space: normal;
 }
-.gateway-editorial .nightshift-hero h1 em {
-  font-family: Gelasio, Georgia, serif;
-  color: #abcfff;
+
+.gateway-fieldbook .nightshift-hero-question {
+  display: block;
+  flex: 0 1 auto;
+  min-width: 0;
+  font-size: clamp(2rem, min(4.4vw, 6.7svh), 4.85rem);
   font-weight: 400;
   letter-spacing: -0.055em;
-  line-height: 1.12;
+  line-height: 0.99;
 }
-.gateway-editorial .nightshift-hero-intro {
-  max-width: 35ch;
-  color: #b6c5d5;
-  margin: clamp(16px, 3svh, 30px) 0 0;
-  font:
-    400 clamp(1rem, 1.95svh, 1.25rem)/1.55 Arimo,
-    Arial,
-    sans-serif;
+
+.gateway-fieldbook .nightshift-hero-intro {
+  max-width: none;
+  margin: 20px 0 0;
+  color: #cbd7df;
+  font-size: clamp(1rem, 1.55vw, 1.375rem);
+  line-height: 1.4;
 }
-.gateway-editorial .nightshift-hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 24px;
-  margin-top: clamp(20px, 3svh, 32px);
-}
-.gateway-editorial .nightshift-hero-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  max-width: 100%;
-  padding: 12px 22px;
-  border: 1px solid #bad8ff;
-  border-radius: 3px;
-  background: #abcfff;
-  color: #091622;
-  font:
-    700 0.9375rem/1.4 Arimo,
-    Arial,
-    sans-serif;
-  text-align: center;
-  cursor: pointer;
-}
-.gateway-editorial .nightshift-hero-primary:hover {
-  background: #cce1ff;
-}
-.gateway-editorial .nightshift-hero-secondary {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 8px 0;
-  max-width: 100%;
-  border-bottom: 1px solid #6f8aa7;
-  color: #e6edf5;
-  font:
-    400 0.9375rem/1.4 Arimo,
-    Arial,
-    sans-serif;
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-.gateway-editorial .nightshift-hero-secondary:hover {
-  color: #abcfff;
-  border-color: #abcfff;
-}
-.gateway-editorial .nightshift-hero-return {
-  margin-top: 16px;
-  max-width: 100%;
-}
-.gateway-editorial .nightshift-hero-visual {
-  margin: 0;
-  min-width: 0;
-}
-.gateway-editorial .energy-scene {
+
+.gateway-fieldbook .nightshift-hero-visual {
   position: relative;
-  isolation: isolate;
-  width: 100%;
-  max-width: calc((100svh - 350px) * 1.5);
-  margin-inline: auto;
-  aspect-ratio: 3 / 2;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  min-height: clamp(280px, 32vw, 540px);
+  margin: 0;
 }
-.gateway-editorial .nightshift-hero-photo,
-.gateway-editorial .energy-focus img {
+
+.gateway-fieldbook .energy-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Cropping happens outside this plane, so labels cannot drift off objects. */
+.gateway-fieldbook .energy-scene-plane {
+  position: absolute;
+  left: var(--scene-plane-center-x, 50%);
+  top: var(--scene-plane-center-y, 50%);
+  width: var(--scene-plane-width, 100%);
+  aspect-ratio: var(--scene-plane-ratio, 2010 / 782);
+  transform: translate(-50%, -50%);
+}
+
+.gateway-fieldbook .energy-scene-plane picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gateway-fieldbook .nightshift-hero-photo {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-.gateway-editorial .nightshift-hero-photo {
-  filter: brightness(0.72);
-  transition: filter 1s ease;
-}
-.gateway-editorial .energy-scene[data-active="3"] .nightshift-hero-photo {
-  filter: brightness(1);
-}
-.gateway-editorial .energy-focus {
+
+.gateway-fieldbook .energy-hotspot {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-.gateway-editorial .energy-focus[data-active="true"] {
-  opacity: 1;
-}
-/* These masks reveal areas of the same site visualization. */
-.gateway-editorial .energy-focus-0 {
-  mask-image: radial-gradient(
-    ellipse 25% 34% at 29% 74%,
-    #000 48%,
-    transparent 100%
-  );
-}
-.gateway-editorial .energy-focus-1 {
-  mask-image: radial-gradient(
-    ellipse 53% 29% at 49% 26%,
-    #000 55%,
-    transparent 100%
-  );
-}
-.gateway-editorial .energy-focus-2 {
-  mask-image: radial-gradient(
-    ellipse 22% 26% at 83% 62%,
-    #000 48%,
-    transparent 100%
-  );
-}
-.gateway-editorial .energy-hotspot {
-  position: absolute;
-  z-index: 2;
-  transform: translate(-22px, -22px);
   display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #d7e6f6;
-  font:
-    400 0.75rem/1.2 Arimo,
-    Arial,
-    sans-serif;
-  cursor: pointer;
-}
-.gateway-editorial .energy-hotspot-number {
-  display: inline-flex;
-  width: 36px;
-  height: 36px;
-  align-items: center;
-  justify-content: center;
-  margin: 4px;
-  border: 1px solid #b9cddd;
-  border-radius: 50%;
-  background: #08121ce8;
-  transition:
-    background 0.2s,
-    color 0.2s;
-}
-.gateway-editorial .energy-hotspot[aria-pressed="true"] .energy-hotspot-number,
-.gateway-editorial .energy-hotspot:hover .energy-hotspot-number {
-  background: #abcfff;
-  color: #0a1725;
-  border-color: #abcfff;
-}
-.gateway-editorial .energy-hotspot-label {
-  padding: 6px 8px;
-  background: #08121cee;
-  border: 1px solid #456078;
-  border-radius: 2px;
-}
-.gateway-editorial .energy-hotspot:last-child {
-  flex-direction: row-reverse;
-  transform: translate(calc(-100% + 22px), -22px);
-}
-.gateway-editorial .nightshift-hero-visual figcaption {
-  display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
-  gap: 16px;
-  min-height: 100px;
-  padding: 18px 0 0;
-  border-top: 1px solid #293847;
-  margin: 8px 0 0;
-}
-.gateway-editorial .energy-caption-number {
-  color: #abcfff;
-  font:
-    italic 400 1.6rem/1.2 Gelasio,
-    Georgia,
-    serif;
-}
-.gateway-editorial .nightshift-hero-visual figcaption strong {
-  display: block;
-  font-size: 1rem;
-  line-height: 1.4;
-  font-weight: 400;
-  color: #e7eef6;
-}
-.gateway-editorial .nightshift-hero-visual figcaption p {
-  margin: 6px 0 0;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: #aabed0;
-}
-.gateway-editorial .nightshift-hero-controls {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(24px, 4vw, 72px);
-  width: 90.2%;
-  max-width: 1640px;
-  margin: 0 auto;
-  padding: 8px 0 14px;
-  border-top: 1px solid #456078;
-}
-.gateway-editorial .nightshift-hero-playback {
-  display: inline-flex;
-  justify-content: center;
   align-items: center;
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid #718da8;
-  border-radius: 50%;
-  background: transparent;
-  color: #dce9f7;
-  cursor: pointer;
-}
-.gateway-editorial .nightshift-hero-playback:hover:not(:disabled) {
-  background: #152333;
-  border-color: #abcfff;
-}
-.gateway-editorial .nightshift-hero-playback:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
-.gateway-editorial .nightshift-hero-timeline {
-  min-width: 0;
-  width: 100%;
-}
-.gateway-editorial .nightshift-hero-stages {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
-.gateway-editorial .nightshift-hero-stages button {
-  min-width: 0;
-  min-height: 44px;
-  padding: 8px 0;
   border: 0;
   background: transparent;
-  color: #adc0d2;
+  color: #e0e8ed;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gateway-fieldbook .energy-hotspot-dot {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px #10202a30;
+  transition:
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.gateway-fieldbook .energy-hotspot-leader {
+  position: absolute;
+  left: 22px;
+  top: 22px;
+  width: 54px;
+  height: 1px;
+  background: currentColor;
+  transform: rotate(-35deg);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+.gateway-fieldbook .energy-hotspot-label {
+  position: absolute;
+  left: 64px;
+  bottom: 42px;
+  padding: 5px 11px 6px;
+  border: 1px solid currentColor;
+  background: #10202ade;
+  color: inherit;
   font:
-    400 0.875rem/1.4 Arimo,
+    500 0.9375rem/1.25 var(--font-fieldbook),
     Arial,
     sans-serif;
+  white-space: nowrap;
+}
+
+.gateway-fieldbook .energy-hotspot[aria-pressed="true"] {
+  color: #ff8650;
+}
+
+.gateway-fieldbook .energy-hotspot-roof .energy-hotspot-leader {
+  transform: rotate(35deg);
+}
+
+.gateway-fieldbook .energy-hotspot-roof .energy-hotspot-label {
+  top: 42px;
+  bottom: auto;
+}
+
+.gateway-fieldbook .energy-hotspot[aria-pressed="true"] .energy-hotspot-dot {
+  box-shadow: 0 0 0 5px #10202a40;
+}
+
+.gateway-fieldbook .energy-hotspot:hover .energy-hotspot-label {
+  background: #10202a;
+}
+
+.gateway-fieldbook .nightshift-hero-context {
+  position: relative;
+  left: calc(var(--fieldbook-gutter) * 0.58);
+  width: min(470px, calc(32.5vw - var(--fieldbook-gutter) * 0.58 - 28px));
+  padding: 18px 24px 17px;
+  margin: auto 0 0;
+  background: var(--hero-paper);
+  color: #13212b;
+}
+
+.gateway-fieldbook .nightshift-context-label {
+  margin: 0 0 6px;
+  color: #a93b13;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.gateway-fieldbook .nightshift-context-question {
+  margin: 0 0 8px;
+  color: #13212b;
+  font-size: clamp(1rem, 1.45vw, 1.25rem);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.gateway-fieldbook .nightshift-context-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  color: #10202a;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.3;
   text-align: left;
+  cursor: pointer;
+}
+
+.gateway-fieldbook .nightshift-context-action span {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+
+.gateway-fieldbook .nightshift-context-action svg {
+  flex: 0 0 auto;
+}
+
+.gateway-fieldbook .nightshift-context-action:hover {
+  color: #a93b13;
+}
+
+.gateway-fieldbook .nightshift-hero-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  gap: 24px;
+  padding: 12px var(--fieldbook-gutter);
+  background: var(--hero-ink);
+}
+
+.gateway-fieldbook .nightshift-hero-stations {
+  display: flex;
+  gap: clamp(24px, 4.5vw, 80px);
+  min-width: 0;
+  align-self: stretch;
+}
+
+.gateway-fieldbook .nightshift-hero-stations button {
+  position: relative;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: #bacbd7;
+  font:
+    400 1rem/1.3 var(--font-fieldbook),
+    Arial,
+    sans-serif;
   cursor: pointer;
   overflow-wrap: anywhere;
 }
-.gateway-editorial .nightshift-hero-stages button:last-child {
-  text-align: right;
+
+.gateway-fieldbook .nightshift-hero-stations button[aria-selected="true"] {
+  border-bottom-color: var(--hero-accent);
+  color: var(--hero-paper);
+  font-weight: 500;
 }
-.gateway-editorial .nightshift-hero-stages button[aria-pressed="true"] {
-  color: #e2efff;
-  text-decoration: underline;
-  text-underline-offset: 7px;
-}
-.gateway-editorial .nightshift-hero-stages button:hover {
+
+.gateway-fieldbook .nightshift-hero-stations button:hover {
   color: #fff;
 }
-.gateway-editorial .stage-short {
+
+.gateway-fieldbook .nightshift-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 16px;
+  min-height: 54px;
+  max-width: 100%;
+  padding: 12px 24px;
+  border: 1px solid var(--hero-accent);
+  border-radius: 1px;
+  background: var(--hero-accent);
+  color: #152129;
+  font:
+    600 1rem/1.35 var(--font-fieldbook),
+    Arial,
+    sans-serif;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+.gateway-fieldbook .nightshift-hero-primary:hover {
+  border-color: #ff8650;
+  background: #ff8650;
+}
+
+.gateway-fieldbook .nightshift-hero-primary svg {
+  flex: 0 0 auto;
+}
+
+.gateway-fieldbook .nightshift-hero-return {
+  padding: 0 var(--fieldbook-gutter) 12px;
+}
+
+.gateway-fieldbook .nightshift-hero-return:empty {
   display: none;
 }
-.gateway-editorial .nightshift-hero-range[type="range"] {
-  display: block;
-  appearance: none;
-  width: 100%;
-  min-width: 0;
-  min-height: 32px;
-  height: 32px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  accent-color: #abcfff;
-  cursor: pointer;
+
+.gateway-fieldbook
+  .nightshift-hero
+  :is(button, a, [role="tabpanel"]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
 }
-.gateway-editorial .nightshift-hero-range::-webkit-slider-runnable-track {
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    #abcfff var(--night-progress-percent, 100%),
-    #456078 var(--night-progress-percent, 100%)
-  );
+
+.gateway-fieldbook
+  .nightshift-hero-context
+  :is(button, [role="tabpanel"]):focus-visible {
+  outline-color: #a93b13;
 }
-.gateway-editorial .nightshift-hero-range::-webkit-slider-thumb {
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  margin-top: -6px;
-  border: 3px solid #080d13;
-  border-radius: 50%;
-  background: #abcfff;
-  outline: 1px solid #abcfff;
-}
-.gateway-editorial .nightshift-hero-range::-moz-range-track {
-  height: 2px;
-  background: #456078;
-}
-.gateway-editorial .nightshift-hero-range::-moz-range-progress {
-  height: 2px;
-  background: #abcfff;
-}
-.gateway-editorial .nightshift-hero-range::-moz-range-thumb {
-  width: 8px;
-  height: 8px;
-  border: 3px solid #080d13;
-  border-radius: 50%;
-  background: #abcfff;
-  outline: 1px solid #abcfff;
-}
-.gateway-editorial .nightshift-hero :is(button, a, input):focus-visible {
-  outline: 2px solid #d2e7ff;
-  outline-offset: 4px;
-}
-.gateway-editorial .nightshift-sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-@media (max-width: 1150px) and (min-width: 901px) {
-  .gateway-editorial .energy-hotspot-label {
-    display: none;
+
+/* Keep the physical roof, transformer and storage in view on short desktops. */
+@media (min-width: 901px) and (max-height: 820px) {
+  .gateway-fieldbook .nightshift-hero-heading {
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
-  .gateway-editorial .energy-hotspot:last-child {
-    flex-direction: row;
-    transform: translate(-22px, -22px);
+  .gateway-fieldbook .nightshift-hero-statement {
+    font-size: clamp(4rem, min(8.5vw, 12svh), 7rem);
   }
-  .gateway-editorial .nightshift-hero-actions {
-    gap: 12px 16px;
+  .gateway-fieldbook .nightshift-hero-question {
+    font-size: clamp(1.5rem, min(3.8vw, 5.5svh), 3.4rem);
   }
-  .gateway-editorial .nightshift-hero-primary {
-    padding-inline: 16px;
+  .gateway-fieldbook .nightshift-hero-intro {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  .gateway-fieldbook .nightshift-hero-controls {
+    padding-block: 8px;
+  }
+  .gateway-fieldbook .nightshift-hero-primary {
+    min-height: 48px;
   }
 }
+
+@media (max-width: 1100px) {
+  .gateway-fieldbook .nightshift-hero-context {
+    padding-inline: 18px;
+  }
+  .gateway-fieldbook .energy-hotspot-label {
+    padding-inline: 8px;
+    font-size: 0.875rem;
+  }
+  .gateway-fieldbook .energy-hotspot-storage .energy-hotspot-leader {
+    transform: rotate(-145deg);
+  }
+  .gateway-fieldbook .energy-hotspot-storage .energy-hotspot-label {
+    left: auto;
+    right: 64px;
+  }
+}
+
 @media (max-width: 900px) {
-  .gateway-editorial .nightshift-hero-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
-    width: calc(100% - 40px);
-    padding: max(82px, 4rem) 0 12px;
+  .gateway-fieldbook .nightshift-hero h1 {
+    gap: 18px;
   }
-  .gateway-editorial .nightshift-hero-content {
+  .gateway-fieldbook .nightshift-hero-statement {
+    font-size: clamp(3rem, 11.2vw, 6rem);
+  }
+  .gateway-fieldbook .nightshift-hero-question {
+    font-size: clamp(1.375rem, 4.25vw, 2.25rem);
+  }
+  .gateway-fieldbook .nightshift-hero-heading {
+    padding-block: 20px;
+  }
+  .gateway-fieldbook .nightshift-hero-intro {
+    margin-top: 16px;
+    font-size: 1rem;
+  }
+  .gateway-fieldbook .nightshift-hero-visual {
+    min-height: 370px;
+  }
+  .gateway-fieldbook .energy-scene {
+    position: relative;
+    flex: 1 0 auto;
+    min-height: 160px;
+  }
+  .gateway-fieldbook .nightshift-hero-context {
+    position: relative;
+    inset: auto;
     width: 100%;
+    padding: 14px var(--fieldbook-gutter) 10px;
   }
-  .gateway-editorial .nightshift-hero-eyebrow {
-    font-size: 0.625rem;
-    margin-bottom: 10px;
+  .gateway-fieldbook .nightshift-hero-controls {
+    gap: 18px;
   }
-  .gateway-editorial .nightshift-hero h1 {
-    font-size: clamp(1.75rem, min(8.5vw, 4.7svh), 2.75rem);
-    line-height: 1.02;
-    letter-spacing: -0.055em;
+  .gateway-fieldbook .nightshift-hero-stations {
+    gap: 22px;
   }
-  .gateway-editorial .nightshift-hero h1 em {
+  .gateway-fieldbook .nightshift-hero-stations button {
+    font-size: 0.875rem;
+  }
+  .gateway-fieldbook .nightshift-hero-primary {
+    gap: 10px;
+    padding-inline: 16px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .gateway-fieldbook .nightshift-hero {
+    min-height: calc(100svh - 64px);
+  }
+}
+
+@media (max-width: 600px) {
+  .gateway-fieldbook .nightshift-hero h1 {
+    display: block;
+  }
+  .gateway-fieldbook .nightshift-hero-statement {
+    font-size: clamp(2.5rem, 14.6vw, 5.4rem);
+  }
+  .gateway-fieldbook .nightshift-hero-question {
+    margin-top: 10px;
+    font-size: clamp(1.5rem, 6.65vw, 2.5rem);
     line-height: 1.1;
   }
-  .gateway-editorial .nightshift-hero-intro {
-    max-width: 100%;
+  .gateway-fieldbook .nightshift-hero-question br {
+    display: none;
+  }
+  .gateway-fieldbook .nightshift-hero-question br::after {
+    content: " ";
+  }
+  .gateway-fieldbook .nightshift-hero-intro {
     margin-top: 12px;
-    font-size: 0.875rem;
-    line-height: 1.45;
-  }
-  .gateway-editorial .nightshift-hero-actions {
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: 12px;
-    width: 100%;
-    max-width: 420px;
-    margin-top: 14px;
-  }
-  .gateway-editorial .nightshift-hero-primary {
-    min-height: 48px;
-    padding: 10px;
-    font-size: 0.875rem;
-    line-height: 1.25;
-  }
-  .gateway-editorial .nightshift-hero-secondary {
-    font-size: 0.875rem;
-  }
-  .gateway-editorial .nightshift-hero-visual {
-    width: 100%;
-  }
-  .gateway-editorial .energy-scene {
-    max-width: calc(29svh * 1.5);
-    margin-inline: auto;
-  }
-  .gateway-editorial .energy-hotspot-label {
-    display: none;
-  }
-  .gateway-editorial .energy-hotspot:last-child {
-    flex-direction: row;
-    transform: translate(-22px, -22px);
-  }
-  .gateway-editorial .nightshift-hero-visual figcaption {
-    grid-template-columns: 24px minmax(0, 1fr);
-    gap: 12px;
-    min-height: 72px;
-    padding-top: 10px;
-    margin-top: 4px;
-  }
-  .gateway-editorial .energy-caption-number {
-    font-size: 1.25rem;
-  }
-  .gateway-editorial .nightshift-hero-visual figcaption strong {
-    font-size: 0.875rem;
-  }
-  .gateway-editorial .nightshift-hero-visual figcaption p {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     line-height: 1.4;
-    margin-top: 4px;
   }
-  .gateway-editorial .nightshift-hero-controls {
-    width: calc(100% - 40px);
-    grid-template-columns: 44px minmax(0, 1fr);
-    gap: 16px;
-    padding: 4px 0 8px;
+  .gateway-fieldbook .nightshift-hero-visual {
+    min-height: 0;
   }
-  .gateway-editorial .nightshift-hero-stages {
-    gap: 8px;
-  }
-  .gateway-editorial .nightshift-hero-stages button {
-    font-size: 0.75rem;
-  }
-  .gateway-editorial .stage-full {
+  .gateway-fieldbook .energy-hotspot-label {
     display: none;
   }
-  .gateway-editorial .stage-short {
-    display: inline;
+  .gateway-fieldbook .energy-hotspot-leader {
+    display: none;
+  }
+  .gateway-fieldbook .energy-hotspot-dot {
+    top: 15px;
+    left: 15px;
+    width: 14px;
+    height: 14px;
+    box-shadow: 0 0 0 5px #10202a80;
+  }
+  .gateway-fieldbook .nightshift-context-label {
+    margin-bottom: 4px;
+    font-size: 0.6875rem;
+  }
+  .gateway-fieldbook .nightshift-context-question {
+    margin-bottom: 4px;
+    font-size: 1.125rem;
+  }
+  .gateway-fieldbook .nightshift-context-action {
+    min-height: 44px;
+    font-size: 0.875rem;
+  }
+  .gateway-fieldbook .nightshift-hero-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding-block: 0 12px;
+  }
+  .gateway-fieldbook .nightshift-hero-stations {
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .gateway-fieldbook .nightshift-hero-stations button {
+    min-height: 48px;
+    font-size: 0.875rem;
+  }
+  .gateway-fieldbook .nightshift-hero-primary {
+    justify-content: space-between;
+    min-height: 48px;
+    padding-inline: 16px;
+    font-size: 0.9375rem;
   }
 }
-@media (max-width: 767px) and (max-height: 700px) {
-  .gateway-editorial .energy-scene {
-    max-width: calc(25svh * 1.5);
+
+@media (max-width: 600px) and (max-height: 700px) {
+  .gateway-fieldbook .nightshift-hero-heading {
+    padding-block: 14px;
   }
-  .gateway-editorial .nightshift-hero-range[type="range"] {
-    height: 24px;
-    min-height: 24px;
+  .gateway-fieldbook .nightshift-hero-statement {
+    font-size: clamp(2.25rem, 13.6vw, 4.5rem);
   }
-}
-@media (max-width: 350px) {
-  .gateway-editorial .nightshift-hero-stages {
-    gap: 4px;
+  .gateway-fieldbook .nightshift-hero-question {
+    margin-top: 8px;
+    font-size: clamp(1.125rem, 5.7vw, 1.625rem);
   }
-}
-@media (max-width: 350px) and (max-height: 700px) {
-  .gateway-editorial .nightshift-hero-body {
-    padding-top: max(74px, 4rem);
+  .gateway-fieldbook .nightshift-hero-intro {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    line-height: 1.35;
   }
-  .gateway-editorial .energy-scene {
-    max-width: calc(21svh * 1.5);
+  .gateway-fieldbook .nightshift-hero-context {
+    padding-block: 10px 6px;
   }
-}
-@media (min-width: 768px) and (max-width: 900px) {
-  .gateway-editorial .nightshift-hero-body {
-    padding-top: 112px;
+  .gateway-fieldbook .nightshift-context-question {
+    font-size: 1rem;
   }
-  .gateway-editorial .nightshift-hero-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 32px;
-    align-items: center;
+  .gateway-fieldbook .nightshift-hero-controls {
+    gap: 8px;
+    padding-bottom: 10px;
   }
-  .gateway-editorial .nightshift-hero-eyebrow {
-    grid-column: 1 / -1;
-  }
-  .gateway-editorial .nightshift-hero h1 {
-    grid-row: 2 / 4;
-  }
-  .gateway-editorial .nightshift-hero-intro {
-    margin-top: 0;
-  }
-  .gateway-editorial .nightshift-hero-actions {
-    margin-top: 0;
+  .gateway-fieldbook .nightshift-hero-stations button {
+    min-height: 44px;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .gateway-editorial .nightshift-hero-photo,
-  .gateway-editorial .energy-focus {
+  .gateway-fieldbook .energy-hotspot-dot,
+  .gateway-fieldbook .nightshift-hero-primary {
     transition: none;
   }
 }

@@ -1,135 +1,96 @@
-# Project Gateway · Vom Stromanschluss zum Energiestandort
+# Project Gateway — Variante 3
 
-final result: passed
+Source visual truth: `docs/qa/fieldbook-2026-10-03/selected-design.webp`.
+The user selected the third displayed design on 3 October 2026:
+`exec-25d7d1bc-1c9b-486e-b260-d4c3e0885ad7.png` (1024 × 1536).
+This explicit selection supersedes the earlier homepage direction.
 
-## Aktuelle Bildkorrektur · 02.10.2026
+## Final visual comparison
 
-Auf Wunsch des Nutzers wurde der freigestellte, wie ein Modell wirkende Hero
-in eine fotorealistische Tageslichtszene mit zusammenhängender Gewerbeumgebung
-umgearbeitet. Auf anschließenden Wunsch zeigt genau diese Kulisse nun Nachtbeleuchtung.
-Aktuelles Asset: `public/energy/gateway-energy-site-v3-night.webp`.
-Es ist weiterhin eine KI-Visualisierung, kein Foto eines realen Kundenprojekts.
-Diese Herkunft wurde dem Nutzer ausdrücklich mitgeteilt und im Alttext benannt.
+All final captures use the production build, Chromium, deviceScaleFactor 1,
+loaded local fonts and reduced motion. Hero state: Netzanschluss; entry state:
+PV already present; record state: Anschluss.
 
-Die große Randvignette entfällt, damit Gebäude, Nachbarbauten, Gelände und
-Horizont zusammenhängend sichtbar bleiben. Die Helligkeit im Fokusmodus wurde
-für die Nachtfassung auf 72 Prozent angehoben. Marker und Fokusmasken folgen dem neuen Bild.
-Der bisherige Seitenaufbau, die Schriftgrößen und die Aktionen bleiben erhalten.
+Evidence in `docs/qa/fieldbook-2026-10-03/`:
 
-Bildprompt, Herkunft und aktuelle Prüfung:
-`docs/qa/hero-realism-2026-10-02/verification.md`.
-Die folgenden Abschnitte dokumentieren die ursprüngliche Konzeptabnahme;
-ihre Angaben zum alten Bild sind historisch.
+- `comparison-final.webp`: selected source and first three implemented sections
+  together at the same 1024px image width, preserving their proportions.
+- `typography-final.webp`: focused source/implementation title comparison.
+- `responsive-final.webp`: tablet and phone hero, with complete controls.
+- `desktop-1440.webp`, `desktop-390.webp`: full-page production captures,
+  including FAQ, closing form and footer.
+- `hero-1440.webp`: full-resolution desktop hero for image/control inspection.
+- `capture.json`: dimensions, font loading, overflow and browser capture data.
+- `comparison-initial.webp`: initial comparison retained to document the fixes.
 
-## Auftrag und Vergleichsgrundlage
+The selected composition is faithfully carried into the title hierarchy,
+industrial night scene, contextual controls, three-way entry and evidence record.
+Five coherent sections replace the previous ten. Local IBM Plex Sans is verified
+through the browser's rendered platform-font data, including its actual weights.
+Slate, chalk and mineral-blue surfaces retain the source's hierarchy. Orange CTA
+text is dark to meet contrast requirements. Inputs, links, tabs, keyboard focus
+and selected states are visibly identifiable.
 
-Am 02.10.2026 hat der Nutzer die vorgeschlagene eigenständige Standortgeschichte,
-drei konkrete Einstiegssituationen und eine entsprechende visuelle Überarbeitung
-freigegeben. Diese Änderung entwickelt den zuvor gewählten Night-Shift-Stil weiter
-und ersetzt die bisherige Hero-Aussage sowie den ersten Bildabschnitt. Die frühere
-Atlas-Vorgabe ist für diese öffentliche Homepage durch die Nutzerauswahl ersetzt;
-fachliche Verträge, Score-Geometrie und bestehende Abläufe bleiben maßgeblich.
+Intentional responsive adaptations:
 
-Ausgangspunkt ist `docs/qa/nightshift-2026-10-02/hero-viewport-fit.webp`.
-Diese Aufnahme wurde gemeinsam mit der neuen Desktop-/Mobilansicht geöffnet.
-Die jetzige Umsetzung ist eine ausdrücklich gewünschte Weiterentwicklung,
-kein pixelidentischer Nachbau des älteren Rasterentwurfs.
+- Header and hero together fill one viewport, satisfying the user's earlier
+  explicit requirement. The generated source has a taller hero proportion.
+- A wider version of the approved night scene fits desktop landscape without
+  losing the roof, transformer or storage. The original scene is retained at
+  tablet/phone widths. These are AI visualizations, accurately identified in alt
+  text; they are not presented as photographs of an actual customer installation.
+- Up to 900px, context sits below the photo. Up to 600px, title and controls stack.
+  Image and hotspots share the same coordinate plane and media breakpoint.
+- The source provides the first three sections. FAQ, intake and footer continue
+  the same typography, surfaces and spacing using existing functional content.
 
-Figma war verbunden. Ein neuer leerer Entwurf wurde angelegt, die erste
-Canvas-Bearbeitung jedoch vom Figma-MCP-Limit des Starter-Plans blockiert.
-Es entstand kein Figma-Design. Die Umsetzung erfolgte direkt im bestehenden
-Frontend, ohne Upgrade oder neue kostenpflichtige Ressource.
+## Findings resolved
 
-## Umsetzung
+- P1: Light context text on a light panel — explicit dark text now applied.
+- P2: Mobile blank image strips — shared scene geometry fills the image area.
+- P2: Tablet crop could hide or cover hotspots — compact image and below-image
+  context keep all three 44px targets fully visible and clickable.
+- P2: Header/hero breakpoint mismatch — exact 72px/64px normal header accounting.
+- P2: 200% text overflow in header, FAQ grid and record — flexible header height,
+  shrinkable grid tracks and wrapping labels/values preserve readable content.
 
-- Hero: „Vom Stromanschluss zum Energiestandort.“ Ein zusammenhängender
-  Gewerbestandort zeigt Netzanschluss, PV-Dach und Batteriespeicher.
-- Vier Stationen heben die tatsächlichen Bildbereiche hervor und erklären die
-  jeweilige Planungsfrage. Hotspots und Zeitleiste sind echte HTML-Bedienelemente.
-- Automatische Erkundung über 16 Sekunden, Pause/Fortsetzen/Neustart,
-  manuelle Auswahl und Regler mit Tastaturbedienung. Bei reduzierter Bewegung
-  bleibt das Gesamtbild stehen; alle Stationen sind manuell erreichbar.
-- Drei aufklappbare Einstiege: hoher Stromverbrauch, bestehende PV-Anlage,
-  ungenutzte Dachfläche. Jeder erläutert die erste Prüffrage, benötigte Angaben
-  und einen konkreten nächsten Schritt im vorhandenen Standortcheck.
-- Die Projektart wird passend vorausgewählt; hoher Stromverbrauch löscht eine
-  zuvor gewählte Art und legt keine Technik fest.
-- Folgeabschnitte, Metadaten und Rahmentexte benennen Verbrauch, Anschluss,
-  Dachzustand, Nachweise und offene Prüfungen konkret.
+Final measured header + hero bounds:
 
-## Sichtprüfung: fünf Flächen
+| Viewport   | Hero bottom | Horizontal overflow |
+| ---------- | ----------- | ------------------- |
+| 1440 × 900 | 900px       | no                  |
+| 1366 × 768 | 768px       | no                  |
+| 768 × 1024 | 1024px      | no                  |
+| 820 × 1180 | 1180px      | no                  |
+| 390 × 844  | 844px       | no                  |
+| 320 × 640  | 640px       | no                  |
 
-1. **Typografie:** Selbst gehostete Arimo und Gelasio bleiben erhalten; CDP
-   bestätigt die tatsächlich gerenderten Webfonts. Klare große Hierarchie,
-   mobile Stationsnamen 12 px, Text und sekundärer CTA mindestens 14 px.
-2. **Layout und Rhythmus:** Desktop mit Text-/Bildspalte, mobile Anordnung im
-   normalen Dokumentfluss. Hero samt Kopfzeile, CTA, Erklärung und Zeitleiste
-   passt bei normaler Schrift in eine Bildschirmhöhe. Bei 200 % Text darf
-   er zugunsten der Lesbarkeit wachsen. Neue nummerierte Einstiege ersetzen
-   die bisherige allgemeine Bildfolge.
-3. **Farben und Zustände:** Navy, eisblaue Akzente und feine Trennlinien führen
-   den gewählten Stil fort. Kontrastreiche Buttons, sichtbare Fokusrahmen,
-   aktive Station und auf-/zugeklappte Bereiche sind unterscheidbar.
-4. **Bild:** Neues erzeugtes Architekturmotiv, 1536 × 1024, WebP, 303610 Byte.
-   3:2-Darstellung ohne Beschnitt bewahrt die Zuordnung der Hotspots:
-   Anschluss 28/69 %, Dach 50/24 %, Speicher 82/58 %. Weiche Bildränder,
-   keine eingebrannten Texte, keine erfundenen Messdaten oder Stromflüsse.
-   Alttext bezeichnet die Szene als Architekturvisualisierung; sie ist keine
-   behauptete Kundenreferenz.
-5. **Inhalt und Funktion:** Überschriften benennen konkrete Fragen. Keine
-   garantierten Einsparungen, keine erfundenen Rechtsaussagen. Vorhandene
-   synthetische Projektbeispiele und nicht angebundene Übergaben behalten
-   ihre sachlich erforderliche Kennzeichnung. Der Standortcheck bleibt eine
-   strukturierte Erfassung und ersetzt keine Fachplanung.
+The automated hero test additionally covers 375 × 667 and every station, testing
+both full-view fit and the complete hit-target bounds inside the photograph.
+At enlarged text size, vertical growth is allowed to preserve content.
 
-## Belege und Korrekturen
+## Verification
 
-Belegordner: `docs/qa/energy-story-2026-10-02/`.
+- 192 unit tests passed.
+- Production build and TypeScript check passed after the final source changes.
+- All 22 landing browser tests passed on the final build: all four project
+  intents, hero actions, keyboard tabs, site record, navigation, request retry,
+  reduced motion, viewport fit and preserved nine-factor score geometry.
+- Five relevant existing Gateway browser tests passed during this work:
+  complete roof journeys on desktop and phone (including upload, result,
+  consent and local submission receipt); keyboard combobox/focus and Axe;
+  required responsive widths/actual fonts; 200% text/touch/reduced motion.
+  The zoom test was rerun successfully after the final wrapping fixes.
+- Axe reported no violations on the tested homepage, entry dialog, check and
+  partner filter states. Real external project delivery is not claimed.
+- Final screenshot set has no page JavaScript exceptions. One pre-existing
+  missing `/favicon.ico` request returns 404; non-blocking P3, unrelated to
+  content or interaction. Hidden lazy record images are intentionally unloaded.
+- Independent final visual review found no remaining P1/P2 issues in the hero,
+  entry, record, FAQ, closing form or footer at desktop and phone widths.
 
-- `hero-desktop-mobile.webp`: Desktop 1366 × 768 und Mobil 390 × 844, DPR 1,
-  nebeneinander ohne Skalierung; Zustand Zusammenspiel, reduzierte Bewegung.
-- `hero-grid-focus.webp`: Desktop 1440 × 900, aktive Station Netzanschluss.
-- `entry-desktop-mobile.webp`: neue Einstiegssektion mit geöffnetem PV-Bestand,
-  Elementaufnahmen bei 1440 bzw. 390 Pixeln Viewportbreite, nebeneinander.
-- `browser-metrics.json`: alle 36 finalen Breiten-/Stationsmessungen sowie
-  Wiedergabe- und Skiplink-Prüfung.
-
-Vollansicht und fokussierte Zustände wurden vor und nach den Korrekturen
-visuell geprüft. Ein zweiter Designreview bestätigte Bildzuordnung, Hierarchie
-und Bedienbarkeit. Keine offenen P0/P1/P2-Befunde.
-
-Behoben: zu hoher Hero auf 320 × 640 durch angepasste Bildhöhe/Abstände und
-kurze mobile Stationsnamen; kleine mobile Beschriftungen vergrößert.
-Ein gelber Skiplink in überhohen Element-Screenshots war ein Aufnahmeeffekt:
-Im normalen Browser liegt der nicht fokussierte Link vollständig oberhalb
-des Viewports (top −100 px, bottom −41 px), ohne Fokus und ohne Überlagerung.
-Die finalen Elementaufnahmen unterdrücken ausschließlich diesen außerhalb
-des sichtbaren Viewports liegenden, nicht fokussierten Link. Tastaturfokus
-und der echte sichtbare Skiplink bleiben unverändert.
-
-## Funktions- und Darstellungsprüfung
-
-- Produktionsbuild und Typecheck bestanden.
-- 26 relevante E2E-Szenarien bestanden: vollständige Eigentümerabläufe auf
-  Desktop/Mobil, Upload, Review, Ergebnis, Einwilligung und Beleg;
-  neue Einstiege, tatsächlicher Draft-Request, Rücksetzen alter Projektart;
-  Hero-Stationen/Hotspots, Navigation, Formulare, Score, Modal, Fokus und Axe.
-- Anschließend neuer Hero-Höhen-Regressionstest und 200-%-Reflow erneut
-  bestanden: 2/2. Damit 27 unterschiedliche relevante Szenarien abgedeckt.
-- Finale Bild-/Höhenprüfung: 1440 × 900, 1366 × 768, 1280 × 720, 1024 × 768,
-  768 × 1024, 390 × 844, 375 × 667, 360 × 640, 320 × 640, jeweils vier Stationen.
-  Alle 36 Zustände passen vollständig in die erste Ansicht; keine horizontale
-  Überbreite, keine JavaScriptfehler.
-- Autoplay, Pause, Fortsetzen, Ende und erneute Wiedergabe im normalen
-  Bewegungsmodus zusätzlich im Browser geprüft.
-- Vergrößerte Schrift, Touch, reduzierte Bewegung und reale Webfonts geprüft.
-
-## Veröffentlichung
-
-Bestehende Netlify-Site und Free-Plan bleiben erhalten. Kein Hostingwechsel,
-keine Tarifänderung, kein kostenpflichtiges Add-on. Produktionsdeploy und abschließende Live-Prüfung sind unter
-`docs/qa/energy-story-2026-10-02/live-verification.md` dokumentiert.
-Auch der Produktionsbuild mit 192 Tests und die öffentliche Desktop-/Mobilprüfung
-sind bestanden.
+The existing downstream data contracts and free-hosting configuration remain
+intact. Deployment is a separate operational step; this report verifies the
+implementation and does not imply that the live site has already been updated.
 
 final result: passed

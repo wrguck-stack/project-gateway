@@ -1,0 +1,344 @@
+/* A compact evidence record, visually connected to the hero location. */
+.gateway-fieldbook .site-record {
+  background: #d8e2e7;
+  color: #18242b;
+  scroll-margin-top: 24px;
+}
+
+.gateway-fieldbook .site-record-inner {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 36px var(--fieldbook-gutter, 60px) 0;
+}
+
+.gateway-fieldbook .site-record-heading {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: 36px;
+  row-gap: 10px;
+  padding-left: 36px;
+}
+
+.gateway-fieldbook .site-record-heading::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 2px;
+  height: 68px;
+  background: #e96a36;
+}
+
+.gateway-fieldbook .site-record-kicker {
+  max-width: none;
+  margin: 0 0 16px;
+  color: #526473;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.095em;
+  text-transform: uppercase;
+}
+
+.gateway-fieldbook .site-record-heading h2 {
+  max-width: none;
+  margin: 0;
+  color: #18242b;
+  font-family: var(--font-fieldbook, "IBM Plex Sans", sans-serif);
+  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  font-weight: 600;
+  line-height: 0.99;
+  letter-spacing: -0.055em;
+}
+
+.gateway-fieldbook .site-record-intro {
+  grid-column: 1 / -1;
+  max-width: none;
+  margin: 0;
+  color: #344653;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+.gateway-fieldbook .site-record-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #aab9c2;
+}
+
+.gateway-fieldbook .site-record-tab {
+  position: relative;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #344653;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.gateway-fieldbook .site-record-tab::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 3px;
+  background: transparent;
+}
+
+.gateway-fieldbook .site-record-tab[aria-selected="true"] {
+  color: #18242b;
+  font-weight: 600;
+}
+
+.gateway-fieldbook .site-record-tab[aria-selected="true"]::after {
+  background: #c9511f;
+}
+
+.gateway-fieldbook .site-record-tab:hover {
+  color: #18242b;
+  background: #18242b07;
+}
+
+.gateway-fieldbook .site-record-tab:focus-visible,
+.gateway-fieldbook .site-record-panel:focus-visible,
+.gateway-fieldbook .site-record-action:focus-visible {
+  outline: 2px solid #18242b;
+  outline-offset: 5px;
+}
+
+.gateway-fieldbook .site-record-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+  gap: 52px;
+  margin: 26px 24px 0 36px;
+}
+
+.gateway-fieldbook .site-record-panel[hidden] {
+  display: none;
+}
+
+.gateway-fieldbook .site-record-figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.gateway-fieldbook .site-record-image {
+  position: relative;
+  height: 205px;
+  overflow: hidden;
+  background: #18242b;
+}
+
+.gateway-fieldbook .site-record-image img {
+  object-fit: cover;
+}
+
+.gateway-fieldbook .site-record-image-connection img {
+  object-position: 29% 74%;
+  transform: scale(2.6);
+  transform-origin: 16% 92%;
+}
+
+.gateway-fieldbook .site-record-image-roof img {
+  object-position: 50% 26%;
+  transform: scale(1.55);
+  transform-origin: 50% 12%;
+}
+
+.gateway-fieldbook .site-record-image-consumption img {
+  object-position: 60% 51%;
+  transform: scale(2.1);
+  transform-origin: 67% 54%;
+}
+
+.gateway-fieldbook .site-record-figure figcaption {
+  margin-top: 6px;
+  color: #344653;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.gateway-fieldbook .site-record-details {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.gateway-fieldbook .site-record-details h3 {
+  margin: 0 0 14px;
+  color: #18242b;
+  font-family: var(--font-fieldbook, "IBM Plex Sans", sans-serif);
+  font-size: clamp(1.5rem, 2.3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.gateway-fieldbook .site-record-details dl {
+  margin: 0;
+  border-top: 1px solid #95a7b2;
+}
+
+.gateway-fieldbook .site-record-details dl > div {
+  display: grid;
+  grid-template-columns: minmax(135px, 0.46fr) minmax(0, 1fr);
+  gap: 20px;
+  min-height: 48px;
+  padding: 11px 0;
+  border-bottom: 1px solid #95a7b2;
+  color: #344653;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.gateway-fieldbook .site-record-details dt,
+.gateway-fieldbook .site-record-details dd {
+  margin: 0;
+}
+
+.gateway-fieldbook .site-record-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 18px;
+  padding-block: 12px;
+  border-top: 1px solid #8196a2;
+}
+
+.gateway-fieldbook .site-record-footer p {
+  max-width: none;
+  margin: 0;
+  color: #344653;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  letter-spacing: 0.015em;
+}
+
+.gateway-fieldbook .site-record-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 54px;
+  padding: 12px 24px;
+  border: 1px solid #18242b;
+  border-radius: 2px;
+  background: #18242b;
+  color: #f2f3ee;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.gateway-fieldbook .site-record-action:hover {
+  background: #304653;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 1100px) {
+  .gateway-fieldbook .site-record-heading {
+    column-gap: 24px;
+  }
+
+  .gateway-fieldbook .site-record-tabs {
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .gateway-fieldbook .site-record-panel {
+    gap: 28px;
+    margin-right: 0;
+  }
+
+  .gateway-fieldbook .site-record-details dl > div {
+    grid-template-columns: minmax(100px, 0.55fr) minmax(0, 1fr);
+    gap: 12px;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .gateway-fieldbook .site-record-inner {
+    padding-top: 36px;
+  }
+
+  .gateway-fieldbook .site-record-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-left: 18px;
+  }
+
+  .gateway-fieldbook .site-record-heading::before {
+    height: 58px;
+  }
+
+  .gateway-fieldbook .site-record-kicker {
+    margin-bottom: 12px;
+  }
+
+  .gateway-fieldbook .site-record-heading h2 {
+    font-size: clamp(2rem, 7.9vw, 2.75rem);
+    line-height: 1.04;
+  }
+
+  .gateway-fieldbook .site-record-intro {
+    grid-row: 2;
+    font-size: 1rem;
+  }
+
+  .gateway-fieldbook .site-record-tabs {
+    gap: 18px;
+    margin: 0 0 0 -18px;
+  }
+
+  .gateway-fieldbook .site-record-tab {
+    min-height: 48px;
+    font-size: 0.875rem;
+  }
+
+  .gateway-fieldbook .site-record-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin: 22px 0 0;
+  }
+
+  .gateway-fieldbook .site-record-image {
+    height: auto;
+    aspect-ratio: 2 / 1;
+  }
+
+  .gateway-fieldbook .site-record-details h3 {
+    font-size: 1.625rem;
+    margin-bottom: 14px;
+  }
+
+  .gateway-fieldbook .site-record-details dl > div {
+    grid-template-columns: minmax(93px, 0.5fr) minmax(0, 1fr);
+    gap: 14px;
+    padding-block: 10px;
+    font-size: 0.875rem;
+  }
+
+  .gateway-fieldbook .site-record-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 28px;
+    padding-block: 20px 28px;
+  }
+
+  .gateway-fieldbook .site-record-action {
+    min-height: 54px;
+    padding-inline: 20px;
+  }
+}

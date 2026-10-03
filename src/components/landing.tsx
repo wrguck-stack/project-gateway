@@ -2,34 +2,20 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  ArrowRight,
-  Location,
-  Building,
-  Flash,
-  Document,
-  Checkmark,
-  ChevronDown,
-} from "@carbon/icons-react";
+import { ArrowRight, Location, ChevronDown } from "@carbon/icons-react";
 import { Header, Footer } from "./shell";
 import { Button, Modal } from "./ui";
 import { api } from "./client-api";
-import {
-  DossierPreview,
-  LandingCheckPreview,
-  ProjectTypes,
-  ScorePreview,
-  projectTypes,
-  type ProjectIntent,
-} from "./landing-content";
+import { projectTypes, type ProjectIntent } from "./landing-content";
 import type { Project } from "@/domain/model";
-import "@fontsource/arimo/latin-400.css";
-import "@fontsource/arimo/latin-700.css";
-import "@fontsource/gelasio/latin-400-italic.css";
-import "./landing.css";
+import "@fontsource/ibm-plex-sans/latin-400.css";
+import "@fontsource/ibm-plex-sans/latin-500.css";
+import "@fontsource/ibm-plex-sans/latin-600.css";
+import "@fontsource/ibm-plex-sans/latin-700.css";
 import { NightshiftHero } from "./nightshift-hero";
 import { SiteSituations } from "./site-situations";
-import "./nightshift-landing.css";
+import { SiteRecord } from "./site-record";
+import "./fieldbook-landing.css";
 
 const faq = [
   [
@@ -333,7 +319,7 @@ export function Landing({ mode }: { mode: string }) {
     setError("");
     setEntryOpen(true);
   }
-  function selectIntent(value: ProjectIntent) {
+  function selectIntent(value?: ProjectIntent) {
     setIntent(value);
     setError("");
     focusEntry();
@@ -353,10 +339,10 @@ export function Landing({ mode }: { mode: string }) {
     />
   );
   return (
-    <div className="gateway-editorial">
+    <div className="gateway-editorial gateway-fieldbook">
       <Header mode={mode} editorial nightshift />
       <main id="main" className="landing-page">
-        <NightshiftHero onStart={focusEntry}>
+        <NightshiftHero onStart={selectIntent}>
           {draft && (
             <p className="draft-return">
               <Link href={`/standortcheck/${draft.id}/1`}>
@@ -389,21 +375,27 @@ export function Landing({ mode }: { mode: string }) {
                 Beginnen Sie mit der Adresse Ihrer Immobilie oder einer
                 Beschreibung Ihrer Fläche.
               </p>
-              {selectedTitle && (
-                <div className="selected-intent" role="status">
-                  <span>
-                    <Checkmark size={20} aria-hidden />
-                    {selectedTitle} ausgewählt
-                  </span>
-                  <button
-                    type="button"
-                    className="text-button"
-                    onClick={() => setIntent(undefined)}
-                  >
-                    Auswahl aufheben
-                  </button>
-                </div>
-              )}
+              <div className="fieldbook-intent field">
+                <label htmlFor="gateway-project-intent">Projektvorhaben</label>
+                <select
+                  id="gateway-project-intent"
+                  value={intent ?? ""}
+                  onChange={(event) =>
+                    setIntent(
+                      event.target.value
+                        ? (event.target.value as ProjectIntent)
+                        : undefined,
+                    )
+                  }
+                >
+                  <option value="">Noch offen</option>
+                  {projectTypes.map((projectType) => (
+                    <option key={projectType.id} value={projectType.id}>
+                      {projectType.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
               {entry("hero")}
               <p className="meta">
                 Ohne Pflichtkonto · Ihre Angaben bereiten die fachliche Prüfung
@@ -420,282 +412,58 @@ export function Landing({ mode }: { mode: string }) {
           }}
         />
 
-        <section id="ablauf" className="section wrap decision-section">
-          <div className="decision-intro">
-            <p className="overline">02 / VOR DER ANLAGENPLANUNG</p>
-            <h2>
-              Erst den Betrieb verstehen.
-              <br />
-              <em>Dann die Anlage planen.</em>
-            </h2>
-            <p>
-              Ein großes Dach allein entscheidet noch nicht über eine passende
-              Anlage. Verbrauchszeiten, Anschlussleistung und Gebäude müssen
-              zusammenpassen. Diese drei Fragen stehen am Anfang.
-            </p>
-            <a href="#standortcheck-vorschau" className="text-link">
-              Den Standortcheck kennenlernen{" "}
-              <ArrowRight size={20} aria-hidden />
-            </a>
-          </div>
-          <div className="process-grid">
-            {[
-              [
-                "moeglichkeiten",
-                "Wann benötigt Ihr Betrieb Strom?",
-                "Stromabrechnung, Betriebszeiten und ein vorhandener Lastgang zeigen unterschiedliche Aspekte Ihres Bedarfs. Sie helfen dabei, Erzeugung und Nutzung zeitlich zusammenzudenken.",
-              ],
-              [
-                "wirtschaftlichkeit",
-                "Was lässt Ihr Netzanschluss zu?",
-                "Die verfügbare Leistung für Bezug und Einspeisung ist eine eigene Planungsfrage. Vorhandene Anschlussunterlagen werden ergänzt; offene Punkte müssen mit Fachplanung und Netzbetreiber geklärt werden.",
-              ],
-              [
-                "naechste-schritte",
-                "Was steht einer Investition noch im Weg?",
-                "Dachzustand, Statik, Genehmigungen und die Wirtschaftlichkeit brauchen belastbare Nachweise. Der Standortcheck sammelt die Ausgangsdaten und hält fest, welche Prüfungen noch fehlen.",
-              ],
-            ].map(([id, title, text], i) => (
-              <article key={id} id={id}>
-                <span className="process-number">0{i + 1}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section wrap dossier-section" id="projektakte">
-          <div className="dossier-intro">
-            <p className="overline">03 / IHRE PROJEKTAKTE</p>
-            <h2>
-              Vom Strombeleg
-              <br />
-              <em>zur Projektakte.</em>
-            </h2>
-            <p className="lead">
-              Stromrechnung, Dachplan, vorhandene Anlagen: Aus einzelnen Angaben
-              entsteht eine gemeinsame Standortakte. Bekannte Werte, Schätzungen
-              und fehlende Nachweise bleiben darin klar unterscheidbar.
-            </p>
-            <ul className="value-list">
-              <li>
-                <Checkmark size={20} aria-hidden />
-                <span>Objekt, Energie und Unterlagen zusammengeführt</span>
-              </li>
-              <li>
-                <Checkmark size={20} aria-hidden />
-                <span>Schätzwerte und offene Prüfungen klar benannt</span>
-              </li>
-              <li>
-                <Checkmark size={20} aria-hidden />
-                <span>Nachvollziehbare Grundlage für das Fachgespräch</span>
-              </li>
-            </ul>
-            <Link href="/beispiel" className="button secondary">
-              Ergebnis am Beispiel ansehen <ArrowRight size={20} aria-hidden />
-            </Link>
-          </div>
-          <DossierPreview />
-        </section>
+        <SiteRecord />
 
         <section
-          className="section wrap editorial-split landing-check"
-          id="standortcheck-vorschau"
+          className="fieldbook-faq"
+          id="fragen"
+          aria-labelledby="faq-title"
         >
-          <LandingCheckPreview />
-          <div>
-            <p className="overline">04 / DER STANDORTCHECK</p>
-            <h2>
-              Wie viel Dach ist
-              <br />
-              <em>wirklich nutzbar?</em>
-            </h2>
-            <p className="lead">
-              Eine der Fragen im Standortcheck. Probieren Sie aus, wie sich
-              Angaben, Schätzwerte und unbekannte Werte erfassen lassen. Eine
-              fertige Planung benötigen Sie für den Einstieg nicht.
-            </p>
-            {[
-              [
-                Building,
-                "Objekt und Fläche",
-                "Gebäude, verfügbare Fläche und Ihre Rolle.",
-              ],
-              [
-                Flash,
-                "Energieprofil",
-                "Verbrauch, bestehende PV und Speicher.",
-              ],
-              [
-                Document,
-                "Vorhandene Unterlagen",
-                "Pläne, Abrechnungen und offene Nachweise.",
-              ],
-            ].map(([Icon, title, text]) => {
-              const Component = Icon as typeof Building;
-              return (
-                <div key={String(title)} className="editorial-line">
-                  <Component size={24} aria-hidden />
-                  <div>
-                    <strong>{String(title)}</strong>
-                    <small>{String(text)}</small>
-                  </div>
-                </div>
-              );
-            })}
-            <button className="text-link text-button" onClick={focusEntry}>
-              Eigenen Standort prüfen <ArrowRight size={20} aria-hidden />
-            </button>
-          </div>
-        </section>
-
-        <section className="section wrap" id="projektarten">
-          <div className="section-intro">
+          <div className="fieldbook-faq-inner">
             <div>
-              <p className="overline">05 / IHRE MÖGLICHKEITEN</p>
-              <h2>
-                Neu erzeugen.
+              <p className="overline">VOR DER INVESTITION</p>
+              <h2 id="faq-title">
+                Gute Entscheidungen
                 <br />
-                <em>Bestehendes ergänzen.</em>
+                beginnen mit Fragen.
               </h2>
-            </div>
-            <p>
-              Dach-PV, Erweiterung, Speicher oder Freifläche: Hier sehen Sie,
-              welche Angaben für den jeweiligen Projektweg gebraucht werden.
-            </p>
-          </div>
-          <ProjectTypes selected={intent} onSelect={selectIntent} />
-        </section>
-        <ScorePreview />
-
-        <section className="section wrap audience-section" id="eigentuemer">
-          <p className="overline">07 / FÜR EIGENTÜMER UND UNTERNEHMEN</p>
-          <h2>
-            Ein Betrieb.
-            <br />
-            <em>Oder ein ganzes Portfolio.</em>
-          </h2>
-          <div className="audience-columns">
-            <article>
-              <span className="mono muted">01 / EIGENTÜMER & UNTERNEHMEN</span>
-              <h3>Fläche und Netzanschluss gemeinsam betrachten.</h3>
-              <p>
-                Ihr vorhandener Netzanschluss gehört zur Betrachtung Ihres
-                Standorts. Halten Sie Strombedarf, Anlagen und
-                Anschlussunterlagen fest, um das wirtschaftliche Potenzial von
-                Photovoltaik und Speichern fachlich prüfen zu lassen.
-              </p>
-              <button className="text-button text-link" onClick={focusEntry}>
-                Meinen Standort erfassen <ArrowRight size={20} aria-hidden />
-              </button>
-            </article>
-            <article>
-              <span className="mono muted">
-                02 / PORTFOLIOS & ASSET MANAGEMENT
-              </span>
-              <h3>Einheitliche Angaben. Klarere Entscheidungen.</h3>
-              <p>
-                Ein gemeinsamer Aufbau macht Informationen leichter prüfbar.
-                Quellen, fehlende Nachweise und offene Entscheidungen bleiben je
-                Standort nachvollziehbar.
-              </p>
-              <a className="text-link" href="#projektpartner">
-                Zusammenarbeit kennenlernen <ArrowRight size={20} aria-hidden />
-              </a>
-            </article>
-          </div>
-        </section>
-
-        <section className="section wrap partner-section" id="projektpartner">
-          <div>
-            <p className="overline">08 / DIE ZUSAMMENARBEIT</p>
-            <h2>
-              Wer prüft Ihren Standort?
-              <br />
-              <em>Wer plant die Anlage?</em>
-            </h2>
-            <p className="lead">
-              Project Gateway bündelt die Angaben. Der tatsächlich benannte
-              Projektpartner bewertet die fachlichen Voraussetzungen und
-              entscheidet über die nächsten Schritte.
-            </p>
-            <div className="actions">
-              <Link
-                href="/kontakt?anliegen=partnerschaft"
-                className="button secondary"
-              >
-                Zusammenarbeit besprechen <ArrowRight size={20} aria-hidden />
-              </Link>
-              <Link className="text-link" href="/partner/login">
-                Partnerbereich öffnen <ArrowRight size={20} aria-hidden />
+              <Link href="/kontakt" className="text-link">
+                Kontakt und Ansprechpartner <ArrowRight size={20} aria-hidden />
               </Link>
             </div>
-          </div>
-          <div className="responsibility-list">
-            {[
-              [
-                "Geordnete Projektanfragen",
-                "Standort, Objekt, Energieprofil und Unterlagen in einer gemeinsamen Akte.",
-              ],
-              [
-                "Nachvollziehbare Einordnung",
-                "Datenherkunft, Schätzwerte und offene Punkte stehen neben der Bewertung.",
-              ],
-              [
-                "Bewusste Entscheidungen",
-                "Prüfen, Angaben anfordern und Entscheidungen mit Begründung dokumentieren.",
-              ],
-            ].map(([title, text], i) => (
-              <article key={title}>
-                <span className="mono amber">0{i + 1}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-              </article>
-            ))}
+            <div>
+              {faq.map(([q, a]) => (
+                <details key={q}>
+                  <summary>
+                    {q}
+                    <ChevronDown
+                      className="faq-chevron"
+                      size={24}
+                      aria-hidden
+                    />
+                  </summary>
+                  <p>{a}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
-
-        <section className="section wrap faq">
+        <section
+          className="fieldbook-closing closing"
+          id="standort-erfassen"
+          aria-labelledby="closing-title"
+        >
           <div>
-            <p className="overline">09 / HÄUFIGE FRAGEN</p>
-            <h2>
-              Was vor einer Investition
+            <p className="overline">IHR NÄCHSTER SCHRITT</p>
+            <h2 id="closing-title">
+              Beginnen wir mit
               <br />
-              <em>zu klären ist.</em>
-            </h2>
-            <Link href="/kontakt" className="text-link">
-              Kontakt und Ansprechpartner <ArrowRight size={20} aria-hidden />
-            </Link>
-          </div>
-          <div>
-            {faq.map(([q, a]) => (
-              <details key={q}>
-                <summary>
-                  {q}
-                  <ChevronDown className="faq-chevron" size={24} aria-hidden />
-                </summary>
-                <p>{a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-        <section className="section wrap closing">
-          <div>
-            <p className="overline">10 / IHR NÄCHSTER SCHRITT</p>
-            <h2>
-              Ihr Energiekonzept beginnt
-              <br />
-              <em>mit Ihrem Standort.</em>
+              Ihrem Standort.
             </h2>
             <p>
-              Beginnen Sie mit Ihrer Adresse. Ergänzen Sie, was Sie über Dach,
-              Verbrauch und bestehende Anlagen wissen. Offene Fragen bleiben
-              sichtbar, bis sie fachlich geklärt sind.
+              Eine Adresse genügt für den ersten Schritt. Ergänzen Sie danach,
+              was Sie über Ihren Betrieb wissen. Fehlende Angaben können offen
+              bleiben.
             </p>
           </div>
           <div>
@@ -709,7 +477,7 @@ export function Landing({ mode }: { mode: string }) {
           </div>
         </section>
       </main>
-      <Footer editorial />
+      <Footer editorial fieldbook />
     </div>
   );
 }

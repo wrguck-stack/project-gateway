@@ -9,7 +9,7 @@ import "./globals.css";
 import { RouteFocus } from "@/components/route-focus";
 export const metadata: Metadata = {
   title: {
-    default: "Project Gateway · Vom Stromanschluss zum Energiestandort",
+    default: "Project Gateway · PV geplant. Die richtigen Fragen zuerst.",
     template: "%s · Project Gateway",
   },
   description:

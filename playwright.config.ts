@@ -11,6 +11,9 @@ export default defineConfig({
   expect: { timeout: 10000 },
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
+    launchOptions: process.env.GATEWAY_BROWSER_EXECUTABLE
+      ? { executablePath: process.env.GATEWAY_BROWSER_EXECUTABLE }
+      : undefined,
     baseURL: `http://127.0.0.1:${port}`,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",

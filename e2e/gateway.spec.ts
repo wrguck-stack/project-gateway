@@ -82,7 +82,12 @@ for (const width of [1440, 390]) {
         exact: true,
       });
       await expect(locationDialog).toBeVisible();
-      await locationDialog.getByRole("combobox").fill(address);
+      await locationDialog
+        .getByRole("combobox", {
+          name: "Adresse Ihrer Immobilie oder Fläche",
+          exact: true,
+        })
+        .fill(address);
       await locationDialog
         .getByRole("button", { name: "Standortcheck starten", exact: true })
         .click();
@@ -465,7 +470,10 @@ test("keyboard combobox and native dialog focus return; accessibility smoke", as
     exact: true,
   });
   await expect(locationDialog.getByRole("heading")).toBeFocused();
-  const input = locationDialog.getByRole("combobox");
+  const input = locationDialog.getByRole("combobox", {
+    name: "Adresse Ihrer Immobilie oder Fläche",
+    exact: true,
+  });
   await input.fill("Muster");
   await expect(
     locationDialog.getByRole("listbox").getByRole("option"),
@@ -521,9 +529,9 @@ test("responsive browser screenshots and reflow across every required width", as
       await page.evaluate(() => document.fonts.ready);
       if (name === "landing" && width === 1440) {
         const typographySelectors = [
-          ".gateway-editorial",
+          ".gateway-fieldbook",
           ".nightshift-hero h1",
-          ".nightshift-hero h1 em",
+          ".nightshift-hero-question",
           ".nightshift-hero-intro",
           ".nightshift-hero-primary",
         ];
@@ -559,16 +567,18 @@ test("responsive browser screenshots and reflow across every required width", as
           expect(
             rendered.fonts.some(
               (font) =>
-                font.familyName ===
-                (selector.endsWith(" em") ? "Gelasio" : "Arimo"),
+                font.isCustomFont &&
+                font.glyphCount > 0 &&
+                /^IBM Plex Sans(?: (?:Medium|SemiBold|Bold))?$/.test(
+                  font.familyName,
+                ) &&
+                /^IBMPlexSans-/.test(font.postScriptName),
             ),
           ).toBe(true);
         }
         await cdp.detach();
         for (const [selector, value] of Object.entries(typography))
-          expect(value.family).toContain(
-            selector.endsWith(" em") ? "Gelasio" : "Arimo",
-          );
+          expect(value.family, selector).toContain("IBM Plex Sans");
       }
       expect(
         await page.evaluate(
@@ -587,7 +597,12 @@ test("responsive browser screenshots and reflow across every required width", as
           name: "Wo liegt Ihr Standort?",
           exact: true,
         });
-        await expect(locationDialog.getByRole("combobox")).toBeVisible();
+        await expect(
+          locationDialog.getByRole("combobox", {
+            name: "Adresse Ihrer Immobilie oder Fläche",
+            exact: true,
+          }),
+        ).toBeVisible();
         expect(
           await locationDialog.evaluate(
             (dialog) => dialog.scrollWidth <= dialog.clientWidth + 1,
@@ -640,7 +655,12 @@ test("200% text, touch without hover, reduced motion and map landscape", async (
     name: "Wo liegt Ihr Standort?",
     exact: true,
   });
-  await locationDialog.getByRole("combobox").fill(address);
+  await locationDialog
+    .getByRole("combobox", {
+      name: "Adresse Ihrer Immobilie oder Fläche",
+      exact: true,
+    })
+    .fill(address);
   expect(
     await locationDialog.evaluate(
       (dialog) => dialog.scrollWidth <= dialog.clientWidth + 1,

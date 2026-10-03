@@ -1,11 +1,37 @@
 import { test, expect } from "@playwright/test";
 
-test("the complete hero fits short desktop and mobile viewports in every station", async ({
+const heroStations = [
+  {
+    name: "Dachfläche",
+    id: "roof",
+    question: "Welche Fläche steht zur Verfügung?",
+    action: "Meine Dachfläche erfassen",
+    intent: "roof",
+  },
+  {
+    name: "Netzanschluss",
+    id: "grid",
+    question: "Welche Leistung steht zur Verfügung?",
+    action: "Anschlussunterlagen erfassen",
+    intent: "",
+  },
+  {
+    name: "Speicher",
+    id: "storage",
+    question: "Wann braucht Ihr Betrieb den Strom?",
+    action: "Mein Speicherprojekt vorbereiten",
+    intent: "storage",
+  },
+] as const;
+
+test("the complete hero fits desktop, tablet and mobile viewports in every station", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const [width, height] of [
     [1366, 768],
+    [768, 1024],
+    [820, 1180],
     [375, 667],
     [320, 640],
   ]) {
@@ -13,26 +39,35 @@ test("the complete hero fits short desktop and mobile viewports in every station
     await page.goto("/");
     await page.evaluate(() => document.fonts.ready);
     const hero = page.locator(".nightshift-hero");
-    await expect(hero).toHaveAttribute("data-motion", "reduced");
-    for (const name of [
-      "Netzanschluss",
-      "Dachfläche",
-      "Speicher",
-      "Zusammenspiel",
-    ]) {
-      await hero
-        .locator(".nightshift-hero-stages")
-        .getByRole("button", { name, exact: true })
-        .click();
+    for (const station of heroStations) {
+      await hero.getByRole("tab", { name: station.name, exact: true }).click();
       await page.evaluate(() => scrollTo(0, 0));
       const box = await hero.boundingBox();
       const controls = await hero
         .locator(".nightshift-hero-controls")
         .boundingBox();
-      expect(box!.height, `${width}×${height}, ${name}`).toBeLessThanOrEqual(
-        height + 1,
-      );
+      expect(
+        box!.y + box!.height,
+        `${width}×${height}, ${station.name}`,
+      ).toBeLessThanOrEqual(height + 1);
       expect(controls!.y + controls!.height).toBeLessThanOrEqual(height + 1);
+      await expect(hero.getByRole("tabpanel")).toContainText(station.question);
+      const marker = hero.getByRole("button", {
+        name: `${station.name} im Standortbild erkunden`,
+        exact: true,
+      });
+      const markerBox = await marker.boundingBox();
+      const sceneBox = await hero.locator(".energy-scene").boundingBox();
+      expect(markerBox!.x).toBeGreaterThanOrEqual(sceneBox!.x);
+      expect(markerBox!.y).toBeGreaterThanOrEqual(sceneBox!.y);
+      expect(markerBox!.x + markerBox!.width).toBeLessThanOrEqual(
+        sceneBox!.x + sceneBox!.width,
+      );
+      expect(markerBox!.y + markerBox!.height).toBeLessThanOrEqual(
+        sceneBox!.y + sceneBox!.height,
+      );
+      await marker.click();
+      await expect(marker).toHaveAttribute("aria-pressed", "true");
     }
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth),
@@ -49,10 +84,59 @@ for (const width of [1440, 390]) {
       await expect(
         page.getByRole("heading", {
           level: 1,
-          name: "Vom Stromanschluss zum Energiestandort.",
+          name: /PV geplant\.\s*Die richtigen\s*Fragen zuerst\./,
           exact: true,
         }),
       ).toBeVisible();
+    });
+
+    test("hero station actions select the relevant project without creating a draft", async ({
+      page,
+    }) => {
+      const writes: string[] = [];
+      page.on("request", (request) => {
+        if (
+          request.method() !== "GET" &&
+          new URL(request.url()).pathname.startsWith("/api/")
+        )
+          writes.push(request.url());
+      });
+      const hero = page.locator(".nightshift-hero");
+      const dialog = page.getByRole("dialog", {
+        name: "Wo liegt Ihr Standort?",
+        exact: true,
+      });
+      // The general connection enquiry follows a roof choice to catch stale intent.
+      for (const station of heroStations) {
+        await hero
+          .getByRole("tab", { name: station.name, exact: true })
+          .click();
+        const action = hero.getByRole("button", {
+          name: station.action,
+          exact: true,
+        });
+        await action.click();
+        await expect(dialog).toBeVisible();
+        await expect(
+          dialog.getByLabel("Projektvorhaben", { exact: true }),
+        ).toHaveValue(station.intent);
+        await expect(
+          dialog.getByRole("combobox", {
+            name: "Adresse Ihrer Immobilie oder Fläche",
+            exact: true,
+          }),
+        ).toBeVisible();
+        await page.keyboard.press("Escape");
+        await expect(dialog).toHaveCount(0);
+        await expect(action).toBeFocused();
+      }
+      await hero
+        .getByRole("button", { name: "Meinen Standort prüfen", exact: true })
+        .click();
+      await expect(
+        dialog.getByLabel("Projektvorhaben", { exact: true }),
+      ).toHaveValue("");
+      expect(writes).toEqual([]);
     });
 
     test("public navigation reaches its pages and the opportunities section from the example", async ({
@@ -75,21 +159,18 @@ for (const width of [1440, 390]) {
         }
         await expect(page).toHaveURL(target);
       };
-      const discovery = page.locator(".nightshift-hero").getByRole("link", {
-        name: "Standort entdecken",
-        exact: true,
-      });
-      await expect(discovery).toHaveAttribute("href", "#ausgangslage");
-      await discovery.click();
-      await expect(page).toHaveURL(/\/#ausgangslage$/);
+      await navigate("Standort", /\/#ausgangslage$/);
       await expect(page.locator("#ausgangslage h2")).toBeInViewport();
-      await page.locator(".closing").scrollIntoViewIfNeeded();
-      await navigate("Möglichkeiten", /\/#projektarten$/);
-      await expect(page.locator("#projektarten h2")).toBeInViewport();
-      await navigate("Projektbeispiel", /\/beispiel$/);
+      await navigate("Projektakte", /\/#projektakte$/);
+      await expect(page.locator("#projektakte h2")).toBeInViewport();
+      await page
+        .locator("#projektakte")
+        .getByRole("link", { name: "Projektakte ansehen", exact: true })
+        .click();
+      await expect(page).toHaveURL(/\/beispiel$/);
       await expect(page.locator("#score")).toBeVisible();
-      await navigate("Möglichkeiten", /\/#projektarten$/);
-      await expect(page.locator("#projektarten h2")).toBeInViewport();
+      await navigate("Möglichkeiten", /\/#ausgangslage$/);
+      await expect(page.locator("#ausgangslage h2")).toBeInViewport();
       await navigate("Kontakt", /\/kontakt$/);
       await expect(page.locator("main h1")).toBeVisible();
       if (width < 768) {
@@ -101,7 +182,7 @@ for (const width of [1440, 390]) {
       }
     });
 
-    test("the interactive check changes its summary without saving or changing the score", async ({
+    test("the site record keeps provenance and open questions accessible by keyboard", async ({
       page,
     }) => {
       const writes: string[] = [];
@@ -112,98 +193,48 @@ for (const width of [1440, 390]) {
         )
           writes.push(request.url());
       });
-      const preview = page.locator(".check-preview");
-      const summary = preview.getByRole("status");
-      const area = preview.getByLabel("Verfügbare Fläche · m²", {
+      const record = page.locator("#projektakte");
+      const tabs = record.getByRole("tablist", {
+        name: "Bereiche der Projektakte",
         exact: true,
       });
-      const nature = preview.getByLabel("Genauigkeit der Fläche", {
+      const roof = tabs.getByRole("tab", { name: "Dach", exact: true });
+      const consumption = tabs.getByRole("tab", {
+        name: "Verbrauch",
         exact: true,
       });
-      const score = page.locator(".score-preview .score-number");
-      await expect(area).toBeEnabled();
-      await area.fill("8.250,5");
-      await expect(summary).toContainText("ca. 8.250,5 m² Dachfläche");
-      await nature.selectOption("Genau bekannt");
-      await expect(summary).toContainText("8.250,5 m² Dachfläche");
-      await expect(summary).not.toContainText("ca.");
-      await preview
-        .getByLabel("Dachzustand (Nutzerauskunft)")
-        .selectOption("Sanierung geplant");
-      await expect(summary).toContainText("Dachzustand: Sanierung geplant");
-
-      await preview
-        .getByRole("radio", { name: "Freifläche", exact: true })
-        .check();
-      await expect(summary).toContainText("8.250,5 m² Freifläche");
-      await expect(summary).toContainText("Genehmigung");
-      await expect(summary).not.toContainText("Dachzustand");
+      const grid = tabs.getByRole("tab", { name: "Anschluss", exact: true });
+      await expect(grid).toHaveAttribute("aria-selected", "true");
       await expect(
-        preview.getByLabel("Dachzustand (Nutzerauskunft)"),
-      ).toHaveCount(0);
-
-      await nature.selectOption("Noch unbekannt");
-      await expect(area).toHaveCount(0);
-      await expect(summary).toContainText("Fläche noch offen");
-      await expect(summary).not.toContainText("8.250");
-      await nature.selectOption("Geschätzt");
-      await area.fill("-20");
-      await expect(summary).toContainText(
-        "Bitte eine positive Fläche eingeben",
+        record.getByRole("tabpanel", { name: "Anschluss", exact: true }),
+      ).toContainText("Noch zu klären");
+      await expect(record.getByRole("tabpanel")).toContainText(
+        "Anschlussunterlagen",
       );
-      await expect(area).toHaveAttribute("aria-invalid", "true");
-      await area.fill("2.000");
-      await expect(summary).toContainText("ca. 2.000 m² Freifläche");
-      await expect(area).not.toHaveAttribute("aria-invalid", "true");
-      await expect(score).toHaveText("82/100");
-      await expect(preview).toContainText("verändern keinen Score");
+      await grid.focus();
+      await grid.press("ArrowRight");
+      await expect(roof).toBeFocused();
+      await expect(roof).toHaveAttribute("aria-selected", "true");
+      await expect(grid).toHaveAttribute("tabindex", "-1");
+      await expect(record.getByRole("tabpanel")).toHaveCount(1);
+      await roof.press("ArrowRight");
+      await expect(consumption).toBeFocused();
+      await expect(consumption).toHaveAttribute("aria-selected", "true");
+      await expect(
+        record.getByRole("tabpanel", { name: "Verbrauch", exact: true }),
+      ).toBeVisible();
+      await consumption.press("End");
+      await expect(grid).toBeFocused();
+      await grid.press("Home");
+      await expect(roof).toBeFocused();
+      await roof.press("ArrowLeft");
+      await expect(grid).toBeFocused();
+      await expect(record.getByRole("tabpanel")).toContainText(
+        "Verfügbare Leistung erfassen",
+      );
       expect(writes).toEqual([]);
-    });
-
-    test("the dossier tabs expose their content by keyboard and link to the full example", async ({
-      page,
-    }) => {
-      const dossier = page.locator(".dossier-preview");
-      const objectTab = dossier.getByRole("tab", {
-        name: "Objekt",
-        exact: true,
-      });
-      const energyTab = dossier.getByRole("tab", {
-        name: "Energie",
-        exact: true,
-      });
-      const nextTab = dossier.getByRole("tab", {
-        name: "Nächste Schritte",
-        exact: true,
-      });
-      await objectTab.focus();
-      await objectTab.press("ArrowRight");
-      await expect(energyTab).toBeFocused();
-      await expect(energyTab).toHaveAttribute("aria-selected", "true");
-      await expect(objectTab).toHaveAttribute("tabindex", "-1");
-      await expect(dossier.getByRole("tabpanel")).toHaveCount(1);
-      await expect(
-        dossier.getByRole("tabpanel", { name: "Energie", exact: true }),
-      ).toContainText("620.000 kWh");
-      await energyTab.press("End");
-      await expect(nextTab).toBeFocused();
-      await expect(
-        dossier.getByRole("tabpanel", {
-          name: "Nächste Schritte",
-          exact: true,
-        }),
-      ).toContainText("Tragfähigkeit");
-      await nextTab.press("ArrowRight");
-      await expect(objectTab).toBeFocused();
-      await objectTab.press("ArrowLeft");
-      await expect(nextTab).toBeFocused();
-      await nextTab.press("Home");
-      await expect(objectTab).toBeFocused();
-      await expect(
-        dossier.getByRole("tabpanel", { name: "Objekt", exact: true }),
-      ).toContainText("ca. 4.800 m²");
-      await dossier
-        .getByRole("link", { name: "Vollständige Beispielakte öffnen" })
+      await record
+        .getByRole("link", { name: "Projektakte ansehen", exact: true })
         .click();
       await expect(page).toHaveURL(/\/beispiel$/);
       await expect(page.locator("#score")).toBeVisible();
@@ -227,22 +258,46 @@ for (const width of [1440, 390]) {
           draftWrites.push(request.url());
       });
       await expect(
-        situations.getByRole("button", {
-          name: "Hoher Stromverbrauch",
+        situations.getByRole("tab", {
+          name: "PV bereits vorhanden",
           exact: true,
         }),
-      ).toHaveAttribute("aria-expanded", "true");
+      ).toHaveAttribute("aria-selected", "true");
+
+      const firstTab = situations.getByRole("tab", {
+        name: "Hoher Stromverbrauch",
+        exact: true,
+      });
+      const lastTab = situations.getByRole("tab", {
+        name: "Ungenutzte Dachfläche",
+        exact: true,
+      });
+      const existingTab = situations.getByRole("tab", {
+        name: "PV bereits vorhanden",
+        exact: true,
+      });
+      await existingTab.focus();
+      await existingTab.press("Home");
+      await expect(firstTab).toBeFocused();
+      await expect(firstTab).toHaveAttribute("aria-selected", "true");
+      await firstTab.press("ArrowLeft");
+      await expect(lastTab).toBeFocused();
+      await expect(lastTab).toHaveAttribute("aria-selected", "true");
+      await lastTab.press("ArrowRight");
+      await expect(firstTab).toBeFocused();
+      await firstTab.press("End");
+      await expect(lastTab).toBeFocused();
 
       for (const scenario of [
         {
           title: "PV bereits vorhanden",
-          action: "Meine PV-Erweiterung vorbereiten",
-          selected: "PV-Erweiterung",
+          action: "Meine Erweiterung vorbereiten",
+          selected: "extension",
         },
         {
           title: "Ungenutzte Dachfläche",
           action: "Meine Dachfläche erfassen",
-          selected: "Gewerbedach-PV",
+          selected: "roof",
         },
         {
           title: "Hoher Stromverbrauch",
@@ -250,17 +305,15 @@ for (const width of [1440, 390]) {
           selected: undefined,
         },
       ]) {
-        const toggle = situations.getByRole("button", {
+        const toggle = situations.getByRole("tab", {
           name: scenario.title,
           exact: true,
         });
         if (width < 768) await toggle.tap();
         else await toggle.click();
-        await expect(toggle).toHaveAttribute("aria-expanded", "true");
-        await expect(
-          situations.locator(".site-situation-panel:visible"),
-        ).toHaveCount(1);
-        const panel = situations.getByRole("region", {
+        await expect(toggle).toHaveAttribute("aria-selected", "true");
+        await expect(situations.getByRole("tabpanel")).toHaveCount(1);
+        const panel = situations.getByRole("tabpanel", {
           name: scenario.title,
           exact: true,
         });
@@ -277,10 +330,10 @@ for (const width of [1440, 390]) {
             exact: true,
           }),
         ).toBeVisible();
+        await expect(
+          dialog.getByLabel("Projektvorhaben", { exact: true }),
+        ).toHaveValue(scenario.selected ?? "");
         if (scenario.selected) {
-          await expect(dialog.getByRole("status")).toContainText(
-            `${scenario.selected} ausgewählt`,
-          );
           const close = dialog.getByRole("button", {
             name: "Schließen",
             exact: true,
@@ -289,21 +342,15 @@ for (const width of [1440, 390]) {
           else await close.click();
           await expect(dialog).toHaveCount(0);
           await expect(action).toBeFocused();
-        } else {
-          // A general consumption enquiry must not inherit the earlier roof choice.
-          await expect(dialog.locator(".selected-intent")).toHaveCount(0);
-          await expect(
-            dialog.getByRole("button", {
-              name: "Auswahl aufheben",
-              exact: true,
-            }),
-          ).toHaveCount(0);
         }
         expect(draftWrites).toEqual([]);
       }
 
       const address = "QA Verbrauchsprofil · Gewerbepark 2";
-      const input = dialog.getByRole("combobox");
+      const input = dialog.getByRole("combobox", {
+        name: "Adresse Ihrer Immobilie oder Fläche",
+        exact: true,
+      });
       await input.fill(address);
       const created = page.waitForResponse(
         (response) =>
@@ -350,21 +397,11 @@ for (const width of [1440, 390]) {
         goal: "Dach oder Fläche bereitstellen",
       },
     ]) {
-      test(`${scenario.title} starts a real check with editable intent defaults`, async ({
+      test(`${scenario.title} starts through the entry form with editable intent defaults`, async ({
         page,
       }) => {
-        const types = page.locator(".project-types");
-        const toggle = types
-          .locator("h3")
-          .getByRole("button", { name: new RegExp(scenario.title) });
-        if ((await toggle.getAttribute("aria-expanded")) !== "true")
-          await toggle.click();
-        await expect(toggle).toHaveAttribute("aria-expanded", "true");
-        await expect(types.locator(".project-type-detail:visible")).toHaveCount(
-          1,
-        );
-        await types
-          .getByRole("button", { name: scenario.action, exact: true })
+        await page
+          .getByRole("button", { name: "Meinen Standort prüfen", exact: true })
           .click();
         const dialog = page.getByRole("dialog", {
           name: "Wo liegt Ihr Standort?",
@@ -376,9 +413,12 @@ for (const width of [1440, 390]) {
           exact: true,
         });
         await expect(input).toBeVisible();
-        await expect(dialog.getByRole("status")).toContainText(
-          `${scenario.title} ausgewählt`,
-        );
+        const projectIntent = dialog.getByLabel("Projektvorhaben", {
+          exact: true,
+        });
+        await expect(projectIntent).toHaveValue("");
+        await projectIntent.selectOption(scenario.intent);
+        await expect(projectIntent).toHaveValue(scenario.intent);
         const address = `QA ${scenario.title} · Gewerbepark 1`;
         await input.fill(address);
         await expect(page.locator(".closing .address-form input")).toHaveValue(
@@ -511,142 +551,137 @@ for (const width of [1440, 390]) {
       expect(draftAttempts).toBe(2);
     });
 
-    test("the score preserves the common points axis and opens all nine factors", async ({
+    test("the full example preserves all nine factors on a common points axis", async ({
       page,
     }) => {
+      await page.goto("/beispiel");
       await page.evaluate(() => document.fonts.ready);
-      const score = page.locator(".score-preview");
-      await expect(
-        score.getByRole("heading", { name: "4 von 9 Faktoren" }),
-      ).toBeVisible();
+      const score = page.locator(".score-summary");
       await expect(score.locator(".score-number")).toHaveText("82/100");
-      await expect(score).toContainText("Beispielbewertung");
       await expect(score).toContainText("Vorläufig · enthält Schätzwerte");
+      await expect(score).toContainText("Keine technische Freigabe");
       await expect(score).toContainText(
-        "Netzanschluss und Tragfähigkeit noch nicht geprüft.",
+        "Netzanschluss und Tragfähigkeit sind noch nicht geprüft.",
       );
-      const bars = await score.locator(".preview-factor").evaluateAll((rows) =>
+      const disclosure = page.locator(".factors-disclosure");
+      if (!(await disclosure.evaluate((el) => (el as HTMLDetailsElement).open)))
+        await disclosure.locator(":scope > summary").click();
+      await expect(page.locator("[data-factor]")).toHaveCount(9);
+      const bars = await page.locator("[data-factor]").evaluateAll((rows) =>
         rows.map((row) => {
-          const axis = row.querySelector(".mini-axis")!.getBoundingClientRect();
-          const maximum = row
-            .querySelector(".bar-max")!
-            .getBoundingClientRect();
+          const contentWidth = (element: Element) => {
+            const style = getComputedStyle(element);
+            return (
+              element.getBoundingClientRect().width -
+              parseFloat(style.borderLeftWidth) -
+              parseFloat(style.borderRightWidth) -
+              parseFloat(style.paddingLeft) -
+              parseFloat(style.paddingRight)
+            );
+          };
+          const axis = row.querySelector(".factor-axis")!;
+          const maximumElement = row.querySelector(".bar-max")!;
+          const maximum = maximumElement.getBoundingClientRect();
           const fill = row.querySelector("i")!.getBoundingClientRect();
           return {
             label: row.textContent,
-            axis: axis.width,
+            axis: contentWidth(axis),
             maximum: maximum.width,
+            maximumContent: contentWidth(maximumElement),
             fill: fill.width,
             within: fill.right <= maximum.right + 0.1,
           };
         }),
       );
       // Independent acceptance values: shared 0–20 points, not normalized percentages.
-      expect(bars).toHaveLength(4);
+      expect(bars).toHaveLength(9);
       for (const [index, [value, maximum]] of [
         [13, 15],
         [12, 15],
         [18, 20],
         [15, 15],
+        [6, 10],
+        [4, 5],
+        [7, 10],
+        [3, 5],
+        [4, 5],
       ].entries()) {
-        expect(bars[index].label).toContain(`${value}/${maximum}`);
+        expect(bars[index].label).toContain(`${value} / ${maximum}`);
         expect(bars[index].axis).toBeGreaterThan(0);
-        expect(bars[index].fill / bars[index].axis).toBeCloseTo(value / 20, 2);
+        expect(bars[index].maximumContent).toBeGreaterThan(0);
+        // The inner fill percentage uses the maximum bar's content box;
+        // its 1px borders do not encode points. Check that fraction separately
+        // and then place it on the shared 0–20 axis via the maximum's width.
+        const contributionFraction =
+          bars[index].fill / bars[index].maximumContent;
+        expect(contributionFraction).toBeCloseTo(value / maximum, 2);
+        expect(
+          contributionFraction * (bars[index].maximum / bars[index].axis),
+        ).toBeCloseTo(value / 20, 2);
         expect(bars[index].maximum / bars[index].axis).toBeCloseTo(
           maximum / 20,
           2,
         );
         expect(bars[index].within).toBe(true);
       }
-      await score.getByRole("link", { name: /alle 9 Faktoren/ }).click();
-      await expect(page).toHaveURL(/\/beispiel#score$/);
-      const disclosure = page.locator(".factors-disclosure");
-      if (!(await disclosure.evaluate((el) => (el as HTMLDetailsElement).open)))
-        await disclosure.locator(":scope > summary").click();
-      await expect(page.locator("[data-factor]")).toHaveCount(9);
-      await expect(page.locator("[data-factor]").last()).toBeVisible();
+      await page
+        .locator("[data-factor]")
+        .first()
+        .locator("details > summary")
+        .click();
+      await expect(
+        page.locator("[data-factor]").first().locator(".factor-rule"),
+      ).toContainText("Belegreferenz:");
     });
   });
 }
 
-test("the hero remains keyboard explorable with reduced motion and does not autoplay", async ({
+test("the hero tabs and image markers remain keyboard accessible with reduced motion", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   const hero = page.locator(".nightshift-hero");
-  const concept = hero.getByRole("slider", {
-    name: "Energiekonzept erkunden",
+  const tablist = hero.getByRole("tablist", {
+    name: "Bestandteile Ihres Standorts",
     exact: true,
   });
-  await expect(hero).toHaveAttribute("data-motion", "reduced");
-  await expect(hero).toHaveAttribute("data-stage", "Zusammenspiel");
-  await expect(concept).toBeEnabled();
-  await expect(concept).toHaveValue("100");
-  await expect(hero.getByRole("button", { name: /Animation/ })).toBeDisabled();
-
-  await concept.focus();
-  await concept.press("Home");
-  await expect(concept).toHaveValue("0");
-  await concept.press("ArrowRight");
-  await expect(concept).toHaveValue("1");
-  await expect(concept).toBeFocused();
-  const observedValues = await concept.evaluate(
-    (element) =>
-      new Promise<string[]>((resolve) => {
-        const values = new Set<string>();
-        const start = performance.now();
-        const sample = () => {
-          values.add((element as HTMLInputElement).value);
-          if (performance.now() - start >= 500) resolve([...values]);
-          else requestAnimationFrame(sample);
-        };
-        requestAnimationFrame(sample);
-      }),
-  );
-  expect(observedValues).toEqual(["1"]);
-  for (const stage of [
-    {
-      name: "Netzanschluss",
-      value: "0",
-      title: "Der Anschluss setzt den Rahmen.",
-    },
-    {
-      name: "Dachfläche",
-      value: "34",
-      title: "Erzeugung beginnt auf dem Dach.",
-    },
-    {
-      name: "Speicher",
-      value: "67",
-      title: "Strom dann nutzen, wenn er gebraucht wird.",
-    },
-    {
-      name: "Zusammenspiel",
-      value: "100",
-      title: "Ein Standort. Ein abgestimmtes Konzept.",
-    },
-  ]) {
-    const station = hero.getByRole("button", { name: stage.name, exact: true });
-    await station.click();
-    await expect(concept).toHaveValue(stage.value);
-    await expect(station).toHaveAttribute("aria-pressed", "true");
-    await expect(hero).toHaveAttribute("data-stage", stage.name);
-    await expect(hero.locator("figcaption")).toContainText(stage.title);
+  const roof = tablist.getByRole("tab", { name: "Dachfläche", exact: true });
+  const grid = tablist.getByRole("tab", { name: "Netzanschluss", exact: true });
+  const storage = tablist.getByRole("tab", { name: "Speicher", exact: true });
+  await expect(hero).toHaveAttribute("data-stage", "grid");
+  await expect(grid).toHaveAttribute("aria-selected", "true");
+  await grid.focus();
+  await grid.press("ArrowLeft");
+  await expect(roof).toBeFocused();
+  await expect(roof).toHaveAttribute("aria-selected", "true");
+  await expect(grid).toHaveAttribute("tabindex", "-1");
+  await roof.press("End");
+  await expect(storage).toBeFocused();
+  await storage.press("ArrowRight");
+  await expect(roof).toBeFocused();
+  await roof.press("ArrowLeft");
+  await expect(storage).toBeFocused();
+  await storage.press("Home");
+  await expect(roof).toBeFocused();
+  for (const station of heroStations) {
+    const marker = hero.getByRole("button", {
+      name: `${station.name} im Standortbild erkunden`,
+      exact: true,
+    });
+    await marker.focus();
+    await marker.press("Enter");
+    await expect(hero).toHaveAttribute("data-stage", station.id);
+    await expect(marker).toHaveAttribute("aria-pressed", "true");
+    await expect(
+      tablist.getByRole("tab", { name: station.name, exact: true }),
+    ).toHaveAttribute("aria-selected", "true");
+    await expect(hero.getByRole("tabpanel")).toHaveCount(1);
+    await expect(
+      hero.getByRole("tabpanel", { name: station.name, exact: true }),
+    ).toContainText(station.question);
+    const target = await marker.boundingBox();
+    expect(target!.width).toBeGreaterThanOrEqual(44);
+    expect(target!.height).toBeGreaterThanOrEqual(44);
   }
-  for (const [name, value] of [
-    ["Netzanschluss", "0"],
-    ["Dachfläche", "34"],
-    ["Speicher", "67"],
-  ]) {
-    await hero
-      .getByRole("button", {
-        name: `${name} im Standortbild erkunden`,
-        exact: true,
-      })
-      .click();
-    await expect(concept).toHaveValue(value);
-    await expect(hero).toHaveAttribute("data-stage", name);
-  }
-  await expect(hero).toHaveAttribute("data-motion", "reduced");
 });

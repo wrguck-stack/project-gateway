@@ -1,340 +1,258 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type ReactNode,
-} from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { Pause, Play, Restart } from "@carbon/icons-react";
+import { ArrowRight } from "@carbon/icons-react";
+import type { ProjectIntent } from "./landing-content";
 import "./nightshift-hero.css";
 
-const stages = [
+const COMPACT_IMAGE_MEDIA = "(max-width: 900px)";
+
+const stations: {
+  id: string;
+  name: string;
+  question: string;
+  action: string;
+  intent?: ProjectIntent;
+  x: number;
+  y: number;
+  wideX: number;
+  wideY: number;
+}[] = [
   {
-    name: "Netzanschluss",
-    short: "Netz",
-    position: 0,
-    title: "Der Anschluss setzt den Rahmen.",
-    caption:
-      "Anschlussleistung, Bezug und Einspeisung bestimmen, was technisch zu prüfen ist.",
-    description: "Vorhandenen Netzanschluss und verfügbare Leistung einordnen",
-    x: 29,
-    y: 74,
-  },
-  {
+    id: "roof",
     name: "Dachfläche",
-    short: "Dach",
-    position: 34,
-    title: "Erzeugung beginnt auf dem Dach.",
-    caption:
-      "Fläche, Dachzustand und Statik bilden die Grundlage für eine passende PV-Planung.",
-    description:
-      "Nutzbare Dachfläche, Dachzustand und Statik gemeinsam betrachten",
+    question: "Welche Fläche steht zur Verfügung?",
+    action: "Meine Dachfläche erfassen",
+    intent: "roof",
     x: 50,
     y: 26,
+    wideX: 50,
+    wideY: 32,
   },
   {
+    id: "grid",
+    name: "Netzanschluss",
+    question: "Welche Leistung steht zur Verfügung?",
+    action: "Anschlussunterlagen erfassen",
+    x: 29,
+    y: 74,
+    wideX: 32.5,
+    wideY: 80,
+  },
+  {
+    id: "storage",
     name: "Speicher",
-    short: "Speicher",
-    position: 67,
-    title: "Strom dann nutzen, wenn er gebraucht wird.",
-    caption:
-      "Ob ein Speicher passt, hängt von Erzeugung, Verbrauch und dem zeitlichen Bedarf ab.",
-    description:
-      "Speicher passend zu Erzeugung und zeitlichem Strombedarf prüfen",
+    question: "Wann braucht Ihr Betrieb den Strom?",
+    action: "Mein Speicherprojekt vorbereiten",
+    intent: "storage",
     x: 83,
     y: 61,
+    wideX: 74.5,
+    wideY: 74,
   },
-  {
-    name: "Zusammenspiel",
-    short: "Konzept",
-    position: 100,
-    title: "Ein Standort. Ein abgestimmtes Konzept.",
-    caption:
-      "Dach, Speicher und Netzanschluss werden gemeinsam mit Ihrem Verbrauch betrachtet.",
-    description:
-      "Erzeugung, Verbrauch, Speicher und Netzanschluss gemeinsam betrachten",
-    x: 50,
-    y: 50,
-  },
-] as const;
-
-const DURATION = 16_000;
-const SITE_IMAGE = "/energy/gateway-energy-site-v3-night.webp";
+];
 
 export function NightshiftHero({
   onStart,
   children,
 }: {
-  onStart: () => void;
+  onStart: (intent?: ProjectIntent) => void;
   children?: ReactNode;
 }) {
-  const heroRef = useRef<HTMLElement>(null);
-  const progressRef = useRef(100);
-  const [progress, setProgress] = useState(100);
-  const [playing, setPlaying] = useState(true);
-  const [manual, setManual] = useState(false);
-  const [imageReady, setImageReady] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [pageVisible, setPageVisible] = useState(true);
-  const [reducedMotion, setReducedMotion] = useState<boolean | null>(null);
+  const [active, setActive] = useState(1);
+  const [compactImage, setCompactImage] = useState(false);
+  const id = useId();
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const scene = useRef<HTMLDivElement>(null);
+  const station = stations[active];
 
-  const updateProgress = useCallback((value: number) => {
-    const bounded = Math.max(0, Math.min(100, value));
-    progressRef.current = bounded;
-    setProgress(bounded);
+  useEffect(() => {
+    const element = scene.current;
+    if (!element) return;
+    const media = window.matchMedia(COMPACT_IMAGE_MEDIA);
+    const fitScene = () => {
+      const { width, height } = element.getBoundingClientRect();
+      if (!width || !height) return;
+      const compact = media.matches;
+      setCompactImage(compact);
+      const ratio = compact ? 1.5 : 2010 / 782;
+      const planeWidth = Math.max(width, height * ratio);
+      const planeHeight = planeWidth / ratio;
+      // Move the complete photo/marker plane, never individual coordinates.
+      // Keep each 44px hit area inside the crop whenever the aspect ratio permits.
+      const cropOffset = (centered: number, lower: number, upper: number) =>
+        lower <= upper ? Math.max(lower, Math.min(upper, centered)) : centered;
+      const left = cropOffset(
+        (width - planeWidth) / 2,
+        24 - planeWidth * (compact ? 0.29 : 0.325),
+        width - 24 - planeWidth * (compact ? 0.83 : 0.745),
+      );
+      const top = cropOffset(
+        (height - planeHeight) / 2,
+        24 - planeHeight * (compact ? 0.26 : 0.32),
+        height - 24 - planeHeight * (compact ? 0.74 : 0.8),
+      );
+      element.style.setProperty("--scene-plane-width", `${planeWidth}px`);
+      element.style.setProperty("--scene-plane-ratio", `${ratio}`);
+      element.style.setProperty(
+        "--scene-plane-center-x",
+        `${left + planeWidth / 2}px`,
+      );
+      element.style.setProperty(
+        "--scene-plane-center-y",
+        `${top + planeHeight / 2}px`,
+      );
+    };
+    const observer = new ResizeObserver(fitScene);
+    observer.observe(element);
+    media.addEventListener("change", fitScene);
+    fitScene();
+    return () => {
+      observer.disconnect();
+      media.removeEventListener("change", fitScene);
+    };
   }, []);
 
-  useEffect(() => {
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncPreference = () => {
-      setReducedMotion(preference.matches);
-      updateProgress(preference.matches ? 100 : 0);
-      setPlaying(!preference.matches);
-    };
-    syncPreference();
-    preference.addEventListener("change", syncPreference);
-
-    const syncVisibility = () =>
-      setPageVisible(document.visibilityState === "visible");
-    syncVisibility();
-    document.addEventListener("visibilitychange", syncVisibility);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.05 },
-    );
-    if (heroRef.current) observer.observe(heroRef.current);
-    return () => {
-      preference.removeEventListener("change", syncPreference);
-      document.removeEventListener("visibilitychange", syncVisibility);
-      observer.disconnect();
-    };
-  }, [updateProgress]);
-
-  useEffect(() => {
-    if (
-      !playing ||
-      !imageReady ||
-      !visible ||
-      !pageVisible ||
-      reducedMotion !== false
-    )
-      return;
-    let frame = 0;
-    let lastTime: number | null = null;
-    let lastRender = 0;
-    const tick = (time: number) => {
-      if (lastTime === null) lastTime = time;
-      progressRef.current = Math.min(
-        100,
-        progressRef.current + ((time - lastTime) / DURATION) * 100,
-      );
-      lastTime = time;
-      if (time - lastRender >= 32 || progressRef.current === 100) {
-        setProgress(progressRef.current);
-        lastRender = time;
-      }
-      if (progressRef.current < 100) frame = window.requestAnimationFrame(tick);
-      else setPlaying(false);
-    };
-    frame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frame);
-  }, [playing, imageReady, visible, pageVisible, reducedMotion]);
-
-  const selectProgress = (value: number) => {
-    setManual(true);
-    setPlaying(false);
-    updateProgress(value);
+  const focusStation = (index: number) => {
+    setActive(index);
+    tabs.current[index]?.focus();
   };
-  const togglePlayback = () => {
-    if (reducedMotion !== false) return;
-    if (progressRef.current >= 100) {
-      setManual(false);
-      updateProgress(0);
-      setPlaying(true);
-    } else setPlaying((value) => !value);
-  };
-
-  const stageIndex =
-    progress < 25 ? 0 : progress < 50 ? 1 : progress < 75 ? 2 : 3;
-  const activeStage = stages[stageIndex];
-  const motionLabel = reducedMotion
-    ? "Animation bei reduzierter Bewegung deaktiviert"
-    : progress >= 100
-      ? "Animation erneut abspielen"
-      : playing
-        ? "Animation pausieren"
-        : "Animation fortsetzen";
-  const PlaybackIcon = progress >= 100 ? Restart : playing ? Pause : Play;
-  const heroStyle = {
-    "--night-progress": progress / 100,
-    "--night-progress-percent": `${progress}%`,
-  } as CSSProperties;
 
   return (
     <section
-      ref={heroRef}
       className="nightshift-hero"
       id="standort-start"
       aria-labelledby="nightshift-hero-title"
-      data-motion={
-        reducedMotion === null
-          ? "pending"
-          : reducedMotion
-            ? "reduced"
-            : playing
-              ? "playing"
-              : "paused"
-      }
-      data-stage={activeStage.name}
-      style={heroStyle}
+      data-stage={station.id}
     >
-      <div className="nightshift-hero-body">
-        <div className="nightshift-hero-content">
-          <p className="nightshift-hero-eyebrow">Energiekonzepte für Gewerbe</p>
-          <h1 id="nightshift-hero-title">
-            <span>Vom Stromanschluss</span> <em>zum Energiestandort.</em>
-          </h1>
-          <p className="nightshift-hero-intro">
-            PV, Speicher und Netzanschluss: Welche Kombination passt zu Ihrem
-            Betrieb?
-          </p>
-          <div className="nightshift-hero-actions">
-            <button
-              className="nightshift-hero-primary"
-              type="button"
-              aria-haspopup="dialog"
-              onClick={onStart}
-            >
-              Meinen Standort prüfen
-            </button>
-            <Link className="nightshift-hero-secondary" href="#ausgangslage">
-              Standort entdecken
-            </Link>
-          </div>
-          {children && <div className="nightshift-hero-return">{children}</div>}
-        </div>
+      <div className="nightshift-hero-heading">
+        <h1 id="nightshift-hero-title">
+          <span className="nightshift-hero-statement">PV geplant.</span>{" "}
+          <span className="nightshift-hero-question">
+            Die richtigen <br />
+            Fragen zuerst.
+          </span>
+        </h1>
+        <p className="nightshift-hero-intro">
+          Dachfläche, Stromverbrauch und Netzanschluss gemeinsam betrachten.
+        </p>
+      </div>
 
-        <figure className="nightshift-hero-visual">
-          <div className="energy-scene" data-active={stageIndex}>
-            <Image
-              className="nightshift-hero-photo"
-              src={SITE_IMAGE}
-              width={1536}
-              height={1024}
-              sizes="(max-width: 900px) 90vw, 58vw"
-              preload
-              unoptimized
-              alt="Fotorealistische KI-Visualisierung eines Gewerbestandorts bei Nacht: PV auf dem Hallendach, Batteriespeicher rechts und eine Trafostation im Vordergrund, mit dezenter Beleuchtung im Gewerbegebiet."
-              onLoad={() => setImageReady(true)}
-            />
-            {stages.slice(0, 3).map((stage, index) => (
-              <div
-                key={stage.name}
-                className={`energy-focus energy-focus-${index}`}
-                data-active={stageIndex === index}
-                aria-hidden="true"
-              >
-                <img src={SITE_IMAGE} alt="" width={1536} height={1024} />
-              </div>
-            ))}
-            {stages.slice(0, 3).map((stage, index) => (
+      <figure className="nightshift-hero-visual">
+        <div className="energy-scene" ref={scene}>
+          {/* Image and markers share one native coordinate plane for each crop. */}
+          <div className="energy-scene-plane">
+            <picture>
+              <source
+                media={COMPACT_IMAGE_MEDIA}
+                srcSet="/energy/gateway-energy-site-v3-night.webp"
+              />
+              <Image
+                className="nightshift-hero-photo"
+                src="/energy/gateway-energy-site-v4-panorama.webp"
+                width={2010}
+                height={782}
+                sizes="100vw"
+                loading="eager"
+                fetchPriority="high"
+                unoptimized
+                alt="Fotorealistische KI-Visualisierung eines Gewerbestandorts bei Nacht: PV auf dem Hallendach, Batteriespeicher rechts und eine Trafostation im Vordergrund."
+              />
+            </picture>
+            {stations.map((item, index) => (
               <button
-                key={stage.name}
+                key={item.id}
                 type="button"
-                className="energy-hotspot"
-                style={{ left: `${stage.x}%`, top: `${stage.y}%` }}
-                aria-label={`${stage.name} im Standortbild erkunden`}
-                aria-pressed={stageIndex === index}
-                aria-controls="nightshift-stage-description"
-                onClick={() => selectProgress(stage.position)}
+                className={`energy-hotspot energy-hotspot-${item.id}`}
+                style={{
+                  left: `${compactImage ? item.x : item.wideX}%`,
+                  top: `${compactImage ? item.y : item.wideY}%`,
+                }}
+                aria-label={`${item.name} im Standortbild erkunden`}
+                aria-pressed={active === index}
+                aria-controls={`${id}-panel`}
+                onClick={() => setActive(index)}
               >
-                <span className="energy-hotspot-number" aria-hidden="true">
-                  0{index + 1}
-                </span>
+                <span className="energy-hotspot-dot" aria-hidden="true" />
+                <span className="energy-hotspot-leader" aria-hidden="true" />
                 <span className="energy-hotspot-label" aria-hidden="true">
-                  {stage.name}
+                  {item.name}
                 </span>
               </button>
             ))}
           </div>
-          <figcaption
-            id="nightshift-stage-description"
-            aria-live={manual ? "polite" : "off"}
-          >
-            <span className="energy-caption-number" aria-hidden="true">
-              0{stageIndex + 1}
-            </span>
-            <div>
-              <strong>{activeStage.title}</strong>
-              <p>{activeStage.caption}</p>
-            </div>
-          </figcaption>
-        </figure>
-      </div>
-
-      <div
-        className="nightshift-hero-controls"
-        aria-label="Energiekonzept entdecken"
-        role="group"
-      >
-        <button
-          className="nightshift-hero-playback"
-          type="button"
-          aria-label={motionLabel}
-          title={motionLabel}
-          aria-describedby={
-            reducedMotion ? "nightshift-motion-help" : undefined
-          }
-          disabled={!imageReady || reducedMotion !== false}
-          onClick={togglePlayback}
-        >
-          <PlaybackIcon size={24} aria-hidden />
-        </button>
-        <div className="nightshift-hero-timeline">
-          <div className="nightshift-hero-stages">
-            {stages.map((stage, index) => (
-              <button
-                key={stage.name}
-                type="button"
-                onClick={() => selectProgress(stage.position)}
-                aria-pressed={stageIndex === index}
-                aria-controls="nightshift-stage-description"
-                aria-label={stage.name}
-              >
-                <span className="stage-full">{stage.name}</span>
-                <span className="stage-short" aria-hidden="true">
-                  {stage.short}
-                </span>
-              </button>
-            ))}
-          </div>
-          <input
-            className="nightshift-hero-range"
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={Math.round(progress)}
-            aria-label="Energiekonzept erkunden"
-            aria-valuetext={activeStage.description}
-            onChange={(event) =>
-              selectProgress(Number(event.currentTarget.value))
-            }
-          />
-          <p className="nightshift-sr-only" id="nightshift-motion-help">
-            Die Animation hebt Netzanschluss, Dach und Speicher im Standortbild
-            nacheinander hervor. Wählen Sie eine Station oder bedienen Sie den
-            Regler mit den Pfeiltasten. Bei reduzierter Bewegung bleibt das Bild
-            ruhig.
-          </p>
         </div>
+        <figcaption className="nightshift-hero-context">
+          <div
+            id={`${id}-panel`}
+            role="tabpanel"
+            aria-labelledby={`${id}-tab-${active}`}
+            tabIndex={0}
+          >
+            <p className="nightshift-context-label">{station.name}</p>
+            <p className="nightshift-context-question">{station.question}</p>
+            <button
+              type="button"
+              className="nightshift-context-action"
+              aria-haspopup="dialog"
+              onClick={() => onStart(station.intent)}
+            >
+              <span>{station.action}</span>
+              <ArrowRight size={20} aria-hidden />
+            </button>
+          </div>
+        </figcaption>
+      </figure>
+
+      <div className="nightshift-hero-controls">
+        <div
+          className="nightshift-hero-stations"
+          role="tablist"
+          aria-label="Bestandteile Ihres Standorts"
+        >
+          {stations.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              role="tab"
+              id={`${id}-tab-${index}`}
+              ref={(element) => {
+                tabs.current[index] = element;
+              }}
+              aria-selected={active === index}
+              aria-controls={`${id}-panel`}
+              tabIndex={active === index ? 0 : -1}
+              onClick={() => setActive(index)}
+              onKeyDown={(event) => {
+                let next: number | undefined;
+                if (event.key === "ArrowRight")
+                  next = (index + 1) % stations.length;
+                if (event.key === "ArrowLeft")
+                  next = (index - 1 + stations.length) % stations.length;
+                if (event.key === "Home") next = 0;
+                if (event.key === "End") next = stations.length - 1;
+                if (next !== undefined) {
+                  event.preventDefault();
+                  focusStation(next);
+                }
+              }}
+            >
+              {item.name}
+            </button>
+          ))}
+        </div>
+        <button
+          className="nightshift-hero-primary"
+          type="button"
+          aria-haspopup="dialog"
+          onClick={() => onStart()}
+        >
+          Meinen Standort prüfen
+          <ArrowRight size={22} aria-hidden />
+        </button>
       </div>
+      {children && <div className="nightshift-hero-return">{children}</div>}
     </section>
   );
 }
