@@ -1,0 +1,36 @@
+[
+  {
+    "viewport": [
+      1366,
+      768
+    ],
+    "heroBottom": 768,
+    "width": 1366,
+    "documentWidth": 1366,
+    "fontLoaded": true,
+    "photoLoaded": true,
+    "photo": "/energy/gateway-energy-site-v4-panorama.webp",
+    "writes": [],
+    "blocked": [],
+    "transportErrors": [],
+    "pageErrors": [],
+    "checks": "hero tabs/hotspots, modal intents and focus, situation tabs, record tabs, navigation"
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "heroBottom": 844,
+    "width": 390,
+    "documentWidth": 390,
+    "fontLoaded": true,
+    "photoLoaded": true,
+    "photo": "/energy/gateway-energy-site-v3-night.webp",
+    "writes": [],
+    "blocked": [],
+    "transportErrors": [],
+    "pageErrors": [],
+    "checks": "hero tabs/hotspots, modal intents and focus, situation tabs, record tabs, navigation"
+  }
+]
