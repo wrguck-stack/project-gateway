@@ -1,5 +1,27 @@
 # Project Gateway — Variante 3
 
+## Long, eased section transitions — 4 October 2026
+
+The user requested a softer hero-to-second-section and FAQ-to-closing blend.
+Both transition zones now use `clamp(152px, 17vw, 264px)` instead of 64–104px.
+The stops are smoothstep-eased OKLab samples between the existing endpoint
+colors, exported as plain hex for predictable browser support. Matching the
+route underlayer to the end of the ramp also removes its small color seam.
+Content remains outside the blend; the hero height and control colors are
+unchanged.
+
+Production build, typecheck, and the three existing checks for keyboard/Axe,
+200% text/touch/reduced motion, and complete responsive hero geometry passed.
+The refreshed browser environment initially had an invalid Fontconfig path;
+after correcting that local QA configuration, all loaded font weights and all
+three tests passed. No application fix or test expectation change was needed.
+
+Visual review at 1440, 390 and 320px passed:
+[before/after](docs/qa/transitions-2026-10-04/comparison.webp) and
+[geometry](docs/qa/transitions-2026-10-04/metrics.json).
+Publication of this refinement awaits renewal of the existing Netlify login;
+the read-only site API returned Unauthorized on 4 October.
+
 ## Softer color transitions — 3 October 2026
 
 Scoped follow-up to the user's request: feather the night photograph into the

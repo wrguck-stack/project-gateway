@@ -5,7 +5,7 @@
   --font-sans: var(--font-fieldbook);
   --font-mono: "IBM Plex Mono", monospace;
   --fieldbook-gutter: clamp(20px, 4.1667vw, 80px);
-  --fieldbook-transition: clamp(64px, 7vw, 104px);
+  --fieldbook-transition: clamp(152px, 17vw, 264px);
   --color-canvas: #10202a;
   --color-surface: #22323b;
   --color-raised: #2b3d47;
@@ -326,15 +326,19 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
   gap: 8vw;
-  /* Keep the light-to-dark blend in empty space above the readable content. */
+  /* Eased OKLab samples keep the long blend neutral and its endpoints quiet.
+     The transition stays in empty space above the readable content. */
   background:
     linear-gradient(
       to bottom,
       #f2f3ee,
-      #e0e5e1 14%,
-      #aab7b8 36%,
-      #586c75 65%,
-      #243740 87%,
+      #e7e9e5 12.5%,
+      #cccfcc 25%,
+      #a6abab 37.5%,
+      #7c8486 50%,
+      #555e63 62.5%,
+      #354046 75%,
+      #202b32 87.5%,
       #18242b
     ) top / 100% var(--fieldbook-transition) no-repeat,
     linear-gradient(to bottom, #18242b 60%, #10202a);
@@ -397,13 +401,16 @@
     linear-gradient(
       to bottom,
       #10202a,
-      #1d2d36 12%,
-      #52626a 34%,
-      #a9b5b9 67%,
-      #d5dee0 86%,
+      #182731 12.5%,
+      #2c3b44 25%,
+      #4b5961 37.5%,
+      #717d84 50%,
+      #99a3a9 62.5%,
+      #bec6ca 75%,
+      #d9dfe2 87.5%,
       #e3e9eb
     ) top / 100% var(--fieldbook-transition) no-repeat,
-    linear-gradient(to bottom, #e3e9eb 45%, #f2f3ee);
+    linear-gradient(to bottom, #e3e9eb var(--fieldbook-transition), #f2f3ee);
   color: #18242b;
 }
 .gateway-fieldbook .fieldbook-route > p {
