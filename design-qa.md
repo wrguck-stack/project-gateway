@@ -1,5 +1,27 @@
 # Project Gateway — Variante 3
 
+## Longer, texture-free eased blends — 4 October 2026
+
+The user still found the linear, dithered gradients pixelated and too hard.
+This attempt removes the SVG texture entirely and extends both transition
+zones to `clamp(260px, 29vw, 440px)` (417.6px at 1440px; 260px on phones).
+Seventeen floating-point OKLab color-mix stops approximate smoothstep easing:
+the color change starts and finishes slowly instead of meeting the neighboring
+flat surface at full speed. Intermediate colors are not rounded to 8-bit hex.
+No blur, images, motion or input-intercepting overlay is used. Header/hero
+geometry and the established text/control colors remain unchanged.
+
+Production build and TypeScript passed, as did the existing keyboard/Axe and
+complete responsive hero tests. Lossless original-size PNGs were reviewed at
+1440, 390 and 320px, with an additional 2× capture at 390px. Independent review
+confirmed softer endpoints without conspicuous grain; the added empty space
+is intentional for this user-requested trial. No claim is made that all display
+quantization disappears on every screen.
+
+Evidence: [desktop transition](docs/qa/soft-blend-2026-10-04/hero-route-desktop.png),
+[mobile closing at 2×](docs/qa/soft-blend-2026-10-04/faq-closing-mobile-2x.png),
+[geometry and computed colors](docs/qa/soft-blend-2026-10-04/metrics.json).
+
 ## Continuous, dithered transitions — 4 October 2026
 
 The user still saw pixelated-looking bands in both long blends. Their nine

@@ -5,7 +5,7 @@
   --font-sans: var(--font-fieldbook);
   --font-mono: "IBM Plex Mono", monospace;
   --fieldbook-gutter: clamp(20px, 4.1667vw, 80px);
-  --fieldbook-transition: clamp(152px, 17vw, 264px);
+  --fieldbook-transition: clamp(260px, 29vw, 440px);
   --color-canvas: #10202a;
   --color-surface: #22323b;
   --color-raised: #2b3d47;
@@ -399,27 +399,35 @@
     var(--fieldbook-blend-base);
   color: #18242b;
 }
-/* Native perceptual interpolation avoids hand-quantized intermediate colors.
-   The preceding declarations remain the fallback for older browsers. */
-@supports (background: linear-gradient(to bottom in oklab, #000, #fff)) {
+/* Smoothstep easing (3t² − 2t³) gently enters and leaves the adjacent surfaces.
+   Keep the intermediate colors in floating-point OKLab rather than rounding
+   them to hex. The longer ramp and eased endpoints need no grain or blur.
+   The preceding two-color declarations remain the older-browser fallback. */
+@supports (background: linear-gradient(in oklab, color-mix(in oklab, #000, #fff), #fff)) {
   .gateway-fieldbook :is(.fieldbook-route, .fieldbook-closing) {
     background-image:
-      linear-gradient(to bottom in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to)),
+      linear-gradient(
+        to bottom in oklab,
+        var(--fieldbook-blend-from),
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 1.123%) 6.25%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 4.2969%) 12.5%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 9.2285%) 18.75%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 15.625%) 25%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 23.1934%) 31.25%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 31.6406%) 37.5%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 40.6738%) 43.75%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 50%) 50%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 59.3262%) 56.25%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 68.3594%) 62.5%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 76.8066%) 68.75%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 84.375%) 75%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 90.7715%) 81.25%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 95.7031%) 87.5%,
+        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 98.877%) 93.75%,
+        var(--fieldbook-blend-to)
+      ),
       var(--fieldbook-blend-base);
   }
-}
-/* Fixed-size, monochrome micro-dither breaks up display quantization bands.
-   Confine it to empty padding, fade its edges, and never intercept a click. */
-.gateway-fieldbook :is(.fieldbook-route, .fieldbook-closing)::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: var(--fieldbook-transition);
-  background: url("/energy/gateway-gradient-dither.svg") repeat;
-  background-size: 128px 128px;
-  opacity: 0.012;
-  mask-image: linear-gradient(to bottom, transparent, #000 12px, #000 calc(100% - 12px), transparent);
-  pointer-events: none;
 }
 .gateway-fieldbook .fieldbook-route > p {
   margin: 0;
