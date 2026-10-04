@@ -323,25 +323,17 @@
   transform: rotate(180deg);
 }
 .gateway-fieldbook .fieldbook-closing {
+  --fieldbook-blend-from: #f2f3ee;
+  --fieldbook-blend-to: #18242b;
+  --fieldbook-blend-base: linear-gradient(to bottom, #18242b 60%, #10202a);
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
   gap: 8vw;
-  /* Eased OKLab samples keep the long blend neutral and its endpoints quiet.
-     The transition stays in empty space above the readable content. */
   background:
-    linear-gradient(
-      to bottom,
-      #f2f3ee,
-      #e7e9e5 12.5%,
-      #cccfcc 25%,
-      #a6abab 37.5%,
-      #7c8486 50%,
-      #555e63 62.5%,
-      #354046 75%,
-      #202b32 87.5%,
-      #18242b
-    ) top / 100% var(--fieldbook-transition) no-repeat,
-    linear-gradient(to bottom, #18242b 60%, #10202a);
+    linear-gradient(to bottom, var(--fieldbook-blend-from), var(--fieldbook-blend-to))
+      top / 100% var(--fieldbook-transition) no-repeat,
+    var(--fieldbook-blend-base);
   border: 0;
   padding: clamp(48px, 6vw, 96px) var(--fieldbook-gutter);
   padding-top: calc(clamp(48px, 6vw, 96px) + var(--fieldbook-transition));
@@ -391,6 +383,10 @@
   font-size: 0.75rem;
 }
 .gateway-fieldbook .fieldbook-route {
+  --fieldbook-blend-from: #10202a;
+  --fieldbook-blend-to: #e3e9eb;
+  --fieldbook-blend-base: linear-gradient(to bottom, #e3e9eb var(--fieldbook-transition), #f2f3ee);
+  position: relative;
   display: grid;
   grid-template-columns: minmax(150px, 0.65fr) minmax(0, 3fr);
   gap: 32px;
@@ -398,20 +394,32 @@
   padding-top: calc(28px + var(--fieldbook-transition));
   border-bottom: 0;
   background:
-    linear-gradient(
-      to bottom,
-      #10202a,
-      #182731 12.5%,
-      #2c3b44 25%,
-      #4b5961 37.5%,
-      #717d84 50%,
-      #99a3a9 62.5%,
-      #bec6ca 75%,
-      #d9dfe2 87.5%,
-      #e3e9eb
-    ) top / 100% var(--fieldbook-transition) no-repeat,
-    linear-gradient(to bottom, #e3e9eb var(--fieldbook-transition), #f2f3ee);
+    linear-gradient(to bottom, var(--fieldbook-blend-from), var(--fieldbook-blend-to))
+      top / 100% var(--fieldbook-transition) no-repeat,
+    var(--fieldbook-blend-base);
   color: #18242b;
+}
+/* Native perceptual interpolation avoids hand-quantized intermediate colors.
+   The preceding declarations remain the fallback for older browsers. */
+@supports (background: linear-gradient(to bottom in oklab, #000, #fff)) {
+  .gateway-fieldbook :is(.fieldbook-route, .fieldbook-closing) {
+    background-image:
+      linear-gradient(to bottom in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to)),
+      var(--fieldbook-blend-base);
+  }
+}
+/* Fixed-size, monochrome micro-dither breaks up display quantization bands.
+   Confine it to empty padding, fade its edges, and never intercept a click. */
+.gateway-fieldbook :is(.fieldbook-route, .fieldbook-closing)::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: var(--fieldbook-transition);
+  background: url("/energy/gateway-gradient-dither.svg") repeat;
+  background-size: 128px 128px;
+  opacity: 0.012;
+  mask-image: linear-gradient(to bottom, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+  pointer-events: none;
 }
 .gateway-fieldbook .fieldbook-route > p {
   margin: 0;

@@ -1,0 +1,58 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "documentWidth": 1440,
+    "heroBottom": 900,
+    "transition": "272.8px",
+    "dpr": 1,
+    "background": "linear-gradient(in oklab, rgb(16, 32, 42), rgb(227, 233, 235)), linear-gradient(rgb(227, 233, 235) 244.8px, rgb(242, 243, 238))",
+    "dither": {
+      "opacity": "0.012",
+      "pointerEvents": "none",
+      "height": "244.797px"
+    }
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "heroBottom": 844,
+    "transition": "180px",
+    "dpr": 1,
+    "background": "linear-gradient(in oklab, rgb(16, 32, 42), rgb(227, 233, 235)), linear-gradient(rgb(227, 233, 235) 152px, rgb(242, 243, 238))",
+    "dither": {
+      "opacity": "0.012",
+      "pointerEvents": "none",
+      "height": "152px"
+    }
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "heroBottom": 844,
+    "transition": "180px",
+    "dpr": 2,
+    "background": "linear-gradient(in oklab, rgb(16, 32, 42), rgb(227, 233, 235)), linear-gradient(rgb(227, 233, 235) 152px, rgb(242, 243, 238))",
+    "dither": {
+      "opacity": "0.012",
+      "pointerEvents": "none",
+      "height": "152px"
+    }
+  },
+  {
+    "width": 320,
+    "height": 640,
+    "documentWidth": 320,
+    "heroBottom": 640,
+    "transition": "180px",
+    "dpr": 1,
+    "background": "linear-gradient(in oklab, rgb(16, 32, 42), rgb(227, 233, 235)), linear-gradient(rgb(227, 233, 235) 152px, rgb(242, 243, 238))",
+    "dither": {
+      "opacity": "0.012",
+      "pointerEvents": "none",
+      "height": "152px"
+    }
+  }
+]

@@ -1,5 +1,26 @@
 # Project Gateway — Variante 3
 
+## Continuous, dithered transitions — 4 October 2026
+
+The user still saw pixelated-looking bands in both long blends. Their nine
+precomputed color stops are now replaced by native two-color OKLab
+interpolation, with a conventional two-color gradient as the fallback.
+A deterministic, fixed-size monochrome SVG adds 1.2% micro-dither only inside
+the empty transition space. Its edges fade out; it cannot intercept input.
+Transition heights, hero geometry, text, controls and application behavior
+are unchanged.
+
+Production build, TypeScript and the existing keyboard/Axe, 200% text/touch/
+reduced-motion and responsive hero tests passed. Original-size lossless PNGs
+were reviewed at 1440, 390 and 320px, including 390px at device pixel ratio 2.
+Independent visual review found smoother ramps without conspicuous grain,
+repeating tiles or hard endpoint seams. This reduces visible banding; display
+bit depth and image compression can still affect its appearance.
+
+Evidence: [desktop hero transition](docs/qa/gradient-2026-10-04/hero-route-desktop.png),
+[mobile closing transition at 2×](docs/qa/gradient-2026-10-04/faq-closing-mobile-2x.png)
+and [browser geometry](docs/qa/gradient-2026-10-04/metrics.json).
+
 ## Long, eased section transitions — 4 October 2026
 
 The user requested a softer hero-to-second-section and FAQ-to-closing blend.
