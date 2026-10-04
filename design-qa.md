@@ -22,6 +22,15 @@ Evidence: [desktop transition](docs/qa/soft-blend-2026-10-04/hero-route-desktop.
 [mobile closing at 2×](docs/qa/soft-blend-2026-10-04/faq-closing-mobile-2x.png),
 [geometry and computed colors](docs/qa/soft-blend-2026-10-04/metrics.json).
 
+Published application commit: `60bf8ca280ec57409a60dec576a56750ea659d25`;
+Netlify production deploy: `6ac2a07f4d0f3b65e0bc9e2f`. The deployment gate
+passed all 192 unit tests, production build and TypeScript. Read-only
+[live acceptance](docs/qa/soft-blend-2026-10-04/live-results.json) passed at
+1440×900 and 390×844: eased colors and heights are correct, texture overlays
+are absent, fonts load, the full hero fits, and there is no horizontal overflow.
+The start dialog and keyboard focus return work. No runtime/transport errors
+or attempted writes occurred. Both live transitions were visually reviewed.
+
 ## Continuous, dithered transitions — 4 October 2026
 
 The user still saw pixelated-looking bands in both long blends. Their nine
