@@ -4,6 +4,17 @@
 
 final result: passed
 
+Publication: application commit `29e7cd09cd9465c6e76b563f4867b0054b579d81`,
+Netlify production deploy `6ac2c28ab965c1a4c9910274`. The deployment gate passed
+192 unit tests, production build and TypeScript. Read-only
+[live acceptance](docs/qa/chapter-band-2026-10-04/live-results.json) passed at
+1440×900 and 390×844: correct solid surfaces, compact band dimensions, readable
+closing caption, complete hero, loaded fonts and no horizontal overflow.
+The start dialog opens, Escape closes it and focus returns to its button.
+No runtime/transport errors or attempted writes occurred. Live screenshots
+of both section boundaries were reviewed. Existing hosting configuration
+is unchanged.
+
 The user selected the FIRST displayed image of the 4 October separation
 exploration: `exec-65acbc7a-02f8-411c-aa0d-713cfd33a3f2.png`.
 This selection changes the section boundaries of the established Variante 3

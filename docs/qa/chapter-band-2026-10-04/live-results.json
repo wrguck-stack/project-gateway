@@ -1,0 +1,110 @@
+{
+  "checkedAt": "2026-10-04T21:20:43.571Z",
+  "url": "https://project-gateway-wrguck.netlify.app",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentWidth": 1440,
+      "heroBottom": 900,
+      "route": {
+        "background": "none",
+        "color": "rgb(217, 226, 229)",
+        "height": 114,
+        "paddingTop": 28,
+        "overlay": {
+          "content": "none",
+          "background": "none"
+        }
+      },
+      "closing": {
+        "background": "none",
+        "color": "rgb(16, 32, 42)",
+        "height": 431.859375,
+        "paddingTop": 86.4,
+        "overlay": {
+          "content": "none",
+          "background": "none"
+        }
+      },
+      "closingLead": {
+        "background": "none",
+        "color": "rgb(217, 226, 229)",
+        "height": 69,
+        "paddingTop": 24,
+        "overlay": {
+          "content": "none",
+          "background": "none"
+        }
+      },
+      "closingCaptionColor": "rgb(24, 36, 43)",
+      "fonts": {
+        "400": true,
+        "500": true,
+        "600": true,
+        "700": true
+      },
+      "dialogOpenedAndClosed": true,
+      "focusReturned": true,
+      "reads": 26,
+      "errors": [],
+      "writes": [],
+      "blocked": [],
+      "transportErrors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "heroBottom": 844,
+      "route": {
+        "background": "none",
+        "color": "rgb(217, 226, 229)",
+        "height": 305.234375,
+        "paddingTop": 28,
+        "overlay": {
+          "content": "none",
+          "background": "none"
+        }
+      },
+      "closing": {
+        "background": "none",
+        "color": "rgb(16, 32, 42)",
+        "height": 560.1875,
+        "paddingTop": 48,
+        "overlay": {
+          "content": "none",
+          "background": "none"
+        }
+      },
+      "closingLead": {
+        "background": "none",
+        "color": "rgb(217, 226, 229)",
+        "height": 98,
+        "paddingTop": 24,
+        "overlay": {
+          "content": "none",
+          "background": "none"
+        }
+      },
+      "closingCaptionColor": "rgb(24, 36, 43)",
+      "fonts": {
+        "400": true,
+        "500": true,
+        "600": true,
+        "700": true
+      },
+      "dialogOpenedAndClosed": true,
+      "focusReturned": true,
+      "reads": 23,
+      "errors": [],
+      "writes": [],
+      "blocked": [],
+      "transportErrors": []
+    }
+  ]
+}
