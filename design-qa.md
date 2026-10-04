@@ -21,6 +21,15 @@ Evidence: [desktop hero transition](docs/qa/gradient-2026-10-04/hero-route-deskt
 [mobile closing transition at 2×](docs/qa/gradient-2026-10-04/faq-closing-mobile-2x.png)
 and [browser geometry](docs/qa/gradient-2026-10-04/metrics.json).
 
+Published application commit: `bbe65e87a30b6f4b3b419e02e45f703d28103afc`;
+Netlify production deploy: `6ac27f88eb713978a1079a54`. The existing Free plan
+is unchanged. The deployment gate passed all 192 unit tests, production build
+and TypeScript. [Read-only live acceptance](docs/qa/gradient-2026-10-04/live-results.json)
+passed at 1440×900 and 390×844: both native gradients and the SVG dither are
+served correctly, all font weights load, hero geometry and widths are intact,
+and the start dialog opens, closes with Escape and returns focus. Live PNGs
+were visually reviewed. No runtime/transport errors or attempted writes.
+
 ## Long, eased section transitions — 4 October 2026
 
 The user requested a softer hero-to-second-section and FAQ-to-closing blend.

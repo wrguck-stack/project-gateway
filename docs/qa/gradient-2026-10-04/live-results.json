@@ -1,0 +1,88 @@
+{
+  "checkedAt": "2026-10-04T16:34:45.027Z",
+  "url": "https://project-gateway-wrguck.netlify.app",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentWidth": 1440,
+      "heroBottom": 900,
+      "route": {
+        "background": "linear-gradient(in oklab, rgb(16, 32, 42), rgb(227, 233, 235)), linear-gradient(rgb(227, 233, 235) 244.8px, rgb(242, 243, 238))",
+        "size": "100% 244.8px, auto",
+        "paddingTop": 272.8,
+        "dither": {
+          "opacity": "0.012",
+          "pointerEvents": "none",
+          "background": "url(\"https://project-gateway-wrguck.netlify.app/energy/gateway-gradient-dither.svg\")"
+        }
+      },
+      "closing": {
+        "background": "linear-gradient(in oklab, rgb(242, 243, 238), rgb(24, 36, 43)), linear-gradient(rgb(24, 36, 43) 60%, rgb(16, 32, 42))",
+        "size": "100% 244.8px, auto",
+        "paddingTop": 331.2,
+        "dither": {
+          "opacity": "0.012",
+          "pointerEvents": "none",
+          "background": "url(\"https://project-gateway-wrguck.netlify.app/energy/gateway-gradient-dither.svg\")"
+        }
+      },
+      "fonts": {
+        "400": true,
+        "500": true,
+        "600": true,
+        "700": true
+      },
+      "dialogOpenedAndClosed": true,
+      "focusReturned": true,
+      "reads": 27,
+      "errors": [],
+      "writes": [],
+      "blocked": [],
+      "transportErrors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "heroBottom": 844,
+      "route": {
+        "background": "linear-gradient(in oklab, rgb(16, 32, 42), rgb(227, 233, 235)), linear-gradient(rgb(227, 233, 235) 152px, rgb(242, 243, 238))",
+        "size": "100% 152px, auto",
+        "paddingTop": 180,
+        "dither": {
+          "opacity": "0.012",
+          "pointerEvents": "none",
+          "background": "url(\"https://project-gateway-wrguck.netlify.app/energy/gateway-gradient-dither.svg\")"
+        }
+      },
+      "closing": {
+        "background": "linear-gradient(in oklab, rgb(242, 243, 238), rgb(24, 36, 43)), linear-gradient(rgb(24, 36, 43) 60%, rgb(16, 32, 42))",
+        "size": "100% 152px, auto",
+        "paddingTop": 200,
+        "dither": {
+          "opacity": "0.012",
+          "pointerEvents": "none",
+          "background": "url(\"https://project-gateway-wrguck.netlify.app/energy/gateway-gradient-dither.svg\")"
+        }
+      },
+      "fonts": {
+        "400": true,
+        "500": true,
+        "600": true,
+        "700": true
+      },
+      "dialogOpenedAndClosed": true,
+      "focusReturned": true,
+      "reads": 24,
+      "errors": [],
+      "writes": [],
+      "blocked": [],
+      "transportErrors": []
+    }
+  ]
+}
