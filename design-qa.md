@@ -1,4 +1,71 @@
-# Project Gateway — Variante 3
+# Project Gateway — Design QA
+
+## Selected section separation, option 1 — 4 October 2026
+
+final result: passed
+
+The user selected the FIRST displayed image of the 4 October separation
+exploration: `exec-65acbc7a-02f8-411c-aa0d-713cfd33a3f2.png`.
+This selection changes the section boundaries of the established Variante 3
+homepage; it does not restore the original Atlas/Variante 1 design.
+Source visual truth: [selected-design.webp](docs/qa/chapter-band-2026-10-04/selected-design.webp).
+The original image identifier, dimensions and checksum are preserved in
+[source.json](docs/qa/chapter-band-2026-10-04/source.json).
+
+**Comparison evidence and scope**
+
+- [Full-view comparison](docs/qa/chapter-band-2026-10-04/comparison.webp):
+  reference on the left, rendered implementation on the right; each is
+  1190×1322 pixels. Browser CSS viewport 1190×754 at DPR 1; full-page clip
+  1190×1322. No density rescaling. State: hero Netzanschluss, PV already present.
+- [Focused band comparison](docs/qa/chapter-band-2026-10-04/comparison-band.webp):
+  the same y=680–1080 region of both artifacts, compared together.
+- [Mobile route](docs/qa/chapter-band-2026-10-04/hero-route-390.webp) and
+  [mobile closing](docs/qa/chapter-band-2026-10-04/faq-closing-390.webp):
+  390×844 CSS viewport, DPR 2; inspected at native density. Additional original
+  browser PNGs at 1440×900, 768×1024 and 320×640 were visually reviewed.
+- [Metrics](docs/qa/chapter-band-2026-10-04/metrics.json) record geometry,
+  loaded fonts, solid surfaces, separator directions and runtime errors.
+  The 114px desktop band matches the reference's approximately 114px band.
+  Existing hero geometry and assets are retained deliberately: the generated
+  mock varies their typography/crop, but the user selected a section divider,
+  not a replacement hero. Existing guidance copy is also retained.
+
+**Fidelity surfaces**
+
+- Typography: existing IBM Plex Sans 400–700 is loaded; readable dark step
+  labels and quieter supporting text match the reference's hierarchy.
+- Spacing/layout: 28px band padding, 58px inner rows and aligned vertical rules;
+  tablet puts the title above the row; phones use open rows with horizontal
+  rules. No extra interactive affordances are added to this informational list.
+- Colors: solid mineral `#d9e2e5`, chalk content and slate `#10202a` closing.
+  Both failed long gradients and their spacing variables are removed.
+- Images: existing approved night assets and Carbon icons are reused unchanged;
+  no new raster asset, texture, simulated icon or gradient is introduced.
+- Copy: the route's three existing steps remain intact. Before the closing
+  form, its existing next-step label and address guidance form a short mineral
+  chapter strip. Duplicate introductory text is removed from the body.
+
+**Findings and comparison history**
+
+1. Initial [P1]: the new closing-strip caption inherited the dark theme's pale
+   paragraph color and failed contrast (1.17:1). Fixed with explicit `#18242b`.
+2. Post-fix: production build and TypeScript passed; the existing keyboard/
+   dialog/Axe check passed again. Hero geometry and 200% text/touch/reduced-motion
+   tests also passed. Fresh closing PNGs were reviewed; independent visual QA
+   found no actionable P0/P1/P2 issue in either section boundary.
+
+**Implementation checklist**
+
+- Replace empty gradient areas with the selected compact informational band: complete.
+- Keep existing form structure, hero viewport fit and clear controls: verified.
+- Compare reference/render together and recheck contrast correction: complete.
+
+**Follow-up polish**
+
+Existing narrow-phone tab text can break awkwardly inside “Stromverbrauch”.
+This predates the selected divider change; it remains a separate typography
+refinement. Chromium is the browser used for these captures and checks.
 
 ## Longer, texture-free eased blends — 4 October 2026
 

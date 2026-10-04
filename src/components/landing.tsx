@@ -412,7 +412,7 @@ export function Landing({ mode }: { mode: string }) {
         )}
 
         <aside
-          className="fieldbook-route"
+          className="fieldbook-route fieldbook-chapter-band"
           aria-label="Ablauf des Standortchecks"
         >
           <p>
@@ -490,22 +490,24 @@ export function Landing({ mode }: { mode: string }) {
             </div>
           </div>
         </section>
+        <div className="fieldbook-closing-lead fieldbook-chapter-band">
+          <p>Ihr nächster Schritt</p>
+          <p>Eine Adresse genügt für den ersten Schritt.</p>
+        </div>
         <section
           className="fieldbook-closing closing"
           id="standort-erfassen"
           aria-labelledby="closing-title"
         >
           <div>
-            <p className="overline">IHR NÄCHSTER SCHRITT</p>
             <h2 id="closing-title">
               Beginnen wir mit
               <br />
               Ihrem Standort.
             </h2>
             <p>
-              Eine Adresse genügt für den ersten Schritt. Ergänzen Sie danach,
-              was Sie über Ihren Betrieb wissen. Fehlende Angaben können offen
-              bleiben.
+              Ergänzen Sie, was Sie über Ihren Betrieb wissen. Fehlende Angaben
+              können offen bleiben.
             </p>
           </div>
           <div>

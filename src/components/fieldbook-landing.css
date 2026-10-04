@@ -5,7 +5,6 @@
   --font-sans: var(--font-fieldbook);
   --font-mono: "IBM Plex Mono", monospace;
   --fieldbook-gutter: clamp(20px, 4.1667vw, 80px);
-  --fieldbook-transition: clamp(260px, 29vw, 440px);
   --color-canvas: #10202a;
   --color-surface: #22323b;
   --color-raised: #2b3d47;
@@ -323,20 +322,12 @@
   transform: rotate(180deg);
 }
 .gateway-fieldbook .fieldbook-closing {
-  --fieldbook-blend-from: #f2f3ee;
-  --fieldbook-blend-to: #18242b;
-  --fieldbook-blend-base: linear-gradient(to bottom, #18242b 60%, #10202a);
-  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
   gap: 8vw;
-  background:
-    linear-gradient(to bottom, var(--fieldbook-blend-from), var(--fieldbook-blend-to))
-      top / 100% var(--fieldbook-transition) no-repeat,
-    var(--fieldbook-blend-base);
+  background: #10202a;
   border: 0;
   padding: clamp(48px, 6vw, 96px) var(--fieldbook-gutter);
-  padding-top: calc(clamp(48px, 6vw, 96px) + var(--fieldbook-transition));
   align-items: center;
 }
 .gateway-fieldbook .fieldbook-closing h2 {
@@ -382,55 +373,23 @@
 .gateway-fieldbook .hosting-credit {
   font-size: 0.75rem;
 }
-.gateway-fieldbook .fieldbook-route {
-  --fieldbook-blend-from: #10202a;
-  --fieldbook-blend-to: #e3e9eb;
-  --fieldbook-blend-base: linear-gradient(to bottom, #e3e9eb var(--fieldbook-transition), #f2f3ee);
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(150px, 0.65fr) minmax(0, 3fr);
-  gap: 32px;
-  padding: 28px var(--fieldbook-gutter);
-  padding-top: calc(28px + var(--fieldbook-transition));
-  border-bottom: 0;
-  background:
-    linear-gradient(to bottom, var(--fieldbook-blend-from), var(--fieldbook-blend-to))
-      top / 100% var(--fieldbook-transition) no-repeat,
-    var(--fieldbook-blend-base);
+/* Selected section divider: an informative chapter band, 4 October 2026.
+   Solid surfaces and open rows separate chapters without decorative fades. */
+.gateway-fieldbook .fieldbook-chapter-band {
+  background: #d9e2e5;
   color: #18242b;
 }
-/* Smoothstep easing (3t² − 2t³) gently enters and leaves the adjacent surfaces.
-   Keep the intermediate colors in floating-point OKLab rather than rounding
-   them to hex. The longer ramp and eased endpoints need no grain or blur.
-   The preceding two-color declarations remain the older-browser fallback. */
-@supports (background: linear-gradient(in oklab, color-mix(in oklab, #000, #fff), #fff)) {
-  .gateway-fieldbook :is(.fieldbook-route, .fieldbook-closing) {
-    background-image:
-      linear-gradient(
-        to bottom in oklab,
-        var(--fieldbook-blend-from),
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 1.123%) 6.25%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 4.2969%) 12.5%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 9.2285%) 18.75%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 15.625%) 25%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 23.1934%) 31.25%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 31.6406%) 37.5%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 40.6738%) 43.75%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 50%) 50%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 59.3262%) 56.25%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 68.3594%) 62.5%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 76.8066%) 68.75%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 84.375%) 75%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 90.7715%) 81.25%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 95.7031%) 87.5%,
-        color-mix(in oklab, var(--fieldbook-blend-from), var(--fieldbook-blend-to) 98.877%) 93.75%,
-        var(--fieldbook-blend-to)
-      ),
-      var(--fieldbook-blend-base);
-  }
+.gateway-fieldbook .fieldbook-route {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.8fr) minmax(0, 3fr);
+  align-items: center;
+  gap: 0;
+  padding: 28px var(--fieldbook-gutter);
+  border: 0;
 }
 .gateway-fieldbook .fieldbook-route > p {
   margin: 0;
+  padding-right: 24px;
   color: #18242b;
   font-size: 0.875rem;
   font-weight: 600;
@@ -439,7 +398,7 @@
 .gateway-fieldbook .fieldbook-route ol {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -449,6 +408,12 @@
   align-items: baseline;
   gap: 14px;
   min-width: 0;
+  min-height: 58px;
+  padding: 6px clamp(20px, 2.65vw, 40px);
+  border-left: 1px solid #a3b1ba;
+}
+.gateway-fieldbook .fieldbook-route li:last-child {
+  padding-right: 0;
 }
 .gateway-fieldbook .fieldbook-route li > span {
   font-family: var(--font-mono);
@@ -468,6 +433,26 @@
   color: #405461;
   font-size: 0.8125rem;
   margin-top: 4px;
+}
+.gateway-fieldbook .fieldbook-closing-lead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  padding: 24px var(--fieldbook-gutter);
+}
+.gateway-fieldbook .fieldbook-closing-lead p {
+  margin: 0;
+  max-width: none;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.gateway-fieldbook .fieldbook-closing-lead p:first-child {
+  color: #18242b;
+  font-weight: 600;
+}
+.gateway-fieldbook .fieldbook-closing-lead p:last-child {
+  color: #405461;
 }
 .gateway-fieldbook .fieldbook-faq-guide {
   margin: 0 0 16px;
@@ -511,11 +496,28 @@
   .gateway-fieldbook .fieldbook-route > p br::after {
     content: " ";
   }
+  .gateway-fieldbook .fieldbook-route li:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
 }
 @media (max-width: 600px) {
   .gateway-fieldbook .fieldbook-route ol {
     grid-template-columns: minmax(0, 1fr);
-    gap: 18px;
+  }
+  .gateway-fieldbook .fieldbook-route li {
+    min-height: 0;
+    padding: 14px 0;
+    border-left: 0;
+    border-top: 1px solid #a3b1ba;
+  }
+  .gateway-fieldbook .fieldbook-route li:last-child {
+    padding-bottom: 0;
+  }
+  .gateway-fieldbook .fieldbook-closing-lead {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 }
 @media (max-width: 767px) {

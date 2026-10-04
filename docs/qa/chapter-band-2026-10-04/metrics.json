@@ -1,0 +1,222 @@
+[
+  {
+    "width": 1190,
+    "height": 754,
+    "documentWidth": 1190,
+    "heroBottom": 754,
+    "route": {
+      "top": 754,
+      "height": 114,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "28px"
+    },
+    "closingLead": {
+      "top": 2778.8125,
+      "height": 69,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "24px"
+    },
+    "closing": {
+      "top": 2847.8125,
+      "height": 401.859375,
+      "color": "rgb(16, 32, 42)",
+      "image": "none",
+      "paddingTop": "71.4px"
+    },
+    "separators": [
+      {
+        "left": "1px",
+        "top": "0px"
+      },
+      {
+        "left": "1px",
+        "top": "0px"
+      },
+      {
+        "left": "1px",
+        "top": "0px"
+      }
+    ],
+    "dpr": 1,
+    "fonts": true,
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "documentWidth": 1440,
+    "heroBottom": 900,
+    "route": {
+      "top": 900,
+      "height": 114,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "28px"
+    },
+    "closingLead": {
+      "top": 2984.890625,
+      "height": 69,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "24px"
+    },
+    "closing": {
+      "top": 3053.890625,
+      "height": 431.859375,
+      "color": "rgb(16, 32, 42)",
+      "image": "none",
+      "paddingTop": "86.4px"
+    },
+    "separators": [
+      {
+        "left": "1px",
+        "top": "0px"
+      },
+      {
+        "left": "1px",
+        "top": "0px"
+      },
+      {
+        "left": "1px",
+        "top": "0px"
+      }
+    ],
+    "dpr": 1,
+    "fonts": true,
+    "errors": []
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "documentWidth": 768,
+    "heroBottom": 1024,
+    "route": {
+      "top": 1024,
+      "height": 172.65625,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "28px"
+    },
+    "closingLead": {
+      "top": 3233.625,
+      "height": 69,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "24px"
+    },
+    "closing": {
+      "top": 3302.625,
+      "height": 392.15625,
+      "color": "rgb(16, 32, 42)",
+      "image": "none",
+      "paddingTop": "48px"
+    },
+    "separators": [
+      {
+        "left": "0px",
+        "top": "0px"
+      },
+      {
+        "left": "1px",
+        "top": "0px"
+      },
+      {
+        "left": "1px",
+        "top": "0px"
+      }
+    ],
+    "dpr": 1,
+    "fonts": true,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "heroBottom": 844,
+    "route": {
+      "top": 844,
+      "height": 305.234375,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "28px"
+    },
+    "closingLead": {
+      "top": 3862.5,
+      "height": 98,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "24px"
+    },
+    "closing": {
+      "top": 3960.5,
+      "height": 560.1875,
+      "color": "rgb(16, 32, 42)",
+      "image": "none",
+      "paddingTop": "48px"
+    },
+    "separators": [
+      {
+        "left": "0px",
+        "top": "1px"
+      },
+      {
+        "left": "0px",
+        "top": "1px"
+      },
+      {
+        "left": "0px",
+        "top": "1px"
+      }
+    ],
+    "dpr": 2,
+    "fonts": true,
+    "errors": []
+  },
+  {
+    "width": 320,
+    "height": 640,
+    "documentWidth": 320,
+    "heroBottom": 640,
+    "route": {
+      "top": 640,
+      "height": 305.234375,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "28px"
+    },
+    "closingLead": {
+      "top": 3929.78125,
+      "height": 98,
+      "color": "rgb(217, 226, 229)",
+      "image": "none",
+      "paddingTop": "24px"
+    },
+    "closing": {
+      "top": 4027.78125,
+      "height": 602.6875,
+      "color": "rgb(16, 32, 42)",
+      "image": "none",
+      "paddingTop": "48px"
+    },
+    "separators": [
+      {
+        "left": "0px",
+        "top": "1px"
+      },
+      {
+        "left": "0px",
+        "top": "1px"
+      },
+      {
+        "left": "0px",
+        "top": "1px"
+      }
+    ],
+    "dpr": 1,
+    "fonts": true,
+    "errors": []
+  }
+]
