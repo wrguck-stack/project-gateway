@@ -19,8 +19,16 @@ three tests passed. No application fix or test expectation change was needed.
 Visual review at 1440, 390 and 320px passed:
 [before/after](docs/qa/transitions-2026-10-04/comparison.webp) and
 [geometry](docs/qa/transitions-2026-10-04/metrics.json).
-Publication of this refinement awaits renewal of the existing Netlify login;
-the read-only site API returned Unauthorized on 4 October.
+Published on 4 October after the user renewed the Netlify login. Application
+commit: `45ae82db9ff6370c185bd3b2347408c3309057e8`; production deploy:
+`6ac26c114d0f3b25d5bc9de3`. The existing Free plan is unchanged. The deployment
+gate passed all 192 unit tests, the production build and TypeScript checks.
+Read-only live acceptance passed at 1440×900 and 390×844: both easing ramps
+and their 244.8px/152px heights are correct, fonts 400–700 load, the hero fits
+one viewport and there is no horizontal overflow. The start dialog opens,
+Escape closes it and focus returns to its button. Both transition screenshots
+were visually reviewed at each width. No JavaScript/transport errors, API
+requests or attempted writes occurred.
 
 ## Softer color transitions — 3 October 2026
 
