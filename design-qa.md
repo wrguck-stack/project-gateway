@@ -1,5 +1,68 @@
 # Project Gateway — Design QA
 
+## Technical hero, selected variant 2 — 6 October 2026
+
+final result: blocked
+
+Implementation is prepared on `feat/homepage-professional-pass`. It is not
+published, and no browser visual acceptance is claimed. The Product Design
+image-to-code gate requires an actual rendered capture and comparison.
+
+**Selected source and scope**
+
+- Exact target: the second displayed generated image, result
+  `exec-3ef07c10-1b79-4f66-a9c1-f1492bd6cc13`.
+- [Selected reference](docs/qa/technical-hero-2026-10-06/selected-reference.webp),
+  1586×992; original checksum in the adjacent `source.json`.
+- Keep its navy composition, large left-aligned copy, three technical motifs,
+  labels and orange primary action. The user's explicit selection supersedes
+  the earlier photo hero and Atlas visual instructions for this section.
+
+**Prepared implementation**
+
+- Separate transparent WebP assets for roof, consumption and grid connection;
+  [asset review against the actual navy](docs/qa/technical-hero-2026-10-06/graphics-review.webp).
+  This contact sheet is asset evidence, not a browser capture.
+- PV modules use one consistent 4×6 grid and one planar highlight. Consumption
+  uses seven solid bars in one row. The connection uses four matching enclosed
+  modules and separate short leads. These are schematic concepts, not measured
+  site data or an electrical wiring plan; accessible descriptive text says so.
+- Main assets use proportional `object-fit: contain` in reserved 1000×680 frames.
+  Captions remain HTML. Image bounds and preparation are recorded in
+  `asset-preparation.json`.
+- A source review caught a distorted orange junction in the stretched route
+  image. The new grey-only route image is separate from a fixed 14px Carbon
+  CircleFilled icon. Its measured endpoint sets the junction at 51.3% height.
+- The project label now has a reserved 78px area inside the visual. At tablet
+  and phone widths routes are removed to avoid detached or crushed endpoints.
+  All three main motifs and their captions remain visible by layout design.
+- Existing IBM Plex Sans, Carbon controls and the neutral `onStart()` entry
+  remain. Only the orange action requests input; figures are informational.
+
+**Checks and blockers**
+
+- Unit suite: 192 passed in 7 files.
+- Production build and TypeScript: passed before final junction refinement;
+  repeated final check recorded in `verification.json`.
+- Existing hero E2E checks were updated for loaded graphics, semantic labels,
+  viewport fit and neutral CTA/focus behavior. They have NOT been executed in
+  this turn. No mobile, keyboard, console or responsive pass is claimed.
+- Agent preview reported started twice but stopped and remained unreachable
+  in the cloud browser. Bounded recovery was exhausted; no alternative hosts,
+  weakened runtime isolation or fake visual evidence were used.
+- No same-viewport rendered capture or side-by-side layout comparison exists.
+  Desktop, tablet, phone and 200% text verification remain required.
+- Netlify CLI reports NOT_LOGGED_IN. Existing site, free plan, storage and
+  deployment configuration are unchanged. No production deploy was attempted.
+
+**Next acceptance gate**
+
+After access is restored, inspect the real rendered page at 1440×900, 1366×768,
+768×1024, 820×1180, 390×844, 375×667 and 320×640. Compare the 1.6-aspect-ratio
+source with the desktop hero at matching normalized density, check graphics
+and label bounds, test the main dialog and Escape/focus restoration, inspect
+console errors, then replace this blocked result only when those checks pass.
+
 ## Selected section separation, option 1 — 4 October 2026
 
 final result: passed

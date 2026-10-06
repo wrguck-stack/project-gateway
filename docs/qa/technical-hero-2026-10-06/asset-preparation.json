@@ -1,0 +1,56 @@
+[
+  {
+    "name": "roof",
+    "sourceSize": [
+      1620,
+      971
+    ],
+    "subjectBounds": [
+      280,
+      220,
+      1310,
+      806
+    ],
+    "outputSize": [
+      1000,
+      680
+    ],
+    "bytes": 99666
+  },
+  {
+    "name": "consumption",
+    "sourceSize": [
+      1619,
+      971
+    ],
+    "subjectBounds": [
+      233,
+      145,
+      1512,
+      928
+    ],
+    "outputSize": [
+      1000,
+      680
+    ],
+    "bytes": 42084
+  },
+  {
+    "name": "connection",
+    "sourceSize": [
+      1619,
+      971
+    ],
+    "subjectBounds": [
+      203,
+      81,
+      1422,
+      925
+    ],
+    "outputSize": [
+      1000,
+      680
+    ],
+    "bytes": 76742
+  }
+]

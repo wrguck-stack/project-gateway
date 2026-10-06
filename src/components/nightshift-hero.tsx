@@ -1,57 +1,16 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import Image from "next/image";
-import { ArrowRight, Information } from "@carbon/icons-react";
+import { ArrowRight, CircleFilled } from "@carbon/icons-react";
 import type { ProjectIntent } from "./landing-content";
 import "./nightshift-hero.css";
 
-const COMPACT_IMAGE_MEDIA = "(max-width: 900px)";
-
-const stations: {
-  id: string;
-  name: string;
-  question: string;
-  action: string;
-  intent?: ProjectIntent;
-  x: number;
-  y: number;
-  wideX: number;
-  wideY: number;
-}[] = [
-  {
-    id: "roof",
-    name: "Dachfläche",
-    question: "Welche Fläche steht zur Verfügung?",
-    action: "Standort angeben",
-    intent: "roof",
-    x: 50,
-    y: 26,
-    wideX: 50,
-    wideY: 32,
-  },
-  {
-    id: "grid",
-    name: "Netzanschluss",
-    question: "Welche Leistung steht zur Verfügung?",
-    action: "Standort angeben",
-    x: 29,
-    y: 74,
-    wideX: 32.5,
-    wideY: 80,
-  },
-  {
-    id: "storage",
-    name: "Speicher",
-    question: "Wann braucht Ihr Betrieb den Strom?",
-    action: "Standort angeben",
-    intent: "storage",
-    x: 83,
-    y: 61,
-    wideX: 74.5,
-    wideY: 74,
-  },
-];
+const factors = [
+  { id: "roof", label: "Dachfläche", possessive: "Ihre" },
+  { id: "consumption", label: "Stromverbrauch", possessive: "Ihr" },
+  { id: "connection", label: "Netzanschluss", possessive: "Ihr" },
+] as const;
 
 export function NightshiftHero({
   onStart,
@@ -60,75 +19,18 @@ export function NightshiftHero({
   onStart: (intent?: ProjectIntent) => void;
   children?: ReactNode;
 }) {
-  const [active, setActive] = useState(1);
-  const [compactImage, setCompactImage] = useState(false);
   const id = useId();
-  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
-  const scene = useRef<HTMLDivElement>(null);
-  const station = stations[active];
-
-  useEffect(() => {
-    const element = scene.current;
-    if (!element) return;
-    const media = window.matchMedia(COMPACT_IMAGE_MEDIA);
-    const fitScene = () => {
-      const { width, height } = element.getBoundingClientRect();
-      if (!width || !height) return;
-      const compact = media.matches;
-      setCompactImage(compact);
-      const ratio = compact ? 1.5 : 2010 / 782;
-      const planeWidth = Math.max(width, height * ratio);
-      const planeHeight = planeWidth / ratio;
-      // Move the complete photo/marker plane, never individual coordinates.
-      // Keep each 44px hit area inside the crop whenever the aspect ratio permits.
-      const cropOffset = (centered: number, lower: number, upper: number) =>
-        lower <= upper ? Math.max(lower, Math.min(upper, centered)) : centered;
-      const left = cropOffset(
-        (width - planeWidth) / 2,
-        24 - planeWidth * (compact ? 0.29 : 0.325),
-        width - 24 - planeWidth * (compact ? 0.83 : 0.745),
-      );
-      const top = cropOffset(
-        (height - planeHeight) / 2,
-        24 - planeHeight * (compact ? 0.26 : 0.32),
-        height - 24 - planeHeight * (compact ? 0.74 : 0.8),
-      );
-      element.style.setProperty("--scene-plane-width", `${planeWidth}px`);
-      element.style.setProperty("--scene-plane-ratio", `${ratio}`);
-      element.style.setProperty(
-        "--scene-plane-center-x",
-        `${left + planeWidth / 2}px`,
-      );
-      element.style.setProperty(
-        "--scene-plane-center-y",
-        `${top + planeHeight / 2}px`,
-      );
-    };
-    const observer = new ResizeObserver(fitScene);
-    observer.observe(element);
-    media.addEventListener("change", fitScene);
-    fitScene();
-    return () => {
-      observer.disconnect();
-      media.removeEventListener("change", fitScene);
-    };
-  }, []);
-
-  const focusStation = (index: number) => {
-    setActive(index);
-    tabs.current[index]?.focus();
-  };
-
   return (
     <section
       className="nightshift-hero"
       id="standort-start"
       aria-labelledby="nightshift-hero-title"
-      data-stage={station.id}
     >
       <div className="nightshift-hero-heading">
         <h1 id="nightshift-hero-title">
-          <span className="nightshift-hero-statement">PV geplant.</span>{" "}
+          <span className="nightshift-hero-statement">
+            PV <span>geplant.</span>
+          </span>{" "}
           <span className="nightshift-hero-question">
             Die richtigen <br />
             Fragen zuerst.
@@ -138,133 +40,70 @@ export function NightshiftHero({
           Dachfläche, Stromverbrauch und Netzanschluss gemeinsam betrachten.
         </p>
       </div>
-
-      <figure className="nightshift-hero-visual">
-        <div className="energy-scene" ref={scene}>
-          {/* Image and markers share one native coordinate plane for each crop. */}
-          <div className="energy-scene-plane">
-            <picture>
-              <source
-                media={COMPACT_IMAGE_MEDIA}
-                srcSet="/energy/gateway-energy-site-v3-night.webp"
-              />
-              <Image
-                className="nightshift-hero-photo"
-                src="/energy/gateway-energy-site-v4-panorama.webp"
-                width={2010}
-                height={782}
-                sizes="100vw"
-                loading="eager"
-                fetchPriority="high"
-                unoptimized
-                alt="Fotorealistische KI-Visualisierung eines Gewerbestandorts bei Nacht: PV auf dem Hallendach, Batteriespeicher rechts und eine Trafostation im Vordergrund."
-              />
-            </picture>
-            {stations.map((item, index) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`energy-hotspot energy-hotspot-${item.id}`}
-                style={{
-                  left: `${compactImage ? item.x : item.wideX}%`,
-                  top: `${compactImage ? item.y : item.wideY}%`,
-                }}
-                aria-label={`${item.name} im Standortbild erkunden`}
-                aria-pressed={active === index}
-                aria-controls={`${id}-panel`}
-                onClick={() => setActive(index)}
-              >
-                <span className="energy-hotspot-dot" aria-hidden="true">
-                  <Information size={22} />
-                </span>
-                <span className="energy-hotspot-leader" aria-hidden="true" />
-                <span className="energy-hotspot-label" aria-hidden="true">
-                  {item.name}
-                </span>
-              </button>
-            ))}
-          </div>
+      <figure
+        className="gateway-hero-system"
+        aria-labelledby={`${id}-project`}
+        aria-describedby={`${id}-description`}
+      >
+        <p className="sr-only" id={`${id}-description`}>
+          Qualitative, schematische Illustration: Dachfläche, Stromverbrauch und
+          Netzanschluss fließen gemeinsam in die Vorbereitung Ihres PV-Projekts
+          ein. Die Darstellung enthält keine Standortmesswerte und keinen
+          elektrischen Schaltplan.
+        </p>
+        <Image
+          className="gateway-hero-convergence"
+          src="/energy/technical-hero/convergence.webp"
+          alt=""
+          width={614}
+          height={1060}
+          unoptimized
+          loading="eager"
+          aria-hidden="true"
+        />
+        <CircleFilled
+          className="gateway-hero-junction"
+          size={14}
+          aria-hidden="true"
+        />
+        <div className="gateway-hero-factors">
+          {factors.map((factor) => (
+            <figure className="gateway-hero-factor" key={factor.id}>
+              <div className="gateway-hero-asset">
+                <Image
+                  src={`/energy/technical-hero/${factor.id}.webp`}
+                  width={1000}
+                  height={680}
+                  sizes="(max-width: 700px) 30vw, (max-width: 1100px) 28vw, 32vw"
+                  alt=""
+                  unoptimized
+                  loading="eager"
+                  fetchPriority={factor.id === "roof" ? "high" : "auto"}
+                />
+              </div>
+              <figcaption>
+                <span>{factor.possessive}</span> {factor.label}
+              </figcaption>
+            </figure>
+          ))}
         </div>
-        <figcaption className="nightshift-hero-context">
-          <div
-            id={`${id}-panel`}
-            role="tabpanel"
-            aria-labelledby={`${id}-tab-${active}`}
-            tabIndex={0}
-          >
-            <p className="nightshift-context-label">Zum Thema {station.name}</p>
-            <p className="nightshift-context-question">{station.question}</p>
-            <button
-              type="button"
-              className="nightshift-context-action"
-              aria-haspopup="dialog"
-              onClick={() => onStart(station.intent)}
-            >
-              <span>{station.action}</span>
-              <ArrowRight size={20} aria-hidden />
-            </button>
-          </div>
+        <figcaption className="gateway-hero-project" id={`${id}-project`}>
+          Ihr PV-Projekt
         </figcaption>
       </figure>
-
       <div className="nightshift-hero-controls">
-        <div className="nightshift-explore">
-          <p className="nightshift-control-caption" id={`${id}-explore`}>
-            Themen im Bild ansehen
-          </p>
-          <div
-            className="nightshift-hero-stations"
-            role="tablist"
-            aria-label="Bestandteile Ihres Standorts"
-            aria-describedby={`${id}-explore`}
-          >
-            {stations.map((item, index) => (
-              <button
-                key={item.id}
-                type="button"
-                role="tab"
-                id={`${id}-tab-${index}`}
-                ref={(element) => {
-                  tabs.current[index] = element;
-                }}
-                aria-selected={active === index}
-                aria-controls={`${id}-panel`}
-                tabIndex={active === index ? 0 : -1}
-                onClick={() => setActive(index)}
-                onKeyDown={(event) => {
-                  let next: number | undefined;
-                  if (event.key === "ArrowRight")
-                    next = (index + 1) % stations.length;
-                  if (event.key === "ArrowLeft")
-                    next = (index - 1 + stations.length) % stations.length;
-                  if (event.key === "Home") next = 0;
-                  if (event.key === "End") next = stations.length - 1;
-                  if (next !== undefined) {
-                    event.preventDefault();
-                    focusStation(next);
-                  }
-                }}
-              >
-                {item.name}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="nightshift-start">
-          <p className="nightshift-control-caption" id={`${id}-start`}>
-            Start mit Ihrer Adresse
-          </p>
-          <button
-            className="nightshift-hero-primary"
-            type="button"
-            aria-haspopup="dialog"
-            onClick={() => onStart()}
-            aria-describedby={`${id}-start`}
-          >
-            Standortcheck starten
-            <ArrowRight size={22} aria-hidden />
-          </button>
-        </div>
+        <p className="nightshift-control-caption" id={`${id}-start`}>
+          Start mit Ihrer Adresse
+        </p>
+        <button
+          className="nightshift-hero-primary"
+          type="button"
+          aria-haspopup="dialog"
+          aria-describedby={`${id}-start`}
+          onClick={() => onStart()}
+        >
+          Standortcheck starten <ArrowRight size={24} aria-hidden />
+        </button>
       </div>
       {children && <div className="nightshift-hero-return">{children}</div>}
     </section>
