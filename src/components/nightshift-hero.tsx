@@ -51,16 +51,21 @@ export function NightshiftHero({
           ein. Die Darstellung enthält keine Standortmesswerte und keinen
           elektrischen Schaltplan.
         </p>
-        <Image
+        <svg
           className="gateway-hero-convergence"
-          src="/energy/technical-hero/convergence.webp"
-          alt=""
-          width={614}
-          height={1060}
-          unoptimized
-          loading="eager"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
           aria-hidden="true"
-        />
+        >
+          <path
+            d="M0 0 C60 0 38 50 100 50 M0 50 H100 M0 100 C60 100 38 50 100 50"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
         <CircleFilled
           className="gateway-hero-junction"
           size={14}
@@ -102,7 +107,8 @@ export function NightshiftHero({
           aria-describedby={`${id}-start`}
           onClick={() => onStart()}
         >
-          Standortcheck starten <ArrowRight size={24} aria-hidden />
+          <span>Standortcheck starten</span>
+          <ArrowRight size={24} aria-hidden />
         </button>
       </div>
       {children && <div className="nightshift-hero-return">{children}</div>}

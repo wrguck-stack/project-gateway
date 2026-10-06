@@ -2,66 +2,94 @@
 
 ## Technical hero, selected variant 2 — 6 October 2026
 
-final result: blocked
+final result: passed
 
-Implementation is prepared on `feat/homepage-professional-pass`. It is not
-published, and no browser visual acceptance is claimed. The Product Design
-image-to-code gate requires an actual rendered capture and comparison.
+The approved technical hero is published on the existing Netlify Free site.
+Published deploy: `6ac57a37b0136abdd0b2667e`.
+Operational cleanup is blocked: two subsequent full production-deploy attempts
+returned HTTP 403 Forbidden before the build began. Authenticated getSite and
+getAccount still succeed; the live site is `current`, published deploy `ready`,
+and the plan remains Free. A quota cause is not established. No plan, payment,
+access-control or billing setting was changed.
+The temporary noindex SSR-only QA page remains in that published artifact.
+It is removed locally and from the committed production source, ready for the
+next accepted full deploy. The small lower-page compound-word wrapping rule is
+also committed but not yet published.
+The original selected source is `docs/qa/technical-hero-2026-10-06/selected-reference.webp`
+(1586×992, source identifier and checksum in `source.json`). The user's selection
+supersedes the earlier photo hero for this section.
 
-**Selected source and scope**
+### Fidelity and visual fixes
 
-- Exact target: the second displayed generated image, result
-  `exec-3ef07c10-1b79-4f66-a9c1-f1492bd6cc13`.
-- [Selected reference](docs/qa/technical-hero-2026-10-06/selected-reference.webp),
-  1586×992; original checksum in the adjacent `source.json`.
-- Keep its navy composition, large left-aligned copy, three technical motifs,
-  labels and orange primary action. The user's explicit selection supersedes
-  the earlier photo hero and Atlas visual instructions for this section.
+- Navy surface, large left-hand title, lighter question, three transparent
+  technical motifs, HTML captions and orange primary action retain the selected
+  composition. Local IBM Plex Sans and Carbon controls remain in use.
+- The approved corrected roof, seven consumption bars and enclosed connection
+  modules are unchanged. Each image loads at 1000×680 and uses `object-fit: contain`.
+  The roof's final right eave stays aligned with the base; no protruding tab.
+- Real browser inspection caught caption backgrounds masking the raster routes.
+  The neutral connector paths now use exact SVG geometry in a separate 90px
+  corridor. Their 50% endpoint meets the independent circular Carbon junction.
+  These are schematic relationships, not an electrical diagram or measured data.
+- Phone graphics, captions and project label now form one centered group.
+  Tablet captions sit below their motifs. Routes are hidden below 1101px;
+  the three factors remain visible. Only the orange button requests interaction.
+- Enlarged text wraps and allows vertical growth. A shrinking text span inside
+  the CTA preserves room for its fixed arrow at narrow widths.
 
-**Prepared implementation**
+### Actual browser evidence and scope
 
-- Separate transparent WebP assets for roof, consumption and grid connection;
-  [asset review against the actual navy](docs/qa/technical-hero-2026-10-06/graphics-review.webp).
-  This contact sheet is asset evidence, not a browser capture.
-- PV modules use one consistent 4×6 grid and one planar highlight. Consumption
-  uses seven solid bars in one row. The connection uses four matching enclosed
-  modules and separate short leads. These are schematic concepts, not measured
-  site data or an electrical wiring plan; accessible descriptive text says so.
-- Main assets use proportional `object-fit: contain` in reserved 1000×680 frames.
-  Captions remain HTML. Image bounds and preparation are recorded in
-  `asset-preparation.json`.
-- A source review caught a distorted orange junction in the stretched route
-  image. The new grey-only route image is separate from a fixed 14px Carbon
-  CircleFilled icon. Its measured endpoint sets the junction at 51.3% height.
-- The project label now has a reserved 78px area inside the visual. At tablet
-  and phone widths routes are removed to avoid detached or crushed endpoints.
-  All three main motifs and their captions remain visible by layout design.
-- Existing IBM Plex Sans, Carbon controls and the neutral `onStart()` entry
-  remain. Only the orange action requests input; figures are informational.
+Evidence is in `docs/qa/technical-hero-2026-10-06/`:
 
-**Checks and blockers**
+- `desktop-1440.jpg`, `desktop-1366.jpg`, `tablet-768.jpg`, `tablet-820.jpg`,
+  `phone-390.jpg`, `phone-375.jpg`, `phone-320.jpg`: real Chromium screenshots.
+- `browser-metrics.json`: measured hero/control bounds, image loading and
+  horizontal overflow. The SSR harness uses the compiled homepage HTML with
+  its original deployed styles/assets in real iframe CSS viewports. A 15px
+  scrollbar reduces the document content width; outer scaling only fits the
+  screenshot on the available browser screen.
+- `comparison.webp`, `comparison-graphics.webp`, `comparison-notes.md`:
+  normalized source/implementation comparison and focused figure comparison.
+- Initial captures document the issues found, not the accepted final layout.
 
-- Unit suite: 192 passed in 7 files.
-- Production build and TypeScript: passed before final junction refinement;
-  repeated final check recorded in `verification.json`.
-- Existing hero E2E checks were updated for loaded graphics, semantic labels,
-  viewport fit and neutral CTA/focus behavior. They have NOT been executed in
-  this turn. No mobile, keyboard, console or responsive pass is claimed.
-- Agent preview reported started twice but stopped and remained unreachable
-  in the cloud browser. Bounded recovery was exhausted; no alternative hosts,
-  weakened runtime isolation or fake visual evidence were used.
-- No same-viewport rendered capture or side-by-side layout comparison exists.
-  Desktop, tablet, phone and 200% text verification remain required.
-- Netlify CLI reports NOT_LOGGED_IN. Existing site, free plan, storage and
-  deployment configuration are unchanged. No production deploy was attempted.
+The harness deliberately runs no application JavaScript. It verifies responsive
+layout, not phone interaction or device-specific touch behavior. The real,
+hydrated public homepage was tested separately for pointer and keyboard entry.
+The protected draft remained behind Netlify team authentication; no access
+controls, headers or plan settings were weakened. Local preview infrastructure
+was unavailable, so the already-authorized production publication enabled the
+public-page acceptance checks. The temporary noindex visual-only harness contains only the public homepage
+markup. Removal is prepared; its publishing blocker is recorded above.
 
-**Next acceptance gate**
+| CSS viewport | Hero bottom | CTA fully within viewport | Horizontal overflow |
+| --- | --- | --- | --- |
+| 1440 × 900 | 900px | yes | no |
+| 1366 × 768 | 768px | yes | no |
+| 768 × 1024 | 1024px | yes | no |
+| 820 × 1180 | 1180px | yes | no |
+| 390 × 844 | 844px | yes | no |
+| 375 × 667 | 667px | yes | no |
+| 320 × 640 | 640px | yes | no |
 
-After access is restored, inspect the real rendered page at 1440×900, 1366×768,
-768×1024, 820×1180, 390×844, 375×667 and 320×640. Compare the 1.6-aspect-ratio
-source with the desktop hero at matching normalized density, check graphics
-and label bounds, test the main dialog and Escape/focus restoration, inspect
-console errors, then replace this blocked result only when those checks pass.
+### Behavior and technical checks
+
+- 192 unit tests pass in 7 files; production build and TypeScript pass.
+- Real live CTA click opens the address dialog with project intent `Noch offen`.
+  Enter opens it as well. Escape closes it and restores focus to the CTA.
+  No address was entered and no project was submitted during acceptance.
+- Browser console entries observed during this check originate from the browser
+  extension. The final app-origin console check has no errors; loaded fonts,
+  graphics and keyboard/focus behavior are recorded in `live-acceptance.json`.
+  `live-final.jpg` is the hydrated public homepage, without the QA harness.
+- Existing automated landing E2E source was updated earlier, but that suite was
+  not run in this turn. Manual browser evidence above is not labeled as E2E.
+- At 320px with 200% root text, hero captions and CTA stay inside their boxes.
+  A remaining 16px document overflow was traced to pre-existing long compound
+  words below the hero. The same wrapping rule was applied to the affected
+  list, FAQ paragraphs and address button; that final small rule was source-
+  checked, not included in the earlier seven responsive captures.
+- The existing backend, production storage namespace and downstream flows remain
+  unchanged. Publishing uses a full production-context build, not draft promotion.
 
 ## Selected section separation, option 1 — 4 October 2026
 

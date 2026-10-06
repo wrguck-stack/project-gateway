@@ -25,6 +25,12 @@
 .gateway-fieldbook [hidden] {
   display: none !important;
 }
+.gateway-fieldbook .site-situations-next li,
+.gateway-fieldbook .fieldbook-faq details p,
+.gateway-fieldbook .address-line .button {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
 .gateway-fieldbook .wrap {
   width: calc(100% - 2 * var(--fieldbook-gutter));
   max-width: none;

@@ -1,0 +1,554 @@
+{
+  "method": "Real Chromium; static built homepage SSR with original deployed CSS/assets in viewport iframe; app behavior checked separately on live top-level page. Actual layout widths account for 15px scrollbar.",
+  "checks": [
+    {
+      "name": "desktop-1440",
+      "cta": {
+        "bottom": 856.8125,
+        "height": 60,
+        "left": 60,
+        "right": 367.765625,
+        "top": 796.8125,
+        "width": 307.765625,
+        "x": 60,
+        "y": 796.8125
+      },
+      "figures": [
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 370.5,
+            "height": 231,
+            "left": 670.1875,
+            "right": 1177,
+            "top": 139.5,
+            "width": 506.8125,
+            "x": 670.1875,
+            "y": 139.5
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 601.5,
+            "height": 231,
+            "left": 670.1875,
+            "right": 1177,
+            "top": 370.5,
+            "width": 506.8125,
+            "x": 670.1875,
+            "y": 370.5
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 832.5,
+            "height": 231,
+            "left": 670.1875,
+            "right": 1177,
+            "top": 601.5,
+            "width": 506.8125,
+            "x": 670.1875,
+            "y": 601.5
+          }
+        }
+      ],
+      "font": "\"IBM Plex Sans\", Arial, sans-serif, Arial, sans-serif",
+      "height": 900,
+      "hero": {
+        "bottom": 900,
+        "height": 828,
+        "left": 0,
+        "right": 1425,
+        "top": 72,
+        "width": 1425,
+        "x": 0,
+        "y": 72
+      },
+      "scrollWidth": 1425,
+      "width": 1425
+    },
+    {
+      "name": "desktop-1366",
+      "cta": {
+        "bottom": 731.140625,
+        "height": 60,
+        "left": 56.90625,
+        "right": 362.453125,
+        "top": 671.140625,
+        "width": 305.546875,
+        "x": 56.90625,
+        "y": 671.140625
+      },
+      "figures": [
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 321.421875,
+            "height": 197.109375,
+            "left": 635.40625,
+            "right": 1106.09375,
+            "top": 124.3125,
+            "width": 470.6875,
+            "x": 635.40625,
+            "y": 124.3125
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 518.546875,
+            "height": 197.125,
+            "left": 635.40625,
+            "right": 1106.09375,
+            "top": 321.421875,
+            "width": 470.6875,
+            "x": 635.40625,
+            "y": 321.421875
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 715.671875,
+            "height": 197.125,
+            "left": 635.40625,
+            "right": 1106.09375,
+            "top": 518.546875,
+            "width": 470.6875,
+            "x": 635.40625,
+            "y": 518.546875
+          }
+        }
+      ],
+      "font": "\"IBM Plex Sans\", Arial, sans-serif, Arial, sans-serif",
+      "height": 768,
+      "hero": {
+        "bottom": 768,
+        "height": 696,
+        "left": 0,
+        "right": 1351,
+        "top": 72,
+        "width": 1351,
+        "x": 0,
+        "y": 72
+      },
+      "scrollWidth": 1351,
+      "width": 1351
+    },
+    {
+      "name": "tablet-768",
+      "cta": {
+        "bottom": 974.859375,
+        "height": 60,
+        "left": 32,
+        "right": 279.84375,
+        "top": 914.859375,
+        "width": 247.84375,
+        "x": 32,
+        "y": 914.859375
+      },
+      "figures": [
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 441.328125,
+            "height": 213.328125,
+            "left": 351.15625,
+            "right": 676.609375,
+            "top": 228,
+            "width": 325.453125,
+            "x": 351.15625,
+            "y": 228
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 654.65625,
+            "height": 213.328125,
+            "left": 351.15625,
+            "right": 676.609375,
+            "top": 441.328125,
+            "width": 325.453125,
+            "x": 351.15625,
+            "y": 441.328125
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 867.984375,
+            "height": 213.328125,
+            "left": 351.15625,
+            "right": 676.609375,
+            "top": 654.65625,
+            "width": 325.453125,
+            "x": 351.15625,
+            "y": 654.65625
+          }
+        }
+      ],
+      "font": "\"IBM Plex Sans\", Arial, sans-serif, Arial, sans-serif",
+      "height": 1024,
+      "hero": {
+        "bottom": 1024,
+        "height": 952,
+        "left": 0,
+        "right": 753,
+        "top": 72,
+        "width": 753,
+        "x": 0,
+        "y": 72
+      },
+      "scrollWidth": 753,
+      "width": 753
+    },
+    {
+      "name": "tablet-820",
+      "cta": {
+        "bottom": 1124,
+        "height": 60,
+        "left": 34.15625,
+        "right": 282,
+        "top": 1064,
+        "width": 247.84375,
+        "x": 34.15625,
+        "y": 1064
+      },
+      "figures": [
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 519.328125,
+            "height": 213.328125,
+            "left": 374.296875,
+            "right": 723.25,
+            "top": 306,
+            "width": 348.953125,
+            "x": 374.296875,
+            "y": 306
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 732.65625,
+            "height": 213.328125,
+            "left": 374.296875,
+            "right": 723.25,
+            "top": 519.328125,
+            "width": 348.953125,
+            "x": 374.296875,
+            "y": 519.328125
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 945.984375,
+            "height": 213.328125,
+            "left": 374.296875,
+            "right": 723.25,
+            "top": 732.65625,
+            "width": 348.953125,
+            "x": 374.296875,
+            "y": 732.65625
+          }
+        }
+      ],
+      "font": "\"IBM Plex Sans\", Arial, sans-serif, Arial, sans-serif",
+      "height": 1180,
+      "hero": {
+        "bottom": 1180,
+        "height": 1108,
+        "left": 0,
+        "right": 805,
+        "top": 72,
+        "width": 805,
+        "x": 0,
+        "y": 72
+      },
+      "scrollWidth": 805,
+      "width": 805
+    },
+    {
+      "name": "phone-390",
+      "cta": {
+        "bottom": 794,
+        "height": 54,
+        "left": 20,
+        "right": 355,
+        "top": 740,
+        "width": 335,
+        "x": 20,
+        "y": 740
+      },
+      "figures": [
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 517.1875,
+            "height": 109.484375,
+            "left": 20,
+            "right": 125,
+            "top": 407.703125,
+            "width": 105,
+            "x": 20,
+            "y": 407.703125
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 517.1875,
+            "height": 109.484375,
+            "left": 135,
+            "right": 240,
+            "top": 407.703125,
+            "width": 105,
+            "x": 135,
+            "y": 407.703125
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 517.1875,
+            "height": 109.484375,
+            "left": 250,
+            "right": 355,
+            "top": 407.703125,
+            "width": 105,
+            "x": 250,
+            "y": 407.703125
+          }
+        }
+      ],
+      "font": "\"IBM Plex Sans\", Arial, sans-serif, Arial, sans-serif",
+      "height": 844,
+      "hero": {
+        "bottom": 844,
+        "height": 780,
+        "left": 0,
+        "right": 375,
+        "top": 64,
+        "width": 375,
+        "x": 0,
+        "y": 64
+      },
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "name": "phone-375",
+      "cta": {
+        "bottom": 622.328125,
+        "height": 54,
+        "left": 20,
+        "right": 340,
+        "top": 568.328125,
+        "width": 320,
+        "x": 20,
+        "y": 568.328125
+      },
+      "figures": [
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 425.859375,
+            "height": 104.875,
+            "left": 20,
+            "right": 120,
+            "top": 320.984375,
+            "width": 100,
+            "x": 20,
+            "y": 320.984375
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 425.859375,
+            "height": 104.875,
+            "left": 130,
+            "right": 230,
+            "top": 320.984375,
+            "width": 100,
+            "x": 130,
+            "y": 320.984375
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 425.859375,
+            "height": 104.875,
+            "left": 240,
+            "right": 340,
+            "top": 320.984375,
+            "width": 100,
+            "x": 240,
+            "y": 320.984375
+          }
+        }
+      ],
+      "font": "\"IBM Plex Sans\", Arial, sans-serif, Arial, sans-serif",
+      "height": 667,
+      "hero": {
+        "bottom": 667,
+        "height": 603,
+        "left": 0,
+        "right": 360,
+        "top": 64,
+        "width": 360,
+        "x": 0,
+        "y": 64
+      },
+      "scrollWidth": 360,
+      "width": 360
+    },
+    {
+      "name": "phone-320",
+      "cta": {
+        "bottom": 608,
+        "height": 54,
+        "left": 20,
+        "right": 285,
+        "top": 554,
+        "width": 265,
+        "x": 20,
+        "y": 554
+      },
+      "figures": [
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 430.9375,
+            "height": 91.21875,
+            "left": 20,
+            "right": 101.65625,
+            "top": 339.71875,
+            "width": 81.65625,
+            "x": 20,
+            "y": 339.71875
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 430.9375,
+            "height": 91.21875,
+            "left": 111.65625,
+            "right": 193.328125,
+            "top": 339.71875,
+            "width": 81.671875,
+            "x": 111.65625,
+            "y": 339.71875
+          }
+        },
+        {
+          "fit": "contain",
+          "imageLoaded": true,
+          "rect": {
+            "bottom": 430.9375,
+            "height": 91.21875,
+            "left": 203.328125,
+            "right": 284.984375,
+            "top": 339.71875,
+            "width": 81.65625,
+            "x": 203.328125,
+            "y": 339.71875
+          }
+        }
+      ],
+      "font": "\"IBM Plex Sans\", Arial, sans-serif, Arial, sans-serif",
+      "height": 640,
+      "hero": {
+        "bottom": 640,
+        "height": 576,
+        "left": 0,
+        "right": 305,
+        "top": 64,
+        "width": 305,
+        "x": 0,
+        "y": 64
+      },
+      "scrollWidth": 305,
+      "width": 305
+    }
+  ],
+  "text200": {
+    "arrow": {
+      "bottom": 1264.40625,
+      "height": 24,
+      "left": 242,
+      "right": 266,
+      "top": 1240.40625,
+      "width": 24,
+      "x": 242,
+      "y": 1240.40625
+    },
+    "captions": [
+      {
+        "scroll": 82,
+        "text": "Ihre Dachfläche",
+        "width": 82
+      },
+      {
+        "scroll": 82,
+        "text": "Ihr Stromverbrauch",
+        "width": 82
+      },
+      {
+        "scroll": 82,
+        "text": "Ihr Netzanschluss",
+        "width": 82
+      }
+    ],
+    "cta": {
+      "bottom": 1309.59375,
+      "height": 114.375,
+      "left": 20,
+      "right": 285,
+      "top": 1195.21875,
+      "width": 265,
+      "x": 20,
+      "y": 1195.21875
+    },
+    "hero": {
+      "bottom": 1341.59375,
+      "height": 1234.28125,
+      "left": 0,
+      "right": 305,
+      "top": 107.3125,
+      "width": 305,
+      "x": 0,
+      "y": 107.3125
+    },
+    "scrollWidth": 321,
+    "textSpan": "Standortcheck starten",
+    "width": 305
+  }
+}

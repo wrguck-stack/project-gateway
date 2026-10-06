@@ -1,0 +1,30 @@
+{
+  "active": "Standortcheck starten",
+  "contentWidth": 1348,
+  "fonts": "loaded",
+  "images": [
+    {
+      "loaded": true,
+      "src": "/energy/technical-hero/roof.webp"
+    },
+    {
+      "loaded": true,
+      "src": "/energy/technical-hero/consumption.webp"
+    },
+    {
+      "loaded": true,
+      "src": "/energy/technical-hero/connection.webp"
+    }
+  ],
+  "openDialogs": 0,
+  "scrollWidth": 1348,
+  "url": "https://project-gateway-wrguck.netlify.app/",
+  "viewport": {
+    "height": 936,
+    "width": 1363
+  },
+  "appErrors": [],
+  "deployId": "6ac57a37b0136abdd0b2667e",
+  "keyboardEntry": "passed",
+  "escapeFocusReturn": "passed"
+}

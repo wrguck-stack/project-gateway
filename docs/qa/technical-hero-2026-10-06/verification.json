@@ -1,15 +1,34 @@
 {
   "date": "2026-10-06",
   "branch": "feat/homepage-professional-pass",
-  "baseCommit": "bd84e59984b3a45099e299e0821683785cb2d74c",
+  "approvedRoofCommit": "ebe286b17e63dd6a36d9c112e95794446daf7d5b",
   "unitTests": {
     "passed": 192,
-    "files": 7
+    "files": 7,
+    "scope": "last successful full production build"
   },
-  "productionBuild": "passed",
-  "typecheck": "passed",
-  "browserVisualQA": "blocked",
-  "e2e": "not run",
-  "netlifyAuthentication": "NOT_LOGGED_IN",
-  "published": false
+  "productionBuild": "passed on published deployment",
+  "typecheck": "passed on published deployment",
+  "browserVisualQA": "passed for hero; seven real CSS viewport renders of built SSR with original assets/styles",
+  "e2e": "automated suite not run; manual live pointer/keyboard dialog checks passed",
+  "netlifyAuthentication": "authorized; authenticated read-only API still succeeds",
+  "netlifyPlan": "Free",
+  "published": true,
+  "deployId": "6ac57a37b0136abdd0b2667e",
+  "liveUrl": "https://project-gateway-wrguck.netlify.app/",
+  "finalization": "cleanup deployment blocked by HTTP 403 Forbidden before build, repeated once with bounded error diagnostics",
+  "pendingDeployChanges": [
+    "Remove temporary noindex public/__hero-qa.html visual-only public-markup harness",
+    "Wrap existing lower-page long compound words at 200% text size"
+  ],
+  "quotaCause": "not established; do not infer quota from 403",
+  "securityOrBillingChanges": false,
+  "evidence": [
+    "browser-metrics.json",
+    "comparison.webp",
+    "comparison-graphics.webp",
+    "comparison-notes.md",
+    "live-acceptance.json",
+    "live-final.jpg"
+  ]
 }
