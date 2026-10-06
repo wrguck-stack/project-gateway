@@ -1,5 +1,28 @@
 # Roof graphic correction — 6 October 2026
 
+## Second correction: right eave
+
+The preceding edit closed the left gable but did not remove the projecting tab
+at the lower end of the right pale border. Following the user's precise
+feedback, built-in Imagegen result `exec-c279e584-2300-422a-9050-adcbc383d268`
+trims that corner to the continuous straight eave line. The roof border and
+navy base now terminate in the same right-end plane. The PV array is retained.
+
+The final encoded WebP was checked on navy at normal review size and in the
+3× enlarged `right-eave-detail.webp`. An independent reviewer verified this
+specific corner, not just the overall roof impression. Consumption/connection
+files are still byte-identical; no application code or live deployment changed.
+
+### Exact right-eave edit prompt
+
+Use case: precise-object-edit. Edit this existing transparent architectural PV-roof illustration. Make ONE tightly localized geometry correction at the LOWER-RIGHT roof corner.
+
+The pale strip running down the far RIGHT slope currently extends too far and creates a small stepped tab/tongue past the lower eave edge. This is the specific defect to REMOVE. SHORTEN and trim the bottom end of that right-hand pale border strip so it meets the front/lower eave on ONE continuous perfectly straight diagonal edge. The entire bottom edge of the pale roof, from the lower-left corner to the lower-right corner, must be collinear with no step, notch, protruding rectangular tab, dangling piece or overlapping slab at the right. At the rightmost corner, the eave/fascia, sloping border and dark-blue supporting plinth must terminate cleanly at the SAME right-end plane. Use a precise flush mitred corner. No part of that right eave should extend past the right end of the dark base.
+
+Preserve everything else faithfully: closed solid left gable, roof pitch, camera angle, object size and framing, premium matte off-white/slate/navy palette, subtle light, exactly six columns and four rows of PV modules, orange highlight over the left two columns. Do not change the module array, do not add any trim, gutter, pipe, cutout, new ledge or architectural detail. Preserve genuine transparent background and full silhouette with generous transparent margins. No text or watermark. This should be recognizably the SAME image with only its flawed right eave corner repaired, not a new design.
+
+## Previous correction: closed gable
+
 User feedback: correct the roof in graphics-review.webp; other two graphics approved.
 
 Changed only the roof asset and rebuilt the comparison sheet. The left gable is

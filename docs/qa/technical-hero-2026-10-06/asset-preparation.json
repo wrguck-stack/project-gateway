@@ -2,22 +2,22 @@
   {
     "name": "roof",
     "sourceSize": [
-      1536,
-      1024
+      1521,
+      1034
     ],
     "subjectBounds": [
-      67,
-      126,
-      1473,
-      916
+      64,
+      123,
+      1460,
+      917
     ],
     "outputSize": [
       1000,
       680
     ],
-    "bytes": 103540,
-    "sourceResult": "exec-28413e05-d009-4b64-b5b7-eb29de4137e5",
-    "correction": "Closed coherent gable/body, unchanged 6×4 module array and two-column highlight."
+    "bytes": 102316,
+    "sourceResult": "exec-c279e584-2300-422a-9050-adcbc383d268",
+    "correction": "Closed gable and continuous straight eave; right border flush with eave and base, no protruding tab. Preserved 6×4 modules and two-column highlight."
   },
   {
     "name": "consumption",
