@@ -2,20 +2,22 @@
   {
     "name": "roof",
     "sourceSize": [
-      1620,
-      971
+      1536,
+      1024
     ],
     "subjectBounds": [
-      280,
-      220,
-      1310,
-      806
+      67,
+      126,
+      1473,
+      916
     ],
     "outputSize": [
       1000,
       680
     ],
-    "bytes": 99666
+    "bytes": 103540,
+    "sourceResult": "exec-28413e05-d009-4b64-b5b7-eb29de4137e5",
+    "correction": "Closed coherent gable/body, unchanged 6×4 module array and two-column highlight."
   },
   {
     "name": "consumption",
